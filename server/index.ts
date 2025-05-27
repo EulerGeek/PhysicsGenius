@@ -38,6 +38,13 @@ app.use((req, res, next) => {
 });
 
 (async () => {
+  try {
+    // Initialize database with course data
+    await seedDatabase();
+  } catch (error) {
+    log("Database seeding failed, but continuing...", "database");
+  }
+
   const server = await registerRoutes(app);
 
   app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
