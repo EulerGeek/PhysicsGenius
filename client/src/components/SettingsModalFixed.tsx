@@ -38,8 +38,8 @@ export default function SettingsModal({ isOpen, onClose, onResetProgress, user, 
 
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-      <Card className="w-full max-w-2xl max-h-[90vh] flex flex-col">
-        <div className="flex justify-between items-center p-6 border-b">
+      <Card className="w-full max-w-2xl h-[90vh] flex flex-col">
+        <div className="flex justify-between items-center p-6 border-b flex-shrink-0">
           <h2 className="text-xl font-semibold flex items-center gap-2">
             ⚙️ Settings
           </h2>
@@ -48,7 +48,7 @@ export default function SettingsModal({ isOpen, onClose, onResetProgress, user, 
           </Button>
         </div>
         
-        <ScrollArea className="flex-1">
+        <div className="flex-1 overflow-y-auto">
           <div className="p-6 space-y-6">
             {/* Audio Settings */}
             <div className="space-y-4">
@@ -275,7 +275,7 @@ export default function SettingsModal({ isOpen, onClose, onResetProgress, user, 
               </div>
             </div>
           </div>
-        </ScrollArea>
+        </div>
       </Card>
 
       {/* Study Reminders Panel */}
