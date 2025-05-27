@@ -4,6 +4,7 @@ import ProgressOverview from "@/components/ProgressOverview";
 import CourseNavigation from "@/components/CourseNavigation";
 import LessonCard from "@/components/LessonCard";
 import LessonPreview from "@/components/LessonPreview";
+import LessonIntro from "@/components/LessonIntro";
 import Resources from "@/components/Resources";
 import Footer from "@/components/Footer";
 import { useProgress } from "@/hooks/useProgress";
@@ -11,6 +12,8 @@ import { getCourses, getLessonsByCourse } from "@/lib/lessons";
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState("classical");
+  const [selectedLesson, setSelectedLesson] = useState<any>(null);
+  const [showLessonIntro, setShowLessonIntro] = useState(false);
   const { progress, updateProgress } = useProgress();
   
   const courses = getCourses();
@@ -18,8 +21,17 @@ export default function Home() {
   const lessons = getLessonsByCourse(activeTab);
 
   const handleStartLesson = (lessonId: string) => {
-    console.log("Starting lesson:", lessonId);
-    // In a real app, this would navigate to the lesson view
+    const lesson = lessons.find(l => l.id === lessonId);
+    if (lesson) {
+      setSelectedLesson(lesson);
+      setShowLessonIntro(true);
+    }
+  };
+
+  const handleActualStartLesson = () => {
+    setShowLessonIntro(false);
+    // This would normally navigate to the actual lesson content
+    console.log("Starting actual lesson:", selectedLesson?.id);
   };
 
   const handleCompleteLesson = (lessonId: string, score: number) => {
@@ -70,6 +82,14 @@ export default function Home() {
       </main>
 
       <Footer />
+
+      {showLessonIntro && selectedLesson && (
+        <LessonIntro
+          lesson={selectedLesson}
+          onStartLesson={handleActualStartLesson}
+          onClose={() => setShowLessonIntro(false)}
+        />
+      )}
     </div>
   );
 }

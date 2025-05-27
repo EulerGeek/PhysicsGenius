@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 
 interface HeaderProps {
   progress: {
@@ -25,9 +26,16 @@ export default function Header({ progress }: HeaderProps) {
               <i className="fas fa-fire text-amber-500 text-sm"></i>
               <span className="text-sm font-medium text-neutral-700">{progress.streak} day streak</span>
             </div>
-            <Button className="bg-primary text-white hover:bg-primary/90">
-              Sign Up Free
-            </Button>
+            <div className="flex items-center space-x-2">
+              <Badge variant="secondary" className="bg-green-100 text-green-800 hover:bg-green-100">
+                <i className="fas fa-gift text-xs mr-1"></i>
+                100% FREE
+              </Badge>
+              <Button size="sm" variant="outline" className="text-neutral-600 hover:text-neutral-900">
+                <i className="fas fa-universal-access text-xs mr-1"></i>
+                Read Mode
+              </Button>
+            </div>
           </div>
         </div>
       </div>
