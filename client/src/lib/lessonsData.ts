@@ -512,6 +512,44 @@ export const classicalMechanicsLessons: Record<string, LessonData> = {
         concept: "No work ⟹ constant KE"
       }
     ]
+  },
+
+  "cm-4": {
+    id: "cm-4",
+    title: "Momentum and Impulse",
+    videoId: "8WRgxJKPgFY",
+    feynmanNotes: "Conservation of momentum is one of the great laws of physics. It says that the total momentum before any collision is equal to the total momentum after the collision.",
+    questions: [
+      { id: "mom-1", type: "multiple-choice", question: "What is momentum?", options: [{ value: "a", text: "p = mv" }, { value: "b", text: "p = ma" }, { value: "c", text: "p = F/t" }, { value: "d", text: "p = mgh" }], correctAnswer: "a", explanation: "Momentum is p = mv, mass times velocity.", concept: "p = mv" },
+      { id: "mom-2", type: "multiple-choice", question: "What is impulse?", options: [{ value: "a", text: "J = mv" }, { value: "b", text: "J = FΔt" }, { value: "c", text: "J = ma" }, { value: "d", text: "J = mgh" }], correctAnswer: "b", explanation: "Impulse J = FΔt, force times time.", concept: "J = FΔt" },
+      { id: "mom-3", type: "multiple-choice", question: "What does impulse equal?", options: [{ value: "a", text: "Change in momentum" }, { value: "b", text: "Change in velocity" }, { value: "c", text: "Change in force" }, { value: "d", text: "Change in energy" }], correctAnswer: "a", explanation: "Impulse equals change in momentum: J = Δp.", concept: "J = Δp" },
+      { id: "mom-4", type: "multiple-choice", question: "Is momentum conserved in collisions?", options: [{ value: "a", text: "Always" }, { value: "b", text: "Never" }, { value: "c", text: "Only elastic collisions" }, { value: "d", text: "Only inelastic collisions" }], correctAnswer: "a", explanation: "Momentum is always conserved in collisions (in absence of external forces).", concept: "Momentum conservation" },
+      { id: "mom-5", type: "multiple-choice", question: "A 2 kg object moving at 5 m/s. What's its momentum?", options: [{ value: "a", text: "10 kg⋅m/s" }, { value: "b", text: "7 kg⋅m/s" }, { value: "c", text: "3 kg⋅m/s" }, { value: "d", text: "25 kg⋅m/s" }], correctAnswer: "a", explanation: "p = mv = (2 kg)(5 m/s) = 10 kg⋅m/s", concept: "Calculate momentum" },
+      { id: "mom-6", type: "multiple-choice", question: "What happens in an elastic collision?", options: [{ value: "a", text: "Kinetic energy is conserved" }, { value: "b", text: "Objects stick together" }, { value: "c", text: "Energy is lost" }, { value: "d", text: "Momentum is not conserved" }], correctAnswer: "a", explanation: "In elastic collisions, both momentum and kinetic energy are conserved.", concept: "Elastic collision" },
+      { id: "mom-7", type: "multiple-choice", question: "What happens in an inelastic collision?", options: [{ value: "a", text: "Kinetic energy is conserved" }, { value: "b", text: "Some kinetic energy is lost" }, { value: "c", text: "Momentum is not conserved" }, { value: "d", text: "Objects repel" }], correctAnswer: "b", explanation: "In inelastic collisions, momentum is conserved but some kinetic energy is lost.", concept: "Inelastic collision" },
+      { id: "mom-8", type: "multiple-choice", question: "What is the center of mass?", options: [{ value: "a", text: "The heaviest point" }, { value: "b", text: "The geometric center" }, { value: "c", text: "The balance point" }, { value: "d", text: "The fastest point" }], correctAnswer: "c", explanation: "Center of mass is the point where the system balances.", concept: "Center of mass" },
+      { id: "mom-9", type: "multiple-choice", question: "In rocket propulsion, what provides thrust?", options: [{ value: "a", text: "Fuel burning" }, { value: "b", text: "Momentum conservation" }, { value: "c", text: "Air resistance" }, { value: "d", text: "Gravity" }], correctAnswer: "b", explanation: "Rockets work by momentum conservation - exhaust goes one way, rocket goes the other.", concept: "Rocket propulsion" },
+      { id: "mom-10", type: "multiple-choice", question: "If a force acts for longer time, what increases?", options: [{ value: "a", text: "Impulse" }, { value: "b", text: "Mass" }, { value: "c", text: "Distance" }, { value: "d", text: "Acceleration only" }], correctAnswer: "a", explanation: "Impulse = FΔt, so longer time means greater impulse.", concept: "Impulse increases with time" }
+    ]
+  },
+
+  "cm-5": {
+    id: "cm-5",
+    title: "Rotational Motion",
+    videoId: "LTjkk4rKcyM",
+    feynmanNotes: "Rotation is motion in a circle. Everything we learned about linear motion has an analog in rotational motion - instead of force we have torque, instead of mass we have moment of inertia.",
+    questions: [
+      { id: "rot-1", type: "multiple-choice", question: "What is angular velocity?", options: [{ value: "a", text: "ω = θ/t" }, { value: "b", text: "ω = v/r" }, { value: "c", text: "Both A and B" }, { value: "d", text: "ω = Fr" }], correctAnswer: "c", explanation: "Angular velocity ω = θ/t = v/r, angle per time or linear velocity divided by radius.", concept: "ω = θ/t = v/r" },
+      { id: "rot-2", type: "multiple-choice", question: "What is torque?", options: [{ value: "a", text: "τ = Fr" }, { value: "b", text: "τ = rF sin θ" }, { value: "c", text: "τ = Iα" }, { value: "d", text: "All of the above" }], correctAnswer: "d", explanation: "Torque τ = rF sin θ = Iα, the rotational analog of force.", concept: "τ = rF sin θ" },
+      { id: "rot-3", type: "multiple-choice", question: "What is moment of inertia?", options: [{ value: "a", text: "Resistance to rotation" }, { value: "b", text: "Rotational mass" }, { value: "c", text: "I = Σmr²" }, { value: "d", text: "All of the above" }], correctAnswer: "d", explanation: "Moment of inertia I = Σmr² is the rotational analog of mass.", concept: "I = Σmr²" },
+      { id: "rot-4", type: "multiple-choice", question: "What is angular momentum?", options: [{ value: "a", text: "L = Iω" }, { value: "b", text: "L = r × p" }, { value: "c", text: "L = mvr" }, { value: "d", text: "All of the above" }], correctAnswer: "d", explanation: "Angular momentum L = Iω = r × p = mvr for circular motion.", concept: "L = Iω" },
+      { id: "rot-5", type: "multiple-choice", question: "Is angular momentum conserved?", options: [{ value: "a", text: "Always" }, { value: "b", text: "When no external torque" }, { value: "c", text: "Never" }, { value: "d", text: "Only for spheres" }], correctAnswer: "b", explanation: "Angular momentum is conserved when there's no external torque.", concept: "Angular momentum conservation" },
+      { id: "rot-6", type: "multiple-choice", question: "What happens when a figure skater pulls arms in?", options: [{ value: "a", text: "Spins faster" }, { value: "b", text: "Spins slower" }, { value: "c", text: "Stops spinning" }, { value: "d", text: "No change" }], correctAnswer: "a", explanation: "Pulling arms in decreases moment of inertia, so angular velocity increases to conserve angular momentum.", concept: "Conservation of L" },
+      { id: "rot-7", type: "multiple-choice", question: "What is rotational kinetic energy?", options: [{ value: "a", text: "½mv²" }, { value: "b", text: "½Iω²" }, { value: "c", text: "mgh" }, { value: "d", text: "½kx²" }], correctAnswer: "b", explanation: "Rotational kinetic energy is KE_rot = ½Iω².", concept: "KE_rot = ½Iω²" },
+      { id: "rot-8", type: "multiple-choice", question: "For a solid sphere, what is the moment of inertia?", options: [{ value: "a", text: "mr²" }, { value: "b", text: "½mr²" }, { value: "c", text: "⅖mr²" }, { value: "d", text: "⅔mr²" }], correctAnswer: "c", explanation: "For a solid sphere about its center, I = ⅖mr².", concept: "I_sphere = ⅖mr²" },
+      { id: "rot-9", type: "multiple-choice", question: "What is the relationship between linear and angular acceleration?", options: [{ value: "a", text: "a = rα" }, { value: "b", text: "a = α/r" }, { value: "c", text: "a = r/α" }, { value: "d", text: "No relationship" }], correctAnswer: "a", explanation: "Linear acceleration a = rα, where r is radius and α is angular acceleration.", concept: "a = rα" },
+      { id: "rot-10", type: "multiple-choice", question: "What causes precession?", options: [{ value: "a", text: "Applied torque perpendicular to angular momentum" }, { value: "b", text: "Friction" }, { value: "c", text: "Gravity alone" }, { value: "d", text: "Centrifugal force" }], correctAnswer: "a", explanation: "Precession occurs when torque is applied perpendicular to the angular momentum vector.", concept: "Precession from perpendicular torque" }
+    ]
   }
 };
 
@@ -851,13 +889,16 @@ export const quantumMechanicsLessons: Record<string, LessonData> = {
   }
 };
 
+// Import additional lessons
+import { allClassicalMechanicsLessons, allGeneralRelativityLessons, allQuantumMechanicsLessons } from './allLessonsData';
+
 export function getLessonData(lessonId: string): LessonData | null {
   if (lessonId.startsWith("cm-")) {
-    return classicalMechanicsLessons[lessonId] || null;
+    return classicalMechanicsLessons[lessonId] || allClassicalMechanicsLessons[lessonId] || null;
   } else if (lessonId.startsWith("rel-")) {
-    return generalRelativityLessons[lessonId] || null;
+    return generalRelativityLessons[lessonId] || allGeneralRelativityLessons[lessonId] || null;
   } else if (lessonId.startsWith("qm-")) {
-    return quantumMechanicsLessons[lessonId] || null;
+    return quantumMechanicsLessons[lessonId] || allQuantumMechanicsLessons[lessonId] || null;
   }
   return null;
 }

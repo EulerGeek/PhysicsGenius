@@ -98,25 +98,56 @@ export default function DevPanel({ isOpen, onClose, onSetProgress }: DevPanelPro
             </Badge>
           </div>
 
-          <div className="p-6 space-y-4">
+          <div className="p-6 space-y-6">
             <div>
-              <h3 className="font-semibold text-gray-900 dark:text-white mb-3">Progress Shortcuts</h3>
-              <div className="space-y-2">
-                <Button
-                  onClick={applySliderProgress}
-                  className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:from-purple-700 hover:to-pink-700"
-                >
-                  <i className="fas fa-magic text-xs mr-2"></i>
-                  Apply {progressValue[0]}% Progress
-                </Button>
-                <Button
-                  onClick={resetProgress}
-                  variant="outline"
-                  className="w-full text-red-600 border-red-600 hover:bg-red-50"
-                >
-                  <i className="fas fa-redo text-xs mr-2"></i>
-                  Reset to 0% Progress
-                </Button>
+              <h3 className="font-semibold text-gray-900 dark:text-white mb-4">Progress Control</h3>
+              <div className="space-y-4">
+                <div>
+                  <div className="flex items-center justify-between mb-2">
+                    <Label className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                      Set Progress Level
+                    </Label>
+                    <span className="text-sm font-bold text-purple-600 dark:text-purple-400">
+                      {progressValue[0]}%
+                    </span>
+                  </div>
+                  <Slider
+                    value={progressValue}
+                    onValueChange={setProgressValue}
+                    min={0}
+                    max={100}
+                    step={5}
+                    className="w-full"
+                  />
+                  <div className="flex justify-between text-xs text-gray-500 mt-1">
+                    <span>0% (Fresh Start)</span>
+                    <span>50% (Half Done)</span>
+                    <span>100% (Complete)</span>
+                  </div>
+                </div>
+                
+                <div className="grid grid-cols-2 gap-2">
+                  <Button
+                    onClick={applySliderProgress}
+                    className="bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:from-purple-700 hover:to-pink-700"
+                  >
+                    <i className="fas fa-magic text-xs mr-1"></i>
+                    Apply {progressValue[0]}%
+                  </Button>
+                  <Button
+                    onClick={resetProgress}
+                    variant="outline"
+                    className="text-red-600 border-red-600 hover:bg-red-50"
+                  >
+                    <i className="fas fa-trash text-xs mr-1"></i>
+                    Reset All
+                  </Button>
+                </div>
+                
+                <div className="text-xs text-gray-600 dark:text-gray-400 bg-gray-50 dark:bg-gray-800 p-2 rounded">
+                  <i className="fas fa-info-circle mr-1"></i>
+                  Generates realistic progress distribution across all physics courses
+                </div>
               </div>
             </div>
 
