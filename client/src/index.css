@@ -64,6 +64,14 @@
     @apply font-sans antialiased bg-neutral-50 dark:bg-gray-900 text-foreground transition-colors;
     font-family: 'Inter', sans-serif;
   }
+
+  html {
+    @apply bg-neutral-50 dark:bg-gray-900 transition-colors;
+  }
+
+  #root {
+    @apply min-h-screen bg-neutral-50 dark:bg-gray-900 transition-colors;
+  }
 }
 
 .lesson-card-completed {
@@ -76,6 +84,24 @@
 
 .lesson-card-locked {
   @apply bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 opacity-60;
+}
+
+/* Ensure all containers and cards respect dark mode */
+.dark .bg-white {
+  @apply !bg-gray-800;
+}
+
+.dark .bg-gray-50 {
+  @apply !bg-gray-900;
+}
+
+.dark .bg-gray-100 {
+  @apply !bg-gray-800;
+}
+
+/* Modal and overlay backgrounds */
+.dark .bg-black {
+  @apply !bg-gray-900;
 }
 
 .gradient-primary {
