@@ -15,6 +15,8 @@ import {
   type InsertUserProgress, 
   type InsertUserStats 
 } from "@shared/schema";
+import { db } from "./db";
+import { eq, and } from "drizzle-orm";
 
 export interface IStorage {
   // User methods
@@ -45,158 +47,113 @@ export interface IStorage {
   updateUserStats(userId: number, stats: Partial<UserStats>): Promise<UserStats | undefined>;
 }
 
-export class MemStorage implements IStorage {
-  private users: Map<number, User>;
-  private courses: Map<number, Course>;
-  private lessons: Map<number, Lesson>;
-  private userProgress: Map<number, UserProgress>;
-  private userStats: Map<number, UserStats>;
-  private currentUserId: number;
-  private currentCourseId: number;
-  private currentLessonId: number;
-  private currentProgressId: number;
-  private currentStatsId: number;
-
-  constructor() {
-    this.users = new Map();
-    this.courses = new Map();
-    this.lessons = new Map();
-    this.userProgress = new Map();
-    this.userStats = new Map();
-    this.currentUserId = 1;
-    this.currentCourseId = 1;
-    this.currentLessonId = 1;
-    this.currentProgressId = 1;
-    this.currentStatsId = 1;
-    
-    this.initializeData();
-  }
-
-  private initializeData() {
-    // Initialize courses
-    const coursesData = [
-      { title: "Classical Mechanics", description: "Master the fundamentals of motion and forces", icon: "fas fa-rocket", color: "bg-blue-50", totalLessons: 15 },
-      { title: "General Relativity", description: "Explore spacetime and gravity", icon: "fas fa-infinity", color: "bg-purple-50", totalLessons: 10 },
-      { title: "Quantum Mechanics", description: "Discover the quantum world", icon: "fas fa-wave-square", color: "bg-amber-50", totalLessons: 12 }
-    ];
-
-    coursesData.forEach(courseData => {
-      const course: Course = { ...courseData, id: this.currentCourseId++ };
-      this.courses.set(course.id, course);
-    });
-
-    // Initialize lessons for Classical Mechanics
-    const classicalLessons = [
-      { courseId: 1, title: "Introduction to Motion", description: "Understanding position, velocity, and acceleration in one dimension", content: {}, order: 1, duration: "15 min", xpReward: 100 },
-      { courseId: 1, title: "Forces and Newton's Laws", description: "Explore the fundamental laws that govern motion and interactions", content: {}, order: 2, duration: "20 min", xpReward: 120 },
-      { courseId: 1, title: "Work and Energy", description: "Understand the relationship between work, kinetic and potential energy", content: {}, order: 3, duration: "18 min", xpReward: 110 }
-    ];
-
-    classicalLessons.forEach(lessonData => {
-      const lesson: Lesson = { ...lessonData, id: this.currentLessonId++ };
-      this.lessons.set(lesson.id, lesson);
-    });
-  }
-
-  // User methods
+export class DatabaseStorage implements IStorage {
   async getUser(id: number): Promise<User | undefined> {
-    return this.users.get(id);
+    const [user] = await db.select().from(users).where(eq(users.id, id));
+    return user || undefined;
   }
 
   async getUserByUsername(username: string): Promise<User | undefined> {
-    return Array.from(this.users.values()).find(user => user.username === username);
+    const [user] = await db.select().from(users).where(eq(users.username, username));
+    return user || undefined;
   }
 
   async createUser(insertUser: InsertUser): Promise<User> {
-    const id = this.currentUserId++;
-    const user: User = { ...insertUser, id };
-    this.users.set(id, user);
+    const [user] = await db
+      .insert(users)
+      .values(insertUser)
+      .returning();
     return user;
   }
 
-  // Course methods
   async getCourses(): Promise<Course[]> {
-    return Array.from(this.courses.values());
+    return await db.select().from(courses);
   }
 
   async getCourse(id: number): Promise<Course | undefined> {
-    return this.courses.get(id);
+    const [course] = await db.select().from(courses).where(eq(courses.id, id));
+    return course || undefined;
   }
 
   async createCourse(insertCourse: InsertCourse): Promise<Course> {
-    const id = this.currentCourseId++;
-    const course: Course = { ...insertCourse, id };
-    this.courses.set(id, course);
+    const [course] = await db
+      .insert(courses)
+      .values(insertCourse)
+      .returning();
     return course;
   }
 
-  // Lesson methods
   async getLessons(): Promise<Lesson[]> {
-    return Array.from(this.lessons.values());
+    return await db.select().from(lessons);
   }
 
   async getLessonsByCourse(courseId: number): Promise<Lesson[]> {
-    return Array.from(this.lessons.values()).filter(lesson => lesson.courseId === courseId);
+    return await db.select().from(lessons).where(eq(lessons.courseId, courseId));
   }
 
   async getLesson(id: number): Promise<Lesson | undefined> {
-    return this.lessons.get(id);
+    const [lesson] = await db.select().from(lessons).where(eq(lessons.id, id));
+    return lesson || undefined;
   }
 
   async createLesson(insertLesson: InsertLesson): Promise<Lesson> {
-    const id = this.currentLessonId++;
-    const lesson: Lesson = { ...insertLesson, id };
-    this.lessons.set(id, lesson);
+    const [lesson] = await db
+      .insert(lessons)
+      .values(insertLesson)
+      .returning();
     return lesson;
   }
 
-  // Progress methods
   async getUserProgress(userId: number): Promise<UserProgress[]> {
-    return Array.from(this.userProgress.values()).filter(progress => progress.userId === userId);
+    return await db.select().from(userProgress).where(eq(userProgress.userId, userId));
   }
 
   async getUserProgressByLesson(userId: number, lessonId: number): Promise<UserProgress | undefined> {
-    return Array.from(this.userProgress.values()).find(
-      progress => progress.userId === userId && progress.lessonId === lessonId
-    );
+    const [progress] = await db
+      .select()
+      .from(userProgress)
+      .where(and(eq(userProgress.userId, userId), eq(userProgress.lessonId, lessonId)));
+    return progress || undefined;
   }
 
   async createUserProgress(insertProgress: InsertUserProgress): Promise<UserProgress> {
-    const id = this.currentProgressId++;
-    const progress: UserProgress = { ...insertProgress, id };
-    this.userProgress.set(id, progress);
+    const [progress] = await db
+      .insert(userProgress)
+      .values(insertProgress)
+      .returning();
     return progress;
   }
 
   async updateUserProgress(id: number, updates: Partial<UserProgress>): Promise<UserProgress | undefined> {
-    const existing = this.userProgress.get(id);
-    if (!existing) return undefined;
-    
-    const updated: UserProgress = { ...existing, ...updates };
-    this.userProgress.set(id, updated);
-    return updated;
+    const [updated] = await db
+      .update(userProgress)
+      .set(updates)
+      .where(eq(userProgress.id, id))
+      .returning();
+    return updated || undefined;
   }
 
-  // Stats methods
   async getUserStats(userId: number): Promise<UserStats | undefined> {
-    return Array.from(this.userStats.values()).find(stats => stats.userId === userId);
+    const [stats] = await db.select().from(userStats).where(eq(userStats.userId, userId));
+    return stats || undefined;
   }
 
   async createUserStats(insertStats: InsertUserStats): Promise<UserStats> {
-    const id = this.currentStatsId++;
-    const stats: UserStats = { ...insertStats, id };
-    this.userStats.set(id, stats);
+    const [stats] = await db
+      .insert(userStats)
+      .values(insertStats)
+      .returning();
     return stats;
   }
 
   async updateUserStats(userId: number, updates: Partial<UserStats>): Promise<UserStats | undefined> {
-    const existing = Array.from(this.userStats.values()).find(stats => stats.userId === userId);
-    if (!existing) return undefined;
-    
-    const updated: UserStats = { ...existing, ...updates };
-    this.userStats.set(existing.id, updated);
-    return updated;
+    const [updated] = await db
+      .update(userStats)
+      .set(updates)
+      .where(eq(userStats.userId, userId))
+      .returning();
+    return updated || undefined;
   }
 }
 
-export const storage = new MemStorage();
+export const storage = new DatabaseStorage();
