@@ -43,6 +43,16 @@ export default function Home() {
     }
   };
 
+  const handleCloseLessonIntro = () => {
+    setShowLessonIntro(false);
+    setSelectedLesson(null);
+  };
+
+  const handleCloseInteractiveLesson = () => {
+    setShowInteractiveLesson(false);
+    setSelectedLesson(null);
+  };
+
   const handleCompleteLesson = (lessonId: string, score: number) => {
     updateProgress(lessonId, true, score);
   };
@@ -96,16 +106,15 @@ export default function Home() {
         <LessonIntro
           lesson={selectedLesson}
           onStartLesson={handleActualStartLesson}
-          onClose={() => setShowLessonIntro(false)}
+          onClose={handleCloseLessonIntro}
         />
       )}
 
       {showInteractiveLesson && selectedLesson && (
         <InteractiveLesson
           lessonId={selectedLesson.id}
-          title={selectedLesson.title}
           onComplete={handleLessonComplete}
-          onClose={() => setShowInteractiveLesson(false)}
+          onClose={handleCloseInteractiveLesson}
         />
       )}
     </div>

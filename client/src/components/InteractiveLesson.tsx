@@ -22,6 +22,7 @@ interface Question {
 interface InteractiveLessonProps {
   lessonId: string;
   onComplete: (score: number) => void;
+  onClose: () => void;
 }
 
 const lessonQuestions: Record<string, Question[]> = {
@@ -238,7 +239,7 @@ const getDefaultQuestions = (lessonId: string): Question[] => {
   ];
 };
 
-export default function InteractiveLesson({ lessonId, onComplete }: InteractiveLessonProps) {
+export default function InteractiveLesson({ lessonId, onComplete, onClose }: InteractiveLessonProps) {
   const questions = lessonQuestions[lessonId] || getDefaultQuestions(lessonId);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<string>("");
@@ -306,16 +307,28 @@ export default function InteractiveLesson({ lessonId, onComplete }: InteractiveL
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-6">
-      <div className="mb-6">
-        <div className="flex items-center justify-between mb-4">
-          <Badge variant="outline" className="text-primary">
-            Question {currentQuestion + 1} of {questions.length}
-          </Badge>
-          <div className="text-sm text-neutral-600 dark:text-gray-400">
-            Score: {score}/{questions.length}
-          </div>
-        </div>
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+      <div className="w-full max-w-4xl max-h-[90vh] overflow-y-auto bg-white dark:bg-gray-900 rounded-lg">
+        <div className="p-6">
+          <div className="mb-6">
+            <div className="flex items-center justify-between mb-4">
+              <Badge variant="outline" className="text-primary">
+                Question {currentQuestion + 1} of {questions.length}
+              </Badge>
+              <div className="flex items-center space-x-4">
+                <div className="text-sm text-neutral-600 dark:text-gray-400">
+                  Score: {score}/{questions.length}
+                </div>
+                <Button 
+                  variant="ghost" 
+                  size="sm" 
+                  onClick={onClose}
+                  className="text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800"
+                >
+                  <i className="fas fa-times"></i>
+                </Button>
+              </div>
+            </div>
         <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
           <div 
             className="bg-primary h-2 rounded-full transition-all duration-300"
@@ -434,6 +447,8 @@ export default function InteractiveLesson({ lessonId, onComplete }: InteractiveL
           </div>
         </CardContent>
       </Card>
+        </div>
+      </div>
     </div>
   );
 }
