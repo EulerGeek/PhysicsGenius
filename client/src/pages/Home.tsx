@@ -16,7 +16,7 @@ export default function Home() {
   const [selectedLesson, setSelectedLesson] = useState<any>(null);
   const [showLessonIntro, setShowLessonIntro] = useState(false);
   const [showInteractiveLesson, setShowInteractiveLesson] = useState(false);
-  const { progress, updateProgress, resetProgress } = useProgress();
+  const { progress, updateProgress, resetProgress, saveProgress } = useProgress();
   
   const courses = getCourses();
   const activeCourse = courses.find(course => course.id === activeTab);
@@ -59,7 +59,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-neutral-50">
-      <Header progress={progress} resetProgress={resetProgress} />
+      <Header progress={progress} resetProgress={resetProgress} setProgress={saveProgress} />
       
       <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <ProgressOverview progress={progress} courses={courses} />

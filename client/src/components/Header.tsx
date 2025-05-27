@@ -5,20 +5,23 @@ import { useTheme } from "@/contexts/ThemeContext";
 import AuthModal from "./AuthModal";
 import SettingsModal from "./SettingsModal";
 import FriendsModal from "./FriendsModal";
+import DevPanel from "./DevPanel";
 
 interface HeaderProps {
   progress: {
     streak: number;
   };
   resetProgress: () => void;
+  setProgress?: (progress: any) => void;
 }
 
-export default function Header({ progress, resetProgress }: HeaderProps) {
+export default function Header({ progress, resetProgress, setProgress }: HeaderProps) {
   const { theme, toggleTheme } = useTheme();
   const [user, setUser] = useState<{ username: string; email: string; } | null>(null);
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [showSettingsModal, setShowSettingsModal] = useState(false);
   const [showFriendsModal, setShowFriendsModal] = useState(false);
+  const [showDevPanel, setShowDevPanel] = useState(false);
 
   const handleSignIn = (userData: { username: string; email: string; }) => {
     setUser(userData);
@@ -48,12 +51,14 @@ export default function Header({ progress, resetProgress }: HeaderProps) {
             </div>
             
             <div className="flex items-center space-x-3">
+              {/* Dev Panel Button - Double click to access */}
               <Button
                 variant="outline"
                 size="sm"
+                onDoubleClick={() => setShowDevPanel(true)}
                 onClick={toggleTheme}
                 className="text-gray-700 dark:text-gray-300"
-                title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+                title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode (Double-click for dev panel)`}
               >
                 <i className={`fas ${theme === 'dark' ? 'fa-sun' : 'fa-moon'} text-sm`}></i>
               </Button>
@@ -131,6 +136,14 @@ export default function Header({ progress, resetProgress }: HeaderProps) {
         onClose={() => setShowFriendsModal(false)}
         user={user}
       />
+
+      {setProgress && (
+        <DevPanel
+          isOpen={showDevPanel}
+          onClose={() => setShowDevPanel(false)}
+          onSetProgress={setProgress}
+        />
+      )}
     </>
   );
 }
