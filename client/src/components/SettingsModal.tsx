@@ -4,7 +4,10 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Switch } from "@/components/ui/switch";
 import { Slider } from "@/components/ui/slider";
+import { Label } from "@/components/ui/label";
+import { Separator } from "@/components/ui/separator";
 import { useTheme } from "@/contexts/ThemeContext";
+import { useAudio } from "@/hooks/useAudio";
 
 interface SettingsModalProps {
   isOpen: boolean;
@@ -16,8 +19,8 @@ interface SettingsModalProps {
 
 export default function SettingsModal({ isOpen, onClose, onResetProgress, user, onSignOut }: SettingsModalProps) {
   const { theme, toggleTheme } = useTheme();
+  const { settings, updateSettings, toggleBackgroundMusic, toggleSoundEffects, playSound } = useAudio();
   const [speechRate, setSpeechRate] = useState(0.8);
-  const [soundEnabled, setSoundEnabled] = useState(true);
   const [notificationsEnabled, setNotificationsEnabled] = useState(true);
 
   if (!isOpen) return null;
