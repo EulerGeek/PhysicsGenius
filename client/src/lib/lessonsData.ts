@@ -347,6 +347,171 @@ export const classicalMechanicsLessons: Record<string, LessonData> = {
         concept: "Walking uses friction reaction force"
       }
     ]
+  },
+
+  "cm-3": {
+    id: "cm-3",
+    title: "Work and Energy",
+    videoId: "w4QFJb9a8vo",
+    feynmanNotes: "Energy is a very subtle concept. It is very, very difficult to get right. Energy cannot be created or destroyed, but it can change forms - kinetic, potential, thermal, and many others.",
+    questions: [
+      {
+        id: "energy-1", type: "multiple-choice",
+        question: "What is the formula for kinetic energy?",
+        options: [
+          { value: "a", text: "mgh" },
+          { value: "b", text: "½mv²" },
+          { value: "c", text: "F⋅d" },
+          { value: "d", text: "½kx²" }
+        ],
+        correctAnswer: "b",
+        explanation: "Kinetic energy is the energy of motion, given by KE = ½mv², where m is mass and v is velocity.",
+        concept: "KE = ½mv²"
+      },
+      {
+        id: "energy-2", type: "multiple-choice",
+        question: "What is gravitational potential energy?",
+        options: [
+          { value: "a", text: "½mv²" },
+          { value: "b", text: "mgh" },
+          { value: "c", text: "F⋅d" },
+          { value: "d", text: "½kx²" }
+        ],
+        correctAnswer: "b",
+        explanation: "Gravitational potential energy is PE = mgh, where m is mass, g is gravitational acceleration, and h is height.",
+        concept: "PE = mgh"
+      },
+      {
+        id: "energy-3", type: "multiple-choice",
+        question: "A 2 kg ball is moving at 10 m/s. What is its kinetic energy?",
+        options: [
+          { value: "a", text: "20 J" },
+          { value: "b", text: "100 J" },
+          { value: "c", text: "200 J" },
+          { value: "d", text: "400 J" }
+        ],
+        correctAnswer: "b",
+        explanation: "KE = ½mv² = ½(2 kg)(10 m/s)² = ½(2)(100) = 100 J",
+        concept: "Calculate KE using ½mv²"
+      },
+      {
+        id: "energy-4", type: "multiple-choice",
+        question: "What happens to total mechanical energy in the absence of friction?",
+        options: [
+          { value: "a", text: "It increases" },
+          { value: "b", text: "It decreases" },
+          { value: "c", text: "It remains constant" },
+          { value: "d", text: "It becomes zero" }
+        ],
+        correctAnswer: "c",
+        explanation: "In the absence of non-conservative forces like friction, total mechanical energy (KE + PE) is conserved.",
+        concept: "Energy conservation: E = KE + PE = constant"
+      },
+      {
+        id: "energy-5", type: "multiple-choice",
+        question: "If you lift a 5 kg object 2 meters high, how much work do you do against gravity?",
+        options: [
+          { value: "a", text: "10 J" },
+          { value: "b", text: "98 J" },
+          { value: "c", text: "50 J" },
+          { value: "d", text: "25 J" }
+        ],
+        correctAnswer: "b",
+        explanation: "Work against gravity = mgh = (5 kg)(9.8 m/s²)(2 m) = 98 J",
+        concept: "Work against gravity = mgh"
+      },
+      {
+        id: "energy-6", type: "multiple-choice",
+        question: "What is power?",
+        options: [
+          { value: "a", text: "Energy per unit mass" },
+          { value: "b", text: "Work per unit time" },
+          { value: "c", text: "Force per unit area" },
+          { value: "d", text: "Energy per unit volume" }
+        ],
+        correctAnswer: "b",
+        explanation: "Power is the rate of doing work or transferring energy: P = W/t = ΔE/t.",
+        concept: "P = W/t"
+      },
+      {
+        id: "energy-7", type: "multiple-choice",
+        question: "What is the SI unit of power?",
+        options: [
+          { value: "a", text: "Joule" },
+          { value: "b", text: "Newton" },
+          { value: "c", text: "Watt" },
+          { value: "d", text: "Pascal" }
+        ],
+        correctAnswer: "c",
+        explanation: "The SI unit of power is the Watt (W), equivalent to J/s or kg⋅m²/s³.",
+        concept: "SI unit: Watt (W)"
+      },
+      {
+        id: "energy-8", type: "multiple-choice",
+        question: "A spring is compressed by 0.1 m with a spring constant of 100 N/m. What is its elastic potential energy?",
+        options: [
+          { value: "a", text: "0.5 J" },
+          { value: "b", text: "1 J" },
+          { value: "c", text: "5 J" },
+          { value: "d", text: "10 J" }
+        ],
+        correctAnswer: "a",
+        explanation: "Elastic PE = ½kx² = ½(100 N/m)(0.1 m)² = ½(100)(0.01) = 0.5 J",
+        concept: "Elastic PE = ½kx²"
+      },
+      {
+        id: "energy-9", type: "multiple-choice",
+        question: "What is work?",
+        options: [
+          { value: "a", text: "Force times time" },
+          { value: "b", text: "Force times distance" },
+          { value: "c", text: "Mass times acceleration" },
+          { value: "d", text: "Energy per unit time" }
+        ],
+        correctAnswer: "b",
+        explanation: "Work is defined as W = F⋅d⋅cos(θ), where F is force, d is displacement, and θ is the angle between them.",
+        concept: "W = F⋅d⋅cos(θ)"
+      },
+      {
+        id: "energy-10", type: "multiple-choice",
+        question: "What is the work-energy theorem?",
+        options: [
+          { value: "a", text: "Work equals kinetic energy" },
+          { value: "b", text: "Work equals potential energy" },
+          { value: "c", text: "Work equals the change in kinetic energy" },
+          { value: "d", text: "Work equals total energy" }
+        ],
+        correctAnswer: "c",
+        explanation: "The work-energy theorem states that the net work done on an object equals its change in kinetic energy: W = ΔKE.",
+        concept: "W = ΔKE"
+      },
+      {
+        id: "energy-11", type: "multiple-choice",
+        question: "What is the SI unit of energy?",
+        options: [
+          { value: "a", text: "Newton" },
+          { value: "b", text: "Joule" },
+          { value: "c", text: "Watt" },
+          { value: "d", text: "Pascal" }
+        ],
+        correctAnswer: "b",
+        explanation: "The SI unit of energy is the Joule (J), equivalent to kg⋅m²/s² or N⋅m.",
+        concept: "SI unit: Joule (J)"
+      },
+      {
+        id: "energy-12", type: "multiple-choice",
+        question: "If no work is done on a system, what happens to its kinetic energy?",
+        options: [
+          { value: "a", text: "It increases" },
+          { value: "b", text: "It decreases" },
+          { value: "c", text: "It remains constant" },
+          { value: "d", text: "It becomes zero" }
+        ],
+        correctAnswer: "c",
+        explanation: "By the work-energy theorem, if W = 0, then ΔKE = 0, so kinetic energy remains constant.",
+        concept: "No work ⟹ constant KE"
+      }
+    ]
   }
 };
 
@@ -538,6 +703,149 @@ export const quantumMechanicsLessons: Record<string, LessonData> = {
         correctAnswer: "c",
         explanation: "The double-slit experiment shows that light (and matter) can exhibit both wave and particle properties depending on how it's observed.",
         concept: "Wave-particle duality"
+      },
+      {
+        id: "qm-1-2", type: "multiple-choice",
+        question: "What is a photon?",
+        options: [
+          { value: "a", text: "A unit of light energy" },
+          { value: "b", text: "A quantum of electromagnetic radiation" },
+          { value: "c", text: "A particle of light" },
+          { value: "d", text: "All of the above" }
+        ],
+        correctAnswer: "d",
+        explanation: "A photon is a quantum (discrete unit) of electromagnetic radiation, representing both the particle nature of light and its energy.",
+        concept: "Photon = light quantum"
+      },
+      {
+        id: "qm-1-3", type: "multiple-choice",
+        question: "What is Planck's constant?",
+        options: [
+          { value: "a", text: "h = 6.63 × 10⁻³⁴ J⋅s" },
+          { value: "b", text: "h = 6.63 × 10⁻²⁴ J⋅s" },
+          { value: "c", text: "h = 6.63 × 10⁻¹⁴ J⋅s" },
+          { value: "d", text: "h = 6.63 × 10⁻⁴ J⋅s" }
+        ],
+        correctAnswer: "a",
+        explanation: "Planck's constant h = 6.63 × 10⁻³⁴ J⋅s is the fundamental constant that relates energy to frequency in quantum mechanics.",
+        concept: "h = 6.63 × 10⁻³⁴ J⋅s"
+      },
+      {
+        id: "qm-1-4", type: "multiple-choice",
+        question: "What is the energy of a photon?",
+        options: [
+          { value: "a", text: "E = hf" },
+          { value: "b", text: "E = mc²" },
+          { value: "c", text: "E = ½mv²" },
+          { value: "d", text: "E = mgh" }
+        ],
+        correctAnswer: "a",
+        explanation: "The energy of a photon is E = hf, where h is Planck's constant and f is the frequency.",
+        concept: "E = hf = hc/λ"
+      },
+      {
+        id: "qm-1-5", type: "multiple-choice",
+        question: "What is de Broglie wavelength?",
+        options: [
+          { value: "a", text: "λ = h/p" },
+          { value: "b", text: "λ = h/m" },
+          { value: "c", text: "λ = h/v" },
+          { value: "d", text: "λ = h/E" }
+        ],
+        correctAnswer: "a",
+        explanation: "De Broglie wavelength λ = h/p shows that all matter has wave properties, where p is momentum.",
+        concept: "λ = h/p (matter waves)"
+      },
+      {
+        id: "qm-1-6", type: "multiple-choice",
+        question: "What is the photoelectric effect?",
+        options: [
+          { value: "a", text: "Light creating electricity" },
+          { value: "b", text: "Electrons being emitted when light hits a material" },
+          { value: "c", text: "Light bending around objects" },
+          { value: "d", text: "Light changing color" }
+        ],
+        correctAnswer: "b",
+        explanation: "The photoelectric effect is the emission of electrons from a material when light of sufficient frequency strikes it.",
+        concept: "Light ejects electrons"
+      },
+      {
+        id: "qm-1-7", type: "multiple-choice",
+        question: "What is the work function?",
+        options: [
+          { value: "a", text: "The minimum energy needed to remove an electron" },
+          { value: "b", text: "The maximum energy of an electron" },
+          { value: "c", text: "The kinetic energy of an electron" },
+          { value: "d", text: "The potential energy of an electron" }
+        ],
+        correctAnswer: "a",
+        explanation: "The work function is the minimum energy required to remove an electron from a material's surface.",
+        concept: "Work function = minimum removal energy"
+      },
+      {
+        id: "qm-1-8", type: "multiple-choice",
+        question: "What is quantization?",
+        options: [
+          { value: "a", text: "Energy comes in discrete packets" },
+          { value: "b", text: "Energy is continuous" },
+          { value: "c", text: "Energy is always zero" },
+          { value: "d", text: "Energy is infinite" }
+        ],
+        correctAnswer: "a",
+        explanation: "Quantization means that certain quantities like energy come in discrete, indivisible packets called quanta.",
+        concept: "Energy = discrete packets"
+      },
+      {
+        id: "qm-1-9", type: "multiple-choice",
+        question: "What happens when you observe a quantum system?",
+        options: [
+          { value: "a", text: "Nothing changes" },
+          { value: "b", text: "The wave function collapses" },
+          { value: "c", text: "The system disappears" },
+          { value: "d", text: "Time stops" }
+        ],
+        correctAnswer: "b",
+        explanation: "Quantum measurement causes the wave function to collapse, forcing the system into a definite state.",
+        concept: "Measurement causes collapse"
+      },
+      {
+        id: "qm-1-10", type: "multiple-choice",
+        question: "What is interference in quantum mechanics?",
+        options: [
+          { value: "a", text: "Particles colliding" },
+          { value: "b", text: "Wave functions adding constructively or destructively" },
+          { value: "c", text: "Electrons repelling" },
+          { value: "d", text: "Atoms bonding" }
+        ],
+        correctAnswer: "b",
+        explanation: "Quantum interference occurs when wave functions add together, creating constructive or destructive interference patterns.",
+        concept: "Wave functions interfere"
+      },
+      {
+        id: "qm-1-11", type: "multiple-choice",
+        question: "What is the complementarity principle?",
+        options: [
+          { value: "a", text: "Wave and particle properties are complementary" },
+          { value: "b", text: "All particles are the same" },
+          { value: "c", text: "Energy and matter are equivalent" },
+          { value: "d", text: "Space and time are linked" }
+        ],
+        correctAnswer: "a",
+        explanation: "Complementarity states that wave and particle properties are complementary aspects of quantum objects - both needed for complete description.",
+        concept: "Wave and particle aspects are complementary"
+      },
+      {
+        id: "qm-1-12", type: "multiple-choice",
+        question: "What determines which slit an electron goes through in the double-slit experiment?",
+        options: [
+          { value: "a", text: "The electron's speed" },
+          { value: "b", text: "The electron's charge" },
+          { value: "c", text: "Whether or not you measure it" },
+          { value: "d", text: "The size of the slits" }
+        ],
+        correctAnswer: "c",
+        explanation: "If you don't measure which slit, the electron goes through both slits simultaneously. If you do measure, it goes through one specific slit.",
+        concept: "Measurement determines path"
       }
     ]
   }

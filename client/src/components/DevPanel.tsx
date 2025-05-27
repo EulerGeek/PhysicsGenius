@@ -103,18 +103,11 @@ export default function DevPanel({ isOpen, onClose, onSetProgress }: DevPanelPro
               <h3 className="font-semibold text-gray-900 dark:text-white mb-3">Progress Shortcuts</h3>
               <div className="space-y-2">
                 <Button
-                  onClick={setFullProgress}
-                  className="w-full bg-green-600 text-white hover:bg-green-700"
+                  onClick={applySliderProgress}
+                  className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:from-purple-700 hover:to-pink-700"
                 >
-                  <i className="fas fa-trophy text-xs mr-2"></i>
-                  Set 100% Progress (All Lessons Complete)
-                </Button>
-                <Button
-                  onClick={setPartialProgress}
-                  className="w-full bg-blue-600 text-white hover:bg-blue-700"
-                >
-                  <i className="fas fa-chart-line text-xs mr-2"></i>
-                  Set 45% Progress (Partial Complete)
+                  <i className="fas fa-magic text-xs mr-2"></i>
+                  Apply {progressValue[0]}% Progress
                 </Button>
                 <Button
                   onClick={resetProgress}
