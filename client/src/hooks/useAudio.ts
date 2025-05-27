@@ -76,13 +76,13 @@ export function useAudio() {
       return;
     }
 
-    // Fallback to default sounds
+    // Use your custom sound files
     const soundMap = {
-      correct: '/audio/correct.mp3',
-      incorrect: '/audio/incorrect.mp3', 
-      complete: '/audio/lesson-complete.mp3',
-      click: '/audio/click.mp3',
-      notification: '/audio/notification.mp3'
+      correct: '/audio/correct.wav',  // Your success alert sound
+      incorrect: '/audio/notification.wav', // Your bike bell for incorrect
+      complete: '/audio/complete.wav',  // Your success alert for completion
+      click: '/audio/click.wav', // Your bike bell for clicks
+      notification: '/audio/notification.wav' // Your bike bell sound
     };
 
     const audio = new Audio(soundMap[soundType]);
