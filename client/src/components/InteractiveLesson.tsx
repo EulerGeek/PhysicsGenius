@@ -23,7 +23,6 @@ export default function InteractiveLesson({ lessonId, title, onComplete, onClose
   const [answers, setAnswers] = useState<Record<string, string>>({});
 
   const lessonData = getLessonData(lessonId);
-  console.log("Lesson ID:", lessonId, "Lesson Data:", lessonData);
   const questions = lessonData?.questions || [];
   const question = questions[currentQuestion];
   const progress = questions.length > 0 ? ((currentQuestion + 1) / questions.length) * 100 : 0;

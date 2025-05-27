@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { getLessonData } from "@/lib/lessonsData";
 
 interface LessonIntroProps {
   lesson: {
@@ -15,65 +15,27 @@ interface LessonIntroProps {
   onClose: () => void;
 }
 
-const videoSources = [
-  { value: "mit-801", label: "MIT 8.01 - Classical Mechanics", icon: "fas fa-university" },
-  { value: "mit-8012", label: "MIT 8.012 - Advanced Classical", icon: "fas fa-graduation-cap" },
-  { value: "feynman", label: "Feynman Lectures", icon: "fas fa-user-graduate" },
-  { value: "khan", label: "Khan Academy", icon: "fas fa-play-circle" }
-];
-
 export default function LessonIntro({ lesson, onStartLesson, onClose }: LessonIntroProps) {
-  const [selectedSource, setSelectedSource] = useState("mit-801");
-  const [isReadMode, setIsReadMode] = useState(false);
-
-  // Publicly accessible physics education videos
-  const getVideoId = (source: string, lessonId: string) => {
-    const videoMap: Record<string, Record<string, string>> = {
-      "mit-801": {
-        "cm-1": "wWnfJ0-xXRE", // MIT Physics: Introduction to Classical Mechanics
-        "cm-2": "ZM8ECpBuQYE", // MIT Physics: Forces and Newton's Laws
-        "cm-3": "w4QFJb9a8vo", // MIT Physics: Work and Energy
-        "cm-4": "9wzqXHsLIQI", // MIT Physics: Momentum
-        "cm-5": "Oh4m8Ees-3Q"  // MIT Physics: Rotational Motion
-      },
-      "feynman": {
-        "cm-1": "j3mhkYbznBk", // Feynman Physics: Motion
-        "cm-2": "QRE0GxT6Zbw", // Feynman Physics: Forces
-        "cm-3": "w4QFJb9a8vo", // Physics: Energy concepts
-        "cm-4": "9wzqXHsLIQI", // Physics: Momentum
-        "cm-5": "Oh4m8Ees-3Q"  // Physics: Rotation
-      },
-      "khan": {
-        "cm-1": "VqK0s5dWagg", // Khan Academy: Introduction to Physics
-        "cm-2": "kKKM8Y-u7ds", // Khan Academy: Newton's Laws
-        "cm-3": "w4QFJb9a8vo", // Khan Academy: Work and Energy
-        "cm-4": "9wzqXHsLIQI", // Khan Academy: Momentum
-        "cm-5": "Oh4m8Ees-3Q"  // Khan Academy: Rotational Motion
-      },
-      "mit-8012": {
-        "cm-1": "wWnfJ0-xXRE", // Advanced Classical Mechanics
-        "cm-2": "ZM8ECpBuQYE", 
-        "cm-3": "w4QFJb9a8vo",
-        "cm-4": "9wzqXHsLIQI",
-        "cm-5": "Oh4m8Ees-3Q"
-      }
-    };
-    return videoMap[source]?.[lessonId] || "wWnfJ0-xXRE";
-  };
-
-  const readContent = () => {
-    const text = `Lesson: ${lesson.title}. ${lesson.description}. This lesson will take approximately ${lesson.duration}. Click start lesson to begin the interactive content.`;
+  const [showNotes, setShowNotes] = useState(false);
+  const [isReading, setIsReading] = useState(false);
+  
+  const lessonData = getLessonData(lesson.id);
+  
+  const handleReadNotes = () => {
+    if (!lessonData?.feynmanNotes) return;
+    
+    setIsReading(true);
     
     if ('speechSynthesis' in window && window.speechSynthesis) {
-      // Stop any currently playing speech
       window.speechSynthesis.cancel();
-      
-      const utterance = new SpeechSynthesisUtterance(text);
+      const utterance = new SpeechSynthesisUtterance(lessonData.feynmanNotes);
       utterance.rate = 0.8;
       utterance.pitch = 1;
       utterance.volume = 1;
       
-      // Wait for voices to load
+      utterance.onend = () => setIsReading(false);
+      utterance.onerror = () => setIsReading(false);
+      
       const speak = () => {
         const voices = window.speechSynthesis.getVoices();
         if (voices.length > 0) {
@@ -87,30 +49,27 @@ export default function LessonIntro({ lesson, onStartLesson, onClose }: LessonIn
       } else {
         speak();
       }
-    } else {
-      alert("Speech synthesis is not supported in your browser. Please try using a modern browser like Chrome or Firefox.");
     }
+    
+    setShowNotes(true);
+  };
+
+  const stopReading = () => {
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.cancel();
+    }
+    setIsReading(false);
   };
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-      <Card className="w-full max-w-4xl max-h-[90vh] overflow-y-auto">
+      <Card className="w-full max-w-2xl max-h-[90vh] overflow-y-auto bg-white dark:bg-gray-900">
         <CardContent className="p-0">
           <div className="gradient-primary p-6 text-white">
             <div className="flex items-center justify-between mb-4">
               <div>
-                <h2 className="text-2xl font-bold mb-2">{lesson.title}</h2>
-                <p className="text-blue-100 mb-3">{lesson.description}</p>
-                <div className="flex items-center space-x-4">
-                  <Badge variant="secondary" className="bg-white bg-opacity-20 text-white">
-                    <i className="fas fa-clock text-xs mr-1"></i>
-                    {lesson.duration}
-                  </Badge>
-                  <Badge variant="secondary" className="bg-green-500 text-white">
-                    <i className="fas fa-gift text-xs mr-1"></i>
-                    100% FREE
-                  </Badge>
-                </div>
+                <h2 className="text-2xl font-bold mb-2 text-white">{lesson.title}</h2>
+                <p className="text-blue-100">{lesson.description}</p>
               </div>
               <Button 
                 variant="ghost" 
@@ -121,115 +80,117 @@ export default function LessonIntro({ lesson, onStartLesson, onClose }: LessonIn
                 <i className="fas fa-times"></i>
               </Button>
             </div>
+            <div className="flex items-center space-x-4">
+              <Badge variant="secondary" className="bg-white bg-opacity-20 text-white">
+                <i className="fas fa-clock text-xs mr-1"></i>
+                {lesson.duration}
+              </Badge>
+              <Badge variant="secondary" className="bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">
+                <i className="fas fa-gift text-xs mr-1"></i>
+                100% FREE
+              </Badge>
+            </div>
           </div>
 
           <div className="p-6">
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-lg font-semibold">Watch Introduction Video</h3>
-              <div className="flex items-center space-x-3">
-                <Select value={selectedSource} onValueChange={setSelectedSource}>
-                  <SelectTrigger className="w-56">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {videoSources.map((source) => (
-                      <SelectItem key={source.value} value={source.value}>
-                        <div className="flex items-center space-x-2">
-                          <i className={`${source.icon} text-sm`}></i>
-                          <span>{source.label}</span>
-                        </div>
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => {
-                    setIsReadMode(!isReadMode);
-                    if (!isReadMode) readContent();
-                  }}
-                  className={isReadMode ? "bg-blue-50 text-blue-600" : ""}
-                >
-                  <i className="fas fa-universal-access text-xs mr-1"></i>
-                  Read Mode
-                </Button>
-              </div>
-            </div>
-
-            {!isReadMode ? (
-              <div className="aspect-video bg-gray-100 rounded-lg mb-6 overflow-hidden">
-                <iframe
-                  width="100%"
-                  height="100%"
-                  src={`https://www.youtube.com/embed/${getVideoId(selectedSource, lesson.id)}?rel=0`}
-                  title={`${lesson.title} - Introduction`}
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                  className="rounded-lg"
-                ></iframe>
-              </div>
-            ) : (
-              <div className="bg-blue-50 p-6 rounded-lg mb-6">
-                <div className="flex items-start space-x-3">
-                  <div className="w-12 h-12 bg-blue-500 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <i className="fas fa-volume-up text-white"></i>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-blue-900 mb-2">Audio Mode Active</h4>
-                    <p className="text-blue-800 mb-3 leading-relaxed">
-                      <strong>{lesson.title}</strong><br/>
-                      {lesson.description}<br/>
-                      Duration: {lesson.duration}
-                    </p>
-                    <Button
-                      onClick={readContent}
-                      size="sm"
-                      className="bg-blue-600 text-white hover:bg-blue-700"
-                    >
-                      <i className="fas fa-play text-xs mr-1"></i>
-                      Read Again
-                    </Button>
-                  </div>
+            {lessonData?.videoId && (
+              <div className="mb-6">
+                <h3 className="text-lg font-semibold mb-3 text-gray-900 dark:text-white">Video Introduction</h3>
+                <div className="aspect-video rounded-lg overflow-hidden">
+                  <iframe
+                    width="100%"
+                    height="100%"
+                    src={`https://www.youtube.com/embed/${lessonData.videoId}`}
+                    title={lesson.title}
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    className="rounded-lg"
+                  ></iframe>
                 </div>
               </div>
             )}
 
-            <div className="grid md:grid-cols-3 gap-4 mb-6">
-              <div className="text-center p-4 bg-gray-50 rounded-lg">
-                <i className="fas fa-university text-primary text-xl mb-2"></i>
-                <div className="text-sm font-medium">MIT Quality</div>
-                <div className="text-xs text-gray-600">University-level content</div>
+            {lessonData?.feynmanNotes && (
+              <div className="mb-6">
+                <div className="flex items-center justify-between mb-3">
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Insights from Physics</h3>
+                  <div className="flex space-x-2">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={handleReadNotes}
+                      disabled={isReading}
+                      className="text-blue-600 border-blue-600 hover:bg-blue-50 dark:text-blue-400 dark:border-blue-400"
+                    >
+                      <i className="fas fa-volume-up text-xs mr-1"></i>
+                      {isReading ? "Reading..." : "Read Notes"}
+                    </Button>
+                    {isReading && (
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={stopReading}
+                        className="text-red-600 border-red-600 hover:bg-red-50"
+                      >
+                        <i className="fas fa-stop text-xs mr-1"></i>
+                        Stop
+                      </Button>
+                    )}
+                  </div>
+                </div>
+                
+                {showNotes && (
+                  <Card className="bg-blue-50 dark:bg-blue-900 border-blue-200 dark:border-blue-700">
+                    <CardContent className="p-4">
+                      <p className="text-sm text-blue-900 dark:text-blue-100 leading-relaxed italic">
+                        "{lessonData.feynmanNotes}"
+                      </p>
+                    </CardContent>
+                  </Card>
+                )}
               </div>
-              <div className="text-center p-4 bg-gray-50 rounded-lg">
-                <i className="fas fa-gamepad text-green-600 text-xl mb-2"></i>
-                <div className="text-sm font-medium">Interactive</div>
-                <div className="text-xs text-gray-600">Hands-on learning</div>
-              </div>
-              <div className="text-center p-4 bg-gray-50 rounded-lg">
-                <i className="fas fa-infinity text-purple-600 text-xl mb-2"></i>
-                <div className="text-sm font-medium">Always Free</div>
-                <div className="text-xs text-gray-600">No payment required</div>
+            )}
+
+            <div className="mb-6">
+              <h3 className="text-lg font-semibold mb-3 text-gray-900 dark:text-white">What You'll Learn</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <div className="flex items-center space-x-2">
+                  <i className="fas fa-check-circle text-green-500 text-sm"></i>
+                  <span className="text-sm text-gray-700 dark:text-gray-300">Core physics concepts</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <i className="fas fa-check-circle text-green-500 text-sm"></i>
+                  <span className="text-sm text-gray-700 dark:text-gray-300">Interactive problem solving</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <i className="fas fa-check-circle text-green-500 text-sm"></i>
+                  <span className="text-sm text-gray-700 dark:text-gray-300">Real-world applications</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <i className="fas fa-check-circle text-green-500 text-sm"></i>
+                  <span className="text-sm text-gray-700 dark:text-gray-300">Mathematical understanding</span>
+                </div>
               </div>
             </div>
 
             <div className="flex items-center justify-between">
-              <Button 
-                variant="outline" 
-                onClick={onClose}
-                className="text-gray-600"
-              >
-                <i className="fas fa-arrow-left text-xs mr-2"></i>
-                Back to Lessons
-              </Button>
-              <Button 
-                onClick={onStartLesson}
-                className="bg-green-600 text-white hover:bg-green-700"
-              >
-                Start Interactive Lesson
-                <i className="fas fa-arrow-right text-xs ml-2"></i>
-              </Button>
+              <div className="text-sm text-gray-600 dark:text-gray-400">
+                <i className="fas fa-question-circle text-primary mr-1"></i>
+                {lessonData?.questions?.length || 12} interactive questions
+              </div>
+              <div className="flex space-x-3">
+                <Button variant="outline" onClick={onClose}>
+                  Maybe Later
+                </Button>
+                <Button 
+                  onClick={onStartLesson}
+                  className="bg-blue-600 text-white hover:bg-blue-700"
+                >
+                  Start Learning
+                  <i className="fas fa-arrow-right text-xs ml-2"></i>
+                </Button>
+              </div>
             </div>
           </div>
         </CardContent>
