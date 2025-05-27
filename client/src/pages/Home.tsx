@@ -5,6 +5,7 @@ import CourseNavigation from "@/components/CourseNavigation";
 import LessonCard from "@/components/LessonCard";
 import LessonPreview from "@/components/LessonPreview";
 import LessonIntro from "@/components/LessonIntro";
+import InteractiveLesson from "@/components/InteractiveLesson";
 import Resources from "@/components/Resources";
 import Footer from "@/components/Footer";
 import { useProgress } from "@/hooks/useProgress";
@@ -14,6 +15,7 @@ export default function Home() {
   const [activeTab, setActiveTab] = useState("classical");
   const [selectedLesson, setSelectedLesson] = useState<any>(null);
   const [showLessonIntro, setShowLessonIntro] = useState(false);
+  const [showInteractiveLesson, setShowInteractiveLesson] = useState(false);
   const { progress, updateProgress } = useProgress();
   
   const courses = getCourses();
@@ -30,8 +32,15 @@ export default function Home() {
 
   const handleActualStartLesson = () => {
     setShowLessonIntro(false);
-    // This would normally navigate to the actual lesson content
-    console.log("Starting actual lesson:", selectedLesson?.id);
+    setShowInteractiveLesson(true);
+  };
+
+  const handleLessonComplete = (score: number) => {
+    if (selectedLesson) {
+      updateProgress(selectedLesson.id, true, score);
+      setShowInteractiveLesson(false);
+      setSelectedLesson(null);
+    }
   };
 
   const handleCompleteLesson = (lessonId: string, score: number) => {
@@ -88,6 +97,15 @@ export default function Home() {
           lesson={selectedLesson}
           onStartLesson={handleActualStartLesson}
           onClose={() => setShowLessonIntro(false)}
+        />
+      )}
+
+      {showInteractiveLesson && selectedLesson && (
+        <InteractiveLesson
+          lessonId={selectedLesson.id}
+          title={selectedLesson.title}
+          onComplete={handleLessonComplete}
+          onClose={() => setShowInteractiveLesson(false)}
         />
       )}
     </div>

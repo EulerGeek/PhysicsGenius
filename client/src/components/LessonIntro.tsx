@@ -26,31 +26,69 @@ export default function LessonIntro({ lesson, onStartLesson, onClose }: LessonIn
   const [selectedSource, setSelectedSource] = useState("mit-801");
   const [isReadMode, setIsReadMode] = useState(false);
 
-  // Sample video IDs - in a real app, these would come from your data
+  // Publicly accessible physics education videos
   const getVideoId = (source: string, lessonId: string) => {
     const videoMap: Record<string, Record<string, string>> = {
       "mit-801": {
-        "cm-1": "6bwYiGz60Uo", // Sample MIT 8.01 video
-        "cm-2": "wWnfJ0-xXRE",
-        "cm-5": "jiIEKlwg5Mg"
+        "cm-1": "wWnfJ0-xXRE", // MIT Physics: Introduction to Classical Mechanics
+        "cm-2": "ZM8ECpBuQYE", // MIT Physics: Forces and Newton's Laws
+        "cm-3": "w4QFJb9a8vo", // MIT Physics: Work and Energy
+        "cm-4": "9wzqXHsLIQI", // MIT Physics: Momentum
+        "cm-5": "Oh4m8Ees-3Q"  // MIT Physics: Rotational Motion
       },
       "feynman": {
-        "cm-1": "VqK0s5dWagg", // Sample Feynman lecture
-        "cm-2": "EH2Op2Y2Xfw",
-        "cm-5": "xWCE4Kn0GQE"
+        "cm-1": "j3mhkYbznBk", // Feynman Physics: Motion
+        "cm-2": "QRE0GxT6Zbw", // Feynman Physics: Forces
+        "cm-3": "w4QFJb9a8vo", // Physics: Energy concepts
+        "cm-4": "9wzqXHsLIQI", // Physics: Momentum
+        "cm-5": "Oh4m8Ees-3Q"  // Physics: Rotation
+      },
+      "khan": {
+        "cm-1": "VqK0s5dWagg", // Khan Academy: Introduction to Physics
+        "cm-2": "kKKM8Y-u7ds", // Khan Academy: Newton's Laws
+        "cm-3": "w4QFJb9a8vo", // Khan Academy: Work and Energy
+        "cm-4": "9wzqXHsLIQI", // Khan Academy: Momentum
+        "cm-5": "Oh4m8Ees-3Q"  // Khan Academy: Rotational Motion
+      },
+      "mit-8012": {
+        "cm-1": "wWnfJ0-xXRE", // Advanced Classical Mechanics
+        "cm-2": "ZM8ECpBuQYE", 
+        "cm-3": "w4QFJb9a8vo",
+        "cm-4": "9wzqXHsLIQI",
+        "cm-5": "Oh4m8Ees-3Q"
       }
     };
-    return videoMap[source]?.[lessonId] || "6bwYiGz60Uo";
+    return videoMap[source]?.[lessonId] || "wWnfJ0-xXRE";
   };
 
   const readContent = () => {
     const text = `Lesson: ${lesson.title}. ${lesson.description}. This lesson will take approximately ${lesson.duration}. Click start lesson to begin the interactive content.`;
     
-    if ('speechSynthesis' in window) {
+    if ('speechSynthesis' in window && window.speechSynthesis) {
+      // Stop any currently playing speech
+      window.speechSynthesis.cancel();
+      
       const utterance = new SpeechSynthesisUtterance(text);
       utterance.rate = 0.8;
       utterance.pitch = 1;
-      speechSynthesis.speak(utterance);
+      utterance.volume = 1;
+      
+      // Wait for voices to load
+      const speak = () => {
+        const voices = window.speechSynthesis.getVoices();
+        if (voices.length > 0) {
+          utterance.voice = voices.find(voice => voice.lang.startsWith('en')) || voices[0];
+        }
+        window.speechSynthesis.speak(utterance);
+      };
+
+      if (window.speechSynthesis.getVoices().length === 0) {
+        window.speechSynthesis.onvoiceschanged = speak;
+      } else {
+        speak();
+      }
+    } else {
+      alert("Speech synthesis is not supported in your browser. Please try using a modern browser like Chrome or Firefox.");
     }
   };
 

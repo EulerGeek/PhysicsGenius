@@ -31,7 +31,35 @@ export default function Header({ progress }: HeaderProps) {
                 <i className="fas fa-gift text-xs mr-1"></i>
                 100% FREE
               </Badge>
-              <Button size="sm" variant="outline" className="text-neutral-600 hover:text-neutral-900">
+              <Button 
+                size="sm" 
+                variant="outline" 
+                className="text-neutral-600 hover:text-neutral-900"
+                onClick={() => {
+                  const text = "Welcome to QUOMA, your personal physics geek. Learn physics through interactive, bite-sized lessons covering Classical Mechanics, General Relativity, and Quantum Mechanics. This platform is completely free to use.";
+                  if ('speechSynthesis' in window && window.speechSynthesis) {
+                    window.speechSynthesis.cancel();
+                    const utterance = new SpeechSynthesisUtterance(text);
+                    utterance.rate = 0.8;
+                    utterance.pitch = 1;
+                    utterance.volume = 1;
+                    
+                    const speak = () => {
+                      const voices = window.speechSynthesis.getVoices();
+                      if (voices.length > 0) {
+                        utterance.voice = voices.find(voice => voice.lang.startsWith('en')) || voices[0];
+                      }
+                      window.speechSynthesis.speak(utterance);
+                    };
+
+                    if (window.speechSynthesis.getVoices().length === 0) {
+                      window.speechSynthesis.onvoiceschanged = speak;
+                    } else {
+                      speak();
+                    }
+                  }
+                }}
+              >
                 <i className="fas fa-universal-access text-xs mr-1"></i>
                 Read Mode
               </Button>
