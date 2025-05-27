@@ -18,6 +18,11 @@ export function useAudio() {
     };
   });
 
+  const [customSounds, setCustomSounds] = useState<Record<string, string>>(() => {
+    const saved = localStorage.getItem('quoma-custom-sounds');
+    return saved ? JSON.parse(saved) : {};
+  });
+
   const backgroundMusicRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
@@ -60,6 +65,18 @@ export function useAudio() {
   const playSound = (soundType: 'correct' | 'incorrect' | 'complete' | 'click' | 'notification') => {
     if (!settings.soundEffectsEnabled) return;
 
+    // Check for custom uploaded sounds first
+    const customUrl = customSounds[soundType];
+    if (customUrl) {
+      const audio = new Audio(customUrl);
+      audio.volume = settings.soundVolume;
+      audio.play().catch(() => {
+        console.log(`Could not play custom ${soundType} sound`);
+      });
+      return;
+    }
+
+    // Fallback to default sounds
     const soundMap = {
       correct: '/audio/correct.mp3',
       incorrect: '/audio/incorrect.mp3', 
@@ -73,6 +90,20 @@ export function useAudio() {
     audio.play().catch(() => {
       // Sound might fail to play, that's okay
     });
+  };
+
+  const uploadCustomSound = (soundType: string, file: File) => {
+    const url = URL.createObjectURL(file);
+    const newCustomSounds = { ...customSounds, [soundType]: url };
+    setCustomSounds(newCustomSounds);
+    localStorage.setItem('quoma-custom-sounds', JSON.stringify(newCustomSounds));
+  };
+
+  const removeCustomSound = (soundType: string) => {
+    const newCustomSounds = { ...customSounds };
+    delete newCustomSounds[soundType];
+    setCustomSounds(newCustomSounds);
+    localStorage.setItem('quoma-custom-sounds', JSON.stringify(newCustomSounds));
   };
 
   const updateSettings = (newSettings: Partial<AudioSettings>) => {
@@ -92,6 +123,9 @@ export function useAudio() {
     updateSettings,
     playSound,
     toggleBackgroundMusic,
-    toggleSoundEffects
+    toggleSoundEffects,
+    uploadCustomSound,
+    removeCustomSound,
+    customSounds
   };
 }
