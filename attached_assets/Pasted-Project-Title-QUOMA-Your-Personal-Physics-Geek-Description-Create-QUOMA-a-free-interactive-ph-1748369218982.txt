@@ -1,0 +1,56 @@
+Project Title: QUOMA — Your Personal Physics Geek
+
+Description:
+Create QUOMA, a free, interactive physics learning website inspired by Duolingo’s approach, designed to build deep intuition through bite-sized lessons and levels. QUOMA covers three core physics areas: Classical Mechanics, General Relativity, and Quantum Mechanics, with content based on MIT 8.01 lectures and trusted physics books.
+
+Key Features:
+
+Levels & Progression:
+Unlock lessons progressively across topics, guiding users step-by-step from foundational classical mechanics to advanced quantum mechanics.
+
+Intuition-Focused Learning:
+Lessons emphasize conceptual clarity, visual explanations, and real-world analogies rather than heavy math.
+
+Interactive Exercises:
+Engage users with multiple-choice quizzes, drag-and-drop activities, and intuitive problem-solving prompts.
+
+Course Structure:
+
+Classical Mechanics (MIT 8.01 + core textbooks)
+
+General Relativity (introductory conceptual lessons)
+
+Quantum Mechanics (basic ideas and thought experiments)
+
+Reference Materials:
+Integrate links and excerpts from MIT OpenCourseWare 8.01, Six Easy Pieces (Feynman), Spacetime and Geometry (Carroll), and Quantum Mechanics (Griffiths).
+
+User Interface:
+Clean, friendly, and engaging UI inspired by Duolingo’s style, with progress bars, motivational messages, and clear navigation.
+
+Accessibility:
+Free access with no login required initially; room for future user accounts and saved progress.
+
+Technical Requirements:
+
+Frontend: HTML, CSS, JavaScript (React preferred)
+
+Optional backend: Node.js or Firebase for progress tracking
+
+Responsive design for all devices
+
+Starter Code Example (React):
+
+jsx
+Copy code
+function LessonCard({ title, level, completed }) {
+  return (
+    <div className={`lesson-card ${completed ? 'completed' : ''}`}>
+      <h3>{title}</h3>
+      <p>Level {level}</p>
+      <button>Start Lesson</button>
+    </div>
+  );
+}
+Additional Notes:
+QUOMA’s main goal is to be your personal physics geek — making physics fun, intuitive, and accessible for learners at all levels. The platform will grow with more lessons, interactive features, and possibly community discussions.
