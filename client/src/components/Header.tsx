@@ -3,7 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "@/contexts/ThemeContext";
 import AuthModal from "./AuthModal";
-import SettingsModal from "./SettingsModal";
+import SettingsModalFixed from "./SettingsModalFixed";
 import FriendsModal from "./FriendsModal";
 import DevPanel from "./DevPanel";
 
@@ -123,7 +123,7 @@ export default function Header({ progress, resetProgress, setProgress }: HeaderP
         onSignIn={handleSignIn}
       />
 
-      <SettingsModal
+      <SettingsModalFixed
         isOpen={showSettingsModal}
         onClose={() => setShowSettingsModal(false)}
         onResetProgress={resetProgress}

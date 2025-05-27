@@ -117,8 +117,8 @@ export default function SettingsModal({ isOpen, onClose, onResetProgress, user, 
                     <p className="text-xs text-gray-600 dark:text-gray-400">Play sounds for interactions</p>
                   </div>
                   <Switch
-                    checked={soundEnabled}
-                    onCheckedChange={setSoundEnabled}
+                    checked={settings.soundEffectsEnabled}
+                    onCheckedChange={toggleSoundEffects}
                   />
                 </div>
               </div>
