@@ -59,11 +59,11 @@ export default function LessonCard({ lesson, isCompleted, isActive, isLocked, on
           </div>
         </div>
         
-        <h4 className={`font-semibold mb-2 ${isLocked ? 'text-gray-600' : 'text-neutral-900'}`}>
+        <h4 className={`font-semibold mb-2 ${isLocked ? 'text-gray-600 dark:text-gray-400' : 'text-neutral-900 dark:text-white'}`}>
           {lesson.title}
         </h4>
         
-        <p className={`text-sm mb-4 ${isLocked ? 'text-gray-500' : 'text-neutral-600'}`}>
+        <p className={`text-sm mb-4 ${isLocked ? 'text-gray-500 dark:text-gray-400' : 'text-neutral-600 dark:text-gray-300'}`}>
           {lesson.description}
         </p>
         

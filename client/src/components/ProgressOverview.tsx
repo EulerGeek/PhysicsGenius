@@ -23,14 +23,14 @@ export default function ProgressOverview({ progress, courses }: ProgressOverview
 
   return (
     <section className="mb-8">
-      <Card className="p-6">
-        <CardContent className="p-0">
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6">
+      <Card className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900 dark:to-purple-900 border-0">
+        <CardContent className="p-6">
+          <div className="flex items-center justify-between mb-6">
             <div>
-              <h2 className="text-2xl font-bold text-neutral-900 mb-2">Welcome back!</h2>
-              <p className="text-neutral-600">Continue your physics journey</p>
+              <h2 className="text-xl font-bold text-neutral-900 dark:text-white">Your Learning Journey</h2>
+              <p className="text-neutral-600 dark:text-gray-300">Track your progress across all physics courses</p>
             </div>
-            <div className="mt-4 sm:mt-0 flex items-center space-x-4">
+            <div className="flex items-center space-x-4">
               <div className="text-center">
                 <div className="w-16 h-16 relative">
                   <svg className="w-16 h-16 transform -rotate-90" viewBox="0 0 100 100">
@@ -51,7 +51,7 @@ export default function ProgressOverview({ progress, courses }: ProgressOverview
                     <span className="text-sm font-bold text-neutral-900">{progress.overallProgress}%</span>
                   </div>
                 </div>
-                <p className="text-xs text-neutral-500 mt-1">Overall Progress</p>
+                <p className="text-xs text-neutral-500">Overall Progress</p>
               </div>
               <div className="text-center">
                 <div className="text-2xl font-bold text-primary">{progress.totalLessonsCompleted}</div>
@@ -59,7 +59,7 @@ export default function ProgressOverview({ progress, courses }: ProgressOverview
               </div>
             </div>
           </div>
-          
+
           <div className="grid grid-cols-3 gap-4">
             {courses.map((course) => (
               <div key={course.id} className={`text-center p-3 ${course.color} rounded-lg`}>

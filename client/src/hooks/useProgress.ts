@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 
 interface UserProgress {
@@ -75,5 +76,10 @@ export function useProgress() {
     saveProgress(newProgress);
   };
 
-  return { progress, updateProgress };
+  const resetProgress = () => {
+    setProgress(defaultProgress);
+    localStorage.setItem("quoma-progress", JSON.stringify(defaultProgress));
+  };
+
+  return { progress, updateProgress, resetProgress };
 }

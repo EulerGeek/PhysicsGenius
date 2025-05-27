@@ -1,8 +1,9 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 :root {
   --background: 0 0% 100%;
@@ -60,21 +61,21 @@
   }
 
   body {
-    @apply font-sans antialiased bg-neutral-50 text-foreground;
+    @apply font-sans antialiased bg-neutral-50 dark:bg-gray-900 text-foreground transition-colors;
     font-family: 'Inter', sans-serif;
   }
 }
 
 .lesson-card-completed {
-  @apply bg-white border border-gray-200;
+  @apply bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600;
 }
 
 .lesson-card-active {
-  @apply bg-white border-2 border-primary;
+  @apply bg-white dark:bg-gray-800 border-2 border-primary;
 }
 
 .lesson-card-locked {
-  @apply bg-gray-50 border border-gray-200 opacity-60;
+  @apply bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 opacity-60;
 }
 
 .gradient-primary {
