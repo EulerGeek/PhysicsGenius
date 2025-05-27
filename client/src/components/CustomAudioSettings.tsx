@@ -12,25 +12,27 @@ interface CustomAudioSettingsProps {
 }
 
 export default function CustomAudioSettings({ isOpen, onClose }: CustomAudioSettingsProps) {
-  const { playSound } = useAudio();
-  const [customSounds, setCustomSounds] = useState({
-    correct: '',
-    incorrect: '',
-    complete: '',
-    click: '',
-    notification: ''
+  const { playSound, uploadCustomSound, removeCustomSound, customSounds: savedCustomSounds } = useAudio();
+  const [customSounds, setCustomSounds] = useState(() => {
+    const saved = localStorage.getItem('quoma-custom-sounds');
+    return saved ? JSON.parse(saved) : {
+      correct: '',
+      incorrect: '',
+      complete: '',
+      click: '',
+      notification: ''
+    };
   });
 
   if (!isOpen) return null;
 
   const handleFileUpload = (soundType: string, file: File) => {
-    const url = URL.createObjectURL(file);
-    setCustomSounds(prev => ({ ...prev, [soundType]: url }));
+    // Use the uploadCustomSound function from useAudio hook
+    uploadCustomSound(soundType, file);
     
-    // Save to localStorage
-    const savedSounds = JSON.parse(localStorage.getItem('quoma-custom-sounds') || '{}');
-    savedSounds[soundType] = url;
-    localStorage.setItem('quoma-custom-sounds', JSON.stringify(savedSounds));
+    // Update local state for UI
+    const url = URL.createObjectURL(file);
+    setCustomSounds((prev: any) => ({ ...prev, [soundType]: url }));
   };
 
   const testSound = (soundType: string) => {
@@ -46,12 +48,11 @@ export default function CustomAudioSettings({ isOpen, onClose }: CustomAudioSett
   };
 
   const resetToDefault = (soundType: string) => {
-    setCustomSounds(prev => ({ ...prev, [soundType]: '' }));
+    // Use the removeCustomSound function from useAudio hook
+    removeCustomSound(soundType);
     
-    // Remove from localStorage
-    const savedSounds = JSON.parse(localStorage.getItem('quoma-custom-sounds') || '{}');
-    delete savedSounds[soundType];
-    localStorage.setItem('quoma-custom-sounds', JSON.stringify(savedSounds));
+    // Update local state for UI
+    setCustomSounds((prev: any) => ({ ...prev, [soundType]: '' }));
   };
 
   const soundTypes = [
