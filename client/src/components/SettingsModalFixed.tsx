@@ -9,6 +9,7 @@ import { Separator } from "@/components/ui/separator";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useAudio } from "@/hooks/useAudio";
+import StudyRemindersPanel from "./StudyRemindersPanel";
 
 interface SettingsModalProps {
   isOpen: boolean;
@@ -23,6 +24,7 @@ export default function SettingsModal({ isOpen, onClose, onResetProgress, user, 
   const { settings, updateSettings, toggleBackgroundMusic, toggleSoundEffects, playSound } = useAudio();
   const [speechRate, setSpeechRate] = useState(0.8);
   const [notificationsEnabled, setNotificationsEnabled] = useState(true);
+  const [showStudyReminders, setShowStudyReminders] = useState(false);
 
   if (!isOpen) return null;
 
@@ -170,16 +172,18 @@ export default function SettingsModal({ isOpen, onClose, onResetProgress, user, 
 
               <div className="flex items-center justify-between">
                 <div className="flex flex-col">
-                  <span className="font-medium">Push Notifications</span>
-                  <span className="text-sm text-gray-500">Study reminders and updates</span>
+                  <span className="font-medium">Study Reminders</span>
+                  <span className="text-sm text-gray-500">Daily notifications and progress tracking</span>
                 </div>
-                <Switch
-                  checked={notificationsEnabled}
-                  onCheckedChange={(checked) => {
-                    setNotificationsEnabled(checked);
+                <Button 
+                  size="sm"
+                  onClick={() => {
+                    setShowStudyReminders(true);
                     playSound('click');
                   }}
-                />
+                >
+                  ⏰ Manage Reminders
+                </Button>
               </div>
             </div>
 
@@ -273,6 +277,12 @@ export default function SettingsModal({ isOpen, onClose, onResetProgress, user, 
           </div>
         </ScrollArea>
       </Card>
+
+      {/* Study Reminders Panel */}
+      <StudyRemindersPanel
+        isOpen={showStudyReminders}
+        onClose={() => setShowStudyReminders(false)}
+      />
     </div>
   );
 }
