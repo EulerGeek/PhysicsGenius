@@ -86,5 +86,5 @@ export function useProgress() {
     localStorage.setItem("quoma-progress", JSON.stringify(resetState));
   };
 
-  return { progress, updateProgress, resetProgress };
+  return { progress, updateProgress, resetProgress, saveProgress };
 }
