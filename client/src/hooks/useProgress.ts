@@ -10,21 +10,15 @@ interface UserProgress {
 }
 
 const defaultProgress: UserProgress = {
-  streak: 7,
-  overallProgress: 30,
-  totalLessonsCompleted: 12,
+  streak: 0,
+  overallProgress: 0,
+  totalLessonsCompleted: 0,
   completedLessons: {
-    classical: 4,
-    relativity: 1,
+    classical: 0,
+    relativity: 0,
     quantum: 0
   },
-  scores: {
-    "cm-1": 850,
-    "cm-2": 920,
-    "cm-3": 780,
-    "cm-4": 890,
-    "rel-1": 750
-  }
+  scores: {}
 };
 
 export function useProgress() {
@@ -77,8 +71,19 @@ export function useProgress() {
   };
 
   const resetProgress = () => {
-    setProgress(defaultProgress);
-    localStorage.setItem("quoma-progress", JSON.stringify(defaultProgress));
+    const resetState = {
+      streak: 0,
+      overallProgress: 0,
+      totalLessonsCompleted: 0,
+      completedLessons: {
+        classical: 0,
+        relativity: 0,
+        quantum: 0
+      },
+      scores: {}
+    };
+    setProgress(resetState);
+    localStorage.setItem("quoma-progress", JSON.stringify(resetState));
   };
 
   return { progress, updateProgress, resetProgress };

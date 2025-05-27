@@ -7,10 +7,10 @@ interface HeaderProps {
   progress: {
     streak: number;
   };
+  resetProgress: () => void;
 }
 
-export default function Header({ progress }: HeaderProps) {
-  const { resetProgress } = useProgress();
+export default function Header({ progress, resetProgress }: HeaderProps) {
   const [isDarkMode, setIsDarkMode] = useState(false);
 
   const toggleDarkMode = () => {
