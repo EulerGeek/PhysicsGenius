@@ -5,6 +5,15 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Dark mode body background fix */
+body {
+  @apply bg-white dark:bg-gray-900 text-gray-900 dark:text-white transition-colors;
+}
+
+html {
+  @apply bg-white dark:bg-gray-900 transition-colors;
+}
+
 :root {
   --background: 0 0% 100%;
   --foreground: 20 14.3% 4.1%;

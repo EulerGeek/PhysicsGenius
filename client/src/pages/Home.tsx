@@ -113,6 +113,7 @@ export default function Home() {
       {showInteractiveLesson && selectedLesson && (
         <InteractiveLesson
           lessonId={selectedLesson.id}
+          title={selectedLesson.title}
           onComplete={handleLessonComplete}
           onClose={handleCloseInteractiveLesson}
         />
