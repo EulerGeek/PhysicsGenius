@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { Progress } from "@/components/ui/progress";
-import { getLessonData, type Question } from "@/lib/lessonsData";
+import { getAllLessonData, type Question } from "@/lib/allLessonsData";
 
 interface InteractiveLessonProps {
   lessonId: string;
@@ -22,7 +22,7 @@ export default function InteractiveLesson({ lessonId, title, onComplete, onClose
   const [score, setScore] = useState(0);
   const [answers, setAnswers] = useState<Record<string, string>>({});
 
-  const lessonData = getLessonData(lessonId);
+  const lessonData = getAllLessonData(lessonId);
   const questions = lessonData?.questions || [];
   const question = questions[currentQuestion];
   const progress = questions.length > 0 ? ((currentQuestion + 1) / questions.length) * 100 : 0;
