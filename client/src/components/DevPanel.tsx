@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Slider } from "@/components/ui/slider";
+import { Label } from "@/components/ui/label";
 
 interface DevPanelProps {
   isOpen: boolean;
@@ -10,54 +12,52 @@ interface DevPanelProps {
 }
 
 export default function DevPanel({ isOpen, onClose, onSetProgress }: DevPanelProps) {
+  const [progressValue, setProgressValue] = useState([50]);
+  
   if (!isOpen) return null;
 
-  const setFullProgress = () => {
-    const fullProgress = {
-      streak: 30,
-      overallProgress: 100,
-      totalLessonsCompleted: 37,
+  const generateProgressFromSlider = (percentage: number) => {
+    const totalLessons = 37; // 15 CM + 10 REL + 12 QM
+    const completedCount = Math.floor((percentage / 100) * totalLessons);
+    
+    // Distribute lessons across courses
+    const cmLessons = Math.min(15, Math.floor(completedCount * 0.4));
+    const relLessons = Math.min(10, Math.floor((completedCount - cmLessons) * 0.5));
+    const qmLessons = Math.min(12, completedCount - cmLessons - relLessons);
+    
+    const scores: Record<string, number> = {};
+    
+    // Add CM scores
+    for (let i = 1; i <= cmLessons; i++) {
+      scores[`cm-${i}`] = 80 + Math.floor(Math.random() * 20);
+    }
+    
+    // Add REL scores
+    for (let i = 1; i <= relLessons; i++) {
+      scores[`rel-${i}`] = 80 + Math.floor(Math.random() * 20);
+    }
+    
+    // Add QM scores
+    for (let i = 1; i <= qmLessons; i++) {
+      scores[`qm-${i}`] = 80 + Math.floor(Math.random() * 20);
+    }
+    
+    return {
+      streak: Math.floor(percentage / 5), // Rough correlation
+      overallProgress: percentage,
+      totalLessonsCompleted: completedCount,
       completedLessons: {
-        classical: 15,
-        relativity: 10,
-        quantum: 12
+        classical: cmLessons,
+        relativity: relLessons,
+        quantum: qmLessons
       },
-      scores: {
-        // Classical Mechanics
-        'cm-1': 100, 'cm-2': 95, 'cm-3': 98, 'cm-4': 92, 'cm-5': 96,
-        'cm-6': 94, 'cm-7': 99, 'cm-8': 91, 'cm-9': 97, 'cm-10': 93,
-        'cm-11': 95, 'cm-12': 98, 'cm-13': 96, 'cm-14': 94, 'cm-15': 100,
-        // General Relativity
-        'rel-1': 88, 'rel-2': 92, 'rel-3': 95, 'rel-4': 89, 'rel-5': 96,
-        'rel-6': 93, 'rel-7': 91, 'rel-8': 97, 'rel-9': 94, 'rel-10': 90,
-        // Quantum Mechanics
-        'qm-1': 85, 'qm-2': 92, 'qm-3': 89, 'qm-4': 94, 'qm-5': 87,
-        'qm-6': 95, 'qm-7': 91, 'qm-8': 93, 'qm-9': 88, 'qm-10': 96,
-        'qm-11': 92, 'qm-12': 94
-      }
+      scores
     };
-    onSetProgress(fullProgress);
-    onClose();
   };
 
-  const setPartialProgress = () => {
-    const partialProgress = {
-      streak: 15,
-      overallProgress: 45,
-      totalLessonsCompleted: 17,
-      completedLessons: {
-        classical: 8,
-        relativity: 5,
-        quantum: 4
-      },
-      scores: {
-        'cm-1': 95, 'cm-2': 88, 'cm-3': 92, 'cm-4': 85, 'cm-5': 91,
-        'cm-6': 89, 'cm-7': 94, 'cm-8': 87,
-        'rel-1': 90, 'rel-2': 85, 'rel-3': 93, 'rel-4': 88, 'rel-5': 91,
-        'qm-1': 82, 'qm-2': 89, 'qm-3': 85, 'qm-4': 92
-      }
-    };
-    onSetProgress(partialProgress);
+  const applySliderProgress = () => {
+    const progress = generateProgressFromSlider(progressValue[0]);
+    onSetProgress(progress);
     onClose();
   };
 

@@ -70,7 +70,14 @@ export default function LessonCard({ lesson, isCompleted, isActive, isLocked, on
         <div className="flex items-center justify-between">
           {isCompleted && (
             <>
-              <span className="text-xs text-green-600 font-medium">Completed</span>
+              <Button 
+                onClick={onStart}
+                size="sm"
+                className="bg-green-600 text-white hover:bg-green-700 text-xs"
+              >
+                <i className="fas fa-redo text-xs mr-1"></i>
+                Review
+              </Button>
               <div className="flex items-center space-x-1">
                 <i className="fas fa-star text-amber-500 text-sm"></i>
                 <span className="text-sm font-medium text-neutral-700">{score || 850} XP</span>

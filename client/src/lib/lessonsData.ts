@@ -182,6 +182,171 @@ export const classicalMechanicsLessons: Record<string, LessonData> = {
         concept: "Energy conservation: PE → KE"
       }
     ]
+  },
+
+  "cm-2": {
+    id: "cm-2",
+    title: "Forces and Newton's Laws",
+    videoId: "ZM8ECpBuQYE",
+    feynmanNotes: "Nature uses only the longest threads to weave her patterns, so that each small piece of her fabric reveals the organization of the entire tapestry. Newton's laws are these longest threads - three simple statements that explain why planets orbit, why we fall, why rockets fly.",
+    questions: [
+      {
+        id: "force-1", type: "multiple-choice",
+        question: "What is Newton's First Law of Motion?",
+        options: [
+          { value: "a", text: "F = ma" },
+          { value: "b", text: "An object at rest stays at rest unless acted upon by a force" },
+          { value: "c", text: "For every action, there is an equal and opposite reaction" },
+          { value: "d", text: "Energy cannot be created or destroyed" }
+        ],
+        correctAnswer: "b",
+        explanation: "Newton's First Law states that an object at rest stays at rest, and an object in motion stays in motion, unless acted upon by an unbalanced force.",
+        concept: "Law of Inertia"
+      },
+      {
+        id: "force-2", type: "multiple-choice",
+        question: "If a 10 kg object experiences a net force of 50 N, what is its acceleration?",
+        options: [
+          { value: "a", text: "2 m/s²" },
+          { value: "b", text: "5 m/s²" },
+          { value: "c", text: "10 m/s²" },
+          { value: "d", text: "500 m/s²" }
+        ],
+        correctAnswer: "b",
+        explanation: "Using Newton's Second Law: F = ma, so a = F/m = 50 N / 10 kg = 5 m/s²",
+        concept: "F = ma"
+      },
+      {
+        id: "force-3", type: "multiple-choice",
+        question: "What is Newton's Third Law of Motion?",
+        options: [
+          { value: "a", text: "F = ma" },
+          { value: "b", text: "Objects at rest stay at rest" },
+          { value: "c", text: "For every action, there is an equal and opposite reaction" },
+          { value: "d", text: "Force equals mass times velocity" }
+        ],
+        correctAnswer: "c",
+        explanation: "Newton's Third Law states that for every action force, there is an equal and opposite reaction force.",
+        concept: "Action-Reaction Pairs"
+      },
+      {
+        id: "force-4", type: "multiple-choice",
+        question: "What is the SI unit of force?",
+        options: [
+          { value: "a", text: "Joule" },
+          { value: "b", text: "Newton" },
+          { value: "c", text: "Watt" },
+          { value: "d", text: "Pascal" }
+        ],
+        correctAnswer: "b",
+        explanation: "The SI unit of force is the Newton (N), defined as kg⋅m/s².",
+        concept: "SI unit: Newton (N)"
+      },
+      {
+        id: "force-5", type: "multiple-choice",
+        question: "Which force always acts toward the center of circular motion?",
+        options: [
+          { value: "a", text: "Centrifugal force" },
+          { value: "b", text: "Centripetal force" },
+          { value: "c", text: "Gravitational force" },
+          { value: "d", text: "Normal force" }
+        ],
+        correctAnswer: "b",
+        explanation: "Centripetal force always points toward the center of the circular path, providing the acceleration needed for circular motion.",
+        concept: "Centripetal force = mv²/r"
+      },
+      {
+        id: "force-6", type: "multiple-choice",
+        question: "What happens to your weight if you travel to the Moon?",
+        options: [
+          { value: "a", text: "It increases by 6 times" },
+          { value: "b", text: "It decreases by 6 times" },
+          { value: "c", text: "It remains the same" },
+          { value: "d", text: "It becomes zero" }
+        ],
+        correctAnswer: "b",
+        explanation: "Weight = mg. Since the Moon's gravity is about 1/6 of Earth's, your weight would be about 1/6 of your Earth weight.",
+        concept: "Weight depends on local gravity"
+      },
+      {
+        id: "force-7", type: "multiple-choice",
+        question: "What is the normal force?",
+        options: [
+          { value: "a", text: "The force of gravity" },
+          { value: "b", text: "The perpendicular contact force from a surface" },
+          { value: "c", text: "The force of friction" },
+          { value: "d", text: "The applied force" }
+        ],
+        correctAnswer: "b",
+        explanation: "The normal force is the perpendicular contact force exerted by a surface on an object resting on it.",
+        concept: "Normal force ⊥ surface"
+      },
+      {
+        id: "force-8", type: "multiple-choice",
+        question: "If you push a book with 10 N of force and it doesn't move, what is the friction force?",
+        options: [
+          { value: "a", text: "0 N" },
+          { value: "b", text: "5 N" },
+          { value: "c", text: "10 N" },
+          { value: "d", text: "20 N" }
+        ],
+        correctAnswer: "c",
+        explanation: "If the book doesn't move, the net force is zero. Static friction exactly balances the applied force: 10 N.",
+        concept: "Static equilibrium: ΣF = 0"
+      },
+      {
+        id: "force-9", type: "multiple-choice",
+        question: "What is inertia?",
+        options: [
+          { value: "a", text: "The tendency of objects to resist changes in motion" },
+          { value: "b", text: "The force that keeps objects moving" },
+          { value: "c", text: "The acceleration of an object" },
+          { value: "d", text: "The speed of an object" }
+        ],
+        correctAnswer: "a",
+        explanation: "Inertia is the tendency of objects to resist changes in their state of motion - to keep moving if moving, or stay at rest if at rest.",
+        concept: "Inertia resists motion changes"
+      },
+      {
+        id: "force-10", type: "multiple-choice",
+        question: "Which has more inertia: a bowling ball or a ping pong ball?",
+        options: [
+          { value: "a", text: "Ping pong ball" },
+          { value: "b", text: "Bowling ball" },
+          { value: "c", text: "They have equal inertia" },
+          { value: "d", text: "Cannot be determined" }
+        ],
+        correctAnswer: "b",
+        explanation: "Inertia depends on mass. Since a bowling ball has much more mass than a ping pong ball, it has more inertia.",
+        concept: "Inertia ∝ mass"
+      },
+      {
+        id: "force-11", type: "multiple-choice",
+        question: "What is the net force on an object moving at constant velocity?",
+        options: [
+          { value: "a", text: "Greater than zero" },
+          { value: "b", text: "Less than zero" },
+          { value: "c", text: "Equal to zero" },
+          { value: "d", text: "Equal to its weight" }
+        ],
+        correctAnswer: "c",
+        explanation: "By Newton's First Law, if an object moves at constant velocity, there is no acceleration, so the net force must be zero.",
+        concept: "Constant velocity ⟹ ΣF = 0"
+      },
+      {
+        id: "force-12", type: "multiple-choice",
+        question: "When you walk forward, what force pushes you forward?",
+        options: [
+          { value: "a", text: "The force your foot applies to the ground" },
+          { value: "b", text: "The friction force from the ground on your foot" },
+          { value: "c", text: "Your weight" },
+          { value: "d", text: "Air resistance" }
+        ],
+        correctAnswer: "b",
+        explanation: "By Newton's Third Law, when your foot pushes backward on the ground, the ground pushes forward on your foot via friction.",
+        concept: "Walking uses friction reaction force"
+      }
+    ]
   }
 };
 
@@ -205,6 +370,149 @@ export const generalRelativityLessons: Record<string, LessonData> = {
         correctAnswer: "b",
         explanation: "The speed of light in a vacuum is exactly 299,792,458 meters per second, often approximated as 3 × 10⁸ m/s.",
         concept: "c = 3 × 10⁸ m/s"
+      },
+      {
+        id: "rel-1-2", type: "multiple-choice",
+        question: "What happens to time as you approach the speed of light?",
+        options: [
+          { value: "a", text: "Time speeds up" },
+          { value: "b", text: "Time slows down" },
+          { value: "c", text: "Time remains constant" },
+          { value: "d", text: "Time reverses" }
+        ],
+        correctAnswer: "b",
+        explanation: "According to time dilation, time slows down for objects moving at high speeds relative to an observer.",
+        concept: "Time Dilation: Δt' = γΔt"
+      },
+      {
+        id: "rel-1-3", type: "multiple-choice",
+        question: "What is the Lorentz factor γ when v = 0?",
+        options: [
+          { value: "a", text: "0" },
+          { value: "b", text: "1" },
+          { value: "c", text: "∞" },
+          { value: "d", text: "c" }
+        ],
+        correctAnswer: "b",
+        explanation: "When v = 0, γ = 1/√(1 - v²/c²) = 1/√(1 - 0) = 1.",
+        concept: "γ = 1/√(1 - v²/c²)"
+      },
+      {
+        id: "rel-1-4", type: "multiple-choice",
+        question: "According to special relativity, which quantity is invariant for all observers?",
+        options: [
+          { value: "a", text: "Time intervals" },
+          { value: "b", text: "Spatial distances" },
+          { value: "c", text: "The speed of light" },
+          { value: "d", text: "Mass" }
+        ],
+        correctAnswer: "c",
+        explanation: "The speed of light in vacuum is the same for all observers, regardless of their motion.",
+        concept: "c is universal constant"
+      },
+      {
+        id: "rel-1-5", type: "multiple-choice",
+        question: "What is length contraction?",
+        options: [
+          { value: "a", text: "Objects appear longer when moving" },
+          { value: "b", text: "Objects appear shorter when moving" },
+          { value: "c", text: "Objects change mass when moving" },
+          { value: "d", text: "Objects change color when moving" }
+        ],
+        correctAnswer: "b",
+        explanation: "Length contraction means objects appear shorter in the direction of motion when viewed by a stationary observer.",
+        concept: "L = L₀/γ"
+      },
+      {
+        id: "rel-1-6", type: "multiple-choice",
+        question: "What is the mass-energy equivalence formula?",
+        options: [
+          { value: "a", text: "E = mc" },
+          { value: "b", text: "E = mc²" },
+          { value: "c", text: "E = ½mc²" },
+          { value: "d", text: "E = 2mc²" }
+        ],
+        correctAnswer: "b",
+        explanation: "Einstein's famous equation E = mc² shows that mass and energy are equivalent.",
+        concept: "E = mc²"
+      },
+      {
+        id: "rel-1-7", type: "multiple-choice",
+        question: "What happens to an object's mass as it approaches the speed of light?",
+        options: [
+          { value: "a", text: "It decreases" },
+          { value: "b", text: "It remains constant" },
+          { value: "c", text: "Its relativistic mass increases" },
+          { value: "d", text: "It becomes negative" }
+        ],
+        correctAnswer: "c",
+        explanation: "The relativistic mass increases with velocity as m = γm₀, though rest mass remains constant.",
+        concept: "Relativistic mass: m = γm₀"
+      },
+      {
+        id: "rel-1-8", type: "multiple-choice",
+        question: "What are the two postulates of special relativity?",
+        options: [
+          { value: "a", text: "Time is absolute, space is relative" },
+          { value: "b", text: "Laws of physics are the same in all frames; speed of light is constant" },
+          { value: "c", text: "Mass equals energy, time equals space" },
+          { value: "d", text: "Gravity bends light, space is curved" }
+        ],
+        correctAnswer: "b",
+        explanation: "The two postulates are: (1) Laws of physics are the same in all inertial frames, (2) Speed of light is constant for all observers.",
+        concept: "Einstein's two postulates"
+      },
+      {
+        id: "rel-1-9", type: "multiple-choice",
+        question: "At what speed does γ = 2?",
+        options: [
+          { value: "a", text: "0.5c" },
+          { value: "b", text: "0.707c" },
+          { value: "c", text: "0.866c" },
+          { value: "d", text: "0.9c" }
+        ],
+        correctAnswer: "c",
+        explanation: "When γ = 2, solving 2 = 1/√(1 - v²/c²) gives v = √3/2 c ≈ 0.866c.",
+        concept: "γ = 2 when v = 0.866c"
+      },
+      {
+        id: "rel-1-10", type: "multiple-choice",
+        question: "What is simultaneity in special relativity?",
+        options: [
+          { value: "a", text: "Events that are simultaneous for all observers" },
+          { value: "b", text: "Events that happen at the same place" },
+          { value: "c", text: "Events simultaneous in one frame may not be in another" },
+          { value: "d", text: "Events that happen at the speed of light" }
+        ],
+        correctAnswer: "c",
+        explanation: "Simultaneity is relative - events that are simultaneous in one reference frame may not be simultaneous in another moving frame.",
+        concept: "Relativity of simultaneity"
+      },
+      {
+        id: "rel-1-11", type: "multiple-choice",
+        question: "Why can't massive objects reach the speed of light?",
+        options: [
+          { value: "a", text: "They would disappear" },
+          { value: "b", text: "It would require infinite energy" },
+          { value: "c", text: "They would reverse time" },
+          { value: "d", text: "They would create black holes" }
+        ],
+        correctAnswer: "b",
+        explanation: "As v approaches c, γ approaches infinity, so the energy required to accelerate further becomes infinite.",
+        concept: "Infinite energy needed to reach c"
+      },
+      {
+        id: "rel-1-12", type: "multiple-choice",
+        question: "What is proper time?",
+        options: [
+          { value: "a", text: "Time measured by a moving observer" },
+          { value: "b", text: "Time measured in the lab frame" },
+          { value: "c", text: "Time measured by the object itself" },
+          { value: "d", text: "Universal time for all observers" }
+        ],
+        correctAnswer: "c",
+        explanation: "Proper time is the time measured by the object itself in its own rest frame - it's the shortest time interval between two events.",
+        concept: "Proper time = time in rest frame"
       }
     ]
   }
