@@ -207,7 +207,7 @@ export default function ConceptsPage({ onStartConcept, onNavigate, progress }: C
   const currentCategories = selectedCategory === "physics" ? physicsConceptCategories : mathConceptCategories;
 
   return (
-    <div className="min-h-screen bg-neutral-50 dark:bg-gray-900">
+    <div className="min-h-screen bg-slate-50 dark:bg-gray-900">
       {/* Navigation Menu */}
       {onNavigate && progress && (
         <NavigationMenu currentPage="concepts" onNavigate={onNavigate} progress={progress} />
@@ -216,10 +216,10 @@ export default function ConceptsPage({ onStartConcept, onNavigate, progress }: C
       <div className="max-w-7xl mx-auto px-2 sm:px-4 py-3 sm:py-6">
         {/* Header */}
         <div className="text-center mb-4 sm:mb-8">
-          <h1 className="text-lg sm:text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-2 sm:mb-4">
+          <h1 className="text-lg sm:text-2xl md:text-3xl font-bold text-slate-900 dark:text-white mb-2 sm:mb-4">
             🎯 Interactive Concepts
           </h1>
-          <p className="text-xs sm:text-sm md:text-base text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+          <p className="text-xs sm:text-sm md:text-base text-slate-600 dark:text-gray-400 max-w-3xl mx-auto">
             Explore fundamental concepts through interactive explanations, visualizations, and guided learning experiences
           </p>
         </div>
