@@ -69,6 +69,25 @@ export default function Home() {
     setSelectedLesson(null);
   };
 
+  const handleNavigate = (page: string) => {
+    if (page === 'concepts') {
+      setShowConceptMenu(true);
+    } else {
+      setCurrentPage(page);
+    }
+  };
+
+  const handleStartConcept = (courseId: string, conceptId: string) => {
+    setCurrentConcept({ courseId, conceptId });
+    setShowConceptLesson(true);
+  };
+
+  const handleCompleteConceptLesson = (score: number) => {
+    console.log(`Concept lesson completed with score: ${score}`);
+    setShowConceptLesson(false);
+    setCurrentConcept(null);
+  };
+
   const handleCompleteLesson = (lessonId: string, score: number) => {
     updateProgress(lessonId, true, score);
   };
@@ -170,11 +189,39 @@ export default function Home() {
     <div className="relative">
       <NavigationMenu
         currentPage={currentPage}
-        onNavigate={setCurrentPage}
+        onNavigate={handleNavigate}
         progress={progress}
       />
       
       {renderCurrentPage()}
+
+      {/* Floating AI Button */}
+      <FloatingAIButton 
+        currentContext={{
+          courseId: activeTab,
+          conceptId: currentPage,
+          title: `${activeCourse?.title || 'Physics'} Learning Assistant`,
+          description: `Get help with ${activeCourse?.title || 'physics'} concepts and problems`
+        }}
+      />
+
+      {/* Concept Menu */}
+      <ConceptMenu
+        isOpen={showConceptMenu}
+        onClose={() => setShowConceptMenu(false)}
+        onStartConcept={handleStartConcept}
+      />
+
+      {/* Interactive Concept Lesson */}
+      {showConceptLesson && currentConcept && (
+        <InteractiveConceptLesson
+          isOpen={showConceptLesson}
+          onClose={() => setShowConceptLesson(false)}
+          courseId={currentConcept.courseId}
+          conceptId={currentConcept.conceptId}
+          onComplete={handleCompleteConceptLesson}
+        />
+      )}
 
       {showLessonIntro && selectedLesson && (
         <LessonIntro
