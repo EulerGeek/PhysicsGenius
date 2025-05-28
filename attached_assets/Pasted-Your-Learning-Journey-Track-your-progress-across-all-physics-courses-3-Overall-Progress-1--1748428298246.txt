@@ -1,0 +1,219 @@
+Your Learning Journey
+Track your progress across all physics courses
+
+3%
+Overall Progress
+
+1
+Lessons Completed
+
+1/15
+Classical
+0/10
+General
+0/12
+Quantum
+🔬 Physics Courses
+
+Classical Mechanics
+
+General Relativity
+🌫️
+
+Quantum Mechanics
+🌫️
+📐 Mathematics (Optional)
+Classical Mechanics
+Master the fundamentals of motion and forces
+
+🧪
+📝 Exam
+🔬 Classical
+
+🚀
+Classical Mechanics
+
+🌌
+General Relativity
+
+⚛️
+Quantum Mechanics
+📚
+1
+Introduction to Motion
+15 min
+🔒
+2
+Forces and Newton's Laws
+20 min
+🔒
+3
+Work and Energy
+18 min
+🔒
+4
+Momentum and Collisions
+16 min
+🔒
+5
+Rotational Motion
+22 min
+🔒
+6
+Simple Harmonic Motion
+19 min
+🔒
+7
+Waves and Vibrations
+21 min
+🔒
+8
+Fluid Mechanics
+20 min
+🔒
+9
+Thermodynamics Basics
+24 min
+🔒
+10
+Electrostatics
+18 min
+🔒
+11
+Electric Current and Circuits
+17 min
+🔒
+12
+Magnetism
+19 min
+🔒
+13
+Optics and Light
+20 min
+🔒
+14
+Modern Physics Introduction
+16 min
+🔒
+15
+Problem Solving Strategies
+25 min
+Progress: 3/15 lessons
+Average: 120%
+
+☰
+
+🏠
+Home
+Main dashboard
+
+🎯
+Concepts
+Interactive physics concepts
+
+📚
+Courses
+Physics lessons
+
+🎓
+Feynman Lectures
+Classic physics lectures
+
+📊
+Progress
+Your achievements
+3
+
+🧪
+Quick Test
+Random questions
+
+👥
+Friends
+Study together
+
+⚙️
+Settings
+Preferences
+
+ℹ️
+About
+About QUOMA
+Physics Explorer
+Level 1
+Ask your AI Physics Tutor! 🤖
+🤖
+AI
+📚 Feynman Lectures
+🧮 Sample Problems
+🎓 More Courses
+🔗 Resources
+📖 The Feynman Lectures on Physics
+Complete collection from Caltech - Interactive physics education by Nobel laureate Richard Feynman
+
+Volume I: Mechanics, Radiation, and Heat
+Atoms in Motion
+The fundamental nature of matter
+
+Ch 1
+Basic Physics
+Physics before 1920
+
+Ch 2
+The Relation of Physics to Other Sciences
+Interdisciplinary connections
+
+Ch 3
+Conservation of Energy
+The great conservation law
+
+Ch 4
+Motion
+Description of motion
+
+Ch 8
+📖 Read Full Volume
+Volume II: Electromagnetic Field
+Electrostatics
+Static electric fields
+
+Ch 1
+The Electric Field
+Field concept in physics
+
+Ch 2
+Electrical Potential
+Energy and electric fields
+
+Ch 3
+Electrostatic Energy
+Energy stored in fields
+
+Ch 4
+Conductors
+Materials and electricity
+
+Ch 5
+📖 Read Full Volume
+Volume III: Quantum Mechanics
+Quantum Behavior
+The strange world of quantum mechanics
+
+Ch 1
+The Relation of Wave and Particle Viewpoints
+Wave-particle duality
+
+Ch 2
+Probability Amplitudes
+The heart of quantum mechanics
+
+Ch 3
+Identical Particles
+Quantum statistics
+
+Ch 4
+The Hamiltonian Matrix
+Energy in quantum systems
+
+Ch 8
+📖 Read Full Volume
