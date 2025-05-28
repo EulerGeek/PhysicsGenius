@@ -47,13 +47,13 @@ export default function Header({ progress, resetProgress, setProgress }: HeaderP
   return (
     <>
       <header className="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700">
-        <div className="w-full px-2 sm:px-4 md:px-6">
-          <div className="flex justify-between items-center h-8 sm:h-10 md:h-12 lg:h-14">
-            <div className="flex items-center space-x-1 sm:space-x-2">
-              <div className="w-4 h-4 sm:w-6 sm:h-6 md:w-8 md:h-8 bg-blue-600 rounded flex items-center justify-center">
-                <span className="text-white text-xs sm:text-sm md:text-base">⚛️</span>
+        <div className="w-full px-1 sm:px-2 md:px-4 lg:px-6">
+          <div className="flex justify-between items-center h-6 sm:h-8 md:h-10 lg:h-12">
+            <div className="flex items-center space-x-0.5 sm:space-x-1 md:space-x-2">
+              <div className="w-3 h-3 sm:w-4 sm:h-4 md:w-6 md:h-6 lg:w-8 lg:h-8 bg-blue-600 rounded flex items-center justify-center">
+                <span className="text-white text-[8px] sm:text-xs md:text-sm lg:text-base">⚛️</span>
               </div>
-              <h1 className="text-xs sm:text-sm md:text-lg lg:text-xl font-bold text-blue-600">QUOMA</h1>
+              <h1 className="text-[10px] sm:text-xs md:text-sm lg:text-lg font-bold text-blue-600">QUOMA</h1>
             </div>
 
             {/* Search - Hidden on mobile */}

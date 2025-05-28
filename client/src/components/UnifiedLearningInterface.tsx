@@ -123,10 +123,10 @@ export default function UnifiedLearningInterface({
   };
 
   return (
-    <div className="space-y-1 sm:space-y-2 md:space-y-4 px-1 sm:px-2 md:px-4">
-      {/* Course Header - Device Relative Scaling */}
+    <div className="space-y-0.5 sm:space-y-1 md:space-y-2 lg:space-y-3 px-0.5 sm:px-1 md:px-2 lg:px-4">
+      {/* Course Header - Ultra Compact */}
       <div className="flex justify-center items-center">
-        <h2 className="text-xs sm:text-sm md:text-lg lg:text-xl font-bold text-gray-900 dark:text-white text-center">
+        <h2 className="text-[8px] sm:text-xs md:text-sm lg:text-lg font-bold text-gray-900 dark:text-white text-center">
           {courseId === 'classical' ? '🔬 Classical' : 
            courseId === 'quantum' ? '⚛️ Quantum' : 
            '🌌 Relativity'}

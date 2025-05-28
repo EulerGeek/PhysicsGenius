@@ -112,10 +112,10 @@ export default function Home() {
       case 'courses':
       default:
         return (
-          <div className="min-h-screen bg-neutral-50 dark:bg-gray-900">
+          <div className="h-screen overflow-hidden bg-neutral-50 dark:bg-gray-900">
             <Header progress={progress} resetProgress={resetProgress} />
             
-            <main className="max-w-6xl mx-auto px-1 sm:px-3 md:px-6 lg:px-8 py-1 sm:py-3 md:py-6 lg:py-8">
+            <main className="max-w-6xl mx-auto px-0.5 sm:px-1 md:px-3 lg:px-6 py-0.5 sm:py-1 md:py-3 lg:py-6 h-[calc(100vh-1.5rem)] sm:h-[calc(100vh-2rem)] md:h-[calc(100vh-2.5rem)] lg:h-[calc(100vh-3rem)] overflow-y-auto">
               <ProgressOverview progress={progress} courses={courses} />
               
               <CourseNavigation 
@@ -125,18 +125,18 @@ export default function Home() {
                 progress={progress}
               />
 
-              <section className="mb-8">
-                <div className="flex items-center justify-between mb-6">
+              <section className="mb-1 sm:mb-2 md:mb-4">
+                <div className="flex items-center justify-between mb-1 sm:mb-2 md:mb-3">
                   <div>
-                    <h3 className="text-xl font-bold text-neutral-900 dark:text-white">{activeCourse?.title}</h3>
-                    <p className="text-neutral-600 dark:text-gray-400">{activeCourse?.description}</p>
+                    <h3 className="text-[10px] sm:text-xs md:text-sm lg:text-lg font-bold text-neutral-900 dark:text-white">{activeCourse?.title}</h3>
+                    <p className="text-[8px] sm:text-xs md:text-sm text-neutral-600 dark:text-gray-400 hidden sm:block">{activeCourse?.description}</p>
                   </div>
-                  <div className="flex flex-col sm:flex-row items-center gap-3">
+                  <div className="flex items-center">
                     <Button
                       onClick={() => setShowQuickTest(true)}
-                      className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white w-full sm:w-auto"
+                      className="h-5 sm:h-6 md:h-8 px-1 sm:px-2 md:px-3 text-[8px] sm:text-xs md:text-sm bg-gradient-to-r from-purple-600 to-pink-600"
                     >
-                      🧪 Quick Test
+                      🧪
                     </Button>
                   </div>
                 </div>

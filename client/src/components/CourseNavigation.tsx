@@ -22,8 +22,8 @@ export default function CourseNavigation({ courses, activeTab, onTabChange, prog
   };
 
   return (
-    <section className="mb-2 sm:mb-4 md:mb-6 lg:mb-8">
-      <div className="flex space-x-0.5 sm:space-x-1 bg-gray-100 p-0.5 sm:p-1 rounded-lg">
+    <section className="mb-1 sm:mb-2 md:mb-4 lg:mb-6">
+      <div className="flex space-x-0.5 sm:space-x-1 bg-gray-100 p-0.5 rounded-lg">
         {courses.map((course) => {
           const locked = isCourseLocked(course.id);
           return (
@@ -32,7 +32,7 @@ export default function CourseNavigation({ courses, activeTab, onTabChange, prog
               onClick={() => !locked && onTabChange(course.id)}
               variant="ghost"
               disabled={locked}
-              className={`flex-1 py-1 px-2 sm:py-2 sm:px-3 md:py-3 md:px-4 rounded-md font-medium transition-all duration-200 text-xs sm:text-sm md:text-base relative ${
+              className={`flex-1 py-0.5 px-1 sm:py-1 sm:px-2 md:py-2 md:px-3 lg:py-3 lg:px-4 rounded-md font-medium transition-all duration-200 text-[8px] sm:text-xs md:text-sm lg:text-base relative ${
                 locked 
                   ? 'bg-gray-200 text-gray-400 cursor-not-allowed opacity-50 backdrop-blur-sm' 
                   : activeTab === course.id
