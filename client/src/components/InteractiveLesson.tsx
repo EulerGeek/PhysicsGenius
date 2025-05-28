@@ -101,60 +101,92 @@ export default function InteractiveLesson({ lessonId, title, onComplete, onClose
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-      <Card className="w-full max-w-4xl max-h-[90vh] overflow-y-auto bg-white dark:bg-gray-900">
+    <div className="fixed inset-0 bg-gradient-to-br from-blue-600 via-purple-600 to-indigo-600 flex items-center justify-center p-4 z-50">
+      <Card className="w-full max-w-5xl max-h-[95vh] overflow-y-auto glass dark:glass-dark backdrop-blur-xl shadow-2xl bounce-in border-2 border-white/20">
         <CardContent className="p-0">
-          <div className="gradient-primary p-6 text-white">
-            <div className="flex items-center justify-between mb-4">
-              <div>
-                <h2 className="text-2xl font-bold mb-2 text-white">{title}</h2>
-                <p className="text-blue-100">Interactive Physics Lesson</p>
+          <div className="bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 p-8 text-white shadow-xl">
+            <div className="flex items-center justify-between mb-6">
+              <div className="flex items-center gap-4">
+                <span className="text-5xl float-animation">🎯</span>
+                <div>
+                  <h2 className="text-3xl font-bold mb-2 text-white">{title}</h2>
+                  <p className="text-blue-100 text-lg">🚀 Interactive Physics Lesson</p>
+                </div>
               </div>
-              <div className="flex items-center space-x-3">
-                <Badge variant="secondary" className="bg-white bg-opacity-20 text-white">
-                  Question {currentQuestion + 1} of {questions.length}
+              <div className="flex items-center space-x-4">
+                <Badge variant="secondary" className="bg-white/20 text-white px-4 py-2 rounded-full backdrop-blur-sm shadow-lg">
+                  📖 Question {currentQuestion + 1} of {questions.length}
                 </Badge>
                 <Button 
                   variant="ghost" 
                   size="sm" 
                   onClick={onClose}
-                  className="text-white hover:bg-white hover:bg-opacity-20"
+                  className="text-white hover:bg-red-500/20 rounded-full p-3 transition-all duration-300 hover:scale-110 group"
                 >
-                  <i className="fas fa-times"></i>
+                  <span className="text-2xl group-hover:wiggle">✕</span>
                 </Button>
               </div>
             </div>
-            <Progress value={progress} className="h-2 bg-white bg-opacity-20" />
+            <div className="space-y-2">
+              <Progress value={progress} className="h-4 bg-white/20 rounded-full overflow-hidden" />
+              <div className="flex justify-between text-sm font-semibold">
+                <span>Physics Mastery Progress</span>
+                <span className="bg-white/20 px-3 py-1 rounded-full backdrop-blur-sm">
+                  {Math.round(progress)}% Complete
+                </span>
+              </div>
+            </div>
           </div>
 
-          <div className="p-6 bg-white dark:bg-gray-900">
-            <div className="flex items-center justify-between mb-6">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Physics Concept: {question.concept}</h3>
+          <div className="p-8 bg-gradient-to-br from-white via-blue-50 to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
+            <div className="flex items-center justify-between mb-8 slide-up">
+              <div className="flex items-center gap-3">
+                <span className="text-2xl">🧠</span>
+                <h3 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                  Physics Concept: {question.concept}
+                </h3>
+              </div>
               <Button
                 variant="outline"
                 size="sm"
                 onClick={handleReadContent}
-                className="text-blue-600 border-blue-600 hover:bg-blue-50 dark:text-blue-400 dark:border-blue-400"
+                className="bg-gradient-to-r from-blue-500 to-purple-500 text-white border-0 hover:from-blue-600 hover:to-purple-600 px-6 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 group"
               >
-                <i className="fas fa-volume-up text-xs mr-1"></i>
+                <span className="text-lg mr-2 group-hover:wiggle">🔊</span>
                 Read Question
               </Button>
             </div>
 
-            <Card className="mb-6 bg-gray-50 dark:bg-gray-800">
-              <CardContent className="p-6">
-                <h4 className="text-xl font-semibold text-neutral-900 dark:text-white mb-4">
-                  {question.question}
-                </h4>
+            <Card className="mb-8 glass dark:glass-dark backdrop-blur-lg shadow-2xl border-2 border-white/20 bounce-in">
+              <CardContent className="p-8">
+                <div className="text-center mb-8">
+                  <span className="text-6xl float-animation mb-4 block">🤔</span>
+                  <h4 className="text-3xl font-bold text-neutral-900 dark:text-white mb-6 leading-tight">
+                    {question.question}
+                  </h4>
+                </div>
                 
                 {question.type === "multiple-choice" && question.options && (
-                  <RadioGroup value={selectedAnswer} onValueChange={setSelectedAnswer}>
-                    {question.options.map((option) => (
-                      <div key={option.value} className="flex items-center space-x-3 p-4 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
-                        <RadioGroupItem value={option.value} id={option.value} />
-                        <Label htmlFor={option.value} className="flex-1 cursor-pointer text-base text-gray-900 dark:text-white">
-                          {option.text}
-                        </Label>
+                  <RadioGroup value={selectedAnswer} onValueChange={setSelectedAnswer} className="space-y-4">
+                    {question.options.map((option, index) => (
+                      <div key={option.value} className={`group cursor-pointer transition-all duration-500 hover-lift ${selectedAnswer === option.value ? 'transform scale-105' : ''}`} style={{animationDelay: `${index * 0.1}s`}}>
+                        <div className={`flex items-center space-x-4 p-6 border-3 rounded-3xl transition-all duration-300 ${
+                          selectedAnswer === option.value 
+                            ? 'bg-gradient-to-r from-green-500 to-blue-500 text-white border-green-500 shadow-2xl pulse-glow' 
+                            : 'border-gray-300 dark:border-gray-600 hover:border-blue-400 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 dark:hover:from-gray-700 dark:hover:to-gray-600 hover:scale-102'
+                        }`}>
+                          <RadioGroupItem value={option.value} id={option.value} className="sr-only" />
+                          <div className={`w-10 h-10 rounded-full flex items-center justify-center text-xl font-bold transition-all duration-300 ${
+                            selectedAnswer === option.value 
+                              ? 'bg-white/20 text-white' 
+                              : 'bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400 group-hover:scale-110'
+                          }`}>
+                            {String.fromCharCode(65 + index)}
+                          </div>
+                          <Label htmlFor={option.value} className="flex-1 cursor-pointer text-lg text-gray-900 dark:text-white leading-relaxed">
+                            {option.text}
+                          </Label>
+                        </div>
                       </div>
                     ))}
                   </RadioGroup>
@@ -163,25 +195,25 @@ export default function InteractiveLesson({ lessonId, title, onComplete, onClose
             </Card>
 
             {showFeedback && (
-              <Card className={`mb-6 ${isCorrect ? 'border-green-200 bg-green-50 dark:border-green-600 dark:bg-green-900' : 'border-red-200 bg-red-50 dark:border-red-600 dark:bg-red-900'}`}>
-                <CardContent className="p-4">
-                  <div className="flex items-start space-x-3">
-                    <div className={`w-8 h-8 rounded-full flex items-center justify-center ${isCorrect ? 'bg-green-500' : 'bg-red-500'}`}>
-                      <span className="text-white text-sm">
-                        {isCorrect ? '✅' : '❌'}
+              <Card className={`mb-8 bounce-in border-3 shadow-2xl ${isCorrect ? 'bg-gradient-to-r from-green-100 to-emerald-100 dark:from-green-900 dark:to-emerald-900 border-green-400' : 'bg-gradient-to-r from-red-100 to-pink-100 dark:from-red-900 dark:to-pink-900 border-red-400'}`}>
+                <CardContent className="p-8">
+                  <div className="flex items-start space-x-6">
+                    <div className={`w-16 h-16 rounded-full flex items-center justify-center text-3xl shadow-xl ${isCorrect ? 'bg-gradient-to-r from-green-500 to-emerald-500' : 'bg-gradient-to-r from-red-500 to-pink-500'} float-animation`}>
+                      <span className="text-white">
+                        {isCorrect ? '🎉' : '🤔'}
                       </span>
                     </div>
                     <div className="flex-1">
-                      <h5 className={`font-semibold mb-2 ${isCorrect ? 'text-green-800 dark:text-green-200' : 'text-red-800 dark:text-red-200'}`}>
-                        {isCorrect ? 'Correct! Great job!' : 'Not quite right.'}
+                      <h5 className={`text-2xl font-bold mb-4 ${isCorrect ? 'text-green-800 dark:text-green-200' : 'text-red-800 dark:text-red-200'}`}>
+                        {isCorrect ? '🌟 Excellent! You got it right!' : '💡 Good attempt! Let\'s learn together.'}
                       </h5>
-                      <p className={`text-sm ${isCorrect ? 'text-green-700 dark:text-green-300' : 'text-red-700 dark:text-red-300'}`}>
+                      <p className={`text-lg leading-relaxed ${isCorrect ? 'text-green-700 dark:text-green-300' : 'text-red-700 dark:text-red-300'}`}>
                         {question.explanation}
                       </p>
                       {isCorrect && (
-                        <div className="mt-2 flex items-center">
-                          <span className="text-amber-500 text-sm mr-1">⭐</span>
-                          <span className="text-sm font-medium text-amber-700 dark:text-amber-300">+20 XP</span>
+                        <div className="mt-4 flex items-center bg-amber-100 dark:bg-amber-900 px-4 py-3 rounded-2xl shadow-lg pulse-glow">
+                          <span className="text-3xl mr-3 float-animation">🏆</span>
+                          <span className="text-xl font-bold text-amber-700 dark:text-amber-300">+20 XP Earned!</span>
                         </div>
                       )}
                     </div>
@@ -190,39 +222,43 @@ export default function InteractiveLesson({ lessonId, title, onComplete, onClose
               </Card>
             )}
 
-            <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-4">
-                <div className="text-sm text-neutral-600 dark:text-neutral-300">
-                  Score: <span className="font-semibold text-primary">{score + (showFeedback && isCorrect ? 20 : 0)}</span> XP
+            <div className="flex items-center justify-between bg-gradient-to-r from-gray-50 to-blue-50 dark:from-gray-800 dark:to-gray-700 p-6 rounded-3xl border-2 border-gray-200 dark:border-gray-600 shadow-xl">
+              <div className="flex items-center space-x-6">
+                <div className="bg-white dark:bg-gray-800 px-6 py-3 rounded-2xl shadow-lg border-2 border-blue-200 dark:border-blue-600">
+                  <div className="text-lg font-bold text-neutral-800 dark:text-neutral-200">
+                    🏆 Score: <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent text-xl">
+                      {score + (showFeedback && isCorrect ? 20 : 0)}
+                    </span> XP
+                  </div>
                 </div>
-                <Badge variant="secondary" className="bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">
-                  <i className="fas fa-gift text-xs mr-1"></i>
-                  100% FREE
+                <Badge variant="secondary" className="bg-gradient-to-r from-green-500 to-emerald-500 text-white px-6 py-3 rounded-full shadow-lg text-lg font-semibold pulse-glow">
+                  🎁 100% FREE
                 </Badge>
               </div>
               
               {!showFeedback ? (
                 <Button 
                   onClick={handleAnswerSubmit}
-                  className="bg-blue-600 text-white hover:bg-blue-700"
+                  className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-4 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-110 text-lg font-semibold group"
                   disabled={!selectedAnswer}
                 >
+                  <span className="mr-2 group-hover:wiggle">🎯</span>
                   Check Answer
                 </Button>
               ) : (
                 <Button 
                   onClick={handleNextQuestion}
-                  className="bg-green-600 text-white hover:bg-green-700"
+                  className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white px-8 py-4 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-110 text-lg font-semibold group"
                 >
                   {currentQuestion < questions.length - 1 ? (
                     <>
+                      <span className="mr-2 group-hover:wiggle">🚀</span>
                       Next Question
-                      <span className="text-xs ml-2">➡️</span>
                     </>
                   ) : (
                     <>
+                      <span className="mr-2 group-hover:wiggle">🎉</span>
                       Complete Lesson
-                      <span className="text-xs ml-2">✅</span>
                     </>
                   )}
                 </Button>
