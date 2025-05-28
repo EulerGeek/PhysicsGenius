@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -26,6 +26,16 @@ export default function InteractiveLesson({ lessonId, title, onComplete, onClose
   const questions = lessonData?.questions || [];
   const question = questions[currentQuestion];
   const progress = questions.length > 0 ? ((currentQuestion + 1) / questions.length) * 100 : 0;
+
+  // Prevent body scrolling when lesson is open
+  useEffect(() => {
+    if (lessonData && questions.length > 0) {
+      document.body.style.overflow = 'hidden';
+      return () => {
+        document.body.style.overflow = 'unset';
+      };
+    }
+  }, [lessonData, questions.length]);
 
   if (!lessonData || questions.length === 0) {
     return (
@@ -101,7 +111,7 @@ export default function InteractiveLesson({ lessonId, title, onComplete, onClose
   };
 
   return (
-    <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center p-6 z-50 overflow-y-auto">
+    <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center p-6 z-50 overflow-hidden">
       <Card className="w-full max-w-4xl max-h-[90vh] flex flex-col bg-white dark:bg-gray-900 shadow-2xl rounded-3xl border-4 border-blue-200 dark:border-blue-800 bounce-in overflow-hidden">
         <CardContent className="p-0">
           <div className="bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 p-8 text-white shadow-xl">

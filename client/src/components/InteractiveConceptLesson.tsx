@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -93,6 +93,14 @@ export default function InteractiveConceptLessonFixed({
   const currentQ = lessonData.questions[currentQuestion];
   const progress = ((currentQuestion + 1) / lessonData.questions.length) * 100;
 
+  // Prevent body scrolling when lesson is open
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, []);
+
   const handleAnswerSubmit = () => {
     if (!selectedAnswer) {
       alert("Please select an answer first!");
@@ -132,7 +140,7 @@ export default function InteractiveConceptLessonFixed({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center p-6 z-50 overflow-y-auto">
+    <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center p-6 z-50 overflow-hidden">
       <Card className="w-full max-w-5xl max-h-[90vh] flex flex-col bg-white dark:bg-gray-900 shadow-2xl rounded-3xl border-4 border-purple-200 dark:border-purple-800 bounce-in overflow-hidden">
         {/* Header */}
         <CardHeader className="bg-gradient-to-r from-purple-600 to-blue-600 text-white flex-shrink-0">
