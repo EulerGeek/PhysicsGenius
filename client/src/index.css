@@ -93,44 +93,56 @@
   border: 1px solid rgba(255, 255, 255, 0.125);
 }
 
-/* Nature-Inspired Vibrant Color Harmony */
+/* Color Theory: Triadic Harmony - Green, Blue, Orange */
 :root {
-  /* Light Mode - Clean Nature Tones */
-  --bg-primary: 195 18% 97%; /* Soft sky white */
-  --bg-secondary: 200 25% 94%; /* Light misty blue */
-  --text-primary: 220 15% 8%; /* Deep forest */
-  --text-secondary: 200 12% 42%; /* Mountain gray */
-  --accent-blue: 200 95% 55%; /* Ocean blue */
-  --accent-purple: 280 85% 65%; /* Lavender purple */
-  --accent-indigo: 245 88% 70%; /* Mountain lake */
-  --accent-teal: 175 85% 55%; /* Tropical water */
-  --success-green: 150 80% 45%; /* Forest green */
-  --warning-amber: 38 92% 60%; /* Sunset gold */
-  --danger-red: 5 78% 58%; /* Coral red */
-  --nature-mint: 165 82% 51%; /* Fresh mint */
-  --nature-sage: 120 25% 65%; /* Sage green */
+  /* Light Mode - High Contrast Accessible Colors */
+  --bg-primary: 0 0% 98%; /* Pure white background */
+  --bg-secondary: 210 40% 92%; /* Light blue-gray */
+  --text-primary: 0 0% 10%; /* Deep black text */
+  --text-secondary: 0 0% 40%; /* Medium gray text */
+  
+  /* Primary Triadic Colors */
+  --color-green: 150 80% 35%; /* Forest green #0d9488 */
+  --color-blue: 210 90% 50%; /* Ocean blue #1e40af */
+  --color-orange: 25 95% 55%; /* Vibrant orange #ea580c */
+  
+  /* Light variants */
+  --color-green-light: 150 60% 65%; /* Light green */
+  --color-blue-light: 210 70% 70%; /* Light blue */
+  --color-orange-light: 25 85% 75%; /* Light orange */
+  
+  /* Dark variants */
+  --color-green-dark: 150 100% 25%; /* Dark green */
+  --color-blue-dark: 210 100% 35%; /* Dark blue */
+  --color-orange-dark: 25 100% 40%; /* Dark orange */
 }
 
 .dark {
-  /* Dark Mode - Deep Nature Night Tones */
-  --bg-primary: 215 28% 7%; /* Deep night sky */
-  --bg-secondary: 220 35% 12%; /* Midnight blue */
-  --text-primary: 200 20% 96%; /* Moonlight white */
-  --text-secondary: 200 15% 68%; /* Silver mist */
-  --accent-blue: 200 90% 72%; /* Bright ocean */
-  --accent-purple: 280 80% 75%; /* Aurora purple */
-  --accent-indigo: 245 85% 75%; /* Northern lights */
-  --accent-teal: 175 80% 65%; /* Bioluminescent */
-  --success-green: 150 75% 55%; /* Aurora green */
-  --warning-amber: 38 88% 70%; /* Star gold */
-  --danger-red: 5 75% 68%; /* Nebula red */
-  --nature-mint: 165 75% 61%; /* Phosphorescent mint */
-  --nature-sage: 120 30% 70%; /* Moonlit sage */
+  /* Dark Mode - Triadic Color Theory */
+  --bg-primary: 0 0% 8%; /* Deep black background */
+  --bg-secondary: 210 20% 15%; /* Dark blue-gray */
+  --text-primary: 0 0% 95%; /* Pure white text */
+  --text-secondary: 0 0% 70%; /* Light gray text */
+  
+  /* Primary Triadic Colors (Brightened for dark mode) */
+  --color-green: 150 70% 55%; /* Bright green */
+  --color-blue: 210 80% 65%; /* Bright blue */
+  --color-orange: 25 90% 65%; /* Bright orange */
+  
+  /* Light variants (extra bright for dark mode) */
+  --color-green-light: 150 60% 75%; /* Very light green */
+  --color-blue-light: 210 70% 80%; /* Very light blue */
+  --color-orange-light: 25 85% 80%; /* Very light orange */
+  
+  /* Dark variants (medium brightness for contrast) */
+  --color-green-dark: 150 80% 45%; /* Medium green */
+  --color-blue-dark: 210 90% 55%; /* Medium blue */
+  --color-orange-dark: 25 95% 55%; /* Medium orange */
 }
 
 /* Enhanced Typography & Backgrounds */
 body {
-  background: linear-gradient(135deg, #14b8a6 0%, #06d6a0 25%, #16a085 50%, #0891b2 75%, #0369a1 100%);
+  background: linear-gradient(135deg, hsl(var(--color-green)) 0%, hsl(var(--color-blue)) 50%, hsl(var(--color-orange)) 100%);
   background-attachment: fixed;
   color: hsl(var(--text-primary));
   font-family: 'Inter', sans-serif;
@@ -158,10 +170,11 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .text-gradient {
-  background: linear-gradient(135deg, #14b8a6 0%, #06d6a0 25%, #8b5cf6 75%, #7c3aed 100%);
+  background: linear-gradient(135deg, hsl(var(--color-green)) 0%, hsl(var(--color-blue)) 50%, hsl(var(--color-orange)) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  font-weight: 700;
 }
 
 /* Enhanced Color Utility Classes */
@@ -220,25 +233,25 @@ input::placeholder, textarea::placeholder {
   color: hsl(var(--text-primary)) !important;
 }
 
-/* Beautiful Nature-Inspired Gradient Backgrounds */
-.gradient-ocean {
-  background: linear-gradient(135deg, #14b8a6 0%, #0891b2 50%, #0369a1 100%);
+/* Color Theory Triadic Gradients - Green, Blue, Orange */
+.gradient-triadic {
+  background: linear-gradient(135deg, hsl(var(--color-green)) 0%, hsl(var(--color-blue)) 50%, hsl(var(--color-orange)) 100%);
 }
 
-.gradient-sunset {
-  background: linear-gradient(135deg, #f59e0b 0%, #f97316 50%, #dc2626 100%);
+.gradient-green {
+  background: linear-gradient(135deg, hsl(var(--color-green-dark)) 0%, hsl(var(--color-green)) 50%, hsl(var(--color-green-light)) 100%);
 }
 
-.gradient-forest {
-  background: linear-gradient(135deg, #059669 0%, #16a085 50%, #06d6a0 100%);
+.gradient-blue {
+  background: linear-gradient(135deg, hsl(var(--color-blue-dark)) 0%, hsl(var(--color-blue)) 50%, hsl(var(--color-blue-light)) 100%);
 }
 
-.gradient-aurora {
-  background: linear-gradient(135deg, #8b5cf6 0%, #06d6a0 25%, #14b8a6 50%, #0891b2 75%, #7c3aed 100%);
+.gradient-orange {
+  background: linear-gradient(135deg, hsl(var(--color-orange-dark)) 0%, hsl(var(--color-orange)) 50%, hsl(var(--color-orange-light)) 100%);
 }
 
-.gradient-nature {
-  background: linear-gradient(135deg, #10b981 0%, #059669 25%, #14b8a6 50%, #0891b2 75%, #8b5cf6 100%);
+.gradient-accessible {
+  background: linear-gradient(135deg, hsl(var(--color-green)) 0%, hsl(var(--color-blue)) 33%, hsl(var(--color-orange)) 66%, hsl(var(--color-green)) 100%);
 }
 
 /* Enhanced Nature-Inspired Hover Effects */
@@ -253,31 +266,47 @@ input::placeholder, textarea::placeholder {
   border-color: #14b8a6;
 }
 
-/* Beautiful Nature Button Styles */
-.btn-nature {
-  background: linear-gradient(135deg, #14b8a6 0%, #06d6a0 50%, #059669 100%);
+/* High-Contrast Accessible Button Styles */
+.btn-green {
+  background: linear-gradient(135deg, #047857 0%, #059669 50%, #10b981 100%);
   color: white !important;
-  border: none;
+  border: 2px solid #065f46;
+  font-weight: 600;
   transition: all 0.3s ease;
 }
 
-.btn-nature:hover {
-  background: linear-gradient(135deg, #0d9488 0%, #059669 50%, #047857 100%);
+.btn-green:hover {
+  background: linear-gradient(135deg, #065f46 0%, #047857 50%, #059669 100%);
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(20, 184, 166, 0.3);
+  box-shadow: 0 8px 25px rgba(5, 150, 105, 0.4);
 }
 
-.btn-nature-purple {
-  background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 50%, #6d28d9 100%);
+.btn-blue {
+  background: linear-gradient(135deg, #1e40af 0%, #2563eb 50%, #3b82f6 100%);
   color: white !important;
-  border: none;
+  border: 2px solid #1e3a8a;
+  font-weight: 600;
   transition: all 0.3s ease;
 }
 
-.btn-nature-purple:hover {
-  background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 50%, #5b21b6 100%);
+.btn-blue:hover {
+  background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 50%, #2563eb 100%);
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(139, 92, 246, 0.3);
+  box-shadow: 0 8px 25px rgba(37, 99, 235, 0.4);
+}
+
+.btn-orange {
+  background: linear-gradient(135deg, #c2410c 0%, #ea580c 50%, #f97316 100%);
+  color: white !important;
+  border: 2px solid #9a3412;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-orange:hover {
+  background: linear-gradient(135deg, #9a3412 0%, #c2410c 50%, #ea580c 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(234, 88, 12, 0.4);
 }
 
 /* Fix dropdown and select visibility */
