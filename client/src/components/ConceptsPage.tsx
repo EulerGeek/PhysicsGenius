@@ -22,7 +22,7 @@ export default function ConceptsPage({ onStartConcept, onNavigate, progress }: C
       title: "Classical Mechanics",
       icon: "⚙️",
       description: "Motion, forces, and energy",
-      color: "bg-yellow-50 border-yellow-200",
+      color: "bg-amber-50 border-amber-200",
       concepts: [
         {
           id: "kinematics",
