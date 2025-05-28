@@ -72,7 +72,11 @@ export default function Home() {
       return (
         <div className="min-h-screen bg-neutral-50 dark:bg-gray-900">
           <Header progress={progress} resetProgress={resetProgress} />
-          <ConceptsPage onStartConcept={handleStartConceptLesson} />
+          <ConceptsPage 
+            onStartConcept={handleStartConceptLesson}
+            onNavigate={setCurrentPage}
+            progress={progress}
+          />
           <EducationalFooter />
           <FloatingAIButton />
         </div>
@@ -81,7 +85,10 @@ export default function Home() {
       return (
         <div className="min-h-screen bg-neutral-50 dark:bg-gray-900">
           <Header progress={progress} resetProgress={resetProgress} />
-          <FeynmanLecturesPage />
+          <FeynmanLecturesPage 
+            onNavigate={setCurrentPage}
+            progress={progress}
+          />
           <FloatingAIButton />
         </div>
       );

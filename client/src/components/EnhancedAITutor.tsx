@@ -336,24 +336,7 @@ export default function EnhancedAITutor({ isOpen, onClose, currentQuestion, cont
             <div ref={messagesEndRef} />
           </div>
 
-          {/* Enhanced Quick Questions */}
-          <div className="border-t-2 border-gray-200 dark:border-gray-700 p-6 bg-gradient-to-r from-gray-50 to-blue-50 dark:from-gray-800 dark:to-gray-700">
-            <p className="text-lg font-semibold text-gray-700 dark:text-gray-300 mb-4 flex items-center gap-2">
-              <span>💡</span> Quick Start Questions:
-            </p>
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
-              {quickQuestions.map((question, index) => (
-                <Button
-                  key={index}
-                  variant="outline"
-                  onClick={() => setInputText(question)}
-                  className="text-left justify-start p-3 h-auto bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-600 rounded-xl hover:border-blue-400 hover:bg-blue-50 dark:hover:bg-gray-700 transition-all duration-300 hover:scale-105 text-sm"
-                >
-                  {question}
-                </Button>
-              ))}
-            </div>
-          </div>
+
 
           {/* Enhanced Input Area */}
           <div className="border-t-2 border-gray-200 dark:border-gray-700 p-6 bg-gradient-to-r from-white to-purple-50 dark:from-gray-900 dark:to-gray-800">
