@@ -219,6 +219,33 @@ export default function InteractiveBunny({ isVisible = true }: InteractiveBunnyP
           <div className="absolute top-6 right-0 w-4 h-0.5 bg-gray-400/60 rounded-full animate-whisker-right"></div>
           <div className="absolute top-7 right-0 w-3 h-0.5 bg-gray-400/60 rounded-full animate-whisker-right" style={{animationDelay: '0.1s'}}></div>
         </div>
+
+        {/* Bunny Legs with IK */}
+        <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-2">
+          {/* Left Leg */}
+          <div className={`absolute -left-3 top-0 transform transition-all duration-300 ${
+            isDragging ? 'animate-leg-stretch' : isKicked ? 'animate-leg-kick' : 'animate-leg-walk'
+          }`}>
+            {/* Upper leg */}
+            <div className="w-2 h-4 bg-gradient-to-b from-pink-300 to-pink-400 rounded-full transform rotate-12 origin-top"></div>
+            {/* Lower leg */}
+            <div className="w-1.5 h-3 bg-gradient-to-b from-pink-400 to-pink-500 rounded-full transform translate-x-1 translate-y-3 rotate-45 origin-top"></div>
+            {/* Foot */}
+            <div className="w-2.5 h-1.5 bg-pink-500 rounded-full transform translate-x-1.5 translate-y-5"></div>
+          </div>
+
+          {/* Right Leg */}
+          <div className={`absolute -right-3 top-0 transform transition-all duration-300 ${
+            isDragging ? 'animate-leg-stretch' : isKicked ? 'animate-leg-kick' : 'animate-leg-walk'
+          }`} style={{animationDelay: '0.3s'}}>
+            {/* Upper leg */}
+            <div className="w-2 h-4 bg-gradient-to-b from-pink-300 to-pink-400 rounded-full transform -rotate-12 origin-top"></div>
+            {/* Lower leg */}
+            <div className="w-1.5 h-3 bg-gradient-to-b from-pink-400 to-pink-500 rounded-full transform -translate-x-1 translate-y-3 -rotate-45 origin-top"></div>
+            {/* Foot */}
+            <div className="w-2.5 h-1.5 bg-pink-500 rounded-full transform -translate-x-1.5 translate-y-5"></div>
+          </div>
+        </div>
         
         {/* Sparkle Effect when kicked */}
         {isKicked && (

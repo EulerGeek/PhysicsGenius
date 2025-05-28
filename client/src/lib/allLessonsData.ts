@@ -1,4 +1,4 @@
-// Complete lesson data for ALL physics courses
+// Complete lesson data for ALL courses (Physics + Mathematics)
 export interface Question {
   id: string;
   type: "multiple-choice" | "drag-drop" | "fill-blank";
