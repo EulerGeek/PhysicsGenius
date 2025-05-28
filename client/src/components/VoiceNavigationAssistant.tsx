@@ -1,8 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import QuomaCharacter from "./QuomaCharacter";
 
 interface VoiceNavigationAssistantProps {
   onNavigate: (command: string) => void;
@@ -50,7 +48,7 @@ export default function VoiceNavigationAssistant({
       'help': () => onVoiceCommand('help', 'Here are available voice commands...'),
       'pause': () => onVoiceCommand('pause', 'Pausing current activity...'),
       'resume': () => onVoiceCommand('resume', 'Resuming activity...'),
-      'connect dots': () => onVoiceCommand('connect_dots', 'Opening Connect the Dots game...'),
+
       'ai tutor': () => onVoiceCommand('ai_tutor', 'Opening AI tutor assistant...'),
       'close': () => onVoiceCommand('close', 'Closing current window...'),
       'show progress': () => onVoiceCommand('show_progress', 'Displaying your progress...'),
@@ -317,60 +315,19 @@ export default function VoiceNavigationAssistant({
 
   return (
     <div className="fixed bottom-4 left-4 z-40">
-      {/* QUOMA Character - Replaces the voice panel */}
-      <div className="relative">
-        <div 
-          className={`w-20 h-20 bg-gradient-to-br from-blue-400 via-purple-500 to-blue-600 rounded-full shadow-2xl flex items-center justify-center border-4 border-white cursor-pointer transition-all duration-300 hover:scale-110 ${
-            isListening ? 'animate-pulse scale-110' : 'hover:shadow-xl'
-          }`}
-          onClick={isListening ? stopListening : startListening}
-        >
-          {/* Orbiting Particles */}
-          <div className="absolute inset-0 rounded-full">
-            <div className="absolute w-2 h-2 bg-yellow-400 rounded-full opacity-80" 
-                 style={{
-                   top: '10px',
-                   left: '50%',
-                   transform: 'translateX(-50%)',
-                   animation: 'orbit 4s linear infinite'
-                 }}></div>
-            <div className="absolute w-1.5 h-1.5 bg-green-400 rounded-full opacity-60" 
-                 style={{
-                   top: '50%',
-                   right: '10px',
-                   transform: 'translateY(-50%)',
-                   animation: 'orbit 3s linear infinite reverse'
-                 }}></div>
-          </div>
-
-          {/* Physics Symbol */}
-          <div className={`text-3xl transition-all duration-300 ${isListening ? 'scale-125' : ''}`}>
-            ⚛️
-          </div>
-
-          {/* Listening indicator */}
-          {isListening && (
-            <div className="absolute inset-0 rounded-full border-4 border-red-400 animate-ping"></div>
-          )}
-        </div>
-        
-        {/* QUOMA Label */}
-        <div className="text-center mt-2">
-          <div className="bg-white/90 dark:bg-gray-800/90 px-3 py-1 rounded-full shadow-lg">
-            <div className="text-sm font-bold text-blue-600 dark:text-blue-400">QUOMA</div>
-          </div>
-        </div>
-      </div>
-
-      {/* Quoma Character - appears when "Hey Quoma" is said */}
-      <QuomaCharacter 
-        isActive={showCharacter}
-        isListening={isListening}
-        onClose={() => {
-          setShowCharacter(false);
-          setIsWakeWordListening(true);
-        }}
-      />
+      {/* Simple Voice Button */}
+      <Button
+        onClick={isListening ? stopListening : startListening}
+        className={`w-14 h-14 rounded-full transition-all duration-300 ${
+          isListening
+            ? 'bg-red-500 hover:bg-red-600 animate-pulse'
+            : 'bg-blue-500 hover:bg-blue-600'
+        } text-white shadow-lg hover:shadow-xl hover:scale-110`}
+      >
+        <span className="text-2xl">
+          {isListening ? '🔴' : '🎤'}
+        </span>
+      </Button>
     </div>
   );
 }

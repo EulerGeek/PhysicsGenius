@@ -1,12 +1,14 @@
 // Complete lesson data for ALL courses (Physics + Mathematics)
 export interface Question {
   id: string;
-  type: "multiple-choice" | "drag-drop" | "fill-blank";
+  type: "multiple-choice" | "fill-blank" | "true-false" | "matching" | "ordering" | "select-all";
   question: string;
   options?: { value: string; text: string; }[];
-  correctAnswer: string;
+  correctAnswer: string | string[];
   explanation: string;
   concept: string;
+  conceptIntro?: string; // New concept introduction
+  visualAid?: string; // Description of visual element
 }
 
 export interface LessonData {
@@ -27,15 +29,28 @@ export const allClassicalMechanicsLessons: Record<string, LessonData> = {
     feynmanNotes: "Motion is change of position over time. Think of it as asking: where is something now compared to where it was before?",
     questions: [
       { id: "motion-1", type: "multiple-choice", question: "What is velocity?", options: [{ value: "a", text: "Change in position over time" }, { value: "b", text: "Speed with direction" }, { value: "c", text: "v = Δx/Δt" }, { value: "d", text: "All of the above" }], correctAnswer: "d", explanation: "Velocity is the rate of change of position, including both magnitude and direction.", concept: "v = Δx/Δt" },
-      { id: "motion-2", type: "multiple-choice", question: "What is acceleration?", options: [{ value: "a", text: "Change in velocity over time" }, { value: "b", text: "a = Δv/Δt" }, { value: "c", text: "Rate of change of motion" }, { value: "d", text: "All of the above" }], correctAnswer: "a", explanation: "Acceleration is the change in velocity over time, which can also be written as a = Δv/Δt.", concept: "a = Δv/Δt" },
-      { id: "motion-3", type: "multiple-choice", question: "For constant acceleration, x = ?", options: [{ value: "a", text: "x = v₀t + ½at²" }, { value: "b", text: "x = vt" }, { value: "c", text: "x = at²" }, { value: "d", text: "x = v₀ + at" }], correctAnswer: "a", explanation: "For constant acceleration, position follows x = v₀t + ½at².", concept: "x = v₀t + ½at²" },
-      { id: "motion-4", type: "multiple-choice", question: "What is free fall?", options: [{ value: "a", text: "Motion under gravity only" }, { value: "b", text: "a = g = 9.8 m/s²" }, { value: "c", text: "Ignoring air resistance" }, { value: "d", text: "All of the above" }], correctAnswer: "d", explanation: "Free fall is motion under gravity alone, with acceleration g = 9.8 m/s².", concept: "Free fall: a = g" },
-      { id: "motion-5", type: "multiple-choice", question: "What is displacement?", options: [{ value: "a", text: "Change in position" }, { value: "b", text: "Vector quantity" }, { value: "c", text: "Different from distance" }, { value: "d", text: "All of the above" }], correctAnswer: "d", explanation: "Displacement is the vector change in position, different from total distance traveled.", concept: "Δx = x_final - x_initial" },
-      { id: "motion-6", type: "multiple-choice", question: "What does the area under a v-t graph represent?", options: [{ value: "a", text: "Displacement" }, { value: "b", text: "Change in position" }, { value: "c", text: "Distance if velocity doesn't change sign" }, { value: "d", text: "All of the above" }], correctAnswer: "d", explanation: "Area under velocity-time graph gives displacement.", concept: "Area under v-t = displacement" },
-      { id: "motion-7", type: "multiple-choice", question: "What does the slope of an x-t graph represent?", options: [{ value: "a", text: "Velocity" }, { value: "b", text: "Rate of position change" }, { value: "c", text: "dx/dt" }, { value: "d", text: "All of the above" }], correctAnswer: "d", explanation: "Slope of position-time graph is velocity.", concept: "Slope of x-t = velocity" },
-      { id: "motion-8", type: "multiple-choice", question: "For projectile motion, what is true?", options: [{ value: "a", text: "Horizontal velocity is constant" }, { value: "b", text: "Vertical acceleration is g downward" }, { value: "c", text: "Motion is independent in x and y" }, { value: "d", text: "All of the above" }], correctAnswer: "d", explanation: "Projectile motion has constant horizontal velocity and constant vertical acceleration.", concept: "Independence of x and y motion" },
-      { id: "motion-9", type: "multiple-choice", question: "What is the kinematic equation v² = ?", options: [{ value: "a", text: "v² = v₀² + 2aΔx" }, { value: "b", text: "v² = v₀² + 2ax" }, { value: "c", text: "v² = v₀ + 2ax" }, { value: "d", text: "v² = v₀² + ax" }], correctAnswer: "a", explanation: "The kinematic equation is v² = v₀² + 2aΔx.", concept: "v² = v₀² + 2aΔx" },
-      { id: "motion-10", type: "multiple-choice", question: "What happens at maximum height in projectile motion?", options: [{ value: "a", text: "Vertical velocity = 0" }, { value: "b", text: "Only horizontal velocity remains" }, { value: "c", text: "Acceleration is still g downward" }, { value: "d", text: "All of the above" }], correctAnswer: "d", explanation: "At maximum height, vertical velocity is zero but acceleration is still g downward.", concept: "v_y = 0 at max height" }
+      
+      { id: "motion-2", type: "true-false", question: "True or False: Acceleration can be negative.", options: [{ value: "true", text: "True" }, { value: "false", text: "False" }], correctAnswer: "true", explanation: "Acceleration can be negative when velocity decreases or when moving in the negative direction.", concept: "Negative acceleration" },
+      
+      { id: "motion-3", type: "multiple-choice", question: "What is acceleration?", options: [{ value: "a", text: "Change in velocity over time" }, { value: "b", text: "a = Δv/Δt" }, { value: "c", text: "Rate of change of motion" }, { value: "d", text: "All of the above" }], correctAnswer: "a", explanation: "Acceleration is the change in velocity over time, which can also be written as a = Δv/Δt.", concept: "a = Δv/Δt" },
+      
+      { id: "motion-4", type: "fill-blank", question: "For constant acceleration, position follows: x = v₀t + ½___t²", options: [{ value: "a", text: "a" }, { value: "v", text: "v" }, { value: "x", text: "x" }, { value: "g", text: "g" }], correctAnswer: "a", explanation: "The kinematic equation is x = v₀t + ½at².", concept: "x = v₀t + ½at²" },
+      
+      { id: "motion-5", type: "multiple-choice", question: "What is free fall?", options: [{ value: "a", text: "Motion under gravity only" }, { value: "b", text: "a = g = 9.8 m/s²" }, { value: "c", text: "Ignoring air resistance" }, { value: "d", text: "All of the above" }], correctAnswer: "d", explanation: "Free fall is motion under gravity alone, with acceleration g = 9.8 m/s².", concept: "Free fall: a = g" },
+      
+      { id: "motion-6", type: "select-all", question: "Which are properties of displacement?", options: [{ value: "a", text: "Vector quantity" }, { value: "b", text: "Has direction" }, { value: "c", text: "Different from distance" }, { value: "d", text: "Change in position" }], correctAnswer: ["a", "b", "c", "d"], explanation: "Displacement has all these properties - it's a vector showing change in position.", concept: "Displacement properties" },
+      
+      { id: "motion-7", type: "multiple-choice", question: "What does the area under a v-t graph represent?", options: [{ value: "a", text: "Displacement" }, { value: "b", text: "Change in position" }, { value: "c", text: "Distance if velocity doesn't change sign" }, { value: "d", text: "All of the above" }], correctAnswer: "d", explanation: "Area under velocity-time graph gives displacement.", concept: "Area under v-t = displacement" },
+      
+      { id: "motion-8", type: "true-false", question: "True or False: The slope of a position-time graph gives acceleration.", options: [{ value: "true", text: "True" }, { value: "false", text: "False" }], correctAnswer: "false", explanation: "The slope of position-time graph gives velocity, not acceleration. Acceleration is the slope of velocity-time graph.", concept: "Slope interpretation" },
+      
+      { id: "motion-9", type: "multiple-choice", question: "For projectile motion, what is true?", options: [{ value: "a", text: "Horizontal velocity is constant" }, { value: "b", text: "Vertical acceleration is g downward" }, { value: "c", text: "Motion is independent in x and y" }, { value: "d", text: "All of the above" }], correctAnswer: "d", explanation: "Projectile motion has constant horizontal velocity and constant vertical acceleration.", concept: "Independence of x and y motion" },
+      
+      { id: "motion-10", type: "multiple-choice", question: "What is the kinematic equation v² = ?", options: [{ value: "a", text: "v² = v₀² + 2aΔx" }, { value: "b", text: "v² = v₀² + 2ax" }, { value: "c", text: "v² = v₀ + 2ax" }, { value: "d", text: "v² = v₀² + ax" }], correctAnswer: "a", explanation: "The kinematic equation is v² = v₀² + 2aΔx.", concept: "v² = v₀² + 2aΔx" },
+      
+      { id: "motion-11", type: "fill-blank", question: "At maximum height in projectile motion, the vertical velocity is ___.", options: [{ value: "0", text: "0" }, { value: "maximum", text: "maximum" }, { value: "g", text: "g" }, { value: "v₀", text: "v₀" }], correctAnswer: "0", explanation: "At maximum height, vertical velocity is zero but acceleration is still g downward.", concept: "v_y = 0 at max height" },
+      
+      { id: "motion-12", type: "multiple-choice", question: "A ball is dropped from rest. After 3 seconds, how far has it fallen?", options: [{ value: "a", text: "44.1 m" }, { value: "b", text: "29.4 m" }, { value: "c", text: "14.7 m" }, { value: "d", text: "88.2 m" }], correctAnswer: "a", explanation: "Using x = ½gt² = ½(9.8)(3²) = 44.1 m. This applies our kinematic equation to free fall.", concept: "Free fall calculation" }
     ]
   },
 
