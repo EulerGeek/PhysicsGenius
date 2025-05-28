@@ -16,6 +16,7 @@ import Footer from "@/components/Footer";
 import ConceptMenu from "@/components/ConceptMenu";
 import InteractiveConceptLesson from "@/components/InteractiveConceptLesson";
 import FloatingAIButton from "@/components/FloatingAIButton";
+import InteractivePhysicsElements from "@/components/InteractivePhysicsElements";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useProgress } from "@/hooks/useProgress";
@@ -244,6 +245,9 @@ export default function Home() {
         isOpen={showQuickTest}
         onClose={() => setShowQuickTest(false)}
       />
+
+      {/* Interactive Physics Elements */}
+      <InteractivePhysicsElements isVisible={true} />
     </div>
   );
 }
