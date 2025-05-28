@@ -123,37 +123,46 @@ export default function UnifiedLearningInterface({
   };
 
   return (
-    <div className="space-y-6">
-      {/* View Mode Toggle */}
-      <div className="flex justify-between items-center">
-        <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
+    <div className="space-y-4 md:space-y-6 px-2 md:px-4">
+      {/* View Mode Toggle - Mobile Responsive */}
+      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 sm:gap-0">
+        <h2 className="text-xl md:text-2xl font-bold text-gray-900 dark:text-white text-center sm:text-left">
           {courseId === 'classical' ? 'Classical Mechanics' : 
            courseId === 'quantum' ? 'Quantum Mechanics' : 
            'General Relativity'}
         </h2>
         
-        <div className="flex items-center space-x-2">
-          <span className="text-sm text-gray-600 dark:text-gray-400">View:</span>
+        <div className="flex items-center justify-center sm:justify-start space-x-2">
+          <span className="text-xs md:text-sm text-gray-600 dark:text-gray-400">View:</span>
           <Tabs value={viewMode} onValueChange={(value) => onViewModeChange(value as 'list' | 'map')}>
-            <TabsList className="grid w-full grid-cols-2">
-              <TabsTrigger value="map">🗺️ Map</TabsTrigger>
-              <TabsTrigger value="list">📋 List</TabsTrigger>
+            <TabsList className="grid w-full grid-cols-2 h-8 md:h-10 text-xs md:text-sm">
+              <TabsTrigger value="map" className="px-2 md:px-4">🗺️ Map</TabsTrigger>
+              <TabsTrigger value="list" className="px-2 md:px-4">📋 List</TabsTrigger>
             </TabsList>
           </Tabs>
         </div>
       </div>
 
-      {/* Concept Notes Modal */}
+      {/* Concept Notes Modal - Mobile Responsive */}
       {showConcepts && selectedLesson && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <Card className="w-full max-w-4xl max-h-[90vh] overflow-y-auto">
-            <CardHeader>
-              <div className="flex justify-between items-center">
-                <h3 className="text-xl font-bold">📚 Concept Review: {selectedLesson.title}</h3>
-                <Button variant="ghost" onClick={() => setShowConcepts(false)}>✕</Button>
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-2 md:p-4">
+          <Card className="w-full max-w-4xl max-h-[95vh] md:max-h-[90vh] overflow-y-auto">
+            <CardHeader className="pb-3 md:pb-6">
+              <div className="flex justify-between items-start gap-2">
+                <h3 className="text-lg md:text-xl font-bold leading-tight">
+                  📚 Concept Review: {selectedLesson.title}
+                </h3>
+                <Button 
+                  variant="ghost" 
+                  size="sm"
+                  onClick={() => setShowConcepts(false)}
+                  className="shrink-0"
+                >
+                  ✕
+                </Button>
               </div>
             </CardHeader>
-            <CardContent className="space-y-6">
+            <CardContent className="space-y-4 md:space-y-6 px-3 md:px-6">
               {/* Key Concepts */}
               <div className="grid gap-4">
                 <h4 className="text-lg font-semibold text-blue-600 dark:text-blue-400">
