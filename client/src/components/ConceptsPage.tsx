@@ -165,7 +165,7 @@ export default function ConceptsPage({ onStartConcept, onNavigate, progress }: C
       title: "Calculus",
       icon: "∫",
       description: "Derivatives and integrals",
-      color: "bg-orange-50 border-orange-200", 
+      color: "bg-slate-50 border-slate-200", 
       concepts: [
         {
           id: "limits",
