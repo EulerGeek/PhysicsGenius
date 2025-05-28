@@ -6,8 +6,12 @@ import LessonCard from "@/components/LessonCard";
 import LessonPreview from "@/components/LessonPreview";
 import LessonIntro from "@/components/LessonIntro";
 import InteractiveLesson from "@/components/InteractiveLesson";
+import LevelMap from "@/components/LevelMap";
+import QuickTest from "@/components/QuickTest";
 import Resources from "@/components/Resources";
 import Footer from "@/components/Footer";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
 import { useProgress } from "@/hooks/useProgress";
 import { getCourses, getLessonsByCourse } from "@/lib/lessons";
 
@@ -16,7 +20,9 @@ export default function Home() {
   const [selectedLesson, setSelectedLesson] = useState<any>(null);
   const [showLessonIntro, setShowLessonIntro] = useState(false);
   const [showInteractiveLesson, setShowInteractiveLesson] = useState(false);
-  const { progress, updateProgress, resetProgress, saveProgress } = useProgress();
+  const [showQuickTest, setShowQuickTest] = useState(false);
+  const [viewMode, setViewMode] = useState<'list' | 'map'>('map');
+  const { progress, updateProgress, resetProgress } = useProgress();
   
   const courses = getCourses();
   const activeCourse = courses.find(course => course.id === activeTab);
@@ -59,7 +65,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-neutral-50">
-      <Header progress={progress} resetProgress={resetProgress} setProgress={saveProgress} />
+      <Header progress={progress} resetProgress={resetProgress} />
       
       <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <ProgressOverview progress={progress} courses={courses} />
@@ -76,24 +82,52 @@ export default function Home() {
               <h3 className="text-xl font-bold text-neutral-900">{activeCourse?.title}</h3>
               <p className="text-neutral-600">{activeCourse?.description}</p>
             </div>
-            <div className="text-sm text-neutral-500">
-              <span>{progress.completedLessons[activeTab] || 0} of {activeCourse?.totalLessons}</span> lessons completed
+            <div className="flex items-center gap-3">
+              <Button
+                onClick={() => setShowQuickTest(true)}
+                className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white"
+              >
+                🧪 Quick Test
+              </Button>
+              <div className="flex items-center gap-2">
+                <Button
+                  variant={viewMode === 'map' ? 'default' : 'outline'}
+                  size="sm"
+                  onClick={() => setViewMode('map')}
+                >
+                  🗺️ Map
+                </Button>
+                <Button
+                  variant={viewMode === 'list' ? 'default' : 'outline'}
+                  size="sm"
+                  onClick={() => setViewMode('list')}
+                >
+                  📋 List
+                </Button>
+              </div>
             </div>
           </div>
 
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {lessons.map((lesson, index) => (
-              <LessonCard
-                key={lesson.id}
-                lesson={lesson}
-                isCompleted={progress.completedLessons[activeTab] > index}
-                isActive={progress.completedLessons[activeTab] === index}
-                isLocked={progress.completedLessons[activeTab] < index}
-                onStart={() => handleStartLesson(lesson.id)}
-                score={progress.scores[lesson.id]}
-              />
-            ))}
-          </div>
+          {viewMode === 'map' ? (
+            <LevelMap
+              progress={progress}
+              onLessonComplete={handleCompleteLesson}
+            />
+          ) : (
+            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+              {lessons.map((lesson, index) => (
+                <LessonCard
+                  key={lesson.id}
+                  lesson={lesson}
+                  isCompleted={progress.completedLessons[activeTab] > index}
+                  isActive={progress.completedLessons[activeTab] === index}
+                  isLocked={progress.completedLessons[activeTab] < index}
+                  onStart={() => handleStartLesson(lesson.id)}
+                  score={progress.scores[lesson.id]}
+                />
+              ))}
+            </div>
+          )}
         </section>
 
         <LessonPreview onComplete={handleCompleteLesson} />
