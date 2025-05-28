@@ -101,8 +101,8 @@ export default function InteractiveLesson({ lessonId, title, onComplete, onClose
   };
 
   return (
-    <div className="fixed inset-0 bg-gradient-to-br from-blue-600 via-purple-600 to-indigo-600 flex items-center justify-center p-4 z-50">
-      <Card className="w-full max-w-5xl max-h-[95vh] overflow-y-auto glass dark:glass-dark backdrop-blur-xl shadow-2xl bounce-in border-2 border-white/20">
+    <div className="fixed inset-0 bg-gradient-to-br from-blue-600 via-purple-600 to-indigo-600 flex items-center justify-center p-4 z-50 overflow-hidden">
+      <Card className="w-full max-w-5xl h-[95vh] flex flex-col glass dark:glass-dark backdrop-blur-xl shadow-2xl bounce-in border-2 border-white/20">
         <CardContent className="p-0">
           <div className="bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 p-8 text-white shadow-xl">
             <div className="flex items-center justify-between mb-6">
@@ -138,7 +138,7 @@ export default function InteractiveLesson({ lessonId, title, onComplete, onClose
             </div>
           </div>
 
-          <div className="p-8 bg-gradient-to-br from-white via-blue-50 to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
+          <div className="flex-1 overflow-y-auto p-8 bg-gradient-to-br from-white via-blue-50 to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
             <div className="flex items-center justify-between mb-8 slide-up">
               <div className="flex items-center gap-3">
                 <span className="text-2xl">🧠</span>
