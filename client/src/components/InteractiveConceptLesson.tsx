@@ -171,33 +171,38 @@ export default function InteractiveConceptLesson({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-gradient-to-br from-blue-600 via-purple-600 to-green-600 z-50 overflow-hidden">
+    <div className="fixed inset-0 bg-gradient-to-br from-blue-600 via-purple-600 to-indigo-600 z-50 overflow-hidden">
       {/* Top Bar */}
-      <div className="bg-white/95 backdrop-blur-lg border-b border-gray-200 p-4">
+      <div className="bg-white/98 dark:bg-gray-900/98 backdrop-blur-xl border-b-2 border-white/20 p-6 shadow-2xl">
         <div className="max-w-4xl mx-auto flex items-center justify-between">
           <Button
             variant="ghost"
             onClick={onClose}
-            className="rounded-full p-3 hover:bg-gray-100"
+            className="rounded-full p-4 hover:bg-red-50 hover:text-red-600 dark:hover:bg-red-900/20 transition-all duration-300 hover:scale-110 group"
           >
-            <span className="text-xl">✕</span>
+            <span className="text-2xl group-hover:wiggle">✕</span>
           </Button>
           
-          <div className="flex-1 mx-6">
-            <Progress value={progress} className="h-3 bg-gray-200" />
-            <div className="flex justify-between text-xs text-gray-600 mt-1">
-              <span>Question {currentQuestion + 1} of {lessonData.questions.length}</span>
-              <span>{Math.round(progress)}% Complete</span>
+          <div className="flex-1 mx-8">
+            <Progress value={progress} className="h-4 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden" />
+            <div className="flex justify-between text-sm font-semibold text-gray-700 dark:text-gray-300 mt-2">
+              <span className="flex items-center gap-2">
+                <span className="text-lg">📖</span>
+                Question {currentQuestion + 1} of {lessonData.questions.length}
+              </span>
+              <span className="bg-gradient-to-r from-green-500 to-blue-500 bg-clip-text text-transparent">
+                {Math.round(progress)}% Complete
+              </span>
             </div>
           </div>
 
-          <div className="flex items-center gap-4">
-            <div className="flex items-center gap-1">
+          <div className="flex items-center gap-6">
+            <div className="flex items-center gap-2 bg-red-50 dark:bg-red-900/20 px-4 py-2 rounded-full">
               {[...Array(5)].map((_, i) => (
-                <span key={i} className={`text-xl ${i < hearts ? '❤️' : '🤍'}`} />
+                <span key={i} className={`text-2xl transition-all duration-300 ${i < hearts ? '❤️ bounce-in' : '🤍'}`} />
               ))}
             </div>
-            <Badge className="bg-orange-100 text-orange-700">
+            <Badge className="bg-gradient-to-r from-orange-500 to-red-500 text-white px-4 py-2 rounded-full shadow-lg pulse-glow">
               🔥 Streak: {streak}
             </Badge>
           </div>
@@ -206,80 +211,96 @@ export default function InteractiveConceptLesson({
 
       {/* Main Content */}
       <div className="flex-1 flex items-center justify-center p-8">
-        <Card className="w-full max-w-4xl bg-white/98 backdrop-blur-lg shadow-2xl rounded-3xl overflow-hidden">
-          <CardContent className="p-8">
+        <Card className="w-full max-w-5xl glass dark:glass-dark backdrop-blur-xl shadow-2xl rounded-3xl overflow-hidden bounce-in border-2 border-white/20">
+          <CardContent className="p-10">
             {!showExplanation ? (
-              <div className="space-y-8">
+              <div className="space-y-10">
                 {/* Question */}
-                <div className="text-center">
-                  <h2 className="text-3xl font-bold text-gray-900 mb-4">
+                <div className="text-center slide-up">
+                  <div className="mb-6">
+                    <span className="text-6xl float-animation">🧠</span>
+                  </div>
+                  <h2 className="text-4xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-gray-200 bg-clip-text text-transparent mb-6 leading-tight">
                     {currentQ.question}
                   </h2>
-                  <Badge variant="secondary" className="bg-blue-100 text-blue-700">
-                    {currentQ.type.replace('-', ' ').toUpperCase()}
+                  <Badge variant="secondary" className="bg-gradient-to-r from-blue-500 to-purple-500 text-white px-6 py-2 rounded-full text-sm font-semibold shadow-lg">
+                    {currentQ.type.replace('-', ' ').toUpperCase()} QUESTION
                   </Badge>
                 </div>
 
                 {/* Question Content */}
                 <div className="min-h-[300px] flex items-center justify-center">
                   {currentQ.type === 'multiple-choice' && (
-                    <div className="grid gap-4 w-full max-w-2xl">
+                    <div className="grid gap-6 w-full max-w-3xl">
                       {currentQ.options?.map((option, index) => (
                         <Button
                           key={index}
                           variant={selectedAnswer === option ? "default" : "outline"}
-                          className={`p-6 text-left justify-start text-lg rounded-2xl border-2 transition-all duration-200 ${
+                          className={`p-8 text-left justify-start text-lg rounded-3xl border-3 transition-all duration-500 hover-lift group ${
                             selectedAnswer === option 
-                              ? 'bg-blue-600 text-white border-blue-600 transform scale-105' 
-                              : 'hover:border-blue-400 hover:bg-blue-50'
+                              ? 'bg-gradient-to-r from-green-500 to-blue-500 text-white border-green-500 transform scale-105 shadow-2xl pulse-glow' 
+                              : 'hover:border-blue-400 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 dark:hover:from-gray-700 dark:hover:to-gray-600 border-gray-300 dark:border-gray-600 hover:scale-102'
                           }`}
                           onClick={() => handleAnswerSelect(option)}
+                          style={{animationDelay: `${index * 0.1}s`}}
                         >
-                          <span className="mr-4 text-xl">
-                            {String.fromCharCode(65 + index)}
-                          </span>
-                          {option}
+                          <div className="flex items-center gap-4 w-full">
+                            <span className={`w-10 h-10 rounded-full flex items-center justify-center text-xl font-bold transition-all duration-300 ${
+                              selectedAnswer === option 
+                                ? 'bg-white/20 text-white' 
+                                : 'bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400 group-hover:scale-110'
+                            }`}>
+                              {String.fromCharCode(65 + index)}
+                            </span>
+                            <span className="flex-1 leading-relaxed">{option}</span>
+                          </div>
                         </Button>
                       ))}
                     </div>
                   )}
 
                   {currentQ.type === 'fill-blank' && (
-                    <div className="text-center space-y-6">
+                    <div className="text-center space-y-8 slide-up">
+                      <div className="mb-4">
+                        <span className="text-5xl float-animation">✍️</span>
+                      </div>
                       <Input
                         type="text"
-                        placeholder="Enter your answer..."
+                        placeholder="Type your answer here..."
                         value={selectedAnswer}
                         onChange={(e) => setSelectedAnswer(e.target.value)}
-                        className="text-2xl text-center p-6 border-2 border-gray-300 rounded-2xl focus:border-blue-500"
+                        className="text-3xl text-center p-8 border-3 border-gray-300 dark:border-gray-600 rounded-3xl focus:border-blue-500 dark:focus:border-blue-400 bg-white dark:bg-gray-800 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 max-w-2xl mx-auto"
                       />
+                      <p className="text-gray-600 dark:text-gray-400 text-lg">
+                        💡 Take your time and think carefully!
+                      </p>
                     </div>
                   )}
 
                   {currentQ.type === 'simulation' && (
-                    <div className="text-center space-y-6 w-full">
-                      <div className="bg-gray-100 rounded-2xl p-8 border-2 border-dashed border-gray-300">
-                        <div className="text-6xl mb-4">🏀</div>
-                        <p className="text-gray-600 mb-4">Interactive Physics Simulation</p>
-                        <div className="grid grid-cols-2 gap-4 max-w-md mx-auto">
-                          <div>
-                            <label className="block text-sm font-medium mb-2">Initial Velocity (m/s)</label>
-                            <Input type="number" placeholder="5" className="text-center" />
+                    <div className="text-center space-y-8 w-full bounce-in">
+                      <div className="bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-800 dark:to-gray-700 rounded-3xl p-10 border-3 border-dashed border-blue-300 dark:border-blue-600 hover:border-blue-500 transition-all duration-300 hover:scale-105 group">
+                        <div className="text-8xl mb-6 float-animation group-hover:wiggle">🏀</div>
+                        <h3 className="text-2xl font-bold text-gray-800 dark:text-white mb-6">Interactive Physics Simulation</h3>
+                        <div className="grid grid-cols-2 gap-6 max-w-lg mx-auto mb-8">
+                          <div className="bg-white dark:bg-gray-800 p-4 rounded-2xl shadow-lg">
+                            <label className="block text-sm font-bold mb-3 text-blue-600 dark:text-blue-400">Initial Velocity (m/s)</label>
+                            <Input type="number" placeholder="5" className="text-center text-xl p-3 border-2 rounded-xl" />
                           </div>
-                          <div>
-                            <label className="block text-sm font-medium mb-2">Acceleration (m/s²)</label>
-                            <Input type="number" placeholder="2" className="text-center" />
+                          <div className="bg-white dark:bg-gray-800 p-4 rounded-2xl shadow-lg">
+                            <label className="block text-sm font-bold mb-3 text-purple-600 dark:text-purple-400">Acceleration (m/s²)</label>
+                            <Input type="number" placeholder="2" className="text-center text-xl p-3 border-2 rounded-xl" />
                           </div>
                         </div>
-                        <Button className="mt-4 bg-green-600 hover:bg-green-700">
+                        <Button className="bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 text-white px-8 py-4 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-110 text-lg font-semibold">
                           🚀 Run Simulation
                         </Button>
                       </div>
                       <Input
-                        placeholder="Enter your values (e.g., v₀=5, a=2)"
+                        placeholder="Enter your calculated values (e.g., v₀=5, a=2)"
                         value={selectedAnswer}
                         onChange={(e) => setSelectedAnswer(e.target.value)}
-                        className="text-center p-4 border-2 border-gray-300 rounded-xl"
+                        className="text-center p-6 border-3 border-gray-300 dark:border-gray-600 rounded-2xl text-lg max-w-2xl mx-auto shadow-lg hover:shadow-xl transition-all duration-300"
                       />
                     </div>
                   )}
