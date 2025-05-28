@@ -13,6 +13,7 @@ import ExamSystem from "@/components/ExamSystem";
 import QuickTest from "@/components/QuickTest";
 import FloatingAIButton from "@/components/FloatingAIButton";
 import EducationalFooter from "@/components/EducationalFooter";
+import Visual3DCourses from "@/components/Visual3DCourses";
 import { Button } from "@/components/ui/button";
 import { useProgress } from "@/hooks/useProgress";
 import { getCourses, getLessonsByCourse } from "@/lib/lessons";
