@@ -140,13 +140,17 @@ export default function Visual3DCourses({ isOpen, onClose, onComplete }: Visual3
   useEffect(() => {
     if (currentConcept && canvasRef.current) {
       setParameters(currentConcept.parameters);
+      setTime(0);
+      setIsPlaying(true); // Auto-start animations when selecting a concept
       drawVisualization();
     }
   }, [currentConcept]);
 
   useEffect(() => {
     if (isPlaying && currentConcept) {
-      animate();
+      lastTimeRef.current = 0;
+      const startAnimation = (timestamp: number) => animate(timestamp);
+      animationRef.current = requestAnimationFrame(startAnimation);
     } else {
       if (animationRef.current) {
         cancelAnimationFrame(animationRef.current);
@@ -157,7 +161,7 @@ export default function Visual3DCourses({ isOpen, onClose, onComplete }: Visual3
         cancelAnimationFrame(animationRef.current);
       }
     };
-  }, [isPlaying, animationSpeed[0], parameters]);
+  }, [isPlaying, animationSpeed[0], parameters, time]);
 
   const animate = (currentTime: number) => {
     if (lastTimeRef.current === 0) lastTimeRef.current = currentTime;
