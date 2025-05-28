@@ -121,7 +121,7 @@ export default function Header({ progress, resetProgress, setProgress }: HeaderP
               </Button>
 
               <div className="hidden sm:flex items-center space-x-2 bg-gray-100 dark:bg-gray-700 px-3 py-1 rounded-full">
-                <i className="fas fa-fire text-amber-500 text-sm"></i>
+                <i className="fas fa-fire text-emerald-500 text-sm"></i>
                 <span className="text-sm font-medium text-neutral-700 dark:text-gray-300">{progress.streak} day streak</span>
               </div>
 
