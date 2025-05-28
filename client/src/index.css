@@ -93,60 +93,82 @@
   border: 1px solid rgba(255, 255, 255, 0.125);
 }
 
-/* Color Theory: Triadic Harmony - Green, Blue, Orange */
+/* Professional Design System - Enterprise Grade */
 :root {
-  /* Light Mode - High Contrast Accessible Colors */
-  --bg-primary: 0 0% 98%; /* Pure white background */
-  --bg-secondary: 210 40% 92%; /* Light blue-gray */
-  --text-primary: 0 0% 10%; /* Deep black text */
-  --text-secondary: 0 0% 40%; /* Medium gray text */
+  /* Premium Background System */
+  --bg-primary: 255 255 255; /* Pure white */
+  --bg-secondary: 248 250 252; /* Slate-50 */
+  --bg-tertiary: 241 245 249; /* Slate-100 */
+  --bg-card: 255 255 255; /* White cards */
+  --bg-elevated: 255 255 255; /* Elevated surfaces */
   
-  /* Primary Triadic Colors */
-  --color-green: 150 80% 35%; /* Forest green #0d9488 */
-  --color-blue: 210 90% 50%; /* Ocean blue #1e40af */
-  --color-orange: 25 95% 55%; /* Vibrant orange #ea580c */
+  /* Professional Text Hierarchy */
+  --text-primary: 15 23 42; /* Slate-900 */
+  --text-secondary: 51 65 85; /* Slate-700 */
+  --text-tertiary: 100 116 139; /* Slate-500 */
+  --text-muted: 148 163 184; /* Slate-400 */
   
-  /* Light variants */
-  --color-green-light: 150 60% 65%; /* Light green */
-  --color-blue-light: 210 70% 70%; /* Light blue */
-  --color-orange-light: 25 85% 75%; /* Light orange */
+  /* Beautiful Green, Blue, Purple Palette */
+  --primary: 59 130 246; /* Blue-500 */
+  --primary-foreground: 255 255 255;
+  --secondary: 34 197 94; /* Green-500 */
+  --secondary-foreground: 255 255 255;
+  --accent: 147 51 234; /* Purple-500 */
+  --accent-foreground: 255 255 255;
+  --success: 16 185 129; /* Emerald-500 */
+  --success-foreground: 255 255 255;
+  --info: 14 165 233; /* Sky-500 */
+  --info-foreground: 255 255 255;
+  --violet: 139 92 246; /* Violet-500 */
+  --violet-foreground: 255 255 255;
   
-  /* Dark variants */
-  --color-green-dark: 150 100% 25%; /* Dark green */
-  --color-blue-dark: 210 100% 35%; /* Dark blue */
-  --color-orange-dark: 25 100% 40%; /* Dark orange */
+  /* Professional Borders */
+  --border: 226 232 240; /* Slate-200 */
+  --border-muted: 241 245 249; /* Slate-100 */
+  --ring: 37 99 235; /* Blue-600 */
+  
+  /* Shadows & Effects */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
 }
 
 .dark {
-  /* Dark Mode - Triadic Color Theory */
-  --bg-primary: 0 0% 8%; /* Deep black background */
-  --bg-secondary: 210 20% 15%; /* Dark blue-gray */
-  --text-primary: 0 0% 95%; /* Pure white text */
-  --text-secondary: 0 0% 70%; /* Light gray text */
+  /* Professional Dark Mode */
+  --bg-primary: 15 23 42; /* Slate-900 */
+  --bg-secondary: 30 41 59; /* Slate-800 */
+  --bg-tertiary: 51 65 85; /* Slate-700 */
+  --bg-card: 30 41 59; /* Slate-800 */
+  --bg-elevated: 51 65 85; /* Slate-700 */
   
-  /* Primary Triadic Colors (Brightened for dark mode) */
-  --color-green: 150 70% 55%; /* Bright green */
-  --color-blue: 210 80% 65%; /* Bright blue */
-  --color-orange: 25 90% 65%; /* Bright orange */
+  /* Dark Mode Text Hierarchy */
+  --text-primary: 248 250 252; /* Slate-50 */
+  --text-secondary: 226 232 240; /* Slate-200 */
+  --text-tertiary: 203 213 225; /* Slate-300 */
+  --text-muted: 148 163 184; /* Slate-400 */
   
-  /* Light variants (extra bright for dark mode) */
-  --color-green-light: 150 60% 75%; /* Very light green */
-  --color-blue-light: 210 70% 80%; /* Very light blue */
-  --color-orange-light: 25 85% 80%; /* Very light orange */
-  
-  /* Dark variants (medium brightness for contrast) */
-  --color-green-dark: 150 80% 45%; /* Medium green */
-  --color-blue-dark: 210 90% 55%; /* Medium blue */
-  --color-orange-dark: 25 95% 55%; /* Medium orange */
+  /* Dark Mode Borders */
+  --border: 71 85 105; /* Slate-600 */
+  --border-muted: 51 65 85; /* Slate-700 */
 }
 
-/* Enhanced Typography & Backgrounds */
+/* Professional Typography & Layout System */
 body {
-  background: linear-gradient(135deg, hsl(var(--color-green)) 0%, hsl(var(--color-blue)) 50%, hsl(var(--color-orange)) 100%);
+  background: linear-gradient(135deg, 
+    rgb(var(--bg-primary)) 0%, 
+    rgb(var(--bg-secondary)) 50%, 
+    rgb(var(--bg-tertiary)) 100%);
   background-attachment: fixed;
-  color: hsl(var(--text-primary));
-  font-family: 'Inter', sans-serif;
-  transition: all 0.3s ease;
+  color: rgb(var(--text-primary));
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  font-feature-settings: 'cv11', 'ss01';
+  font-variation-settings: 'opsz' 32;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 html {
@@ -177,11 +199,39 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
 }
 
-/* PROFESSIONAL DESIGN SYSTEM */
+/* ENTERPRISE DESIGN SYSTEM */
 * {
-  color: hsl(var(--text-primary));
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
+
+/* Professional Typography Scale */
+.text-xs { font-size: 0.75rem; line-height: 1rem; }
+.text-sm { font-size: 0.875rem; line-height: 1.25rem; }
+.text-base { font-size: 1rem; line-height: 1.5rem; }
+.text-lg { font-size: 1.125rem; line-height: 1.75rem; }
+.text-xl { font-size: 1.25rem; line-height: 1.75rem; }
+.text-2xl { font-size: 1.5rem; line-height: 2rem; }
+.text-3xl { font-size: 1.875rem; line-height: 2.25rem; }
+.text-4xl { font-size: 2.25rem; line-height: 2.5rem; }
+.text-5xl { font-size: 3rem; line-height: 1; }
+
+/* Professional Font Weights */
+.font-light { font-weight: 300; }
+.font-normal { font-weight: 400; }
+.font-medium { font-weight: 500; }
+.font-semibold { font-weight: 600; }
+.font-bold { font-weight: 700; }
+.font-extrabold { font-weight: 800; }
+
+/* Professional Spacing System */
+.space-y-1 > * + * { margin-top: 0.25rem; }
+.space-y-2 > * + * { margin-top: 0.5rem; }
+.space-y-3 > * + * { margin-top: 0.75rem; }
+.space-y-4 > * + * { margin-top: 1rem; }
+.space-y-6 > * + * { margin-top: 1.5rem; }
+.space-y-8 > * + * { margin-top: 2rem; }
 
 /* Enhanced Color Utility Classes */
 .bg-primary { background: hsl(var(--bg-primary)) !important; color: hsl(var(--text-primary)) !important; }
@@ -317,61 +367,69 @@ input::placeholder, textarea::placeholder {
   border-color: #14b8a6;
 }
 
-/* Color Theory Triadic Button Styles */
-.btn-green {
-  background: linear-gradient(135deg, hsl(var(--color-green-dark)) 0%, hsl(var(--color-green)) 50%, hsl(var(--color-green-light)) 100%);
-  color: white !important;
-  border: 2px solid hsl(var(--color-green-dark));
-  font-weight: 700;
-  transition: all 0.3s ease;
+/* ENTERPRISE BUTTON SYSTEM */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  outline: none;
+  border: 1px solid transparent;
+  cursor: pointer;
 }
 
-.btn-green:hover {
-  background: linear-gradient(135deg, hsl(var(--color-green-dark)) 0%, hsl(var(--color-green-dark)) 100%);
-  transform: translateY(-3px);
-  box-shadow: 0 10px 30px hsla(var(--color-green), 0.5);
+.btn-sm { height: 2.25rem; padding: 0 0.75rem; font-size: 0.75rem; }
+.btn-md { height: 2.5rem; padding: 0 1rem; }
+.btn-lg { height: 2.75rem; padding: 0 2rem; font-size: 1rem; }
+
+.btn-primary {
+  background: rgb(var(--primary));
+  color: rgb(var(--primary-foreground));
+  box-shadow: var(--shadow-sm);
 }
 
-.btn-blue {
-  background: linear-gradient(135deg, hsl(var(--color-blue-dark)) 0%, hsl(var(--color-blue)) 50%, hsl(var(--color-blue-light)) 100%);
-  color: white !important;
-  border: 2px solid hsl(var(--color-blue-dark));
-  font-weight: 700;
-  transition: all 0.3s ease;
+.btn-primary:hover {
+  background: rgb(var(--primary) / 0.9);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
 }
 
-.btn-blue:hover {
-  background: linear-gradient(135deg, hsl(var(--color-blue-dark)) 0%, hsl(var(--color-blue-dark)) 100%);
-  transform: translateY(-3px);
-  box-shadow: 0 10px 30px hsla(var(--color-blue), 0.5);
+.btn-secondary {
+  background: rgb(var(--secondary));
+  color: rgb(var(--secondary-foreground));
+  box-shadow: var(--shadow-sm);
 }
 
-.btn-orange {
-  background: linear-gradient(135deg, hsl(var(--color-orange-dark)) 0%, hsl(var(--color-orange)) 50%, hsl(var(--color-orange-light)) 100%);
-  color: white !important;
-  border: 2px solid hsl(var(--color-orange-dark));
-  font-weight: 700;
-  transition: all 0.3s ease;
+.btn-secondary:hover {
+  background: rgb(var(--secondary) / 0.9);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
 }
 
-.btn-orange:hover {
-  background: linear-gradient(135deg, hsl(var(--color-orange-dark)) 0%, hsl(var(--color-orange-dark)) 100%);
-  transform: translateY(-3px);
-  box-shadow: 0 10px 30px hsla(var(--color-orange), 0.5);
+.btn-outline {
+  border: 1px solid rgb(var(--border));
+  background: rgb(var(--bg-card));
+  color: rgb(var(--text-primary));
 }
 
-.btn-triadic {
-  background: linear-gradient(135deg, hsl(var(--color-green)) 0%, hsl(var(--color-blue)) 50%, hsl(var(--color-orange)) 100%);
-  color: white !important;
-  border: 2px solid hsl(var(--color-green-dark));
-  font-weight: 700;
-  transition: all 0.3s ease;
+.btn-outline:hover {
+  background: rgb(var(--bg-secondary));
+  border-color: rgb(var(--primary));
+  box-shadow: var(--shadow-sm);
 }
 
-.btn-triadic:hover {
-  background: linear-gradient(135deg, hsl(var(--color-green-dark)) 0%, hsl(var(--color-blue-dark)) 50%, hsl(var(--color-orange-dark)) 100%);
-  transform: translateY(-3px);
-  box-shadow: 0 10px 30px hsla(var(--color-blue), 0.5);
+.btn-ghost {
+  background: transparent;
+  color: rgb(var(--text-primary));
+}
+
+.btn-ghost:hover {
+  background: rgb(var(--bg-secondary));
+  color: rgb(var(--text-primary));
 }
 
 /* Fix dropdown and select visibility */
