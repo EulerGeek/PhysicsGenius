@@ -14,6 +14,8 @@ interface FloatingAIButtonProps {
 export default function FloatingAIButton({ currentContext }: FloatingAIButtonProps) {
   const [showAITutor, setShowAITutor] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
+  
+  console.log('FloatingAIButton render - showAITutor:', showAITutor);
 
   const defaultContext = {
     courseId: 'general',
@@ -39,7 +41,7 @@ export default function FloatingAIButton({ currentContext }: FloatingAIButtonPro
     <>
       {/* Floating AI Button */}
       <div 
-        className="fixed bottom-6 right-6 z-40"
+        className="fixed bottom-6 right-6 z-50"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
@@ -54,10 +56,15 @@ export default function FloatingAIButton({ currentContext }: FloatingAIButtonPro
 
           {/* AI Button */}
           <Button
-            onClick={() => setShowAITutor(true)}
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              console.log('AI Button clicked!');
+              setShowAITutor(true);
+            }}
             className={`w-18 h-18 rounded-full bg-gradient-to-r from-purple-600 via-blue-600 to-indigo-600 hover:from-purple-700 hover:via-blue-700 hover:to-indigo-700 text-white shadow-2xl transition-all duration-500 ${
               isHovered ? 'scale-125 shadow-purple-500/40 hover-glow' : 'scale-100 float-animation'
-            } flex items-center justify-center relative overflow-hidden group`}
+            } flex items-center justify-center relative overflow-hidden group cursor-pointer z-50`}
           >
             {/* Animated Background */}
             <div className="absolute inset-0 bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-full"></div>
