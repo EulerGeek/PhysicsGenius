@@ -20,7 +20,7 @@ interface Visual3DConcept {
   id: string;
   title: string;
   description: string;
-  visualization: 'pendulum' | 'wave' | 'orbit' | 'field' | 'particle' | 'spring';
+  visualization: 'pendulum' | 'wave' | 'orbit' | 'field' | 'particle' | 'spring' | 'collision' | 'fluid';
   parameters: Record<string, number>;
   explanation: string;
 }
@@ -182,7 +182,12 @@ export default function Visual3DCourses({ isOpen, onClose, onComplete }: Visual3
 
     // Clear canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = '#f8fafc';
+    // Create beautiful gradient background
+    const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+    gradient.addColorStop(0, '#1a1a2e');
+    gradient.addColorStop(0.5, '#16213e');
+    gradient.addColorStop(1, '#0f3460');
+    ctx.fillStyle = gradient;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     const centerX = canvas.width / 2;
@@ -213,29 +218,60 @@ export default function Visual3DCourses({ isOpen, onClose, onComplete }: Visual3
 
   const drawPendulum = (ctx: CanvasRenderingContext2D, centerX: number, centerY: number, time: number) => {
     const length = parameters.length * 100;
-    const angle = parameters.angle * Math.PI / 180 * Math.cos(time * Math.sqrt(parameters.gravity / parameters.length));
+    const gravity = parameters.gravity || 9.81;
+    const damping = 0.995; // Realistic energy loss
+    
+    // Advanced physics with damping
+    const frequency = Math.sqrt(gravity / (parameters.length * 100));
+    const amplitude = parameters.angle * Math.PI / 180;
+    const angle = amplitude * Math.cos(time * frequency) * Math.pow(damping, time);
     
     const bobX = centerX + length * Math.sin(angle);
     const bobY = centerY + length * Math.cos(angle);
 
-    // Draw pivot
-    ctx.fillStyle = '#374151';
+    // Draw motion trail with fade effect
+    ctx.globalAlpha = 0.2;
+    for (let i = 1; i <= 8; i++) {
+      const trailTime = time - i * 0.05;
+      const trailAngle = amplitude * Math.cos(trailTime * frequency) * Math.pow(damping, trailTime);
+      const trailX = centerX + length * Math.sin(trailAngle);
+      const trailY = centerY + length * Math.cos(trailAngle);
+      
+      ctx.fillStyle = `rgba(220, 38, 38, ${0.2 - i * 0.025})`;
+      ctx.beginPath();
+      ctx.arc(trailX, trailY, 12, 0, 2 * Math.PI);
+      ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+
+    // Draw pivot with metallic effect
+    const pivotGradient = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, 12);
+    pivotGradient.addColorStop(0, '#fbbf24');
+    pivotGradient.addColorStop(0.7, '#f59e0b');
+    pivotGradient.addColorStop(1, '#d97706');
+    ctx.fillStyle = pivotGradient;
     ctx.beginPath();
-    ctx.arc(centerX, centerY, 8, 0, 2 * Math.PI);
+    ctx.arc(centerX, centerY, 12, 0, 2 * Math.PI);
     ctx.fill();
 
-    // Draw string
-    ctx.strokeStyle = '#6b7280';
-    ctx.lineWidth = 2;
+    // Draw string with realistic physics tension
+    ctx.strokeStyle = '#e5e7eb';
+    ctx.lineWidth = 3;
+    ctx.lineCap = 'round';
     ctx.beginPath();
     ctx.moveTo(centerX, centerY);
     ctx.lineTo(bobX, bobY);
     ctx.stroke();
 
-    // Draw bob
-    ctx.fillStyle = '#dc2626';
+    // Draw bob with 3D gradient and mass-based size
+    const bobRadius = 15 * Math.sqrt(parameters.mass);
+    const bobGradient = ctx.createRadialGradient(bobX - 5, bobY - 5, 0, bobX, bobY, bobRadius);
+    bobGradient.addColorStop(0, '#fca5a5');
+    bobGradient.addColorStop(0.6, '#dc2626');
+    bobGradient.addColorStop(1, '#991b1b');
+    ctx.fillStyle = bobGradient;
     ctx.beginPath();
-    ctx.arc(bobX, bobY, 15 * Math.sqrt(parameters.mass), 0, 2 * Math.PI);
+    ctx.arc(bobX, bobY, bobRadius, 0, 2 * Math.PI);
     ctx.fill();
 
     // Draw angle arc
@@ -330,33 +366,78 @@ export default function Visual3DCourses({ isOpen, onClose, onComplete }: Visual3
     const wavelength = parameters.wavelength * 50;
     const amplitude = parameters.amplitude * 30;
     const frequency = parameters.frequency;
+    const speed = 2;
 
-    ctx.strokeStyle = '#3b82f6';
+    // Create multiple wave layers for depth and interference
+    const waves = [
+      { color: '#60a5fa', alpha: 0.9, phase: 0 },
+      { color: '#3b82f6', alpha: 0.7, phase: 0.2 },
+      { color: '#1d4ed8', alpha: 0.5, phase: 0.4 }
+    ];
+
+    waves.forEach((wave, index) => {
+      ctx.globalAlpha = wave.alpha;
+      ctx.strokeStyle = wave.color;
+      ctx.lineWidth = 4 - index;
+      ctx.beginPath();
+
+      for (let x = 0; x < 600; x += 1) {
+        const y = centerY + amplitude * Math.sin(2 * Math.PI * (x / wavelength - frequency * time * speed) + wave.phase);
+        if (x === 0) {
+          ctx.moveTo(x, y);
+        } else {
+          ctx.lineTo(x, y);
+        }
+      }
+      ctx.stroke();
+    });
+    ctx.globalAlpha = 1;
+
+    // Draw animated wave particles
+    for (let x = 0; x < 600; x += 30) {
+      const y = centerY + amplitude * Math.sin(2 * Math.PI * (x / wavelength - frequency * time * speed));
+      const particleSize = 4 + 2 * Math.sin(time * 3 + x * 0.1);
+      
+      const particleGradient = ctx.createRadialGradient(x, y, 0, x, y, particleSize);
+      particleGradient.addColorStop(0, '#fbbf24');
+      particleGradient.addColorStop(0.5, '#f59e0b');
+      particleGradient.addColorStop(1, 'rgba(245, 158, 11, 0)');
+      
+      ctx.fillStyle = particleGradient;
+      ctx.beginPath();
+      ctx.arc(x, y, particleSize, 0, 2 * Math.PI);
+      ctx.fill();
+    }
+
+    // Draw dynamic wavelength indicator
+    const indicatorY = centerY + amplitude + 30;
+    ctx.strokeStyle = '#f59e0b';
     ctx.lineWidth = 3;
     ctx.beginPath();
-
-    for (let x = 0; x < 600; x += 2) {
-      const y = centerY + amplitude * Math.sin(2 * Math.PI * (x / wavelength - frequency * time));
-      if (x === 0) {
-        ctx.moveTo(x, y);
-      } else {
-        ctx.lineTo(x, y);
-      }
-    }
+    ctx.moveTo(50, indicatorY);
+    ctx.lineTo(50 + wavelength, indicatorY);
     ctx.stroke();
 
-    // Draw wavelength indicator
-    ctx.strokeStyle = '#f59e0b';
-    ctx.lineWidth = 2;
+    // Add arrow heads
+    ctx.fillStyle = '#f59e0b';
     ctx.beginPath();
-    ctx.moveTo(50, centerY + amplitude + 30);
-    ctx.lineTo(50 + wavelength, centerY + amplitude + 30);
-    ctx.stroke();
+    ctx.moveTo(50, indicatorY);
+    ctx.lineTo(45, indicatorY - 5);
+    ctx.lineTo(45, indicatorY + 5);
+    ctx.fill();
+    ctx.beginPath();
+    ctx.moveTo(50 + wavelength, indicatorY);
+    ctx.lineTo(55 + wavelength, indicatorY - 5);
+    ctx.lineTo(55 + wavelength, indicatorY + 5);
+    ctx.fill();
 
-    // Wavelength label
-    ctx.fillStyle = '#374151';
-    ctx.font = '14px sans-serif';
-    ctx.fillText('λ', 50 + wavelength/2, centerY + amplitude + 50);
+    // Enhanced wavelength label with glow effect
+    ctx.shadowColor = '#fbbf24';
+    ctx.shadowBlur = 10;
+    ctx.fillStyle = '#1f2937';
+    ctx.font = 'bold 16px sans-serif';
+    ctx.fillText('λ = ' + wavelength.toFixed(0) + 'px', 50 + wavelength/2 - 30, centerY + amplitude + 60);
+    ctx.shadowBlur = 0;
   };
 
   const drawElectricField = (ctx: CanvasRenderingContext2D, centerX: number, centerY: number) => {
