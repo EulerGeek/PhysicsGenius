@@ -22,12 +22,12 @@ export interface ExamSession {
   prerequisites: string[];
 }
 
-// Classical Mechanics Placement Exam
+// Classical Mechanics Exam
 export const classicalMechanicsExam: ExamSession = {
-  id: 'classical-placement',
+  id: 'classical-exam',
   courseId: 'classical',
-  title: 'Classical Mechanics Placement Exam',
-  description: 'Demonstrate your understanding of basic physics and algebra to unlock Classical Mechanics',
+  title: 'Classical Mechanics Fundamentals',
+  description: 'Master motion, forces, and energy concepts',
   timeLimit: 30,
   passingScore: 70,
   prerequisites: [],
@@ -175,16 +175,27 @@ export const classicalMechanicsExam: ExamSession = {
   ]
 };
 
-// General Relativity Qualifying Exam
+// General Relativity Exam
 export const relativityExam: ExamSession = {
-  id: 'relativity-qualifying',
+  id: 'relativity-exam',
   courseId: 'relativity',
-  title: 'General Relativity Qualifying Exam',
-  description: 'Advanced Classical Mechanics knowledge required to unlock General Relativity',
+  title: 'General Relativity Fundamentals',
+  description: 'Advanced concepts of spacetime and gravity',
   timeLimit: 45,
   passingScore: 75,
   prerequisites: ['classical'],
   questions: [
+    {
+      id: 'gr-concept',
+      question: 'CONCEPT: General Relativity - Einstein\'s theory describing gravity as the curvature of spacetime.',
+      type: 'multiple-choice',
+      options: ['Continue to Questions'],
+      correctAnswer: 'Continue to Questions',
+      explanation: 'General relativity revolutionized our understanding of gravity, space, and time. Key concepts include spacetime curvature, time dilation, length contraction, and the equivalence principle.',
+      difficulty: 'easy',
+      topic: 'Introduction',
+      points: 0
+    },
     {
       id: 'gr-1',
       question: 'In special relativity, what happens to time as an object approaches the speed of light?',
@@ -198,39 +209,60 @@ export const relativityExam: ExamSession = {
     },
     {
       id: 'gr-2',
-      question: 'What is the rest energy of a 2 kg object? (c = 3×10⁸ m/s)',
+      question: 'What is the speed of light in a vacuum?',
       type: 'multiple-choice',
-      options: ['6×10⁸ J', '1.8×10¹⁷ J', '9×10¹⁶ J', '6×10¹⁶ J'],
-      correctAnswer: '1.8×10¹⁷ J',
-      explanation: 'Using E = mc²: E = 2 kg × (3×10⁸ m/s)² = 2 × 9×10¹⁶ = 1.8×10¹⁷ J',
+      options: ['3.0 × 10⁸ m/s', '3.0 × 10⁶ m/s', '2.99 × 10⁸ m/s', '299,792,458 m/s'],
+      correctAnswer: '299,792,458 m/s',
+      explanation: 'The speed of light in vacuum is exactly 299,792,458 m/s, a fundamental constant of nature.',
       difficulty: 'medium',
-      topic: 'Mass-Energy Equivalence',
-      points: 20
+      topic: 'Constants',
+      points: 10
     },
     {
       id: 'gr-3',
-      question: 'According to Einstein, gravity is not a force but a curvature of what?',
-      type: 'multiple-choice',
-      options: ['Space only', 'Time only', 'Spacetime', 'Matter'],
-      correctAnswer: 'Spacetime',
-      explanation: 'General relativity describes gravity as the curvature of spacetime caused by mass and energy',
+      question: 'According to Einstein\'s equivalence principle, gravitational mass equals inertial mass.',
+      type: 'true-false',
+      correctAnswer: 'true',
+      explanation: 'The equivalence principle states that gravitational and inertial mass are equivalent, leading to the geometric interpretation of gravity.',
       difficulty: 'hard',
-      topic: 'General Relativity Concepts',
-      points: 25
+      topic: 'Equivalence Principle',
+      points: 20
+    },
+    {
+      id: 'gr-4',
+      question: 'What causes gravitational time dilation?',
+      type: 'multiple-choice',
+      options: ['High velocity', 'Strong gravitational fields', 'Low temperature', 'High pressure'],
+      correctAnswer: 'Strong gravitational fields',
+      explanation: 'Gravitational time dilation occurs in strong gravitational fields, where time runs slower compared to weaker fields.',
+      difficulty: 'hard',
+      topic: 'Time Dilation',
+      points: 20
     }
   ]
 };
 
-// Quantum Mechanics Qualifying Exam
+// Quantum Mechanics Exam
 export const quantumExam: ExamSession = {
-  id: 'quantum-qualifying',
+  id: 'quantum-exam',
   courseId: 'quantum',
-  title: 'Quantum Mechanics Qualifying Exam',
-  description: 'Master both Classical and Relativistic Physics to unlock Quantum Mechanics',
-  timeLimit: 60,
-  passingScore: 80,
-  prerequisites: ['classical', 'relativity'],
+  title: 'Quantum Mechanics Fundamentals',
+  description: 'Explore the quantum world of particles and waves',
+  timeLimit: 40,
+  passingScore: 75,
+  prerequisites: ['relativity'],
   questions: [
+    {
+      id: 'qm-concept',
+      question: 'CONCEPT: Quantum Mechanics - The physics of atoms and subatomic particles, where classical physics breaks down.',
+      type: 'multiple-choice',
+      options: ['Continue to Questions'],
+      correctAnswer: 'Continue to Questions',
+      explanation: 'Quantum mechanics describes the behavior of matter and energy at atomic scales. Key principles include wave-particle duality, uncertainty principle, and quantum superposition.',
+      difficulty: 'easy',
+      topic: 'Introduction',
+      points: 0
+    },
     {
       id: 'qm-1',
       question: 'What is the energy of a photon with frequency 5×10¹⁴ Hz? (h = 6.626×10⁻³⁴ J⋅s)',
@@ -256,16 +288,27 @@ export const quantumExam: ExamSession = {
   ]
 };
 
-// Mathematics Placement Exams
+// Mathematics Exams
 export const algebraExam: ExamSession = {
-  id: 'algebra-placement',
+  id: 'algebra-exam',
   courseId: 'algebra',
-  title: 'Algebra Fundamentals Exam',
-  description: 'Test your basic algebra skills to unlock advanced mathematics',
+  title: 'Algebra Fundamentals',
+  description: 'Master basic algebraic concepts and equations',
   timeLimit: 25,
   passingScore: 65,
   prerequisites: [],
   questions: [
+    {
+      id: 'alg-concept',
+      question: 'CONCEPT: Algebra - The branch of mathematics dealing with symbols and rules for manipulating those symbols.',
+      type: 'multiple-choice',
+      options: ['Continue to Questions'],
+      correctAnswer: 'Continue to Questions',
+      explanation: 'Algebra uses letters and symbols to represent numbers and quantities in formulas and equations. Key concepts include linear equations, quadratic functions, and systems of equations.',
+      difficulty: 'easy',
+      topic: 'Introduction',
+      points: 0
+    },
     {
       id: 'alg-1',
       question: 'Solve for x: 3x + 7 = 22',
@@ -290,9 +333,9 @@ export const algebraExam: ExamSession = {
       id: 'alg-3',
       question: 'Factor completely: x² - 9',
       type: 'multiple-choice',
-      options: ['(x - 3)(x - 3)', '(x + 3)(x + 3)', '(x - 3)(x + 3)', 'Cannot be factored'],
-      correctAnswer: '(x - 3)(x + 3)',
-      explanation: 'This is a difference of squares: x² - 9 = x² - 3² = (x - 3)(x + 3)',
+      options: ['(x + 3)(x - 3)', '(x - 3)²', '(x + 3)²', 'x(x - 9)'],
+      correctAnswer: '(x + 3)(x - 3)',
+      explanation: 'This is a difference of squares: a² - b² = (a + b)(a - b), so x² - 9 = (x + 3)(x - 3)',
       difficulty: 'medium',
       topic: 'Factoring',
       points: 15
@@ -301,70 +344,93 @@ export const algebraExam: ExamSession = {
 };
 
 export const calculusExam: ExamSession = {
-  id: 'calculus-qualifying',
+  id: 'calculus-exam',
   courseId: 'calculus',
-  title: 'Calculus Readiness Exam',
-  description: 'Demonstrate algebra mastery to unlock calculus',
-  timeLimit: 40,
+  title: 'Calculus Fundamentals',
+  description: 'Master derivatives and integrals',
+  timeLimit: 35,
   passingScore: 70,
   prerequisites: ['algebra'],
   questions: [
     {
-      id: 'calc-1',
-      question: 'What is the derivative of f(x) = x³?',
+      id: 'calc-concept',
+      question: 'CONCEPT: Calculus - The mathematical study of continuous change, including derivatives and integrals.',
       type: 'multiple-choice',
-      options: ['3x²', 'x²/3', '3x', 'x⁴/4'],
-      correctAnswer: '3x²',
-      explanation: 'Using the power rule: d/dx(xⁿ) = nxⁿ⁻¹, so d/dx(x³) = 3x²',
-      difficulty: 'medium',
+      options: ['Continue to Questions'],
+      correctAnswer: 'Continue to Questions',
+      explanation: 'Calculus is fundamental to understanding rates of change (derivatives) and areas under curves (integrals). Essential for physics, engineering, and many other fields.',
+      difficulty: 'easy',
+      topic: 'Introduction',
+      points: 0
+    },
+    {
+      id: 'calc-1',
+      question: 'What is the derivative of f(x) = x²?',
+      type: 'multiple-choice',
+      options: ['x', '2x', 'x²', '2x²'],
+      correctAnswer: '2x',
+      explanation: 'Using the power rule: d/dx(xⁿ) = nxⁿ⁻¹, so d/dx(x²) = 2x¹ = 2x',
+      difficulty: 'easy',
       topic: 'Derivatives',
-      points: 15
+      points: 10
     },
     {
       id: 'calc-2',
-      question: 'Find the limit: lim(x→2) (x² - 4)/(x - 2)',
-      type: 'numerical',
-      correctAnswer: 4,
-      explanation: 'Factor: (x² - 4)/(x - 2) = (x - 2)(x + 2)/(x - 2) = x + 2. As x→2: 2 + 2 = 4',
-      difficulty: 'hard',
-      topic: 'Limits',
-      points: 25
+      question: 'The derivative represents the instantaneous rate of change.',
+      type: 'true-false',
+      correctAnswer: 'true',
+      explanation: 'Yes! The derivative at a point gives the instantaneous rate of change of the function at that point.',
+      difficulty: 'medium',
+      topic: 'Derivatives',
+      points: 15
     }
   ]
 };
 
 export const linearAlgebraExam: ExamSession = {
-  id: 'linear-algebra-qualifying',
+  id: 'linear-algebra-exam',
   courseId: 'linear-algebra',
-  title: 'Linear Algebra Placement Exam',
-  description: 'Advanced mathematics prerequisite for quantum mechanics',
-  timeLimit: 35,
-  passingScore: 75,
-  prerequisites: ['algebra', 'calculus'],
+  title: 'Linear Algebra Fundamentals',
+  description: 'Master vectors, matrices, and linear transformations',
+  timeLimit: 30,
+  passingScore: 70,
+  prerequisites: ['calculus'],
   questions: [
     {
+      id: 'la-concept',
+      question: 'CONCEPT: Linear Algebra - The study of vectors, vector spaces, and linear transformations between them.',
+      type: 'multiple-choice',
+      options: ['Continue to Questions'],
+      correctAnswer: 'Continue to Questions',
+      explanation: 'Linear algebra is essential for computer graphics, machine learning, and quantum mechanics. Key concepts include vectors, matrices, eigenvalues, and linear transformations.',
+      difficulty: 'easy',
+      topic: 'Introduction',
+      points: 0
+    },
+    {
       id: 'la-1',
-      question: 'What is the determinant of the 2×2 matrix [[3, 1], [2, 4]]?',
+      question: 'What is the dot product of vectors (2, 3) and (4, 1)?',
       type: 'numerical',
-      correctAnswer: 10,
-      explanation: 'For matrix [[a, b], [c, d]], determinant = ad - bc = 3×4 - 1×2 = 12 - 2 = 10',
-      difficulty: 'medium',
-      topic: 'Determinants',
-      points: 20
+      correctAnswer: 11,
+      explanation: 'Dot product = (2)(4) + (3)(1) = 8 + 3 = 11',
+      difficulty: 'easy',
+      topic: 'Vectors',
+      points: 10
     },
     {
       id: 'la-2',
-      question: 'Two vectors are orthogonal if their dot product equals what?',
-      type: 'numerical',
-      correctAnswer: 0,
-      explanation: 'Orthogonal vectors have a dot product of zero: a⃗ · b⃗ = 0',
-      difficulty: 'easy',
-      topic: 'Vector Operations',
+      question: 'A matrix multiplied by its inverse equals the identity matrix.',
+      type: 'true-false',
+      correctAnswer: 'true',
+      explanation: 'Yes! For an invertible matrix A, A × A⁻¹ = I (the identity matrix)',
+      difficulty: 'medium',
+      topic: 'Matrices',
       points: 15
     }
   ]
 };
 
+// Exam retrieval functions
 export const allExams = [
   classicalMechanicsExam,
   relativityExam,
@@ -374,6 +440,6 @@ export const allExams = [
   linearAlgebraExam
 ];
 
-export const getExamForCourse = (courseId: string): ExamSession | undefined => {
+export function getExamForCourse(courseId: string): ExamSession | undefined {
   return allExams.find(exam => exam.courseId === courseId);
-};
+}
