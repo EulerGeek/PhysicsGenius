@@ -160,8 +160,107 @@ h1, h2, h3, h4, h5, h6 {
 /* Enhanced Color Utility Classes */
 .bg-primary { background: hsl(var(--bg-primary)); }
 .bg-secondary { background: hsl(var(--bg-secondary)); }
-.text-primary { color: hsl(var(--text-primary)); }
-.text-secondary { color: hsl(var(--text-secondary)); }
+.text-primary { color: hsl(var(--text-primary)) !important; }
+.text-secondary { color: hsl(var(--text-secondary)) !important; }
+
+/* Fix white text visibility issues */
+.text-white { color: white !important; }
+.text-black { color: black !important; }
+.text-gray-900 { color: #111827 !important; }
+.text-gray-800 { color: #1f2937 !important; }
+.text-gray-700 { color: #374151 !important; }
+.text-gray-600 { color: #4b5563 !important; }
+.text-gray-500 { color: #6b7280 !important; }
+
+/* Ensure proper contrast for selected states */
+::selection {
+  background-color: hsl(var(--accent-blue) / 0.3);
+  color: hsl(var(--text-primary));
+}
+
+::-moz-selection {
+  background-color: hsl(var(--accent-blue) / 0.3);
+  color: hsl(var(--text-primary));
+}
+
+/* Fix button and interactive element visibility */
+button, .btn {
+  color: inherit;
+}
+
+button:focus, .btn:focus {
+  outline: 2px solid hsl(var(--accent-blue));
+  outline-offset: 2px;
+}
+
+/* Fix input field visibility */
+input, textarea, select {
+  color: hsl(var(--text-primary)) !important;
+  background: hsl(var(--bg-primary)) !important;
+}
+
+input::placeholder, textarea::placeholder {
+  color: hsl(var(--text-secondary)) !important;
+  opacity: 0.7;
+}
+
+/* Fix specific component visibility issues */
+.card-enhanced, .bg-white {
+  color: hsl(var(--text-primary)) !important;
+}
+
+.dark .card-enhanced, .dark .bg-white {
+  color: hsl(var(--text-primary)) !important;
+}
+
+/* Fix dropdown and select visibility */
+select option {
+  background: hsl(var(--bg-primary)) !important;
+  color: hsl(var(--text-primary)) !important;
+}
+
+/* Fix modal and overlay text */
+.fixed.inset-0 {
+  color: hsl(var(--text-primary));
+}
+
+/* Fix badge and label visibility */
+.badge, .label {
+  color: inherit !important;
+}
+
+/* Fix link visibility */
+a {
+  color: hsl(var(--accent-blue));
+}
+
+a:hover {
+  color: hsl(var(--accent-purple));
+}
+
+/* Fix disabled state visibility */
+.disabled, [disabled] {
+  opacity: 0.6;
+  color: hsl(var(--text-secondary)) !important;
+}
+
+/* Fix hover states */
+.hover\:text-white:hover {
+  color: white !important;
+}
+
+.hover\:text-black:hover {
+  color: black !important;
+}
+
+/* Ensure readable text on gradient backgrounds */
+.bg-gradient-to-r, .bg-gradient-primary, .bg-gradient-secondary {
+  color: white !important;
+}
+
+.bg-gradient-to-r *, .bg-gradient-primary *, .bg-gradient-secondary * {
+  color: inherit;
+}
 
 .bg-gradient-primary {
   background: linear-gradient(135deg, hsl(var(--accent-blue)) 0%, hsl(var(--accent-indigo)) 50%, hsl(var(--accent-purple)) 100%);
