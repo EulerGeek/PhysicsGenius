@@ -37,8 +37,10 @@ export default function Visual3DCourses({ isOpen, onClose, onComplete }: Visual3
   const [isPlaying, setIsPlaying] = useState(false);
   const [animationSpeed, setAnimationSpeed] = useState([1]);
   const [parameters, setParameters] = useState<Record<string, number>>({});
+  const [time, setTime] = useState(0);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationRef = useRef<number>();
+  const lastTimeRef = useRef<number>(0);
 
   const visual3DCourses: Visual3DCourse[] = [
     {
@@ -143,7 +145,7 @@ export default function Visual3DCourses({ isOpen, onClose, onComplete }: Visual3
   }, [currentConcept]);
 
   useEffect(() => {
-    if (isPlaying) {
+    if (isPlaying && currentConcept) {
       animate();
     } else {
       if (animationRef.current) {
@@ -155,9 +157,14 @@ export default function Visual3DCourses({ isOpen, onClose, onComplete }: Visual3
         cancelAnimationFrame(animationRef.current);
       }
     };
-  }, [isPlaying, animationSpeed[0]]);
+  }, [isPlaying, animationSpeed[0], parameters]);
 
-  const animate = () => {
+  const animate = (currentTime: number) => {
+    if (lastTimeRef.current === 0) lastTimeRef.current = currentTime;
+    const deltaTime = (currentTime - lastTimeRef.current) / 1000;
+    lastTimeRef.current = currentTime;
+    
+    setTime(prevTime => prevTime + deltaTime * animationSpeed[0]);
     drawVisualization();
     animationRef.current = requestAnimationFrame(animate);
   };
@@ -176,7 +183,7 @@ export default function Visual3DCourses({ isOpen, onClose, onComplete }: Visual3
 
     const centerX = canvas.width / 2;
     const centerY = canvas.height / 2;
-    const time = Date.now() * 0.001 * animationSpeed[0];
+    const currentTime = time;
 
     switch (currentConcept.visualization) {
       case 'pendulum':
