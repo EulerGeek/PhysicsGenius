@@ -266,47 +266,61 @@ input::placeholder, textarea::placeholder {
   border-color: #14b8a6;
 }
 
-/* High-Contrast Accessible Button Styles */
+/* Color Theory Triadic Button Styles */
 .btn-green {
-  background: linear-gradient(135deg, #047857 0%, #059669 50%, #10b981 100%);
+  background: linear-gradient(135deg, hsl(var(--color-green-dark)) 0%, hsl(var(--color-green)) 50%, hsl(var(--color-green-light)) 100%);
   color: white !important;
-  border: 2px solid #065f46;
-  font-weight: 600;
+  border: 2px solid hsl(var(--color-green-dark));
+  font-weight: 700;
   transition: all 0.3s ease;
 }
 
 .btn-green:hover {
-  background: linear-gradient(135deg, #065f46 0%, #047857 50%, #059669 100%);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(5, 150, 105, 0.4);
+  background: linear-gradient(135deg, hsl(var(--color-green-dark)) 0%, hsl(var(--color-green-dark)) 100%);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px hsla(var(--color-green), 0.5);
 }
 
 .btn-blue {
-  background: linear-gradient(135deg, #1e40af 0%, #2563eb 50%, #3b82f6 100%);
+  background: linear-gradient(135deg, hsl(var(--color-blue-dark)) 0%, hsl(var(--color-blue)) 50%, hsl(var(--color-blue-light)) 100%);
   color: white !important;
-  border: 2px solid #1e3a8a;
-  font-weight: 600;
+  border: 2px solid hsl(var(--color-blue-dark));
+  font-weight: 700;
   transition: all 0.3s ease;
 }
 
 .btn-blue:hover {
-  background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 50%, #2563eb 100%);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(37, 99, 235, 0.4);
+  background: linear-gradient(135deg, hsl(var(--color-blue-dark)) 0%, hsl(var(--color-blue-dark)) 100%);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px hsla(var(--color-blue), 0.5);
 }
 
 .btn-orange {
-  background: linear-gradient(135deg, #c2410c 0%, #ea580c 50%, #f97316 100%);
+  background: linear-gradient(135deg, hsl(var(--color-orange-dark)) 0%, hsl(var(--color-orange)) 50%, hsl(var(--color-orange-light)) 100%);
   color: white !important;
-  border: 2px solid #9a3412;
-  font-weight: 600;
+  border: 2px solid hsl(var(--color-orange-dark));
+  font-weight: 700;
   transition: all 0.3s ease;
 }
 
 .btn-orange:hover {
-  background: linear-gradient(135deg, #9a3412 0%, #c2410c 50%, #ea580c 100%);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(234, 88, 12, 0.4);
+  background: linear-gradient(135deg, hsl(var(--color-orange-dark)) 0%, hsl(var(--color-orange-dark)) 100%);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px hsla(var(--color-orange), 0.5);
+}
+
+.btn-triadic {
+  background: linear-gradient(135deg, hsl(var(--color-green)) 0%, hsl(var(--color-blue)) 50%, hsl(var(--color-orange)) 100%);
+  color: white !important;
+  border: 2px solid hsl(var(--color-green-dark));
+  font-weight: 700;
+  transition: all 0.3s ease;
+}
+
+.btn-triadic:hover {
+  background: linear-gradient(135deg, hsl(var(--color-green-dark)) 0%, hsl(var(--color-blue-dark)) 50%, hsl(var(--color-orange-dark)) 100%);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px hsla(var(--color-blue), 0.5);
 }
 
 /* Fix dropdown and select visibility */
