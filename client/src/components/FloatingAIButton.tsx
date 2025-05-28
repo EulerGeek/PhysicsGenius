@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import CustomAITutor from "./CustomAITutor";
+import EnhancedAITutor from "./EnhancedAITutor";
 
 interface FloatingAIButtonProps {
   currentContext?: {
@@ -85,8 +85,8 @@ export default function FloatingAIButton({ currentContext }: FloatingAIButtonPro
         </div>
       </div>
 
-      {/* AI Tutor Modal */}
-      <CustomAITutor
+      {/* Enhanced AI Tutor Modal */}
+      <EnhancedAITutor
         isOpen={showAITutor}
         onClose={() => setShowAITutor(false)}
         currentQuestion={defaultContext.currentQuestion}
