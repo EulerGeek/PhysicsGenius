@@ -6,12 +6,14 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import Home from "@/pages/Home";
 import NotFound from "@/pages/not-found";
+import AdaptiveLearning from "@/pages/AdaptiveLearning";
 import InteractiveBunny from "@/components/InteractiveBunny";
 
 function Router() {
   return (
     <Switch>
       <Route path="/" component={Home} />
+      <Route path="/adaptive-learning" component={AdaptiveLearning} />
       <Route component={NotFound} />
     </Switch>
   );

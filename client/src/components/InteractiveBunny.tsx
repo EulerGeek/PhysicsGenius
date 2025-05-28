@@ -191,28 +191,7 @@ export default function InteractiveBunny({ isVisible = true }: InteractiveBunnyP
           <div className="absolute -top-1 right-3.5 w-2 h-6 bg-pink-200 rounded-full transform -rotate-15"></div>
         </div>
 
-        {/* Bunny Legs - Standing Position */}
-        <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-4">
-          {/* Left Leg */}
-          <div className="absolute -left-4 top-0">
-            {/* Upper leg */}
-            <div className="w-3 h-6 bg-gray-200 rounded-full"></div>
-            {/* Lower leg */}
-            <div className="w-2.5 h-5 bg-gray-300 rounded-full transform translate-x-0.5 translate-y-5"></div>
-            {/* Foot */}
-            <div className="w-4 h-2 bg-gray-400 rounded-full transform -translate-x-0.5 translate-y-9"></div>
-          </div>
 
-          {/* Right Leg */}
-          <div className="absolute -right-4 top-0">
-            {/* Upper leg */}
-            <div className="w-3 h-6 bg-gray-200 rounded-full"></div>
-            {/* Lower leg */}
-            <div className="w-2.5 h-5 bg-gray-300 rounded-full transform -translate-x-0.5 translate-y-5"></div>
-            {/* Foot */}
-            <div className="w-4 h-2 bg-gray-400 rounded-full transform translate-x-0.5 translate-y-9"></div>
-          </div>
-        </div>
         
         {/* Sparkle Effect when kicked */}
         {isKicked && (
