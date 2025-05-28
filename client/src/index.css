@@ -93,14 +93,46 @@
   border: 1px solid rgba(255, 255, 255, 0.125);
 }
 
-/* Enhanced Typography & Dark mode body background fix */
+/* Color Theory Enhancement - Blue-Purple-Indigo Harmony */
+:root {
+  /* Light Mode - Sophisticated Blue Tones */
+  --bg-primary: 210 16% 98%; /* Soft blue-tinted white */
+  --bg-secondary: 215 25% 96%; /* Light blue-gray */
+  --text-primary: 220 13% 9%; /* Deep blue-black */
+  --text-secondary: 215 13% 46%; /* Mid blue-gray */
+  --accent-blue: 217 91% 60%; /* Vibrant blue */
+  --accent-purple: 268 83% 58%; /* Deep purple */
+  --accent-indigo: 238 83% 67%; /* Bright indigo */
+  --success-green: 160 84% 39%; /* Emerald */
+  --warning-amber: 43 96% 56%; /* Golden */
+  --danger-red: 0 72% 51%; /* Vibrant red */
+}
+
+.dark {
+  /* Dark Mode - Deep Blues and Purples */
+  --bg-primary: 224 71% 4%; /* Deep navy */
+  --bg-secondary: 224 47% 8%; /* Dark blue */
+  --text-primary: 210 40% 98%; /* Soft white */
+  --text-secondary: 215 20% 65%; /* Light blue-gray */
+  --accent-blue: 213 94% 68%; /* Bright blue */
+  --accent-purple: 263 85% 70%; /* Bright purple */
+  --accent-indigo: 250 84% 70%; /* Bright indigo */
+  --success-green: 160 84% 54%; /* Bright emerald */
+  --warning-amber: 48 96% 76%; /* Bright yellow */
+  --danger-red: 0 63% 31%; /* Dark red */
+}
+
+/* Enhanced Typography & Backgrounds */
 body {
-  @apply bg-white dark:bg-gray-900 text-gray-900 dark:text-white transition-colors;
+  background: hsl(var(--bg-primary));
+  color: hsl(var(--text-primary));
   font-family: 'Inter', sans-serif;
+  transition: all 0.3s ease;
 }
 
 html {
-  @apply bg-white dark:bg-gray-900 transition-colors;
+  background: hsl(var(--bg-primary));
+  transition: all 0.3s ease;
 }
 
 /* Enhanced Typography Hierarchy */
@@ -119,10 +151,39 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .text-gradient {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, hsl(var(--accent-blue)) 0%, hsl(var(--accent-purple)) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+
+/* Enhanced Color Utility Classes */
+.bg-primary { background: hsl(var(--bg-primary)); }
+.bg-secondary { background: hsl(var(--bg-secondary)); }
+.text-primary { color: hsl(var(--text-primary)); }
+.text-secondary { color: hsl(var(--text-secondary)); }
+
+.bg-gradient-primary {
+  background: linear-gradient(135deg, hsl(var(--accent-blue)) 0%, hsl(var(--accent-indigo)) 50%, hsl(var(--accent-purple)) 100%);
+}
+
+.bg-gradient-secondary {
+  background: linear-gradient(45deg, hsl(var(--accent-purple)) 0%, hsl(var(--accent-blue)) 100%);
+}
+
+.border-accent { border-color: hsl(var(--accent-blue)); }
+.hover-lift { transition: transform 0.2s ease; }
+.hover-lift:hover { transform: translateY(-2px); }
+
+.card-enhanced {
+  background: hsl(var(--bg-primary));
+  border: 1px solid hsl(var(--accent-blue) / 0.1);
+  box-shadow: 0 4px 6px -1px hsl(var(--accent-blue) / 0.1), 0 2px 4px -1px hsl(var(--accent-blue) / 0.06);
+}
+
+.card-enhanced:hover {
+  border-color: hsl(var(--accent-blue) / 0.3);
+  box-shadow: 0 10px 15px -3px hsl(var(--accent-blue) / 0.1), 0 4px 6px -2px hsl(var(--accent-blue) / 0.05);
 }
 
 /* Bunny Animation Keyframes */
