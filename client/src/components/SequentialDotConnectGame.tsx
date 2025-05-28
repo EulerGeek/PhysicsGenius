@@ -168,9 +168,14 @@ export default function SequentialDotConnectGame({ isOpen, onClose, onComplete, 
   const currentPuzzleData = puzzles[currentPuzzle];
   const progress = ((currentPuzzle + 1) / puzzles.length) * 100;
 
+  // Initialize dots only when puzzle changes
   useEffect(() => {
-    if (currentPuzzleData) {
-      setDots(currentPuzzleData.dots.map(dot => ({ ...dot, isConnected: false })));
+    if (currentPuzzleData && currentPuzzleData.dots) {
+      const initialDots = currentPuzzleData.dots.map(dot => ({ 
+        ...dot, 
+        isConnected: false 
+      }));
+      setDots(initialDots);
       setConnections([]);
       setCurrentDot(null);
       setNextExpected(1);
@@ -178,7 +183,7 @@ export default function SequentialDotConnectGame({ isOpen, onClose, onComplete, 
       setShowResults(false);
       setMistakes(0);
     }
-  }, [currentPuzzle]);
+  }, [currentPuzzle, isOpen]); // Only re-run when puzzle changes or modal opens
 
   // Prevent body scrolling when game is open
   useEffect(() => {
@@ -396,7 +401,7 @@ export default function SequentialDotConnectGame({ isOpen, onClose, onComplete, 
             </svg>
 
             {/* Dots */}
-            {dots.map((dot) => (
+            {dots && dots.length > 0 && dots.map((dot) => (
               <div
                 key={dot.id}
                 id={`dot-${dot.id}`}
