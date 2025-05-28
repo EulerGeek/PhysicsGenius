@@ -20,6 +20,46 @@ interface AITutorProps {
 
 class EnhancedPhysicsAIBrain {
   private comprehensiveKnowledge: Record<string, string> = {
+    // Famous Scientists and Their Contributions
+    'albert einstein': 'Albert Einstein (1879-1955) revolutionized physics with his theories of special and general relativity. Famous for E=mc², he explained the photoelectric effect (Nobel Prize 1921), Brownian motion, and predicted gravitational waves. His work laid foundation for modern cosmology and quantum mechanics.',
+    
+    'isaac newton': 'Sir Isaac Newton (1643-1727) formulated the laws of motion and universal gravitation. He invented calculus, explained planetary motion, studied optics and light, and wrote Principia Mathematica. His three laws of motion form the foundation of classical mechanics.',
+    
+    'marie curie': 'Marie Curie (1867-1934) was the first woman to win a Nobel Prize and the only person to win Nobel Prizes in two different sciences (Physics 1903, Chemistry 1911). She discovered radium and polonium, pioneered research on radioactivity, and developed mobile X-ray units.',
+    
+    'galileo galilei': 'Galileo Galilei (1564-1642) is the father of observational astronomy and modern physics. He improved the telescope, discovered Jupiter\'s moons, studied projectile motion, and supported heliocentrism. He established the principle of inertia and laid groundwork for Newton\'s laws.',
+    
+    'nikola tesla': 'Nikola Tesla (1856-1943) invented the AC electrical system, induction motor, and wireless technology. He held over 300 patents, developed radio technology, and envisioned wireless power transmission. His work enabled the modern electrical grid and wireless communications.',
+    
+    'richard feynman': 'Richard Feynman (1918-1988) developed quantum electrodynamics (QED), invented Feynman diagrams, and won the Nobel Prize in Physics (1965). Known for his teaching ability, he explained complex physics concepts simply and contributed to the Manhattan Project.',
+    
+    'stephen hawking': 'Stephen Hawking (1942-2018) made groundbreaking discoveries about black holes, including Hawking radiation. He wrote "A Brief History of Time," advanced our understanding of cosmology and general relativity, and showed black holes emit radiation and eventually evaporate.',
+    
+    'max planck': 'Max Planck (1858-1947) founded quantum theory by introducing energy quanta (E=hf). His work on blackbody radiation led to the quantum revolution. He discovered Planck\'s constant and won the Nobel Prize in Physics (1918) for his quantum hypothesis.',
+    
+    'niels bohr': 'Niels Bohr (1885-1962) developed the atomic model with quantized electron orbits and the Copenhagen interpretation of quantum mechanics. He won the Nobel Prize (1922) and established complementarity principle explaining wave-particle duality.',
+    
+    'werner heisenberg': 'Werner Heisenberg (1901-1976) formulated the uncertainty principle and developed matrix mechanics (quantum theory). He won the Nobel Prize (1932) and showed that position and momentum cannot be simultaneously measured with perfect precision.',
+    
+    'erwin schrödinger': 'Erwin Schrödinger (1887-1961) developed wave mechanics and the famous Schrödinger equation. His wave function describes quantum states, and his thought experiment "Schrödinger\'s cat" illustrates quantum superposition paradoxes.',
+    
+    'james clerk maxwell': 'James Clerk Maxwell (1831-1879) unified electricity and magnetism with Maxwell\'s equations. He predicted electromagnetic waves travel at light speed, explained light as electromagnetic radiation, and laid foundation for modern electromagnetic theory.',
+    
+    'michael faraday': 'Michael Faraday (1791-1867) discovered electromagnetic induction, electrolysis laws, and the magnetic field concept. He built the first electric motor and generator, establishing the connection between electricity and magnetism.',
+    
+    'charles darwin': 'Charles Darwin (1809-1882) developed the theory of evolution by natural selection. His book "On the Origin of Species" revolutionized biology by explaining how species evolve and adapt over time through survival of the fittest.',
+    
+    'louis pasteur': 'Louis Pasteur (1822-1895) developed the germ theory of disease and pasteurization. He created vaccines for rabies and anthrax, disproved spontaneous generation, and founded microbiology and immunology.',
+    
+    'gregor mendel': 'Gregor Mendel (1822-1884) is the father of genetics. Through pea plant experiments, he discovered the laws of inheritance, dominant and recessive traits, and laid the foundation for understanding heredity and genetic variation.',
+    
+    'dmitri mendeleev': 'Dmitri Mendeleev (1834-1907) created the periodic table of elements. He arranged elements by atomic weight, predicted properties of undiscovered elements, and established the periodic law governing chemical behavior.',
+    
+    'antoine lavoisier': 'Antoine Lavoisier (1743-1794) is the father of modern chemistry. He discovered the role of oxygen in combustion, established the law of conservation of mass, and developed the modern system of chemical nomenclature.',
+    
+    'alexander fleming': 'Alexander Fleming (1881-1955) discovered penicillin, the first antibiotic. His accidental discovery revolutionized medicine by enabling treatment of bacterial infections and saving millions of lives.',
+    
+    'watson and crick': 'James Watson and Francis Crick discovered the double helix structure of DNA in 1953. Along with Rosalind Franklin\'s X-ray crystallography, they revealed how genetic information is stored and replicated.',
     // Physics Fundamentals
     'force': 'A force is a push or pull that changes motion. Newton\'s laws govern forces: F=ma (second law), every action has an equal opposite reaction (third law), and objects at rest stay at rest unless acted upon by a force (first law). Forces include gravity, electromagnetic, strong nuclear, and weak nuclear forces.',
     
@@ -121,11 +161,57 @@ class EnhancedPhysicsAIBrain {
       );
     }
 
-    // Enhanced default response
-    return this.createMessage(
-      "That's a fascinating question! 🤔 I'm your comprehensive STEM learning companion, ready to help with:\n\n🔬 **Physics**: mechanics, waves, electricity, magnetism, quantum mechanics, relativity, thermodynamics\n\n📐 **Mathematics**: calculus, algebra, linear algebra, statistics, probability, complex numbers, differential equations\n\n🧮 **Advanced Topics**: tensors, Fourier transforms, vector operations, matrix theory\n\nCould you ask about any specific concept? I love making complex topics clear and engaging! For example, try asking 'What is a tensor product?' or 'Explain quantum mechanics' ✨",
-      'question'
+    // Check if it's a science-related question that might need external search
+    const scienceKeywords = [
+      'scientist', 'research', 'discovery', 'invention', 'theory', 'experiment',
+      'biology', 'chemistry', 'geology', 'astronomy', 'medicine', 'engineering',
+      'history', 'technology', 'innovation', 'patent', 'university', 'laboratory',
+      'nobel', 'award', 'breakthrough', 'study', 'journal', 'publication'
+    ];
+    
+    const isScientificQuery = scienceKeywords.some(keyword => 
+      inputLower.includes(keyword)
     );
+    
+    if (isScientificQuery) {
+      return this.createMessage(
+        `That's a fascinating scientific question! While I specialize in physics, mathematics, and famous scientists, your question appears to be outside my core knowledge areas.
+
+🔍 **For the most accurate information, I recommend:**
+• **Wikipedia** - Comprehensive scientific articles with references
+• **Google Scholar** - Peer-reviewed research papers
+• **NASA, NIH, or university websites** - Authoritative scientific sources
+• **Educational databases** - Like Khan Academy or Coursera
+
+📚 **I can definitely help you with:**
+• Physics concepts (mechanics, quantum physics, relativity, electromagnetism)
+• Mathematics (calculus, algebra, statistics, linear algebra)
+• Famous scientists like Einstein, Newton, Curie, Tesla, and many others
+• Problem-solving techniques and study strategies
+
+What physics or math topic would you like to explore instead?`,
+        'encouragement'
+      );
+    } else {
+      return this.createMessage(
+        `I'm your specialized physics and mathematics tutor! While I'd love to help with all topics, I focus on providing accurate information in my areas of expertise.
+
+🧪 **My specialties include:**
+• **Physics**: Classical mechanics, quantum mechanics, relativity, electromagnetism, thermodynamics
+• **Mathematics**: Calculus, algebra, statistics, geometry, linear algebra
+• **Scientists**: Einstein, Newton, Curie, Tesla, Feynman, Hawking, and many more
+• **Problem-solving**: Step-by-step explanations and study techniques
+
+🎯 **Try asking me about:**
+• "Tell me about Einstein's discoveries"
+• "How does quantum mechanics work?"
+• "Explain calculus derivatives"
+• "What did Marie Curie discover?"
+
+What would you like to learn about today?`,
+        'encouragement'
+      );
+    }
   }
 
   private findMatchingTopics(input: string): string[] {
@@ -142,11 +228,36 @@ class EnhancedPhysicsAIBrain {
       'calc': 'calculus',
       'math': 'algebra',
       'physics': 'force',
-      'einstein': 'relativity',
-      'newton': 'force',
+      'einstein': 'albert einstein',
+      'newton': 'isaac newton',
+      'curie': 'marie curie',
+      'tesla': 'nikola tesla',
+      'feynman': 'richard feynman',
+      'hawking': 'stephen hawking',
+      'bohr': 'niels bohr',
+      'planck': 'max planck',
+      'heisenberg': 'werner heisenberg',
+      'schrödinger': 'erwin schrödinger',
+      'maxwell': 'james clerk maxwell',
+      'faraday': 'michael faraday',
+      'darwin': 'charles darwin',
+      'pasteur': 'louis pasteur',
+      'mendel': 'gregor mendel',
+      'mendeleev': 'dmitri mendeleev',
+      'lavoisier': 'antoine lavoisier',
+      'fleming': 'alexander fleming',
+      'watson': 'watson and crick',
+      'crick': 'watson and crick',
       'quantum': 'quantum mechanics',
       'electric': 'electricity',
-      'magnetic': 'magnetism'
+      'magnetic': 'magnetism',
+      'relativity': 'albert einstein',
+      'dna': 'watson and crick',
+      'periodic table': 'dmitri mendeleev',
+      'evolution': 'charles darwin',
+      'genetics': 'gregor mendel',
+      'antibiotic': 'alexander fleming',
+      'radioactivity': 'marie curie'
     };
     
     for (const [synonym, topic] of Object.entries(synonyms)) {
