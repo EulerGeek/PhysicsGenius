@@ -171,7 +171,7 @@ export default function DuolingoStyleLesson({ isOpen, onClose, courseId, lessonI
       case 'fill_blank':
         return (
           <div className="space-y-4">
-            <div className="text-center p-4 bg-yellow-50 rounded-lg border-2 border-yellow-200">
+            <div className="text-center p-4 bg-blue-50 rounded-lg border-2 border-blue-200">
               <p className="text-lg">{currentQuestion.question}</p>
             </div>
             <div className="grid grid-cols-2 gap-3">
@@ -181,8 +181,8 @@ export default function DuolingoStyleLesson({ isOpen, onClose, courseId, lessonI
                   variant={selectedAnswer === option ? "default" : "outline"}
                   className={`p-4 transition-all duration-200 hover:scale-105 ${
                     selectedAnswer === option 
-                      ? "bg-gradient-to-r from-orange-500 to-yellow-600 text-white shadow-lg" 
-                      : "bg-white hover:bg-orange-50 border-2 border-orange-200"
+                      ? "bg-gradient-to-r from-green-500 to-emerald-600 text-white shadow-lg" 
+                      : "bg-white hover:bg-green-50 border-2 border-green-200"
                   }`}
                   onClick={() => setSelectedAnswer(option)}
                 >
