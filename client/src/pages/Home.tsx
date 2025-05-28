@@ -2,6 +2,7 @@ import { useState } from "react";
 import Header from "@/components/Header";
 import HomeScreen from "@/components/HomeScreen";
 import AboutPage from "@/components/AboutPage";
+import ConceptsPage from "@/components/ConceptsPage";
 import NavigationMenu from "@/components/NavigationMenu";
 import ProgressOverview from "@/components/ProgressOverview";
 import CourseNavigation from "@/components/CourseNavigation";
@@ -10,7 +11,6 @@ import InteractiveConceptLesson from "@/components/InteractiveConceptLesson";
 import ExamSystem from "@/components/ExamSystem";
 import QuickTest from "@/components/QuickTest";
 import FloatingAIButton from "@/components/FloatingAIButton";
-import ConceptMenu from "@/components/ConceptMenu";
 import EducationalFooter from "@/components/EducationalFooter";
 import { Button } from "@/components/ui/button";
 import { useProgress } from "@/hooks/useProgress";
@@ -19,7 +19,7 @@ import { getCourses, getLessonsByCourse } from "@/lib/lessons";
 export default function Home() {
   const [currentPage, setCurrentPage] = useState("courses");
   const [activeTab, setActiveTab] = useState("classical");
-  const [showConceptMenu, setShowConceptMenu] = useState(false);
+
   const [showConceptLesson, setShowConceptLesson] = useState(false);
   const [showExam, setShowExam] = useState(false);
   const [examCourseId, setExamCourseId] = useState('');
@@ -67,13 +67,22 @@ export default function Home() {
           <FloatingAIButton />
         </div>
       );
+    case 'concepts':
+      return (
+        <div className="min-h-screen bg-neutral-50 dark:bg-gray-900">
+          <Header progress={progress} resetProgress={resetProgress} />
+          <ConceptsPage onStartConcept={handleStartConceptLesson} />
+          <EducationalFooter />
+          <FloatingAIButton />
+        </div>
+      );
     case 'courses':
     default:
       return (
-        <div className="h-screen overflow-hidden bg-neutral-50 dark:bg-gray-900">
+        <div className="min-h-screen bg-neutral-50 dark:bg-gray-900">
           <Header progress={progress} resetProgress={resetProgress} />
           
-          <main className="max-w-6xl mx-auto px-0.5 sm:px-1 md:px-3 lg:px-6 py-0.5 sm:py-1 md:py-3 lg:py-6 h-[calc(100vh-1.5rem)] sm:h-[calc(100vh-2rem)] md:h-[calc(100vh-2.5rem)] lg:h-[calc(100vh-3rem)] overflow-y-auto">
+          <main className="max-w-6xl mx-auto px-0.5 sm:px-1 md:px-3 lg:px-6 py-0.5 sm:py-1 md:py-3 lg:py-6">
             <ProgressOverview progress={progress} courses={courses} />
             
             <CourseNavigation 
@@ -123,12 +132,7 @@ export default function Home() {
             progress={progress}
           />
 
-          {/* Concept Menu */}
-          <ConceptMenu
-            isOpen={showConceptMenu}
-            onClose={() => setShowConceptMenu(false)}
-            onStartConcept={handleStartConceptLesson}
-          />
+
 
           {/* Interactive Concept Lesson */}
           {showConceptLesson && currentConcept && (
