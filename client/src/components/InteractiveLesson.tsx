@@ -6,6 +6,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { Progress } from "@/components/ui/progress";
 import { getAllLessonData, type Question } from "@/lib/allLessonsData";
+import UniversalDotLinkQuiz from "./UniversalDotLinkQuiz";
 
 interface InteractiveLessonProps {
   lessonId: string;
@@ -21,6 +22,7 @@ export default function InteractiveLesson({ lessonId, title, onComplete, onClose
   const [isCorrect, setIsCorrect] = useState(false);
   const [score, setScore] = useState(0);
   const [answers, setAnswers] = useState<Record<string, string>>({});
+  const [showDotLinkQuiz, setShowDotLinkQuiz] = useState(false);
 
   const lessonData = getAllLessonData(lessonId);
   const questions = lessonData?.questions || [];
@@ -156,15 +158,26 @@ export default function InteractiveLesson({ lessonId, title, onComplete, onClose
                   Physics Concept: {question.concept}
                 </h3>
               </div>
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={handleReadContent}
-                className="bg-gradient-to-r from-blue-500 to-purple-500 text-white border-0 hover:from-blue-600 hover:to-purple-600 px-6 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 group"
-              >
-                <span className="text-lg mr-2 group-hover:wiggle">🔊</span>
-                Read Question
-              </Button>
+              <div className="flex gap-3">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={handleReadContent}
+                  className="bg-gradient-to-r from-blue-500 to-purple-500 text-white border-0 hover:from-blue-600 hover:to-purple-600 px-6 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 group"
+                >
+                  <span className="text-lg mr-2 group-hover:wiggle">🔊</span>
+                  Read Question
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => setShowDotLinkQuiz(true)}
+                  className="bg-gradient-to-r from-green-500 to-emerald-500 text-white border-0 hover:from-green-600 hover:to-emerald-600 px-6 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 group"
+                >
+                  <span className="text-lg mr-2 group-hover:wiggle">🔗</span>
+                  Dot Link Challenge
+                </Button>
+              </div>
             </div>
 
             <Card className="mb-8 glass dark:glass-dark backdrop-blur-lg shadow-2xl border-2 border-white/20 bounce-in">
@@ -277,6 +290,17 @@ export default function InteractiveLesson({ lessonId, title, onComplete, onClose
           </div>
         </CardContent>
       </Card>
+
+      {/* Universal Dot Link Quiz Integration */}
+      <UniversalDotLinkQuiz 
+        isOpen={showDotLinkQuiz} 
+        onClose={() => setShowDotLinkQuiz(false)} 
+        onComplete={(dotLinkScore) => {
+          setScore(prev => prev + dotLinkScore);
+          setShowDotLinkQuiz(false);
+        }}
+        subject="physics"
+      />
     </div>
   );
 }
