@@ -106,6 +106,51 @@ export default function ConceptMenu({ isOpen, onClose, onStartConcept }: Concept
       ]
     },
     {
+      id: 'mathematics',
+      title: 'Mathematics',
+      description: 'Master essential math concepts from algebra to calculus',
+      color: 'from-green-500 to-green-700',
+      icon: '📐',
+      concepts: [
+        {
+          id: 'basic-algebra',
+          title: 'Basic Algebra',
+          description: 'Variables, equations, and algebraic thinking',
+          difficulty: 'beginner',
+          estimatedTime: '40 min',
+          prerequisites: [],
+          isCompleted: false,
+          progress: 0,
+          icon: '🔢',
+          topics: ['Variables', 'Linear Equations', 'Polynomials', 'Factoring', 'Systems of Equations']
+        },
+        {
+          id: 'calculus',
+          title: 'Calculus',
+          description: 'Limits, derivatives, and integrals',
+          difficulty: 'advanced',
+          estimatedTime: '90 min',
+          prerequisites: ['basic-algebra'],
+          isCompleted: false,
+          progress: 0,
+          icon: '📈',
+          topics: ['Limits', 'Derivatives', 'Integration', 'Applications', 'Series']
+        },
+        {
+          id: 'linear-algebra',
+          title: 'Linear Algebra',
+          description: 'Vectors, matrices, and transformations',
+          difficulty: 'advanced',
+          estimatedTime: '75 min',
+          prerequisites: ['basic-algebra'],
+          isCompleted: false,
+          progress: 0,
+          icon: '🔗',
+          topics: ['Vectors', 'Matrices', 'Linear Transformations', 'Eigenvalues', 'Vector Spaces']
+        }
+      ]
+    },
+    {
       id: 'general-relativity',
       title: 'General Relativity',
       description: 'Explore Einstein\'s theory of gravity and spacetime',

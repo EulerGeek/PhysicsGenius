@@ -14,9 +14,9 @@ export default function InteractiveBunny({ isVisible = true }: InteractiveBunnyP
   const bunnyRef = useRef<HTMLDivElement>(null);
 
   // Physics constants
-  const gravity = 0.5;
-  const friction = 0.99;
-  const bounce = 0.8;
+  const gravity = 0.3;
+  const friction = 0.95;
+  const bounce = 0.6;
   const bunnySize = 60;
 
   useEffect(() => {
@@ -167,83 +167,50 @@ export default function InteractiveBunny({ isVisible = true }: InteractiveBunnyP
           filter: `hue-rotate(${Math.abs(velocity.x + velocity.y) * 2}deg)`
         }}
       >
-        {/* Bunny Body with animated gradient */}
-        <div className="absolute inset-0 bg-gradient-to-br from-pink-200 via-pink-300 to-pink-400 rounded-full shadow-lg animate-gentle-pulse">
-          {/* Animated glow effect */}
-          <div className="absolute inset-0 bg-gradient-to-br from-white/30 to-transparent rounded-full animate-shimmer"></div>
-          
-          {/* Bunny Face */}
-          <div className="absolute inset-2 bg-gradient-to-br from-white via-pink-50 to-pink-100 rounded-full flex items-center justify-center animate-face-glow">
-            {/* Animated Eyes */}
-            <div className={`absolute top-3 left-3 w-2 h-2 bg-black rounded-full transition-all duration-300 ${
-              isKicked ? 'animate-blink-rapid' : 'animate-blink-slow'
-            }`}></div>
-            <div className={`absolute top-3 right-3 w-2 h-2 bg-black rounded-full transition-all duration-300 ${
-              isKicked ? 'animate-blink-rapid' : 'animate-blink-slow'
-            }`} style={{animationDelay: '0.1s'}}></div>
+        {/* Bunny Body - Clean and Simple */}
+        <div className="absolute inset-1 bg-gradient-to-br from-gray-100 to-gray-200 rounded-full shadow-lg">
+          {/* Main Body */}
+          <div className="absolute inset-1 bg-white rounded-full flex items-center justify-center">
+            {/* Simple Eyes */}
+            <div className="absolute top-4 left-4 w-3 h-3 bg-black rounded-full"></div>
+            <div className="absolute top-4 right-4 w-3 h-3 bg-black rounded-full"></div>
             
-            {/* Eye sparkles */}
-            <div className="absolute top-3.5 left-3.5 w-0.5 h-0.5 bg-white rounded-full animate-twinkle"></div>
-            <div className="absolute top-3.5 right-3.5 w-0.5 h-0.5 bg-white rounded-full animate-twinkle" style={{animationDelay: '0.2s'}}></div>
+            {/* Simple Nose */}
+            <div className="absolute top-7 left-1/2 transform -translate-x-1/2 w-1.5 h-1 bg-pink-400 rounded-full"></div>
             
-            {/* Animated Nose */}
-            <div className={`absolute top-6 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-pink-500 rounded-full transition-all duration-300 ${
-              isKicked ? 'animate-nose-wiggle' : 'animate-nose-breathe'
-            }`}></div>
-            
-            {/* Animated Mouth */}
-            <div className={`absolute top-7 left-1/2 transform -translate-x-1/2 w-3 h-1 border-b-2 border-gray-400 rounded-b-full transition-all duration-300 ${
-              isKicked ? 'animate-mouth-happy' : 'animate-mouth-neutral'
-            }`}></div>
-            
-            {/* Cheek blush */}
-            <div className="absolute top-5 left-1 w-1.5 h-1 bg-pink-300/60 rounded-full animate-blush"></div>
-            <div className="absolute top-5 right-1 w-1.5 h-1 bg-pink-300/60 rounded-full animate-blush" style={{animationDelay: '0.3s'}}></div>
+            {/* Simple Mouth */}
+            <div className="absolute top-8 left-1/2 transform -translate-x-1/2 w-4 h-0.5 bg-gray-600 rounded-full"></div>
           </div>
           
-          {/* Animated Ears */}
-          <div className={`absolute -top-3 left-2 w-3 h-8 bg-gradient-to-t from-pink-200 via-pink-300 to-pink-400 rounded-full transform rotate-12 shadow-md transition-all duration-500 ${
-            isKicked ? 'animate-ear-flap' : 'animate-ear-twitch'
-          }`}></div>
-          <div className={`absolute -top-3 right-2 w-3 h-8 bg-gradient-to-t from-pink-200 via-pink-300 to-pink-400 rounded-full transform -rotate-12 shadow-md transition-all duration-500 ${
-            isKicked ? 'animate-ear-flap' : 'animate-ear-twitch'
-          }`} style={{animationDelay: '0.2s'}}></div>
+          {/* Simple Ears */}
+          <div className="absolute -top-2 left-3 w-4 h-10 bg-gray-200 rounded-full transform rotate-15 shadow-sm"></div>
+          <div className="absolute -top-2 right-3 w-4 h-10 bg-gray-200 rounded-full transform -rotate-15 shadow-sm"></div>
           
-          {/* Inner Ears with animation */}
-          <div className="absolute -top-2 left-2.5 w-1.5 h-5 bg-gradient-to-t from-pink-400 to-pink-500 rounded-full transform rotate-12 animate-ear-inner"></div>
-          <div className="absolute -top-2 right-2.5 w-1.5 h-5 bg-gradient-to-t from-pink-400 to-pink-500 rounded-full transform -rotate-12 animate-ear-inner" style={{animationDelay: '0.1s'}}></div>
-          
-          {/* Animated whiskers */}
-          <div className="absolute top-6 left-0 w-4 h-0.5 bg-gray-400/60 rounded-full animate-whisker-left"></div>
-          <div className="absolute top-7 left-0 w-3 h-0.5 bg-gray-400/60 rounded-full animate-whisker-left" style={{animationDelay: '0.1s'}}></div>
-          <div className="absolute top-6 right-0 w-4 h-0.5 bg-gray-400/60 rounded-full animate-whisker-right"></div>
-          <div className="absolute top-7 right-0 w-3 h-0.5 bg-gray-400/60 rounded-full animate-whisker-right" style={{animationDelay: '0.1s'}}></div>
+          {/* Inner Ears */}
+          <div className="absolute -top-1 left-3.5 w-2 h-6 bg-pink-200 rounded-full transform rotate-15"></div>
+          <div className="absolute -top-1 right-3.5 w-2 h-6 bg-pink-200 rounded-full transform -rotate-15"></div>
         </div>
 
-        {/* Bunny Legs with IK */}
-        <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-2">
+        {/* Bunny Legs - Standing Position */}
+        <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-4">
           {/* Left Leg */}
-          <div className={`absolute -left-3 top-0 transform transition-all duration-300 ${
-            isDragging ? 'animate-leg-stretch' : isKicked ? 'animate-leg-kick' : 'animate-leg-walk'
-          }`}>
+          <div className="absolute -left-4 top-0">
             {/* Upper leg */}
-            <div className="w-2 h-4 bg-gradient-to-b from-pink-300 to-pink-400 rounded-full transform rotate-12 origin-top"></div>
+            <div className="w-3 h-6 bg-gray-200 rounded-full"></div>
             {/* Lower leg */}
-            <div className="w-1.5 h-3 bg-gradient-to-b from-pink-400 to-pink-500 rounded-full transform translate-x-1 translate-y-3 rotate-45 origin-top"></div>
+            <div className="w-2.5 h-5 bg-gray-300 rounded-full transform translate-x-0.5 translate-y-5"></div>
             {/* Foot */}
-            <div className="w-2.5 h-1.5 bg-pink-500 rounded-full transform translate-x-1.5 translate-y-5"></div>
+            <div className="w-4 h-2 bg-gray-400 rounded-full transform -translate-x-0.5 translate-y-9"></div>
           </div>
 
           {/* Right Leg */}
-          <div className={`absolute -right-3 top-0 transform transition-all duration-300 ${
-            isDragging ? 'animate-leg-stretch' : isKicked ? 'animate-leg-kick' : 'animate-leg-walk'
-          }`} style={{animationDelay: '0.3s'}}>
+          <div className="absolute -right-4 top-0">
             {/* Upper leg */}
-            <div className="w-2 h-4 bg-gradient-to-b from-pink-300 to-pink-400 rounded-full transform -rotate-12 origin-top"></div>
+            <div className="w-3 h-6 bg-gray-200 rounded-full"></div>
             {/* Lower leg */}
-            <div className="w-1.5 h-3 bg-gradient-to-b from-pink-400 to-pink-500 rounded-full transform -translate-x-1 translate-y-3 -rotate-45 origin-top"></div>
+            <div className="w-2.5 h-5 bg-gray-300 rounded-full transform -translate-x-0.5 translate-y-5"></div>
             {/* Foot */}
-            <div className="w-2.5 h-1.5 bg-pink-500 rounded-full transform -translate-x-1.5 translate-y-5"></div>
+            <div className="w-4 h-2 bg-gray-400 rounded-full transform translate-x-0.5 translate-y-9"></div>
           </div>
         </div>
         
