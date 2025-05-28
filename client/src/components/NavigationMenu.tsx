@@ -53,16 +53,19 @@ export default function NavigationMenu({ currentPage, onNavigate, progress }: Na
           <span className={`text-2xl relative z-10 transition-transform duration-300 ${isOpen ? 'rotate-90' : ''}`}>☰</span>
         </Button>
 
-        {/* Invisible bridge to prevent menu from closing */}
-        <div className="absolute top-12 left-0 w-12 h-6 bg-transparent" />
+        {/* Invisible bridge to prevent menu from closing - BIGGER for better hover */}
+        <div className="absolute top-10 left-0 w-16 h-10 bg-transparent" />
         
-        {/* Hover Menu - Extended hover area */}
+        {/* Hover Menu - Extended hover area with better detection */}
         <div 
-          className={`absolute top-14 left-0 transition-all duration-300 ${
-            isOpen ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 -translate-y-4 pointer-events-none'
+          className={`absolute top-16 left-0 transition-all duration-200 ${
+            isOpen ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 -translate-y-2 pointer-events-none'
           }`}
           onMouseEnter={() => setIsOpen(true)}
-          onMouseLeave={() => setIsOpen(false)}
+          onMouseLeave={() => {
+            // Add small delay to prevent flickering
+            setTimeout(() => setIsOpen(false), 100);
+          }}
         >
           <Card className="bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm shadow-xl border-0 min-w-[240px]">
             <CardContent className="p-2">

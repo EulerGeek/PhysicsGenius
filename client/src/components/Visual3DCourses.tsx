@@ -219,6 +219,15 @@ export default function Visual3DCourses({ isOpen, onClose, onComplete }: Visual3
       case 'fluid':
         drawFluidDynamics(ctx, centerX, centerY, time);
         break;
+      case 'spacetime':
+        drawSpacetime(ctx, centerX, centerY, time);
+        break;
+      case 'blackhole':
+        drawBlackhole(ctx, centerX, centerY, time);
+        break;
+      case 'gravity_waves':
+        drawGravityWaves(ctx, centerX, centerY, time);
+        break;
     }
   };
 
@@ -662,6 +671,120 @@ export default function Visual3DCourses({ isOpen, onClose, onComplete }: Visual3
     }
   };
 
+  // NEW: Add spectacular General Relativity visualizations!
+  const drawSpacetime = (ctx: CanvasRenderingContext2D, centerX: number, centerY: number, time: number) => {
+    // Clear with deep space background
+    ctx.fillStyle = '#0a0a23';
+    ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+    
+    // Draw spacetime grid with gravitational warping
+    ctx.strokeStyle = '#4f46e5';
+    ctx.lineWidth = 2;
+    
+    // Horizontal grid lines with curvature from massive object
+    for (let y = 50; y < ctx.canvas.height - 50; y += 40) {
+      ctx.beginPath();
+      ctx.moveTo(50, y);
+      for (let x = 50; x < ctx.canvas.width - 50; x += 10) {
+        const distanceFromCenter = Math.sqrt((x - centerX) ** 2 + (y - centerY) ** 2);
+        const warp = Math.max(0, 30 / (1 + distanceFromCenter / 50));
+        ctx.lineTo(x, y + warp);
+      }
+      ctx.stroke();
+    }
+    
+    // Vertical grid lines with warping
+    for (let x = 50; x < ctx.canvas.width - 50; x += 40) {
+      ctx.beginPath();
+      ctx.moveTo(x, 50);
+      for (let y = 50; y < ctx.canvas.height - 50; y += 10) {
+        const distanceFromCenter = Math.sqrt((x - centerX) ** 2 + (y - centerY) ** 2);
+        const warp = Math.max(0, 30 / (1 + distanceFromCenter / 50));
+        ctx.lineTo(x + warp * 0.5, y);
+      }
+      ctx.stroke();
+    }
+    
+    // Draw massive object causing curvature
+    ctx.fillStyle = '#fbbf24';
+    ctx.beginPath();
+    ctx.arc(centerX, centerY, 25, 0, 2 * Math.PI);
+    ctx.fill();
+    
+    // Add glow effect
+    ctx.fillStyle = '#fde047';
+    ctx.beginPath();
+    ctx.arc(centerX, centerY, 20, 0, 2 * Math.PI);
+    ctx.fill();
+  };
+
+  const drawBlackhole = (ctx: CanvasRenderingContext2D, centerX: number, centerY: number, time: number) => {
+    // Deep space background
+    ctx.fillStyle = '#000000';
+    ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+    
+    // Draw accretion disk with vibrant rotating colors
+    for (let radius = 100; radius > 30; radius -= 5) {
+      const alpha = (100 - radius) / 100;
+      const hue = (time * 50 + radius * 2) % 360;
+      ctx.fillStyle = `hsla(${hue}, 100%, 60%, ${alpha * 0.3})`;
+      ctx.beginPath();
+      ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
+      ctx.fill();
+    }
+    
+    // Draw event horizon (black center)
+    ctx.fillStyle = '#000000';
+    ctx.beginPath();
+    ctx.arc(centerX, centerY, 30, 0, 2 * Math.PI);
+    ctx.fill();
+    
+    // Draw Hawking radiation particles
+    for (let i = 0; i < 10; i++) {
+      const angle = (time + i) * 0.5;
+      const x = centerX + Math.cos(angle) * 35;
+      const y = centerY + Math.sin(angle) * 35;
+      ctx.fillStyle = '#ff6b6b';
+      ctx.beginPath();
+      ctx.arc(x, y, 2, 0, 2 * Math.PI);
+      ctx.fill();
+    }
+  };
+
+  const drawGravityWaves = (ctx: CanvasRenderingContext2D, centerX: number, centerY: number, time: number) => {
+    // Space background
+    ctx.fillStyle = '#1a1a2e';
+    ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+    
+    // Draw gravitational waves as expanding ripples
+    for (let i = 1; i <= 8; i++) {
+      const radius = (time * 100 + i * 30) % 300;
+      const alpha = Math.max(0, 1 - radius / 300);
+      
+      ctx.strokeStyle = `rgba(139, 69, 255, ${alpha})`;
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+      ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
+      ctx.stroke();
+    }
+    
+    // Draw binary system causing gravitational waves
+    const angle = time * 2;
+    const orbit = 60;
+    
+    // Star 1 (red)
+    ctx.fillStyle = '#ff6b6b';
+    ctx.beginPath();
+    ctx.arc(centerX + Math.cos(angle) * orbit, centerY + Math.sin(angle) * orbit, 15, 0, 2 * Math.PI);
+    ctx.fill();
+    
+    // Star 2 (cyan)
+    ctx.fillStyle = '#4ecdc4';
+    ctx.beginPath();
+    ctx.arc(centerX - Math.cos(angle) * orbit, centerY - Math.sin(angle) * orbit, 15, 0, 2 * Math.PI);
+    ctx.fill();
+  };
+
   const drawFluidDynamics = (ctx: CanvasRenderingContext2D, centerX: number, centerY: number, time: number) => {
     const viscosity = parameters.viscosity || 0.1;
     const flow_speed = parameters.flow_speed || 2;
@@ -716,12 +839,10 @@ export default function Visual3DCourses({ isOpen, onClose, onComplete }: Visual3
       const x = 50 + particle_age * 70;
       const y = centerY + 30 * Math.sin(time * 2 + i) * turbulence;
       
-      const particle_size = 4 + 2 * Math.sin(time * 3 + i);
-      const particleGradient = ctx.createRadialGradient(x, y, 0, x, y, particle_size);
-      particleGradient.addColorStop(0, '#60a5fa');
-      particleGradient.addColorStop(1, 'rgba(96, 165, 250, 0)');
+      const particle_size = Math.max(1, 4 + 2 * Math.sin(time * 3 + i));
       
-      ctx.fillStyle = particleGradient;
+      // Use vibrant solid colors instead of gradients
+      ctx.fillStyle = '#60a5fa';
       ctx.beginPath();
       ctx.arc(x, y, particle_size, 0, 2 * Math.PI);
       ctx.fill();
