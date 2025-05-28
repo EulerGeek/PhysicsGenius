@@ -152,6 +152,11 @@ export default function Home() {
           onClose={handleCloseInteractiveLesson}
         />
       )}
+
+      <QuickTest
+        isOpen={showQuickTest}
+        onClose={() => setShowQuickTest(false)}
+      />
     </div>
   );
 }

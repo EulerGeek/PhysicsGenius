@@ -49,10 +49,7 @@ export default function InteractiveLesson({ lessonId, title, onComplete, onClose
       return;
     }
 
-    // Debug logging to see what's happening
-    console.log("Selected Answer:", selectedAnswer);
-    console.log("Correct Answer:", question.correctAnswer);
-    console.log("Question:", question);
+
 
     const correct = selectedAnswer === question.correctAnswer;
     setIsCorrect(correct);

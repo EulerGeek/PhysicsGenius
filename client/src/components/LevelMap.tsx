@@ -192,7 +192,7 @@ export default function LevelMap({ progress, onLessonComplete }: LevelMapProps) 
                   <span className="font-semibold">Progress:</span> {Object.keys(progress.completedLessons).length}/{lessons.length} lessons
                 </div>
                 <div className="text-sm">
-                  <span className="font-semibold">Average:</span> {Math.round(Object.values(progress.scores).reduce((a: any, b: any) => a + b, 0) / Math.max(Object.values(progress.scores).length, 1))}%
+                  <span className="font-semibold">Average:</span> {Math.round(Object.values(progress.scores as Record<string, number>).reduce((a: number, b: number) => a + b, 0) / Math.max(Object.values(progress.scores as Record<string, number>).length, 1))}%
                 </div>
               </div>
             </CardContent>
