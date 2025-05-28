@@ -11,6 +11,7 @@ import LessonIntro from "@/components/LessonIntro";
 import InteractiveLesson from "@/components/InteractiveLesson";
 import LevelMap from "@/components/LevelMap";
 import QuickTest from "@/components/QuickTest";
+import UnifiedLearningInterface from "@/components/UnifiedLearningInterface";
 import Resources from "@/components/Resources";
 import Footer from "@/components/Footer";
 import ConceptMenu from "@/components/ConceptMenu";
@@ -33,6 +34,7 @@ export default function Home() {
   const [showInteractiveLesson, setShowInteractiveLesson] = useState(false);
   const [showQuickTest, setShowQuickTest] = useState(false);
   const [viewMode, setViewMode] = useState<'list' | 'map'>('map');
+  const [wrongAnswers, setWrongAnswers] = useState<any[]>([]);
   const { progress, updateProgress, resetProgress } = useProgress();
   
   const courses = getCourses();

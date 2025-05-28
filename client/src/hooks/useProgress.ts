@@ -5,7 +5,7 @@ interface UserProgress {
   streak: number;
   overallProgress: number;
   totalLessonsCompleted: number;
-  completedLessons: Record<string, number>;
+  completedLessons: Record<string, string[]>; // Track actual lesson IDs instead of counts
   scores: Record<string, number>;
 }
 
@@ -14,9 +14,9 @@ const defaultProgress: UserProgress = {
   overallProgress: 0,
   totalLessonsCompleted: 0,
   completedLessons: {
-    classical: 0,
-    relativity: 0,
-    quantum: 0
+    classical: [],
+    relativity: [],
+    quantum: []
   },
   scores: {}
 };
