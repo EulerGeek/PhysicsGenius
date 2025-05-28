@@ -17,21 +17,21 @@ export async function seedDatabase() {
       {
         title: "Classical Mechanics",
         description: "Master the fundamentals of motion and forces",
-        icon: "fas fa-rocket",
+        icon: "🚀",
         color: "bg-blue-50",
         totalLessons: 15
       },
       {
         title: "General Relativity", 
         description: "Explore spacetime and gravity",
-        icon: "fas fa-infinity",
+        icon: "🌌",
         color: "bg-purple-50",
         totalLessons: 10
       },
       {
         title: "Quantum Mechanics",
         description: "Discover the quantum world", 
-        icon: "fas fa-wave-square",
+        icon: "⚛️",
         color: "bg-amber-50",
         totalLessons: 12
       }
