@@ -1,5 +1,8 @@
 import { useState } from "react";
 import Header from "@/components/Header";
+import HomeScreen from "@/components/HomeScreen";
+import AboutPage from "@/components/AboutPage";
+import NavigationMenu from "@/components/NavigationMenu";
 import ProgressOverview from "@/components/ProgressOverview";
 import CourseNavigation from "@/components/CourseNavigation";
 import LessonCard from "@/components/LessonCard";
@@ -16,6 +19,7 @@ import { useProgress } from "@/hooks/useProgress";
 import { getCourses, getLessonsByCourse } from "@/lib/lessons";
 
 export default function Home() {
+  const [currentPage, setCurrentPage] = useState("home");
   const [activeTab, setActiveTab] = useState("classical");
   const [selectedLesson, setSelectedLesson] = useState<any>(null);
   const [showLessonIntro, setShowLessonIntro] = useState(false);
@@ -63,78 +67,108 @@ export default function Home() {
     updateProgress(lessonId, true, score);
   };
 
-  return (
-    <div className="min-h-screen bg-neutral-50">
-      <Header progress={progress} resetProgress={resetProgress} />
-      
-      <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <ProgressOverview progress={progress} courses={courses} />
-        
-        <CourseNavigation 
-          courses={courses}
-          activeTab={activeTab}
-          onTabChange={setActiveTab}
-        />
-
-        <section className="mb-8">
-          <div className="flex items-center justify-between mb-6">
-            <div>
-              <h3 className="text-xl font-bold text-neutral-900">{activeCourse?.title}</h3>
-              <p className="text-neutral-600">{activeCourse?.description}</p>
-            </div>
-            <div className="flex items-center gap-3">
-              <Button
-                onClick={() => setShowQuickTest(true)}
-                className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white"
-              >
-                🧪 Quick Test
-              </Button>
-              <div className="flex items-center gap-2">
-                <Button
-                  variant={viewMode === 'map' ? 'default' : 'outline'}
-                  size="sm"
-                  onClick={() => setViewMode('map')}
-                >
-                  🗺️ Map
-                </Button>
-                <Button
-                  variant={viewMode === 'list' ? 'default' : 'outline'}
-                  size="sm"
-                  onClick={() => setViewMode('list')}
-                >
-                  📋 List
-                </Button>
-              </div>
+  const renderCurrentPage = () => {
+    switch (currentPage) {
+      case 'home':
+        return <HomeScreen progress={progress} onNavigate={setCurrentPage} onStartQuickTest={() => setShowQuickTest(true)} />;
+      case 'about':
+        return <AboutPage />;
+      case 'progress':
+        return (
+          <div className="min-h-screen bg-neutral-50 dark:bg-gray-900">
+            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+              <ProgressOverview progress={progress} courses={courses} />
             </div>
           </div>
+        );
+      case 'courses':
+      default:
+        return (
+          <div className="min-h-screen bg-neutral-50 dark:bg-gray-900">
+            <Header progress={progress} resetProgress={resetProgress} />
+            
+            <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+              <ProgressOverview progress={progress} courses={courses} />
+              
+              <CourseNavigation 
+                courses={courses}
+                activeTab={activeTab}
+                onTabChange={setActiveTab}
+              />
 
-          {viewMode === 'map' ? (
-            <LevelMap
-              progress={progress}
-              onLessonComplete={handleCompleteLesson}
-            />
-          ) : (
-            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-              {lessons.map((lesson, index) => (
-                <LessonCard
-                  key={lesson.id}
-                  lesson={lesson}
-                  isCompleted={progress.completedLessons[activeTab] > index}
-                  isActive={progress.completedLessons[activeTab] === index}
-                  isLocked={progress.completedLessons[activeTab] < index}
-                  onStart={() => handleStartLesson(lesson.id)}
-                  score={progress.scores[lesson.id]}
-                />
-              ))}
-            </div>
-          )}
-        </section>
+              <section className="mb-8">
+                <div className="flex items-center justify-between mb-6">
+                  <div>
+                    <h3 className="text-xl font-bold text-neutral-900 dark:text-white">{activeCourse?.title}</h3>
+                    <p className="text-neutral-600 dark:text-gray-400">{activeCourse?.description}</p>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <Button
+                      onClick={() => setShowQuickTest(true)}
+                      className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white"
+                    >
+                      🧪 Quick Test
+                    </Button>
+                    <div className="flex items-center gap-2">
+                      <Button
+                        variant={viewMode === 'map' ? 'default' : 'outline'}
+                        size="sm"
+                        onClick={() => setViewMode('map')}
+                      >
+                        🗺️ Map
+                      </Button>
+                      <Button
+                        variant={viewMode === 'list' ? 'default' : 'outline'}
+                        size="sm"
+                        onClick={() => setViewMode('list')}
+                      >
+                        📋 List
+                      </Button>
+                    </div>
+                  </div>
+                </div>
 
-        <LessonPreview onComplete={handleCompleteLesson} />
-        <Resources />
-      </main>
+                {viewMode === 'map' ? (
+                  <LevelMap
+                    progress={progress}
+                    onLessonComplete={handleCompleteLesson}
+                  />
+                ) : (
+                  <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                    {lessons.map((lesson, index) => (
+                      <LessonCard
+                        key={lesson.id}
+                        lesson={lesson}
+                        isCompleted={progress.completedLessons[activeTab] > index}
+                        isActive={progress.completedLessons[activeTab] === index}
+                        isLocked={progress.completedLessons[activeTab] < index}
+                        onStart={() => handleStartLesson(lesson.id)}
+                        score={progress.scores[lesson.id]}
+                      />
+                    ))}
+                  </div>
+                )}
+              </section>
 
-      <Footer />
+              <LessonPreview onComplete={handleCompleteLesson} />
+              <Resources />
+            </main>
+
+            <Footer />
+          </div>
+        );
+    }
+  };
+
+  return (
+    <div className="relative">
+      <NavigationMenu
+        currentPage={currentPage}
+        onNavigate={setCurrentPage}
+        progress={progress}
+      />
+      
+      {renderCurrentPage()}
 
       {showLessonIntro && selectedLesson && (
         <LessonIntro
