@@ -317,83 +317,50 @@ export default function VoiceNavigationAssistant({
 
   return (
     <div className="fixed bottom-4 left-4 z-40">
-      <Card className="bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm shadow-2xl border-2 border-blue-200 dark:border-blue-800 rounded-2xl">
-        <CardContent className="p-4">
-          <div className="flex items-center gap-4">
-            {/* Microphone Button */}
-            <Button
-              onClick={isListening ? stopListening : startListening}
-              className={`w-14 h-14 rounded-full transition-all duration-300 ${
-                isListening
-                  ? 'bg-red-500 hover:bg-red-600 animate-pulse'
-                  : 'bg-blue-500 hover:bg-blue-600'
-              } text-white shadow-lg hover:shadow-xl hover:scale-110`}
-            >
-              <span className="text-2xl">
-                {isListening ? '🔴' : '🎤'}
-              </span>
-            </Button>
-
-            {/* Voice Status */}
-            <div className="flex-1 min-w-0">
-              <div className="flex items-center gap-2 mb-1">
-                <Badge className={`px-2 py-1 text-xs ${
-                  isListening 
-                    ? 'bg-red-100 text-red-700 dark:bg-red-900 dark:text-red-300' 
-                    : 'bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300'
-                }`}>
-                  {isListening ? '🎤 Listening...' : '⚛️ QUOMA'}
-                </Badge>
-                
-                {confidence > 0 && (
-                  <Badge className="bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300 px-2 py-1 text-xs">
-                    {Math.round(confidence * 100)}% confidence
-                  </Badge>
-                )}
-              </div>
-
-              {transcript && (
-                <p className="text-sm text-gray-700 dark:text-gray-300 truncate">
-                  "{transcript}"
-                </p>
-              )}
-
-              {lastCommand && showFeedback && (
-                <p className="text-xs text-green-600 dark:text-green-400 mt-1">
-                  ✓ Executed: {lastCommand}
-                </p>
-              )}
-            </div>
-
-            {/* Help Button */}
-            <Button
-              onClick={speakHelp}
-              variant="outline"
-              size="sm"
-              className="bg-white/80 dark:bg-gray-800/80 hover:bg-white dark:hover:bg-gray-800 border-blue-200 dark:border-blue-700 rounded-xl px-3 py-2"
-            >
-              <span className="text-lg mr-1">❓</span>
-              <span className="text-xs">Help</span>
-            </Button>
+      {/* QUOMA Character - Replaces the voice panel */}
+      <div className="relative">
+        <div 
+          className={`w-20 h-20 bg-gradient-to-br from-blue-400 via-purple-500 to-blue-600 rounded-full shadow-2xl flex items-center justify-center border-4 border-white cursor-pointer transition-all duration-300 hover:scale-110 ${
+            isListening ? 'animate-pulse scale-110' : 'hover:shadow-xl'
+          }`}
+          onClick={isListening ? stopListening : startListening}
+        >
+          {/* Orbiting Particles */}
+          <div className="absolute inset-0 rounded-full">
+            <div className="absolute w-2 h-2 bg-yellow-400 rounded-full opacity-80" 
+                 style={{
+                   top: '10px',
+                   left: '50%',
+                   transform: 'translateX(-50%)',
+                   animation: 'orbit 4s linear infinite'
+                 }}></div>
+            <div className="absolute w-1.5 h-1.5 bg-green-400 rounded-full opacity-60" 
+                 style={{
+                   top: '50%',
+                   right: '10px',
+                   transform: 'translateY(-50%)',
+                   animation: 'orbit 3s linear infinite reverse'
+                 }}></div>
           </div>
 
-          {/* Quick Command Hints */}
-          <div className="mt-3 pt-3 border-t border-gray-200 dark:border-gray-700">
-            <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">Quick commands:</p>
-            <div className="flex flex-wrap gap-1">
-              {['home', 'physics', 'help', 'start lesson'].map((cmd) => (
-                <Badge 
-                  key={cmd}
-                  className="bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 px-2 py-1 text-xs cursor-pointer hover:bg-blue-100 dark:hover:bg-blue-900 transition-colors"
-                  onClick={() => processVoiceCommand(cmd)}
-                >
-                  "{cmd}"
-                </Badge>
-              ))}
-            </div>
+          {/* Physics Symbol */}
+          <div className={`text-3xl transition-all duration-300 ${isListening ? 'scale-125' : ''}`}>
+            ⚛️
           </div>
-        </CardContent>
-      </Card>
+
+          {/* Listening indicator */}
+          {isListening && (
+            <div className="absolute inset-0 rounded-full border-4 border-red-400 animate-ping"></div>
+          )}
+        </div>
+        
+        {/* QUOMA Label */}
+        <div className="text-center mt-2">
+          <div className="bg-white/90 dark:bg-gray-800/90 px-3 py-1 rounded-full shadow-lg">
+            <div className="text-sm font-bold text-blue-600 dark:text-blue-400">QUOMA</div>
+          </div>
+        </div>
+      </div>
 
       {/* Quoma Character - appears when "Hey Quoma" is said */}
       <QuomaCharacter 
