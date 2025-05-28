@@ -10,9 +10,7 @@ export default function Footer() {
   const handleFooterWikipediaSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (footerSearchQuery.trim()) {
-      const searchUrl = `https://en.wikipedia.org/wiki/${encodeURIComponent(footerSearchQuery.trim())}`;
-      window.open(searchUrl, '_blank');
-      setFooterSearchQuery("");
+      setShowWikipediaPanel(true);
     }
   };
 
@@ -54,25 +52,37 @@ export default function Footer() {
         <div className="mb-6 text-center">
           <div className="flex flex-wrap justify-center gap-3 text-sm">
             <button 
-              onClick={() => window.open('https://en.wikipedia.org/wiki/Albert_Einstein', '_blank')}
+              onClick={() => {
+                setFooterSearchQuery("Albert Einstein");
+                setShowWikipediaPanel(true);
+              }}
               className="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 rounded-full hover:bg-blue-200 dark:hover:bg-blue-800 transition-colors"
             >
               Einstein 🧠
             </button>
             <button 
-              onClick={() => window.open('https://en.wikipedia.org/wiki/Quantum_mechanics', '_blank')}
+              onClick={() => {
+                setFooterSearchQuery("Quantum mechanics");
+                setShowWikipediaPanel(true);
+              }}
               className="px-3 py-1 bg-purple-100 dark:bg-purple-900 text-purple-700 dark:text-purple-300 rounded-full hover:bg-purple-200 dark:hover:bg-purple-800 transition-colors"
             >
               Quantum Physics ⚛️
             </button>
             <button 
-              onClick={() => window.open('https://en.wikipedia.org/wiki/General_relativity', '_blank')}
+              onClick={() => {
+                setFooterSearchQuery("General relativity");
+                setShowWikipediaPanel(true);
+              }}
               className="px-3 py-1 bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-300 rounded-full hover:bg-green-200 dark:hover:bg-green-800 transition-colors"
             >
               Relativity 🌌
             </button>
             <button 
-              onClick={() => window.open('https://en.wikipedia.org/wiki/Newton%27s_laws_of_motion', '_blank')}
+              onClick={() => {
+                setFooterSearchQuery("Newton's laws of motion");
+                setShowWikipediaPanel(true);
+              }}
               className="px-3 py-1 bg-orange-100 dark:bg-orange-900 text-orange-700 dark:text-orange-300 rounded-full hover:bg-orange-200 dark:hover:bg-orange-800 transition-colors"
             >
               Newton's Laws 🍎
@@ -101,6 +111,12 @@ export default function Footer() {
           © 2024 QUOMA. Free physics education for everyone. 🚀 Explore the universe of knowledge!
         </div>
       </div>
+
+      <WikipediaPanel
+        isOpen={showWikipediaPanel}
+        onClose={() => setShowWikipediaPanel(false)}
+        initialQuery={footerSearchQuery}
+      />
     </footer>
   );
 }
