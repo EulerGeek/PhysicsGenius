@@ -714,44 +714,49 @@ export default function Visual3DCourses({ isOpen, onClose, onComplete }: Visual3
     ctx.fillStyle = '#0a0a23';
     ctx.fillRect(0, 0, 600, 400);
     
+    // Use parameters for dynamic control
+    const mass = parameters.mass || 1;
+    const gridSize = parameters.gridSize || 20;
+    
     // Draw spacetime grid with gravitational warping
     ctx.strokeStyle = '#4f46e5';
     ctx.lineWidth = 2;
     
     // Horizontal grid lines with curvature from massive object
-    for (let y = 50; y < ctx.canvas.height - 50; y += 40) {
+    for (let y = 50; y < 350; y += gridSize) {
       ctx.beginPath();
       ctx.moveTo(50, y);
-      for (let x = 50; x < ctx.canvas.width - 50; x += 10) {
+      for (let x = 50; x < 550; x += 10) {
         const distanceFromCenter = Math.sqrt((x - centerX) ** 2 + (y - centerY) ** 2);
-        const warp = Math.max(0, 30 / (1 + distanceFromCenter / 50));
+        const warp = Math.max(0, (30 * mass) / (1 + distanceFromCenter / 50));
         ctx.lineTo(x, y + warp);
       }
       ctx.stroke();
     }
     
     // Vertical grid lines with warping
-    for (let x = 50; x < ctx.canvas.width - 50; x += 40) {
+    for (let x = 50; x < 550; x += gridSize) {
       ctx.beginPath();
       ctx.moveTo(x, 50);
-      for (let y = 50; y < ctx.canvas.height - 50; y += 10) {
+      for (let y = 50; y < 350; y += 10) {
         const distanceFromCenter = Math.sqrt((x - centerX) ** 2 + (y - centerY) ** 2);
-        const warp = Math.max(0, 30 / (1 + distanceFromCenter / 50));
+        const warp = Math.max(0, (30 * mass) / (1 + distanceFromCenter / 50));
         ctx.lineTo(x + warp * 0.5, y);
       }
       ctx.stroke();
     }
     
-    // Draw massive object causing curvature
+    // Draw massive object causing curvature (size based on mass)
+    const objectRadius = 15 + mass * 10;
     ctx.fillStyle = '#fbbf24';
     ctx.beginPath();
-    ctx.arc(centerX, centerY, 25, 0, 2 * Math.PI);
+    ctx.arc(centerX, centerY, objectRadius, 0, 2 * Math.PI);
     ctx.fill();
     
     // Add glow effect
     ctx.fillStyle = '#fde047';
     ctx.beginPath();
-    ctx.arc(centerX, centerY, 20, 0, 2 * Math.PI);
+    ctx.arc(centerX, centerY, objectRadius * 0.8, 0, 2 * Math.PI);
     ctx.fill();
   };
 
@@ -760,27 +765,36 @@ export default function Visual3DCourses({ isOpen, onClose, onComplete }: Visual3
     ctx.fillStyle = '#000000';
     ctx.fillRect(0, 0, 600, 400);
     
-    // Draw accretion disk with vibrant rotating colors
-    for (let radius = 100; radius > 30; radius -= 5) {
-      const alpha = (100 - radius) / 100;
-      const hue = (time * 50 + radius * 2) % 360;
+    // Use parameters for dynamic control
+    const mass = parameters.mass || 2;
+    const accretionRate = parameters.accretionRate || 1.5;
+    
+    // Draw accretion disk with vibrant rotating colors (size based on mass)
+    const maxRadius = 60 + mass * 40;
+    const eventHorizon = 15 + mass * 15;
+    
+    for (let radius = maxRadius; radius > eventHorizon; radius -= 5) {
+      const alpha = (maxRadius - radius) / maxRadius;
+      const hue = (time * 50 * accretionRate + radius * 2) % 360;
       ctx.fillStyle = `hsla(${hue}, 100%, 60%, ${alpha * 0.3})`;
       ctx.beginPath();
       ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
       ctx.fill();
     }
     
-    // Draw event horizon (black center)
+    // Draw event horizon (black center, size based on mass)
     ctx.fillStyle = '#000000';
     ctx.beginPath();
-    ctx.arc(centerX, centerY, 30, 0, 2 * Math.PI);
+    ctx.arc(centerX, centerY, eventHorizon, 0, 2 * Math.PI);
     ctx.fill();
     
-    // Draw Hawking radiation particles
-    for (let i = 0; i < 10; i++) {
-      const angle = (time + i) * 0.5;
-      const x = centerX + Math.cos(angle) * 35;
-      const y = centerY + Math.sin(angle) * 35;
+    // Draw Hawking radiation particles (more with higher mass)
+    const particleCount = Math.floor(5 + mass * 5);
+    for (let i = 0; i < particleCount; i++) {
+      const angle = (time * accretionRate + i) * 0.5;
+      const distance = eventHorizon + 5;
+      const x = centerX + Math.cos(angle) * distance;
+      const y = centerY + Math.sin(angle) * distance;
       ctx.fillStyle = '#ff6b6b';
       ctx.beginPath();
       ctx.arc(x, y, 2, 0, 2 * Math.PI);
@@ -793,33 +807,58 @@ export default function Visual3DCourses({ isOpen, onClose, onComplete }: Visual3
     ctx.fillStyle = '#1a1a2e';
     ctx.fillRect(0, 0, 600, 400);
     
+    // Use parameters for dynamic control
+    const frequency = parameters.frequency || 1;
+    const amplitude = parameters.amplitude || 1;
+    
     // Draw gravitational waves as expanding ripples
-    for (let i = 1; i <= 8; i++) {
-      const radius = (time * 100 + i * 30) % 300;
-      const alpha = Math.max(0, 1 - radius / 300);
+    const waveCount = Math.floor(6 + amplitude * 4);
+    for (let i = 1; i <= waveCount; i++) {
+      const radius = (time * 80 * frequency + i * 25) % (250 + amplitude * 50);
+      const alpha = Math.max(0, (1 - radius / (300 + amplitude * 50)) * amplitude);
       
       ctx.strokeStyle = `rgba(139, 69, 255, ${alpha})`;
-      ctx.lineWidth = 3;
+      ctx.lineWidth = 2 + amplitude;
       ctx.beginPath();
       ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
       ctx.stroke();
     }
     
     // Draw binary system causing gravitational waves
-    const angle = time * 2;
-    const orbit = 60;
+    const angle = time * frequency * 2;
+    const orbit = 40 + amplitude * 20;
+    const starSize = 10 + amplitude * 5;
     
     // Star 1 (red)
     ctx.fillStyle = '#ff6b6b';
     ctx.beginPath();
-    ctx.arc(centerX + Math.cos(angle) * orbit, centerY + Math.sin(angle) * orbit, 15, 0, 2 * Math.PI);
+    ctx.arc(centerX + Math.cos(angle) * orbit, centerY + Math.sin(angle) * orbit, starSize, 0, 2 * Math.PI);
     ctx.fill();
     
     // Star 2 (cyan)
     ctx.fillStyle = '#4ecdc4';
     ctx.beginPath();
-    ctx.arc(centerX - Math.cos(angle) * orbit, centerY - Math.sin(angle) * orbit, 15, 0, 2 * Math.PI);
+    ctx.arc(centerX - Math.cos(angle) * orbit, centerY - Math.sin(angle) * orbit, starSize, 0, 2 * Math.PI);
     ctx.fill();
+    
+    // Add orbital trail effect
+    ctx.globalAlpha = 0.3;
+    for (let j = 1; j <= 20; j++) {
+      const trailAngle = angle - j * 0.1;
+      const trailAlpha = 0.3 - j * 0.015;
+      
+      ctx.globalAlpha = trailAlpha;
+      ctx.fillStyle = '#ff6b6b';
+      ctx.beginPath();
+      ctx.arc(centerX + Math.cos(trailAngle) * orbit, centerY + Math.sin(trailAngle) * orbit, starSize * 0.7, 0, 2 * Math.PI);
+      ctx.fill();
+      
+      ctx.fillStyle = '#4ecdc4';
+      ctx.beginPath();
+      ctx.arc(centerX - Math.cos(trailAngle) * orbit, centerY - Math.sin(trailAngle) * orbit, starSize * 0.7, 0, 2 * Math.PI);
+      ctx.fill();
+    }
+    ctx.globalAlpha = 1;
   };
 
   const drawFluidDynamics = (ctx: CanvasRenderingContext2D, centerX: number, centerY: number, time: number) => {
