@@ -20,7 +20,7 @@ interface Visual3DConcept {
   id: string;
   title: string;
   description: string;
-  visualization: 'pendulum' | 'wave' | 'orbit' | 'field' | 'particle' | 'spring' | 'collision' | 'fluid';
+  visualization: 'pendulum' | 'wave' | 'orbit' | 'field' | 'particle' | 'spring' | 'collision' | 'fluid' | 'spacetime' | 'blackhole' | 'gravity_waves';
   parameters: Record<string, number>;
   explanation: string;
 }
@@ -329,43 +329,72 @@ export default function Visual3DCourses({ isOpen, onClose, onComplete }: Visual3
   };
 
   const drawSpring = (ctx: CanvasRenderingContext2D, centerX: number, centerY: number, time: number) => {
-    const equilibrium = centerY;
-    const displacement = parameters.amplitude * 20 * Math.cos(time * Math.sqrt(parameters.springConstant / parameters.mass)) * Math.exp(-parameters.damping * time);
-    const massY = equilibrium + displacement;
+    const equilibrium = centerX; // Fixed: horizontal equilibrium
+    const displacement = parameters.amplitude * 50 * Math.cos(time * Math.sqrt(parameters.springConstant / parameters.mass)) * Math.exp(-parameters.damping * time);
+    const massX = equilibrium + displacement; // Fixed: horizontal movement
 
-    // Draw wall
+    // Draw wall with 3D effect
+    ctx.fillStyle = '#6b7280';
+    ctx.fillRect(50, centerY - 100, 20, 200);
     ctx.fillStyle = '#374151';
-    ctx.fillRect(centerX - 150, centerY - 100, 20, 200);
+    ctx.fillRect(52, centerY - 98, 16, 196);
 
-    // Draw spring
-    ctx.strokeStyle = '#6b7280';
-    ctx.lineWidth = 3;
+    // Draw spring with proper horizontal coils
+    ctx.strokeStyle = '#10b981';
+    ctx.lineWidth = 4;
     ctx.beginPath();
-    ctx.moveTo(centerX - 130, centerY);
+    ctx.moveTo(70, centerY);
     
-    const coils = 12;
-    const springLength = 100 + displacement;
+    const coils = 15;
+    const springLength = 150 + displacement; // Variable spring length
     for (let i = 0; i <= coils; i++) {
-      const x = centerX - 130 + (i / coils) * springLength;
-      const y = centerY + (i % 2 === 0 ? -10 : 10);
+      const x = 70 + (i / coils) * springLength;
+      const y = centerY + (i % 2 === 0 ? -15 : 15); // Coil height
       ctx.lineTo(x, y);
     }
-    ctx.lineTo(centerX - 30, massY);
+    ctx.lineTo(massX - 25, centerY);
     ctx.stroke();
 
-    // Draw mass
+    // Draw mass with vibrant colors
     ctx.fillStyle = '#dc2626';
-    ctx.fillRect(centerX - 50, massY - 15, 40, 30);
+    ctx.fillRect(massX - 25, centerY - 20, 50, 40);
+    ctx.fillStyle = '#fca5a5';
+    ctx.fillRect(massX - 23, centerY - 18, 46, 36);
 
-    // Draw equilibrium line
-    ctx.strokeStyle = '#94a3b8';
-    ctx.lineWidth = 1;
-    ctx.setLineDash([3, 3]);
+    // Add mass outline
+    ctx.strokeStyle = '#7f1d1d';
+    ctx.lineWidth = 2;
+    ctx.strokeRect(massX - 25, centerY - 20, 50, 40);
+
+    // Draw equilibrium line (vertical)
+    ctx.strokeStyle = '#fbbf24';
+    ctx.lineWidth = 2;
+    ctx.setLineDash([5, 5]);
     ctx.beginPath();
-    ctx.moveTo(centerX - 80, equilibrium);
-    ctx.lineTo(centerX + 50, equilibrium);
+    ctx.moveTo(equilibrium, centerY - 80);
+    ctx.lineTo(equilibrium, centerY + 80);
     ctx.stroke();
     ctx.setLineDash([]);
+
+    // Add velocity indicator
+    const velocity = -parameters.amplitude * 50 * Math.sqrt(parameters.springConstant / parameters.mass) * Math.sin(time * Math.sqrt(parameters.springConstant / parameters.mass)) * Math.exp(-parameters.damping * time);
+    if (Math.abs(velocity) > 1) {
+      ctx.strokeStyle = '#3b82f6';
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+      ctx.moveTo(massX, centerY);
+      ctx.lineTo(massX + velocity * 2, centerY);
+      ctx.stroke();
+      
+      // Arrow head
+      ctx.fillStyle = '#3b82f6';
+      ctx.beginPath();
+      const arrowDir = velocity > 0 ? 1 : -1;
+      ctx.moveTo(massX + velocity * 2, centerY);
+      ctx.lineTo(massX + velocity * 2 - arrowDir * 10, centerY - 5);
+      ctx.lineTo(massX + velocity * 2 - arrowDir * 10, centerY + 5);
+      ctx.fill();
+    }
   };
 
   const drawWave = (ctx: CanvasRenderingContext2D, centerX: number, centerY: number, time: number) => {
