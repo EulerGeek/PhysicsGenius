@@ -7,6 +7,7 @@ import AuthModal from "./AuthModal";
 import SettingsModalFixed from "./SettingsModalFixed";
 import FriendsModal from "./FriendsModal";
 import DevPanel from "./DevPanel";
+import WikipediaPanel from "./WikipediaPanel";
 
 interface HeaderProps {
   progress: {
@@ -24,6 +25,7 @@ export default function Header({ progress, resetProgress, setProgress }: HeaderP
   const [showFriendsModal, setShowFriendsModal] = useState(false);
   const [showDevPanel, setShowDevPanel] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const [showWikipediaPanel, setShowWikipediaPanel] = useState(false);
 
   const handleSignIn = (userData: { username: string; email: string; }) => {
     setUser(userData);
@@ -38,9 +40,7 @@ export default function Header({ progress, resetProgress, setProgress }: HeaderP
   const handleWikipediaSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (searchQuery.trim()) {
-      const searchUrl = `https://en.wikipedia.org/wiki/${encodeURIComponent(searchQuery.trim())}`;
-      window.open(searchUrl, '_blank');
-      setSearchQuery("");
+      setShowWikipediaPanel(true);
     }
   };
 
@@ -178,6 +178,12 @@ export default function Header({ progress, resetProgress, setProgress }: HeaderP
           onSetProgress={setProgress}
         />
       )}
+
+      <WikipediaPanel
+        isOpen={showWikipediaPanel}
+        onClose={() => setShowWikipediaPanel(false)}
+        initialQuery={searchQuery}
+      />
     </>
   );
 }

@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import WikipediaPanel from "./WikipediaPanel";
 
 export default function Footer() {
   const [footerSearchQuery, setFooterSearchQuery] = useState("");
+  const [showWikipediaPanel, setShowWikipediaPanel] = useState(false);
 
   const handleFooterWikipediaSearch = (e: React.FormEvent) => {
     e.preventDefault();

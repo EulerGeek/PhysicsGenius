@@ -59,7 +59,7 @@ export default function NavigationMenu({ currentPage, onNavigate, progress }: Na
                         ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white' 
                         : 'hover:bg-gray-100 dark:hover:bg-gray-700'
                     }`}
-                    onClick={() => onNavigate(item.id)}
+                    onClick={() => handleNavigate(item.id)}
                   >
                     <div className="flex items-center gap-3 w-full">
                       <span className="text-lg">{item.icon}</span>
