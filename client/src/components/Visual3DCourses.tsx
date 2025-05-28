@@ -712,7 +712,7 @@ export default function Visual3DCourses({ isOpen, onClose, onComplete }: Visual3
   const drawSpacetime = (ctx: CanvasRenderingContext2D, centerX: number, centerY: number, time: number) => {
     // Clear with deep space background
     ctx.fillStyle = '#0a0a23';
-    ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+    ctx.fillRect(0, 0, 600, 400);
     
     // Draw spacetime grid with gravitational warping
     ctx.strokeStyle = '#4f46e5';
@@ -758,7 +758,7 @@ export default function Visual3DCourses({ isOpen, onClose, onComplete }: Visual3
   const drawBlackhole = (ctx: CanvasRenderingContext2D, centerX: number, centerY: number, time: number) => {
     // Deep space background
     ctx.fillStyle = '#000000';
-    ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+    ctx.fillRect(0, 0, 600, 400);
     
     // Draw accretion disk with vibrant rotating colors
     for (let radius = 100; radius > 30; radius -= 5) {
@@ -791,7 +791,7 @@ export default function Visual3DCourses({ isOpen, onClose, onComplete }: Visual3
   const drawGravityWaves = (ctx: CanvasRenderingContext2D, centerX: number, centerY: number, time: number) => {
     // Space background
     ctx.fillStyle = '#1a1a2e';
-    ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+    ctx.fillRect(0, 0, 600, 400);
     
     // Draw gravitational waves as expanding ripples
     for (let i = 1; i <= 8; i++) {
