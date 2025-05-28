@@ -124,23 +124,13 @@ export default function UnifiedLearningInterface({
 
   return (
     <div className="space-y-4 md:space-y-6 px-2 md:px-4">
-      {/* View Mode Toggle - Mobile Responsive */}
-      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 sm:gap-0">
-        <h2 className="text-xl md:text-2xl font-bold text-gray-900 dark:text-white text-center sm:text-left">
-          {courseId === 'classical' ? 'Classical Mechanics' : 
-           courseId === 'quantum' ? 'Quantum Mechanics' : 
-           'General Relativity'}
+      {/* Course Header - Mobile Responsive */}
+      <div className="flex justify-center items-center">
+        <h2 className="text-xl md:text-2xl font-bold text-gray-900 dark:text-white text-center">
+          {courseId === 'classical' ? '🔬 Classical Mechanics' : 
+           courseId === 'quantum' ? '⚛️ Quantum Mechanics' : 
+           '🌌 General Relativity'}
         </h2>
-        
-        <div className="flex items-center justify-center sm:justify-start space-x-2">
-          <span className="text-xs md:text-sm text-gray-600 dark:text-gray-400">View:</span>
-          <Tabs value={viewMode} onValueChange={(value) => onViewModeChange(value as 'list' | 'map')}>
-            <TabsList className="grid w-full grid-cols-2 h-8 md:h-10 text-xs md:text-sm">
-              <TabsTrigger value="map" className="px-2 md:px-4">🗺️ Map</TabsTrigger>
-              <TabsTrigger value="list" className="px-2 md:px-4">📋 List</TabsTrigger>
-            </TabsList>
-          </Tabs>
-        </div>
       </div>
 
       {/* Concept Notes Modal - Mobile Responsive */}
@@ -237,26 +227,13 @@ export default function UnifiedLearningInterface({
       )}
 
       {/* Main Content */}
+      {/* Map View Only - Mobile Responsive */}
       <div className="space-y-4">
-        {viewMode === 'map' ? (
-          <LevelMap 
-            lessons={lessons}
-            onLessonSelect={handleLessonSelect}
-            progress={progress}
-          />
-        ) : (
-          <div className="grid gap-4">
-            {lessons.map((lesson, index) => (
-              <LessonCard
-                key={lesson.id}
-                lesson={lesson}
-                index={index}
-                onStart={() => handleLessonSelect(lesson)}
-                progress={progress}
-              />
-            ))}
-          </div>
-        )}
+        <LevelMap 
+          lessons={lessons}
+          onLessonSelect={handleLessonSelect}
+          progress={progress}
+        />
       </div>
     </div>
   );

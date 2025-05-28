@@ -115,7 +115,7 @@ export default function Home() {
           <div className="min-h-screen bg-neutral-50 dark:bg-gray-900">
             <Header progress={progress} resetProgress={resetProgress} />
             
-            <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <main className="max-w-6xl mx-auto px-2 sm:px-4 md:px-6 lg:px-8 py-4 md:py-8">
               <ProgressOverview progress={progress} courses={courses} />
               
               <CourseNavigation 
@@ -130,52 +130,24 @@ export default function Home() {
                     <h3 className="text-xl font-bold text-neutral-900 dark:text-white">{activeCourse?.title}</h3>
                     <p className="text-neutral-600 dark:text-gray-400">{activeCourse?.description}</p>
                   </div>
-                  <div className="flex items-center gap-3">
+                  <div className="flex flex-col sm:flex-row items-center gap-3">
                     <Button
                       onClick={() => setShowQuickTest(true)}
-                      className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white"
+                      className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white w-full sm:w-auto"
                     >
                       🧪 Quick Test
                     </Button>
-                    <div className="flex items-center gap-2">
-                      <Button
-                        variant={viewMode === 'map' ? 'default' : 'outline'}
-                        size="sm"
-                        onClick={() => setViewMode('map')}
-                      >
-                        🗺️ Map
-                      </Button>
-                      <Button
-                        variant={viewMode === 'list' ? 'default' : 'outline'}
-                        size="sm"
-                        onClick={() => setViewMode('list')}
-                      >
-                        📋 List
-                      </Button>
-                    </div>
                   </div>
                 </div>
 
-                {viewMode === 'map' ? (
-                  <LevelMap
-                    progress={progress}
-                    onLessonComplete={handleCompleteLesson}
-                  />
-                ) : (
-                  <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-                    {lessons.map((lesson, index) => (
-                      <LessonCard
-                        key={lesson.id}
-                        lesson={lesson}
-                        isCompleted={progress.completedLessons[activeTab] > index}
-                        isActive={progress.completedLessons[activeTab] === index}
-                        isLocked={progress.completedLessons[activeTab] < index}
-                        onStart={() => handleStartLesson(lesson.id)}
-                        score={progress.scores[lesson.id]}
-                      />
-                    ))}
-                  </div>
-                )}
+                <UnifiedLearningInterface
+                  courseId={activeCourse.id}
+                  lessons={activeCourse.lessons}
+                  onStartLesson={handleStartLesson}
+                  progress={progress}
+                  viewMode="map"
+                  onViewModeChange={() => {}}
+                />
               </section>
 
               <LessonPreview onComplete={handleCompleteLesson} />
