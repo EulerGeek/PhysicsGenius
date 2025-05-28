@@ -11,6 +11,7 @@ import ExamSystem from "@/components/ExamSystem";
 import QuickTest from "@/components/QuickTest";
 import FloatingAIButton from "@/components/FloatingAIButton";
 import ConceptMenu from "@/components/ConceptMenu";
+import EducationalFooter from "@/components/EducationalFooter";
 import { Button } from "@/components/ui/button";
 import { useProgress } from "@/hooks/useProgress";
 import { getCourses, getLessonsByCourse } from "@/lib/lessons";
@@ -160,6 +161,9 @@ export default function Home() {
 
           {/* Floating AI Assistant */}
           <FloatingAIButton />
+
+          {/* Educational Resources Footer */}
+          <EducationalFooter />
         </div>
       );
   }
