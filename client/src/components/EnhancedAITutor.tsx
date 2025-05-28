@@ -29,6 +29,20 @@ class EnhancedPhysicsAIBrain {
     
     'gravity': 'Gravity is the fundamental force of attraction between masses. Newton\'s law of universal gravitation: F = G(m₁m₂)/r² where G = 6.67 × 10⁻¹¹ N⋅m²/kg². Einstein\'s general relativity describes gravity as the curvature of spacetime caused by mass and energy.',
     
+    'quantum gravity': 'Quantum gravity is one of physics\' greatest unsolved problems - how to unify quantum mechanics with general relativity. At the Planck scale (10⁻³⁵ m), spacetime itself becomes quantized. Leading theories include string theory, loop quantum gravity, emergent gravity, and causal set theory. The graviton is the hypothetical quantum of gravity.',
+    
+    'graviton': 'The graviton is the hypothetical quantum particle that mediates gravitational force, like how photons mediate electromagnetic force. If gravity is quantized, gravitons would be massless, spin-2 particles traveling at light speed. They have never been detected due to gravity\'s extreme weakness.',
+    
+    'planck scale': 'The Planck scale is where quantum effects of gravity become significant. Planck length: 1.6 × 10⁻³⁵ m, Planck time: 5.4 × 10⁻⁴⁴ s, Planck energy: 1.2 × 10¹⁹ GeV. At these scales, spacetime may become discrete rather than continuous, and our current theories break down.',
+    
+    'string theory': 'String theory proposes fundamental particles are tiny vibrating strings in 10 or 11 dimensions. Different vibration modes correspond to different particles, including the graviton. It naturally includes gravity but requires extra dimensions and has no experimental verification yet.',
+    
+    'loop quantum gravity': 'Loop quantum gravity (LQG) quantizes spacetime itself, suggesting space has discrete, granular structure at the Planck scale. Unlike string theory, LQG doesn\'t require extra dimensions and focuses on quantum geometry. It predicts space is woven from loops and nodes.',
+    
+    'black hole': 'Black holes are regions where gravity is so strong nothing can escape, not even light. They form when massive stars collapse. Hawking radiation suggests black holes slowly evaporate by emitting quantum radiation. The information paradox asks what happens to information that falls in.',
+    
+    'hawking radiation': 'Hawking radiation is thermal radiation predicted to be emitted by black holes due to quantum effects near the event horizon. Virtual particle pairs split at the horizon, with one falling in and one escaping. This causes black holes to slowly evaporate, with smaller ones radiating faster.',
+    
     'wave': 'Waves transfer energy without transferring matter. Key properties: wavelength (λ), frequency (f), amplitude (A), and speed (v = fλ). Types include mechanical waves (sound, water) requiring a medium, and electromagnetic waves (light, radio) that can travel through vacuum.',
     
     'electricity': 'Electricity involves electric charges and their interactions. Coulomb\'s law: F = k(q₁q₂)/r². Electric current I = Q/t (charge per time). Ohm\'s law: V = IR relates voltage, current, and resistance. Electric power P = IV = I²R = V²/R.',
