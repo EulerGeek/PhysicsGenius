@@ -601,6 +601,17 @@ export default function CustomAITutor({ isOpen, onClose, currentQuestion, contex
               </Button>
             </div>
             
+            {/* Back Button */}
+            <div className="mt-4 flex justify-center">
+              <Button
+                onClick={onClose}
+                variant="outline"
+                className="w-full max-w-xs bg-gray-100 hover:bg-gray-200 text-gray-700 border-2 border-gray-300 rounded-xl py-3 px-6 transition-all duration-300 hover:scale-105"
+              >
+                ← Back to Learning
+              </Button>
+            </div>
+            
             <div className="mt-3 text-center">
               <p className="text-sm text-gray-500 dark:text-gray-400">
                 ✨ Powered by QUOMA's intelligent AI assistant
