@@ -236,7 +236,7 @@ export default function FeynmanLecturesPage() {
                     variant="secondary"
                     size="sm"
                     className="bg-white/20 hover:bg-white/30 text-white border-white/30"
-                    onClick={() => window.open('https://www.feynmanlectures.caltech.edu/', '_blank')}
+                    onClick={() => window.open('https://feynmanlectures.caltech.edu/', '_blank')}
                   >
                     📖 Read on Caltech Site
                   </Button>
@@ -294,9 +294,17 @@ export default function FeynmanLecturesPage() {
                         <Button 
                           size="sm" 
                           className="flex-1 text-xs sm:text-sm bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700"
-                          onClick={() => window.open(`https://www.feynmanlectures.caltech.edu/I_${chapter.id.split('-')[1]}.html`, '_blank')}
+                          onClick={() => window.open('https://feynmanlectures.caltech.edu/', '_blank')}
                         >
-                          🚀 Read Chapter
+                          📖 Find at Caltech
+                        </Button>
+                        <Button 
+                          variant="outline" 
+                          size="sm"
+                          className="text-xs sm:text-sm"
+                          onClick={() => window.open(`https://archive.org/search.php?query=feynman+lectures+${chapter.title.replace(/\s+/g, '+')}`, '_blank')}
+                        >
+                          📚 Archive.org
                         </Button>
                         <Button 
                           variant="outline" 
@@ -304,9 +312,27 @@ export default function FeynmanLecturesPage() {
                           className="text-xs sm:text-sm"
                           onClick={() => setSelectedChapter(selectedChapter === chapter.id ? null : chapter.id)}
                         >
-                          {selectedChapter === chapter.id ? '👁️' : '👁️‍🗨️'}
+                          {selectedChapter === chapter.id ? '🔽' : 'ℹ️'}
                         </Button>
                       </div>
+                      
+                      {selectedChapter === chapter.id && (
+                        <div className="mt-4 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg border-l-4 border-blue-500">
+                          <h5 className="font-semibold text-sm mb-2">Chapter Summary:</h5>
+                          <p className="text-xs sm:text-sm text-gray-700 dark:text-gray-300 mb-3">
+                            {chapter.description}
+                          </p>
+                          <div className="text-xs text-gray-600 dark:text-gray-400">
+                            <strong>How to Access:</strong>
+                            <ul className="mt-2 space-y-1 ml-4">
+                              <li>• Visit the official Caltech Feynman Lectures website</li>
+                              <li>• Search for "{chapter.title}" in the chapter index</li>
+                              <li>• Check Archive.org for digital copies</li>
+                              <li>• Look for Volume {volume.id.replace('volume', '').toUpperCase()}, Chapter {chapter.id.split('-')[1]}</li>
+                            </ul>
+                          </div>
+                        </div>
+                      )}
                     </CardContent>
                   </Card>
                 ))}
