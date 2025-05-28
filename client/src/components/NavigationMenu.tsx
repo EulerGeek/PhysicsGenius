@@ -10,7 +10,7 @@ interface NavigationMenuProps {
 }
 
 export default function NavigationMenu({ currentPage, onNavigate, progress }: NavigationMenuProps) {
-  const [isHovered, setIsHovered] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const menuItems = [
     { id: 'home', label: 'Home', icon: '🏠', description: 'Main dashboard' },
@@ -22,17 +22,22 @@ export default function NavigationMenu({ currentPage, onNavigate, progress }: Na
     { id: 'about', label: 'About', icon: 'ℹ️', description: 'About QUOMA' },
   ];
 
+  const handleNavigate = (page: string) => {
+    onNavigate(page);
+    setIsOpen(false); // Close menu after navigation
+  };
+
   return (
     <div className="fixed top-4 left-4 z-50">
       <div 
         className="relative"
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
+        onMouseEnter={() => setIsOpen(true)}
+        onMouseLeave={() => setIsOpen(false)}
       >
         {/* Menu Button */}
         <Button
           className={`w-12 h-12 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white shadow-lg transition-all duration-300 ${
-            isHovered ? 'scale-110' : 'scale-100'
+            isOpen ? 'scale-110' : 'scale-100'
           }`}
         >
           <span className="text-xl">☰</span>
@@ -40,7 +45,7 @@ export default function NavigationMenu({ currentPage, onNavigate, progress }: Na
 
         {/* Hover Menu */}
         <div className={`absolute top-16 left-0 transition-all duration-300 ${
-          isHovered ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 -translate-y-4 pointer-events-none'
+          isOpen ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 -translate-y-4 pointer-events-none'
         }`}>
           <Card className="bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm shadow-xl border-0 min-w-[240px]">
             <CardContent className="p-2">

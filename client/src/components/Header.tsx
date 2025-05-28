@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { useTheme } from "@/contexts/ThemeContext";
 import AuthModal from "./AuthModal";
 import SettingsModalFixed from "./SettingsModalFixed";
@@ -22,6 +23,7 @@ export default function Header({ progress, resetProgress, setProgress }: HeaderP
   const [showSettingsModal, setShowSettingsModal] = useState(false);
   const [showFriendsModal, setShowFriendsModal] = useState(false);
   const [showDevPanel, setShowDevPanel] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
 
   const handleSignIn = (userData: { username: string; email: string; }) => {
     setUser(userData);
@@ -31,6 +33,15 @@ export default function Header({ progress, resetProgress, setProgress }: HeaderP
   const handleSignOut = () => {
     setUser(null);
     setShowSettingsModal(false);
+  };
+
+  const handleWikipediaSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      const searchUrl = `https://en.wikipedia.org/wiki/${encodeURIComponent(searchQuery.trim())}`;
+      window.open(searchUrl, '_blank');
+      setSearchQuery("");
+    }
   };
 
   return (
@@ -48,6 +59,29 @@ export default function Header({ progress, resetProgress, setProgress }: HeaderP
                   Your Personal Physics Geek
                 </p>
               </div>
+            </div>
+
+            {/* Wikipedia Search Bar */}
+            <div className="flex-1 max-w-md mx-8">
+              <form onSubmit={handleWikipediaSearch} className="relative">
+                <Input
+                  type="text"
+                  placeholder="Search Wikipedia for physics topics..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:text-white"
+                />
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <span className="text-gray-400 text-sm">🔍</span>
+                </div>
+                <Button
+                  type="submit"
+                  size="sm"
+                  className="absolute inset-y-0 right-0 px-3 bg-blue-600 hover:bg-blue-700 text-white rounded-r-lg"
+                >
+                  📖
+                </Button>
+              </form>
             </div>
             
             <div className="flex items-center space-x-3">
