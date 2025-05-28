@@ -134,6 +134,43 @@ export default function Visual3DCourses({ isOpen, onClose, onComplete }: Visual3
           explanation: 'Quantum objects exhibit both wave and particle properties. De Broglie wavelength λ = h/p relates particle momentum to wave properties.'
         }
       ]
+    },
+
+    // NEW: Amazing General Relativity Course with spectacular visualizations!
+    {
+      id: 'relativity',
+      title: 'General Relativity Visualizations',
+      description: 'Experience Einstein\'s revolutionary insights with stunning spacetime visualizations',
+      icon: <Atom className="w-6 h-6" />,
+      difficulty: 'Advanced' as const,
+      duration: '60 min',
+      category: 'relativity' as const,
+      concepts: [
+        {
+          id: 'spacetime',
+          title: 'Spacetime Curvature',
+          description: 'See how mass warps the fabric of spacetime itself',
+          visualization: 'spacetime' as const,
+          parameters: { mass: 1, gridSize: 20 },
+          explanation: 'Mass and energy curve spacetime, creating what we perceive as gravity. This revolutionary insight by Einstein shows that gravity is not a force but the curvature of spacetime itself!'
+        },
+        {
+          id: 'blackhole',
+          title: 'Black Hole Dynamics',
+          description: 'Witness the extreme physics near a black hole\'s event horizon',
+          visualization: 'blackhole' as const,
+          parameters: { mass: 2, accretionRate: 1.5 },
+          explanation: 'Black holes represent the ultimate gravitational extreme where spacetime curvature becomes so intense that nothing, not even light, can escape beyond the event horizon. The swirling accretion disk glows from superheated matter!'
+        },
+        {
+          id: 'gravity_waves',
+          title: 'Gravitational Waves',
+          description: 'Observe ripples in spacetime from colliding massive objects',
+          visualization: 'gravity_waves' as const,
+          parameters: { frequency: 1, amplitude: 1 },
+          explanation: 'When massive objects accelerate, they create ripples in spacetime that propagate at light speed. These gravitational waves were predicted by Einstein in 1915 and detected by LIGO in 2015, opening a new window to the universe!'
+        }
+      ]
     }
   ];
 
