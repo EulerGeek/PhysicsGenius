@@ -269,15 +269,17 @@ export default function Visual3DCourses({ isOpen, onClose, onComplete }: Visual3
     ctx.lineTo(bobX, bobY);
     ctx.stroke();
 
-    // Draw bob with 3D gradient and mass-based size
-    const bobRadius = 15 * Math.sqrt(parameters.mass);
-    const bobGradient = ctx.createRadialGradient(bobX - 5, bobY - 5, 0, bobX, bobY, bobRadius);
-    bobGradient.addColorStop(0, '#fca5a5');
-    bobGradient.addColorStop(0.6, '#dc2626');
-    bobGradient.addColorStop(1, '#991b1b');
-    ctx.fillStyle = bobGradient;
+    // Draw bob with vibrant colors and mass-based size
+    const bobRadius = Math.max(10, 15 * Math.sqrt(Math.abs(parameters.mass || 1)));
+    ctx.fillStyle = '#dc2626';
     ctx.beginPath();
     ctx.arc(bobX, bobY, bobRadius, 0, 2 * Math.PI);
+    ctx.fill();
+    
+    // Add highlight
+    ctx.fillStyle = '#fca5a5';
+    ctx.beginPath();
+    ctx.arc(bobX - 3, bobY - 3, bobRadius * 0.6, 0, 2 * Math.PI);
     ctx.fill();
 
     // Draw angle arc
@@ -329,14 +331,15 @@ export default function Visual3DCourses({ isOpen, onClose, onComplete }: Visual3
   };
 
   const drawSpring = (ctx: CanvasRenderingContext2D, centerX: number, centerY: number, time: number) => {
-    const equilibrium = centerX; // Fixed: horizontal equilibrium
+    const parameters = { amplitude: 1, springConstant: 2, mass: 1, damping: 0.1 };
+    const equilibrium = centerX;
     const displacement = parameters.amplitude * 50 * Math.cos(time * Math.sqrt(parameters.springConstant / parameters.mass)) * Math.exp(-parameters.damping * time);
-    const massX = equilibrium + displacement; // Fixed: horizontal movement
+    const massX = equilibrium + displacement;
 
-    // Draw wall with 3D effect
+    // Draw wall with vibrant colors
     ctx.fillStyle = '#6b7280';
     ctx.fillRect(50, centerY - 100, 20, 200);
-    ctx.fillStyle = '#374151';
+    ctx.fillStyle = '#94a3b8';
     ctx.fillRect(52, centerY - 98, 16, 196);
 
     // Draw spring with proper horizontal coils
@@ -346,10 +349,10 @@ export default function Visual3DCourses({ isOpen, onClose, onComplete }: Visual3
     ctx.moveTo(70, centerY);
     
     const coils = 15;
-    const springLength = 150 + displacement; // Variable spring length
+    const springLength = Math.abs(massX - 70);
     for (let i = 0; i <= coils; i++) {
       const x = 70 + (i / coils) * springLength;
-      const y = centerY + (i % 2 === 0 ? -15 : 15); // Coil height
+      const y = centerY + (i % 2 === 0 ? -15 : 15);
       ctx.lineTo(x, y);
     }
     ctx.lineTo(massX - 25, centerY);
@@ -366,7 +369,7 @@ export default function Visual3DCourses({ isOpen, onClose, onComplete }: Visual3
     ctx.lineWidth = 2;
     ctx.strokeRect(massX - 25, centerY - 20, 50, 40);
 
-    // Draw equilibrium line (vertical)
+    // Draw equilibrium line
     ctx.strokeStyle = '#fbbf24';
     ctx.lineWidth = 2;
     ctx.setLineDash([5, 5]);
@@ -621,23 +624,28 @@ export default function Visual3DCourses({ isOpen, onClose, onComplete }: Visual3
     }
     ctx.globalAlpha = 1;
     
-    // Draw particles with 3D effect
-    const particle1Gradient = ctx.createRadialGradient(x1 - 5, centerY - 5, 0, x1, centerY, Math.sqrt(m1) * 12);
-    particle1Gradient.addColorStop(0, '#fca5a5');
-    particle1Gradient.addColorStop(0.7, '#dc2626');
-    particle1Gradient.addColorStop(1, '#991b1b');
-    ctx.fillStyle = particle1Gradient;
+    // Draw particles with vibrant colors
+    const radius1 = Math.max(8, Math.sqrt(Math.abs(m1)) * 12);
+    const radius2 = Math.max(8, Math.sqrt(Math.abs(m2)) * 12);
+    
+    // Particle 1 (red)
+    ctx.fillStyle = '#dc2626';
     ctx.beginPath();
-    ctx.arc(x1, centerY, Math.sqrt(m1) * 12, 0, 2 * Math.PI);
+    ctx.arc(x1, centerY, radius1, 0, 2 * Math.PI);
+    ctx.fill();
+    ctx.fillStyle = '#fca5a5';
+    ctx.beginPath();
+    ctx.arc(x1 - 3, centerY - 3, radius1 * 0.6, 0, 2 * Math.PI);
     ctx.fill();
     
-    const particle2Gradient = ctx.createRadialGradient(x2 - 5, centerY - 5, 0, x2, centerY, Math.sqrt(m2) * 12);
-    particle2Gradient.addColorStop(0, '#93c5fd');
-    particle2Gradient.addColorStop(0.7, '#2563eb');
-    particle2Gradient.addColorStop(1, '#1d4ed8');
-    ctx.fillStyle = particle2Gradient;
+    // Particle 2 (blue)
+    ctx.fillStyle = '#2563eb';
     ctx.beginPath();
-    ctx.arc(x2, centerY, Math.sqrt(m2) * 12, 0, 2 * Math.PI);
+    ctx.arc(x2, centerY, radius2, 0, 2 * Math.PI);
+    ctx.fill();
+    ctx.fillStyle = '#93c5fd';
+    ctx.beginPath();
+    ctx.arc(x2 - 3, centerY - 3, radius2 * 0.6, 0, 2 * Math.PI);
     ctx.fill();
     
     // Add collision flash effect
@@ -745,7 +753,7 @@ export default function Visual3DCourses({ isOpen, onClose, onComplete }: Visual3
         <CardContent className="p-0 h-full">
           {!selectedCourse ? (
             // Course Selection
-            <div className="p-8 space-y-6 overflow-y-auto h-full">
+            <div className="p-8 space-y-6 overflow-y-auto h-full max-h-[80vh] scrollbar-thin scrollbar-thumb-blue-500 scrollbar-track-gray-200">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 {visual3DCourses.map((course) => (
                   <Card key={course.id} className="hover:shadow-lg transition-all duration-300 border-2 hover:border-blue-300">
@@ -795,7 +803,7 @@ export default function Visual3DCourses({ isOpen, onClose, onComplete }: Visual3
             </div>
           ) : !currentConcept ? (
             // Concept Selection
-            <div className="p-8 space-y-6 overflow-y-auto h-full">
+            <div className="p-8 space-y-6 overflow-y-auto h-full max-h-[80vh] scrollbar-thin scrollbar-thumb-blue-500 scrollbar-track-gray-200">
               <div className="flex items-center gap-4 mb-6">
                 <Button onClick={() => setSelectedCourse(null)} variant="outline">
                   ← Back to Courses
