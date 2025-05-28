@@ -352,6 +352,16 @@ export default function EnhancedAITutor({ isOpen, onClose, currentQuestion, cont
 
           {/* Enhanced Input Area */}
           <div className="border-t-2 border-gray-200 dark:border-gray-700 p-6 bg-gradient-to-r from-white to-purple-50 dark:from-gray-900 dark:to-gray-800">
+            <div className="flex gap-2 items-center mb-4">
+              <Button
+                onClick={onClose}
+                variant="outline"
+                size="sm"
+                className="text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+              >
+                ← Back
+              </Button>
+            </div>
             <div className="flex gap-4 items-end">
               <div className="flex-1">
                 <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
