@@ -62,24 +62,25 @@ export default function Header({ progress, resetProgress, setProgress }: HeaderP
             </div>
 
             {/* Wikipedia Search Bar */}
-            <div className="flex-1 max-w-md mx-8">
-              <form onSubmit={handleWikipediaSearch} className="relative">
+            <div className="flex-1 max-w-lg mx-8">
+              <form onSubmit={handleWikipediaSearch} className="relative group">
                 <Input
                   type="text"
-                  placeholder="Search Wikipedia for physics topics..."
+                  placeholder="Search physics topics on Wikipedia..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:text-white"
+                  className="w-full pl-12 pr-16 py-3 text-sm border-2 border-gray-200 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-400 dark:bg-gray-800 dark:text-white dark:placeholder-gray-400 bg-gray-50 dark:bg-gray-800 transition-all duration-200 group-hover:border-blue-300 dark:group-hover:border-blue-500 shadow-sm"
                 />
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <span className="text-gray-400 text-sm">🔍</span>
+                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                  <span className="text-blue-500 dark:text-blue-400 text-lg">🔍</span>
                 </div>
                 <Button
                   type="submit"
                   size="sm"
-                  className="absolute inset-y-0 right-0 px-3 bg-blue-600 hover:bg-blue-700 text-white rounded-r-lg"
+                  className="absolute inset-y-0 right-1 my-1 px-4 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white rounded-lg shadow-md transition-all duration-200 hover:shadow-lg flex items-center gap-1"
                 >
-                  📖
+                  <span className="text-sm">📚</span>
+                  <span className="hidden sm:inline text-xs font-medium">Search</span>
                 </Button>
               </form>
             </div>

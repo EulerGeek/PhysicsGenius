@@ -22,24 +22,25 @@ export default function Footer() {
           <h3 className="text-lg font-semibold text-neutral-900 dark:text-white mb-3">
             🔍 Explore Physics on Wikipedia
           </h3>
-          <div className="max-w-lg mx-auto">
-            <form onSubmit={handleFooterWikipediaSearch} className="relative">
+          <div className="max-w-xl mx-auto">
+            <form onSubmit={handleFooterWikipediaSearch} className="relative group">
               <Input
                 type="text"
-                placeholder="Search physics topics, scientists, theories..."
+                placeholder="Discover physics knowledge: Einstein, Quantum Theory, Black Holes..."
                 value={footerSearchQuery}
                 onChange={(e) => setFooterSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-20 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:text-white text-center"
+                className="w-full pl-14 pr-24 py-4 text-center border-2 border-gray-300 dark:border-gray-500 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-blue-400 dark:bg-gray-700 dark:text-white dark:placeholder-gray-300 bg-white transition-all duration-200 group-hover:border-blue-300 dark:group-hover:border-blue-400 shadow-lg dark:shadow-gray-900/20 text-sm font-medium"
               />
-              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <span className="text-gray-400 text-lg">📚</span>
+              <div className="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none">
+                <span className="text-blue-600 dark:text-blue-400 text-xl">📚</span>
               </div>
               <Button
                 type="submit"
                 size="sm"
-                className="absolute inset-y-0 right-0 px-4 bg-blue-600 hover:bg-blue-700 text-white rounded-r-lg"
+                className="absolute inset-y-0 right-2 my-2 px-5 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white rounded-xl shadow-lg transition-all duration-200 hover:shadow-xl flex items-center gap-2 font-semibold"
               >
-                Search 🔍
+                <span>🔍</span>
+                <span className="text-sm">Explore</span>
               </Button>
             </form>
             <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">
@@ -50,13 +51,13 @@ export default function Footer() {
 
         {/* Quick Physics Links */}
         <div className="mb-6 text-center">
-          <div className="flex flex-wrap justify-center gap-3 text-sm">
+          <div className="flex flex-wrap justify-center gap-4 text-sm">
             <button 
               onClick={() => {
                 setFooterSearchQuery("Albert Einstein");
                 setShowWikipediaPanel(true);
               }}
-              className="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 rounded-full hover:bg-blue-200 dark:hover:bg-blue-800 transition-colors"
+              className="px-5 py-3 bg-gradient-to-r from-blue-500 to-blue-600 dark:from-blue-600 dark:to-blue-700 text-white rounded-xl hover:from-blue-600 hover:to-blue-700 dark:hover:from-blue-700 dark:hover:to-blue-800 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105 font-medium"
             >
               Einstein 🧠
             </button>
@@ -65,7 +66,7 @@ export default function Footer() {
                 setFooterSearchQuery("Quantum mechanics");
                 setShowWikipediaPanel(true);
               }}
-              className="px-3 py-1 bg-purple-100 dark:bg-purple-900 text-purple-700 dark:text-purple-300 rounded-full hover:bg-purple-200 dark:hover:bg-purple-800 transition-colors"
+              className="px-5 py-3 bg-gradient-to-r from-purple-500 to-purple-600 dark:from-purple-600 dark:to-purple-700 text-white rounded-xl hover:from-purple-600 hover:to-purple-700 dark:hover:from-purple-700 dark:hover:to-purple-800 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105 font-medium"
             >
               Quantum Physics ⚛️
             </button>
@@ -74,7 +75,7 @@ export default function Footer() {
                 setFooterSearchQuery("General relativity");
                 setShowWikipediaPanel(true);
               }}
-              className="px-3 py-1 bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-300 rounded-full hover:bg-green-200 dark:hover:bg-green-800 transition-colors"
+              className="px-5 py-3 bg-gradient-to-r from-green-500 to-green-600 dark:from-green-600 dark:to-green-700 text-white rounded-xl hover:from-green-600 hover:to-green-700 dark:hover:from-green-700 dark:hover:to-green-800 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105 font-medium"
             >
               Relativity 🌌
             </button>
@@ -83,7 +84,7 @@ export default function Footer() {
                 setFooterSearchQuery("Newton's laws of motion");
                 setShowWikipediaPanel(true);
               }}
-              className="px-3 py-1 bg-orange-100 dark:bg-orange-900 text-orange-700 dark:text-orange-300 rounded-full hover:bg-orange-200 dark:hover:bg-orange-800 transition-colors"
+              className="px-5 py-3 bg-gradient-to-r from-orange-500 to-orange-600 dark:from-orange-600 dark:to-orange-700 text-white rounded-xl hover:from-orange-600 hover:to-orange-700 dark:hover:from-orange-700 dark:hover:to-orange-800 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105 font-medium"
             >
               Newton's Laws 🍎
             </button>

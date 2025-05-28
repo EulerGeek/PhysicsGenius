@@ -78,44 +78,63 @@ export default function WikipediaPanel({ isOpen, onClose, initialQuery = "" }: W
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-      <Card className="w-full max-w-4xl h-[90vh] bg-white dark:bg-gray-900 shadow-2xl">
-        <CardHeader className="border-b border-gray-200 dark:border-gray-700">
+    <div className="fixed inset-0 bg-black/60 backdrop-blur-md z-50 flex items-center justify-center p-4">
+      <Card className="w-full max-w-5xl h-[90vh] bg-white dark:bg-gray-800 shadow-2xl border-2 border-gray-200 dark:border-gray-600 rounded-2xl overflow-hidden">
+        <CardHeader className="border-b-2 border-gray-200 dark:border-gray-600 bg-gradient-to-r from-blue-50 to-purple-50 dark:from-gray-700 dark:to-gray-600">
           <div className="flex items-center justify-between">
-            <CardTitle className="text-2xl font-bold text-gray-900 dark:text-white flex items-center gap-2">
-              📚 Wikipedia Physics Reader
+            <CardTitle className="text-2xl font-bold text-gray-900 dark:text-white flex items-center gap-3">
+              <span className="text-3xl">📚</span>
+              <div>
+                <div>Wikipedia Physics Reader</div>
+                <div className="text-sm font-normal text-gray-600 dark:text-gray-300">Explore the universe of knowledge</div>
+              </div>
             </CardTitle>
             <Button
               variant="outline"
               size="sm"
               onClick={onClose}
-              className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+              className="text-gray-500 hover:text-gray-700 dark:text-gray-300 dark:hover:text-white border-2 border-gray-300 dark:border-gray-500 hover:border-red-400 dark:hover:border-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-xl px-4 py-2"
             >
-              ✕ Close
+              <span className="text-lg">✕</span>
+              <span className="ml-1 font-medium">Close</span>
             </Button>
           </div>
           
           {/* Search Form */}
-          <form onSubmit={handleSearch} className="flex gap-2 mt-4">
+          <form onSubmit={handleSearch} className="flex gap-3 mt-6">
             <Input
               type="text"
               placeholder="Search Wikipedia for physics topics..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="flex-1"
+              className="flex-1 py-3 px-4 border-2 border-gray-300 dark:border-gray-500 rounded-xl focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white dark:placeholder-gray-300 bg-gray-50"
             />
-            <Button type="submit" disabled={isLoading}>
-              {isLoading ? "🔄" : "🔍"} Search
+            <Button 
+              type="submit" 
+              disabled={isLoading}
+              className="px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white rounded-xl shadow-lg transition-all duration-200 hover:shadow-xl disabled:opacity-50"
+            >
+              {isLoading ? (
+                <span className="flex items-center gap-2">
+                  <span className="animate-spin">🔄</span>
+                  Loading...
+                </span>
+              ) : (
+                <span className="flex items-center gap-2">
+                  <span>🔍</span>
+                  Search
+                </span>
+              )}
             </Button>
           </form>
 
           {/* Quick Search Buttons */}
-          <div className="flex flex-wrap gap-2 mt-3">
+          <div className="flex flex-wrap gap-3 mt-4">
             {recentSearches.map((term, index) => (
               <Badge
                 key={index}
                 variant="secondary"
-                className="cursor-pointer hover:bg-blue-100 dark:hover:bg-blue-900"
+                className="cursor-pointer px-4 py-2 bg-blue-100 dark:bg-blue-800 text-blue-700 dark:text-blue-200 hover:bg-blue-200 dark:hover:bg-blue-700 border border-blue-200 dark:border-blue-600 rounded-lg transition-all duration-200 hover:shadow-md font-medium"
                 onClick={() => handleQuickSearch(term)}
               >
                 {term}
