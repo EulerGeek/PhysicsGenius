@@ -101,8 +101,8 @@ export default function InteractiveLesson({ lessonId, title, onComplete, onClose
   };
 
   return (
-    <div className="fixed inset-0 bg-gradient-to-br from-blue-600 via-purple-600 to-indigo-600 flex items-center justify-center p-4 z-50 overflow-hidden">
-      <Card className="w-full max-w-5xl h-[95vh] flex flex-col glass dark:glass-dark backdrop-blur-xl shadow-2xl bounce-in border-2 border-white/20">
+    <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center p-6 z-50 overflow-y-auto">
+      <Card className="w-full max-w-4xl max-h-[90vh] flex flex-col bg-white dark:bg-gray-900 shadow-2xl rounded-3xl border-4 border-blue-200 dark:border-blue-800 bounce-in overflow-hidden">
         <CardContent className="p-0">
           <div className="bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 p-8 text-white shadow-xl">
             <div className="flex items-center justify-between mb-6">

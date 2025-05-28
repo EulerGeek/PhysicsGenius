@@ -171,19 +171,29 @@ export default function InteractiveConceptLesson({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-gradient-to-br from-blue-600 via-purple-600 to-indigo-600 z-50 flex flex-col overflow-hidden">
-      {/* Top Bar */}
-      <div className="bg-white/98 dark:bg-gray-900/98 backdrop-blur-xl border-b-2 border-white/20 p-6 shadow-2xl flex-shrink-0">
-        <div className="max-w-4xl mx-auto flex items-center justify-between">
-          <Button
-            variant="ghost"
-            onClick={onClose}
-            className="rounded-full p-4 hover:bg-red-50 hover:text-red-600 dark:hover:bg-red-900/20 transition-all duration-300 hover:scale-110 group"
-          >
-            <span className="text-2xl group-hover:wiggle">✕</span>
-          </Button>
+    <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center p-6 z-50 overflow-y-auto">
+      <Card className="w-full max-w-5xl max-h-[90vh] flex flex-col bg-white dark:bg-gray-900 shadow-2xl rounded-3xl border-4 border-purple-200 dark:border-purple-800 bounce-in overflow-hidden">
+        {/* Header */}
+        <div className="bg-gradient-to-r from-purple-600 to-blue-600 p-6 text-white flex-shrink-0">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-4">
+              <span className="text-4xl">🧠</span>
+              <div>
+                <h2 className="text-2xl font-bold">{lessonData.title}</h2>
+                <p className="text-purple-100">Interactive Concept Learning</p>
+              </div>
+            </div>
+            <Button
+              variant="ghost"
+              onClick={onClose}
+              className="text-white hover:bg-white/20 rounded-full p-3 transition-all duration-300 hover:scale-110 group"
+            >
+              <span className="text-2xl group-hover:wiggle">✕</span>
+            </Button>
+          </div>
           
-          <div className="flex-1 mx-8">
+          <div className="p-4">
+            <div className="flex items-center justify-between mb-4">
             <Progress value={progress} className="h-4 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden" />
             <div className="flex justify-between text-sm font-semibold text-gray-700 dark:text-gray-300 mt-2">
               <span className="flex items-center gap-2">
@@ -388,9 +398,7 @@ export default function InteractiveConceptLesson({
             )}
           </CardContent>
         </Card>
-      </div>
-
-      {/* AI Tutor - Temporarily disabled, will be available through floating button */}
+      </Card>
     </div>
   );
 }
