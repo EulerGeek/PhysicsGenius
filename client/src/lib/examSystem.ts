@@ -33,6 +33,17 @@ export const classicalMechanicsExam: ExamSession = {
   prerequisites: [],
   questions: [
     {
+      id: 'cm-concept',
+      question: 'CONCEPT: Classical Mechanics - Study of motion and forces acting on objects, from Newton\'s laws to energy conservation.',
+      type: 'multiple-choice',
+      options: ['Continue to Questions'],
+      correctAnswer: 'Continue to Questions',
+      explanation: 'Classical mechanics forms the foundation of physics, describing how objects move under the influence of forces. Key concepts include Newton\'s three laws, kinematics equations, energy conservation, and momentum.',
+      difficulty: 'easy',
+      topic: 'Introduction',
+      points: 0
+    },
+    {
       id: 'cm-1',
       question: 'A car accelerates from rest to 30 m/s in 6 seconds. What is its acceleration?',
       type: 'multiple-choice',
@@ -83,6 +94,82 @@ export const classicalMechanicsExam: ExamSession = {
       explanation: 'Using h = ½gt²: 20 = ½(10)t², so t² = 4, therefore t = 2 s',
       difficulty: 'hard',
       topic: 'Projectile Motion',
+      points: 20
+    },
+    {
+      id: 'cm-6',
+      question: 'What is the formula for kinetic energy?',
+      type: 'multiple-choice',
+      options: ['KE = mv', 'KE = ½mv²', 'KE = mgh', 'KE = Fd'],
+      correctAnswer: 'KE = ½mv²',
+      explanation: 'Kinetic energy is the energy of motion, given by KE = ½mv², where m is mass and v is velocity.',
+      difficulty: 'medium',
+      topic: 'Energy',
+      points: 15
+    },
+    {
+      id: 'cm-7',
+      question: 'If a 2 kg object moves at 4 m/s, what is its kinetic energy?',
+      type: 'multiple-choice',
+      options: ['8 J', '16 J', '32 J', '4 J'],
+      correctAnswer: '16 J',
+      explanation: 'KE = ½mv² = ½(2)(4²) = ½(2)(16) = 16 J',
+      difficulty: 'medium',
+      topic: 'Energy',
+      points: 15
+    },
+    {
+      id: 'cm-8',
+      question: 'What does Newton\'s third law state?',
+      type: 'multiple-choice',
+      options: ['F = ma', 'Objects at rest stay at rest', 'For every action, there is an equal and opposite reaction', 'Energy is conserved'],
+      correctAnswer: 'For every action, there is an equal and opposite reaction',
+      explanation: 'Newton\'s third law states that forces always come in pairs - when object A exerts a force on object B, object B exerts an equal and opposite force on object A.',
+      difficulty: 'easy',
+      topic: 'Newton\'s Laws',
+      points: 10
+    },
+    {
+      id: 'cm-9',
+      question: 'A car travels 100 m in 5 seconds. What is its average speed?',
+      type: 'multiple-choice',
+      options: ['15 m/s', '20 m/s', '25 m/s', '500 m/s'],
+      correctAnswer: '20 m/s',
+      explanation: 'Average speed = distance/time = 100 m / 5 s = 20 m/s',
+      difficulty: 'easy',
+      topic: 'Kinematics',
+      points: 10
+    },
+    {
+      id: 'cm-10',
+      question: 'What happens to gravitational potential energy as an object falls?',
+      type: 'multiple-choice',
+      options: ['It increases', 'It decreases', 'It stays constant', 'It becomes negative'],
+      correctAnswer: 'It decreases',
+      explanation: 'As an object falls, its height decreases, so its gravitational potential energy (PE = mgh) decreases and converts to kinetic energy.',
+      difficulty: 'medium',
+      topic: 'Energy',
+      points: 15
+    },
+    {
+      id: 'cm-11',
+      question: 'In an isolated system, momentum is always conserved.',
+      type: 'true-false',
+      correctAnswer: 'true',
+      explanation: 'Yes! Conservation of momentum is a fundamental law - in any isolated system (no external forces), the total momentum remains constant.',
+      difficulty: 'medium',
+      topic: 'Momentum',
+      points: 15
+    },
+    {
+      id: 'cm-12',
+      question: 'If two objects collide and stick together, what type of collision is this?',
+      type: 'multiple-choice',
+      options: ['Elastic collision', 'Inelastic collision', 'Perfectly inelastic collision', 'Explosive collision'],
+      correctAnswer: 'Perfectly inelastic collision',
+      explanation: 'When objects stick together after collision, it\'s perfectly inelastic. Momentum is conserved but kinetic energy is not.',
+      difficulty: 'hard',
+      topic: 'Collisions',
       points: 20
     }
   ]
