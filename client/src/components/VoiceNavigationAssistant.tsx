@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 
 interface VoiceNavigationAssistantProps {
   onNavigate: (command: string) => void;
@@ -302,13 +301,11 @@ export default function VoiceNavigationAssistant({
   if (!isSupported) {
     return (
       <div className="fixed bottom-4 left-4 z-40">
-        <Card className="bg-red-100 dark:bg-red-900 border-red-300 dark:border-red-700">
-          <CardContent className="p-4">
-            <p className="text-sm text-red-700 dark:text-red-300">
-              🎤 Voice navigation not supported in this browser
-            </p>
-          </CardContent>
-        </Card>
+        <div className="bg-red-100 dark:bg-red-900 border border-red-300 dark:border-red-700 rounded-lg p-4">
+          <p className="text-sm text-red-700 dark:text-red-300">
+            🎤 Voice navigation not supported in this browser
+          </p>
+        </div>
       </div>
     );
   }
