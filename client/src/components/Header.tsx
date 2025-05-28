@@ -46,7 +46,7 @@ export default function Header({ progress, resetProgress, setProgress }: HeaderP
 
   return (
     <>
-      <header className="bg-gradient-to-r from-yellow-400 to-amber-400 shadow-lg border-b border-yellow-300">
+      <header className="bg-gradient-to-r from-blue-500 to-emerald-500 shadow-lg border-b border-blue-300">
         <div className="w-full px-1 sm:px-2 md:px-4 lg:px-6">
           <div className="flex justify-between items-center h-6 sm:h-8 md:h-10 lg:h-12">
             <div className="flex items-center space-x-0.5 sm:space-x-1 md:space-x-2">
@@ -64,15 +64,15 @@ export default function Header({ progress, resetProgress, setProgress }: HeaderP
                   placeholder="Search physics topics on Wikipedia..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-12 pr-16 py-3 text-sm border-2 border-amber-300 rounded-xl focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 bg-white/90 backdrop-blur-sm transition-all duration-200 group-hover:border-yellow-400 shadow-md placeholder-amber-600"
+                  className="w-full pl-12 pr-16 py-3 text-sm border-2 border-blue-300 rounded-xl focus:ring-2 focus:ring-blue-400 focus:border-blue-400 bg-white/90 backdrop-blur-sm transition-all duration-200 group-hover:border-blue-400 shadow-md placeholder-blue-600"
                 />
                 <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                  <span className="text-amber-600 text-lg">🔍</span>
+                  <span className="text-blue-600 text-lg">🔍</span>
                 </div>
                 <Button
                   type="submit"
                   size="sm"
-                  className="absolute inset-y-0 right-1 my-1 px-3 bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-600 hover:to-yellow-600 text-white rounded-lg shadow-md transition-all duration-200 hover:shadow-lg flex items-center justify-center"
+                  className="absolute inset-y-0 right-1 my-1 px-3 bg-gradient-to-r from-blue-500 to-emerald-500 hover:from-blue-600 hover:to-emerald-600 text-white rounded-lg shadow-md transition-all duration-200 hover:shadow-lg flex items-center justify-center"
                 >
                   <span className="text-lg">🔍</span>
                 </Button>
@@ -100,7 +100,7 @@ export default function Header({ progress, resetProgress, setProgress }: HeaderP
                   e.stopPropagation();
                   setShowFriendsModal(true);
                 }}
-                className="text-amber-700 border-amber-600 hover:bg-amber-50 bg-white/80"
+                className="text-blue-700 border-blue-600 hover:bg-blue-50 bg-white/80"
                 title="Friends & Leaderboard"
               >
                 👥 Friends
@@ -120,9 +120,9 @@ export default function Header({ progress, resetProgress, setProgress }: HeaderP
                 ⚙️ Settings
               </Button>
 
-              <div className="hidden sm:flex items-center space-x-2 bg-white/90 px-3 py-1 rounded-full shadow-md border border-amber-300">
-                <i className="fas fa-fire text-amber-500 text-sm"></i>
-                <span className="text-sm font-medium text-amber-800">{progress.streak} day streak</span>
+              <div className="hidden sm:flex items-center space-x-2 bg-white/90 px-3 py-1 rounded-full shadow-md border border-blue-300">
+                <i className="fas fa-fire text-emerald-500 text-sm"></i>
+                <span className="text-sm font-medium text-blue-800">{progress.streak} day streak</span>
               </div>
 
               {user ? (

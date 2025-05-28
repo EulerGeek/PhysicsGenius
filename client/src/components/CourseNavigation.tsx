@@ -28,7 +28,7 @@ export default function CourseNavigation({ courses, activeTab, onTabChange, prog
         <h3 className="text-[8px] sm:text-xs md:text-sm font-semibold text-center mb-1 sm:mb-2 text-blue-700">
           🔬 Physics Courses
         </h3>
-        <div className="flex space-x-0.5 sm:space-x-1 bg-blue-50 p-0.5 rounded-lg">
+        <div className="flex space-x-0.5 sm:space-x-1 bg-gradient-to-r from-blue-50 to-emerald-50 p-0.5 rounded-lg border border-blue-200">
           {courses.filter(course => ['classical', 'relativity', 'quantum'].includes(course.id)).map((course) => {
             const locked = isCourseLocked(course.id);
             return (
@@ -41,8 +41,8 @@ export default function CourseNavigation({ courses, activeTab, onTabChange, prog
                   locked 
                     ? 'bg-gray-200 text-gray-400 cursor-not-allowed opacity-50 backdrop-blur-sm' 
                     : activeTab === course.id
-                      ? 'bg-white text-blue-600 shadow-sm'
-                      : 'text-neutral-600 hover:text-neutral-900'
+                      ? 'bg-gradient-to-r from-blue-500 to-emerald-500 text-white shadow-lg'
+                      : 'text-blue-700 hover:text-blue-900 hover:bg-blue-100'
                 } ${locked ? 'after:content-["🔒"] after:absolute after:top-1 after:right-1 after:text-xs after:opacity-60' : ''}`}
               >
                 <span className={locked ? 'blur-sm' : ''}>
@@ -62,10 +62,10 @@ export default function CourseNavigation({ courses, activeTab, onTabChange, prog
       </section>
       {/* Mathematics Courses (Optional) */}
       <section className="mb-1 sm:mb-2">
-        <h3 className="text-[8px] sm:text-xs md:text-sm font-semibold text-center mb-1 sm:mb-2 text-[#c1f0ff]">
+        <h3 className="text-[8px] sm:text-xs md:text-sm font-semibold text-center mb-1 sm:mb-2 text-emerald-700">
           📐 Mathematics (Optional)
         </h3>
-        <div className="flex space-x-0.5 sm:space-x-1 bg-green-50 p-0.5 rounded-lg">
+        <div className="flex space-x-0.5 sm:space-x-1 bg-gradient-to-r from-emerald-50 to-green-50 p-0.5 rounded-lg border border-emerald-200">
           {courses.filter(course => ['algebra', 'calculus', 'linear-algebra'].includes(course.id)).map((course) => (
             <Button
               key={course.id}
@@ -73,8 +73,8 @@ export default function CourseNavigation({ courses, activeTab, onTabChange, prog
               variant="ghost"
               className={`flex-1 py-0.5 px-1 sm:py-1 sm:px-2 md:py-2 md:px-3 lg:py-3 lg:px-4 rounded-md font-medium transition-all duration-200 text-[8px] sm:text-xs md:text-sm lg:text-base ${
                 activeTab === course.id
-                  ? 'bg-white text-green-600 shadow-sm'
-                  : 'text-neutral-600 hover:text-neutral-900'
+                  ? 'bg-gradient-to-r from-emerald-500 to-green-500 text-white shadow-lg'
+                  : 'text-emerald-700 hover:text-emerald-900 hover:bg-emerald-100'
               }`}
             >
               <i className={`${course.icon} mr-1 sm:mr-2`}></i>
