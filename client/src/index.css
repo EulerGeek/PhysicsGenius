@@ -108,18 +108,18 @@
   --text-tertiary: 100 116 139; /* Slate-500 */
   --text-muted: 148 163 184; /* Slate-400 */
   
-  /* Calm Blue & Green Color Palette */
-  --primary: 37 99 235; /* Blue-600 - Main brand color */
+  /* Professional Modern Color Palette */
+  --primary: 30 41 59; /* Slate-800 - Deep professional blue-gray */
   --primary-foreground: 255 255 255;
-  --secondary: 16 185 129; /* Emerald-500 - Secondary actions */
+  --secondary: 71 85 105; /* Slate-600 - Medium gray-blue */
   --secondary-foreground: 255 255 255;
-  --accent: 59 130 246; /* Blue-500 - Accents and highlights */
+  --accent: 59 130 246; /* Blue-500 - Clean accent blue */
   --accent-foreground: 255 255 255;
-  --warning: 245 158 11; /* Amber-500 - Warnings */
+  --warning: 245 158 11; /* Amber-500 - Professional warning */
   --warning-foreground: 255 255 255;
-  --success: 34 197 94; /* Green-500 - Success states */
+  --success: 34 197 94; /* Green-500 - Clean success */
   --success-foreground: 255 255 255;
-  --destructive: 239 68 68; /* Red-500 - Errors */
+  --destructive: 239 68 68; /* Red-500 - Clean error */
   --destructive-foreground: 255 255 255;
   
   /* Professional Borders */

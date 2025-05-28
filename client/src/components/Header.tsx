@@ -46,7 +46,7 @@ export default function Header({ progress, resetProgress, setProgress }: HeaderP
 
   return (
     <>
-      <header className="bg-gradient-to-r from-blue-500 to-emerald-500 shadow-lg border-b border-blue-300">
+      <header className="bg-gradient-to-r from-slate-800 to-slate-700 shadow-lg border-b border-slate-600">
         <div className="w-full px-1 sm:px-2 md:px-4 lg:px-6">
           <div className="flex justify-between items-center h-6 sm:h-8 md:h-10 lg:h-12">
             <div className="flex items-center space-x-0.5 sm:space-x-1 md:space-x-2">
@@ -64,15 +64,15 @@ export default function Header({ progress, resetProgress, setProgress }: HeaderP
                   placeholder="Search physics topics on Wikipedia..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-12 pr-16 py-3 text-sm border-2 border-blue-300 rounded-xl focus:ring-2 focus:ring-blue-400 focus:border-blue-400 bg-white/90 backdrop-blur-sm transition-all duration-200 group-hover:border-blue-400 shadow-md placeholder-blue-600"
+                  className="w-full pl-12 pr-16 py-3 text-sm border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white transition-all duration-200 group-hover:border-slate-400 shadow-sm placeholder-slate-500"
                 />
                 <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                  <span className="text-blue-600 text-lg">🔍</span>
+                  <span className="text-slate-500 text-lg">🔍</span>
                 </div>
                 <Button
                   type="submit"
                   size="sm"
-                  className="absolute inset-y-0 right-1 my-1 px-3 bg-gradient-to-r from-blue-500 to-emerald-500 hover:from-blue-600 hover:to-emerald-600 text-white rounded-lg shadow-md transition-all duration-200 hover:shadow-lg flex items-center justify-center"
+                  className="absolute inset-y-0 right-1 my-1 px-3 bg-blue-600 hover:bg-blue-700 text-white rounded-md shadow-sm transition-all duration-200 hover:shadow-md flex items-center justify-center"
                 >
                   <span className="text-lg">🔍</span>
                 </Button>
@@ -100,7 +100,7 @@ export default function Header({ progress, resetProgress, setProgress }: HeaderP
                   e.stopPropagation();
                   setShowFriendsModal(true);
                 }}
-                className="text-blue-700 border-blue-600 hover:bg-blue-50 bg-white/80"
+                className="text-slate-200 border-slate-500 hover:bg-slate-600 bg-slate-700/80"
                 title="Friends & Leaderboard"
               >
                 👥 Friends
@@ -120,9 +120,9 @@ export default function Header({ progress, resetProgress, setProgress }: HeaderP
                 ⚙️ Settings
               </Button>
 
-              <div className="hidden sm:flex items-center space-x-2 bg-white/90 px-3 py-1 rounded-full shadow-md border border-blue-300">
-                <i className="fas fa-fire text-emerald-500 text-sm"></i>
-                <span className="text-sm font-medium text-blue-800">{progress.streak} day streak</span>
+              <div className="hidden sm:flex items-center space-x-2 bg-white/95 px-3 py-1 rounded-lg shadow-sm border border-slate-200">
+                <span className="text-orange-500 text-sm">🔥</span>
+                <span className="text-sm font-medium text-slate-700">{progress.streak} day streak</span>
               </div>
 
               {user ? (
