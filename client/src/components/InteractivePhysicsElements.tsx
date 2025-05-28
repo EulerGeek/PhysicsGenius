@@ -224,6 +224,10 @@ export default function InteractivePhysicsElements({ isVisible = true }: Interac
               : 'none'
           }}
           onMouseDown={(e) => handleMouseDown(e, obj.id)}
+          onContextMenu={(e) => {
+            e.preventDefault();
+            setObjects(prev => prev.filter(o => o.id !== obj.id));
+          }}
         >
           {/* Add some visual texture */}
           <div 
@@ -244,18 +248,24 @@ export default function InteractivePhysicsElements({ isVisible = true }: Interac
         </div>
       ))}
 
-      {/* Instructions overlay */}
+      {/* Enhanced Instructions overlay */}
       <div className="fixed bottom-4 right-4 bg-black/80 text-white p-4 rounded-xl shadow-2xl backdrop-blur-sm max-w-xs pointer-events-auto">
         <h4 className="font-bold mb-2 text-sm">🧪 Physics Playground</h4>
         <div className="text-xs space-y-1 text-gray-300">
           <p>• Drag objects to move them around</p>
           <p>• Double-click empty space to add objects</p>
+          <p>• Right-click objects to remove them</p>
           <p>• Watch gravity and collisions in action!</p>
-          <p>• Objects bounce off walls and floor</p>
         </div>
-        <div className="mt-3 text-center">
+        <div className="mt-3 flex gap-2">
+          <button
+            onClick={() => setObjects([])}
+            className="text-xs bg-red-600 hover:bg-red-700 px-3 py-1 rounded-full transition-colors"
+          >
+            🗑️ Clear All
+          </button>
           <span className="text-xs bg-blue-600 px-2 py-1 rounded-full">
-            Real Physics Simulation ⚡
+            Real Physics ⚡
           </span>
         </div>
       </div>

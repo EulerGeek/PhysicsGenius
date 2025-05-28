@@ -148,7 +148,7 @@ export default function InteractiveLesson({ lessonId, title, onComplete, onClose
             </div>
           </div>
 
-          <div className="flex-1 overflow-y-auto p-8 bg-gradient-to-br from-white via-blue-50 to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
+          <div className="flex-1 overflow-y-auto p-8 bg-gradient-to-br from-white via-blue-50 to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 max-h-[60vh]">
             <div className="flex items-center justify-between mb-8 slide-up">
               <div className="flex items-center gap-3">
                 <span className="text-2xl">🧠</span>
