@@ -77,10 +77,9 @@ export default function Header({ progress, resetProgress, setProgress }: HeaderP
                 <Button
                   type="submit"
                   size="sm"
-                  className="absolute inset-y-0 right-1 my-1 px-4 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white rounded-lg shadow-md transition-all duration-200 hover:shadow-lg flex items-center gap-1"
+                  className="absolute inset-y-0 right-1 my-1 px-3 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white rounded-lg shadow-md transition-all duration-200 hover:shadow-lg flex items-center justify-center"
                 >
-                  <span className="text-sm">📚</span>
-                  <span className="hidden sm:inline text-xs font-medium">Search</span>
+                  <span className="text-lg">🔍</span>
                 </Button>
               </form>
             </div>

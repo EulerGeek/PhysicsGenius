@@ -14,6 +14,7 @@ export default function NavigationMenu({ currentPage, onNavigate, progress }: Na
 
   const menuItems = [
     { id: 'home', label: 'Home', icon: '🏠', description: 'Main dashboard' },
+    { id: 'concepts', label: 'Concepts', icon: '🎯', description: 'Interactive physics concepts' },
     { id: 'courses', label: 'Courses', icon: '📚', description: 'Physics lessons' },
     { id: 'progress', label: 'Progress', icon: '📊', description: 'Your achievements' },
     { id: 'test', label: 'Quick Test', icon: '🧪', description: 'Random questions' },

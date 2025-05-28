@@ -37,10 +37,9 @@ export default function Footer() {
               <Button
                 type="submit"
                 size="sm"
-                className="absolute inset-y-0 right-2 my-2 px-5 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white rounded-xl shadow-lg transition-all duration-200 hover:shadow-xl flex items-center gap-2 font-semibold"
+                className="absolute inset-y-0 right-2 my-2 px-4 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white rounded-xl shadow-lg transition-all duration-200 hover:shadow-xl flex items-center justify-center"
               >
-                <span>🔍</span>
-                <span className="text-sm">Explore</span>
+                <span className="text-xl">🔍</span>
               </Button>
             </form>
             <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">
