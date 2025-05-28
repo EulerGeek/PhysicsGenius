@@ -72,7 +72,7 @@ export default function CandyCrushLevelMap({ onLevelSelect, progress }: CandyCru
                     <div className="text-sm text-white font-bold mb-1">Progress</div>
                     <div className="w-full bg-white/30 rounded-full h-3">
                       <div 
-                        className="bg-yellow-400 h-3 rounded-full transition-all duration-500"
+                        className="bg-emerald-400 h-3 rounded-full transition-all duration-500"
                         style={{ width: `${lesson.overallProgress}%` }}
                       />
                     </div>
@@ -87,7 +87,7 @@ export default function CandyCrushLevelMap({ onLevelSelect, progress }: CandyCru
                         key={i}
                         className={`
                           w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold
-                          ${level.isCompleted ? 'bg-yellow-400 text-black' : 
+                          ${level.isCompleted ? 'bg-emerald-500 text-white' : 
                             level.isLocked ? 'bg-gray-400 text-gray-600' : 'bg-white text-black'}
                         `}
                       >
@@ -155,7 +155,7 @@ export default function CandyCrushLevelMap({ onLevelSelect, progress }: CandyCru
           <svg className="absolute inset-0 w-full h-full" style={{ height: `${selectedLesson.levels.length * 120 + 200}px` }}>
             <path
               d={`M 50 100 Q 300 80 350 150 Q 400 220 150 240 Q 50 260 100 320 Q 150 380 350 400 Q 500 420 450 480 Q 400 540 200 560 Q 50 580 100 640`}
-              stroke="#FFD700"
+              stroke="#3b82f6"
               strokeWidth="20"
               fill="none"
               strokeDasharray="10,5"
@@ -212,7 +212,7 @@ export default function CandyCrushLevelMap({ onLevelSelect, progress }: CandyCru
                     {/* Stars */}
                     {level.isCompleted && (
                       <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2">
-                        <div className="bg-yellow-400 rounded-full px-2 py-1 text-xs font-bold text-black">
+                        <div className="bg-emerald-500 rounded-full px-2 py-1 text-xs font-bold text-white">
                           {getStarDisplay(level.stars)}
                         </div>
                       </div>

@@ -195,8 +195,8 @@ export default function CandyCrushLevelPlayer({ level, onComplete, onClose }: Ca
           </div>
 
           {/* Score */}
-          <div className="bg-yellow-400 rounded-full px-4 py-2">
-            <span className="text-black font-bold">⭐ {score}</span>
+          <div className="bg-emerald-500 rounded-full px-4 py-2">
+            <span className="text-white font-bold">⭐ {score}</span>
           </div>
         </div>
       </div>
