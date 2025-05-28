@@ -93,33 +93,39 @@
   border: 1px solid rgba(255, 255, 255, 0.125);
 }
 
-/* Color Theory Enhancement - Blue-Purple-Indigo Harmony */
+/* Nature-Inspired Vibrant Color Harmony */
 :root {
-  /* Light Mode - Sophisticated Blue Tones */
-  --bg-primary: 210 16% 98%; /* Soft blue-tinted white */
-  --bg-secondary: 215 25% 96%; /* Light blue-gray */
-  --text-primary: 220 13% 9%; /* Deep blue-black */
-  --text-secondary: 215 13% 46%; /* Mid blue-gray */
-  --accent-blue: 217 91% 60%; /* Vibrant blue */
-  --accent-purple: 268 83% 58%; /* Deep purple */
-  --accent-indigo: 238 83% 67%; /* Bright indigo */
-  --success-green: 160 84% 39%; /* Emerald */
-  --warning-amber: 43 96% 56%; /* Golden */
-  --danger-red: 0 72% 51%; /* Vibrant red */
+  /* Light Mode - Clean Nature Tones */
+  --bg-primary: 195 18% 97%; /* Soft sky white */
+  --bg-secondary: 200 25% 94%; /* Light misty blue */
+  --text-primary: 220 15% 8%; /* Deep forest */
+  --text-secondary: 200 12% 42%; /* Mountain gray */
+  --accent-blue: 200 95% 55%; /* Ocean blue */
+  --accent-purple: 280 85% 65%; /* Lavender purple */
+  --accent-indigo: 245 88% 70%; /* Mountain lake */
+  --accent-teal: 175 85% 55%; /* Tropical water */
+  --success-green: 150 80% 45%; /* Forest green */
+  --warning-amber: 38 92% 60%; /* Sunset gold */
+  --danger-red: 5 78% 58%; /* Coral red */
+  --nature-mint: 165 82% 51%; /* Fresh mint */
+  --nature-sage: 120 25% 65%; /* Sage green */
 }
 
 .dark {
-  /* Dark Mode - Deep Blues and Purples */
-  --bg-primary: 224 71% 4%; /* Deep navy */
-  --bg-secondary: 224 47% 8%; /* Dark blue */
-  --text-primary: 210 40% 98%; /* Soft white */
-  --text-secondary: 215 20% 65%; /* Light blue-gray */
-  --accent-blue: 213 94% 68%; /* Bright blue */
-  --accent-purple: 263 85% 70%; /* Bright purple */
-  --accent-indigo: 250 84% 70%; /* Bright indigo */
-  --success-green: 160 84% 54%; /* Bright emerald */
-  --warning-amber: 48 96% 76%; /* Bright yellow */
-  --danger-red: 0 63% 31%; /* Dark red */
+  /* Dark Mode - Deep Nature Night Tones */
+  --bg-primary: 215 28% 7%; /* Deep night sky */
+  --bg-secondary: 220 35% 12%; /* Midnight blue */
+  --text-primary: 200 20% 96%; /* Moonlight white */
+  --text-secondary: 200 15% 68%; /* Silver mist */
+  --accent-blue: 200 90% 72%; /* Bright ocean */
+  --accent-purple: 280 80% 75%; /* Aurora purple */
+  --accent-indigo: 245 85% 75%; /* Northern lights */
+  --accent-teal: 175 80% 65%; /* Bioluminescent */
+  --success-green: 150 75% 55%; /* Aurora green */
+  --warning-amber: 38 88% 70%; /* Star gold */
+  --danger-red: 5 75% 68%; /* Nebula red */
+  --nature-mint: 165 75% 61%; /* Phosphorescent mint */
+  --nature-sage: 120 30% 70%; /* Moonlit sage */
 }
 
 /* Enhanced Typography & Backgrounds */

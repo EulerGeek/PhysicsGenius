@@ -719,7 +719,7 @@ export default function Visual3DCourses({ isOpen, onClose, onComplete }: Visual3
     const gridSize = parameters.gridSize || 20;
     
     // Draw spacetime grid with gravitational warping
-    ctx.strokeStyle = '#4f46e5';
+    ctx.strokeStyle = '#7c3aed';
     ctx.lineWidth = 2;
     
     // Horizontal grid lines with curvature from massive object
@@ -748,15 +748,22 @@ export default function Visual3DCourses({ isOpen, onClose, onComplete }: Visual3
     
     // Draw massive object causing curvature (size based on mass)
     const objectRadius = 15 + mass * 10;
-    ctx.fillStyle = '#fbbf24';
+    
+    // Create radial gradient for the massive object
+    const gradient = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, objectRadius);
+    gradient.addColorStop(0, '#fbbf24');
+    gradient.addColorStop(0.6, '#f59e0b');
+    gradient.addColorStop(1, '#d97706');
+    
+    ctx.fillStyle = gradient;
     ctx.beginPath();
     ctx.arc(centerX, centerY, objectRadius, 0, 2 * Math.PI);
     ctx.fill();
     
-    // Add glow effect
-    ctx.fillStyle = '#fde047';
+    // Add bright glow effect
+    ctx.fillStyle = '#fef3c7';
     ctx.beginPath();
-    ctx.arc(centerX, centerY, objectRadius * 0.8, 0, 2 * Math.PI);
+    ctx.arc(centerX, centerY, objectRadius * 0.6, 0, 2 * Math.PI);
     ctx.fill();
   };
 
@@ -817,7 +824,7 @@ export default function Visual3DCourses({ isOpen, onClose, onComplete }: Visual3
       const radius = (time * 80 * frequency + i * 25) % (250 + amplitude * 50);
       const alpha = Math.max(0, (1 - radius / (300 + amplitude * 50)) * amplitude);
       
-      ctx.strokeStyle = `rgba(139, 69, 255, ${alpha})`;
+      ctx.strokeStyle = `rgba(124, 58, 237, ${alpha})`;
       ctx.lineWidth = 2 + amplitude;
       ctx.beginPath();
       ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
