@@ -6,7 +6,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { Progress } from "@/components/ui/progress";
 import { getAllLessonData, type Question } from "@/lib/allLessonsData";
-import UniversalDotLinkQuiz from "./UniversalDotLinkQuiz";
+import SequentialDotConnectGame from "./SequentialDotConnectGame";
 
 interface InteractiveLessonProps {
   lessonId: string;
@@ -174,8 +174,8 @@ export default function InteractiveLesson({ lessonId, title, onComplete, onClose
                   onClick={() => setShowDotLinkQuiz(true)}
                   className="bg-gradient-to-r from-green-500 to-emerald-500 text-white border-0 hover:from-green-600 hover:to-emerald-600 px-6 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 group"
                 >
-                  <span className="text-lg mr-2 group-hover:wiggle">🔗</span>
-                  Dot Link Challenge
+                  <span className="text-lg mr-2 group-hover:wiggle">🎯</span>
+                  Connect the Dots
                 </Button>
               </div>
             </div>
@@ -291,11 +291,11 @@ export default function InteractiveLesson({ lessonId, title, onComplete, onClose
         </CardContent>
       </Card>
 
-      {/* Universal Dot Link Quiz Integration */}
-      <UniversalDotLinkQuiz 
+      {/* Sequential Dot Connect Game Integration */}
+      <SequentialDotConnectGame 
         isOpen={showDotLinkQuiz} 
         onClose={() => setShowDotLinkQuiz(false)} 
-        onComplete={(dotLinkScore) => {
+        onComplete={(dotLinkScore: number) => {
           setScore(prev => prev + dotLinkScore);
           setShowDotLinkQuiz(false);
         }}
