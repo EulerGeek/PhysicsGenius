@@ -247,13 +247,16 @@ export default function EnhancedAITutor({ isOpen, onClose, currentQuestion, cont
     <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4" style={{ pointerEvents: 'auto' }}>
       <Card className="w-full max-w-4xl h-[90vh] bg-white dark:bg-gray-900 shadow-2xl rounded-3xl overflow-hidden" style={{ pointerEvents: 'auto' }}>
         {/* Enhanced Header */}
-        <CardHeader className="border-b-2 border-gray-200 dark:border-gray-700 bg-gradient-to-r from-blue-600 to-purple-600 text-white p-6">
+        {/* Fixed Stable Header */}
+        <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-4 border-b-2 border-gray-200 dark:border-gray-700 flex-shrink-0">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="text-3xl animate-bounce">🤖</div>
+              <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
+                <span className="text-xl">🤖</span>
+              </div>
               <div>
-                <CardTitle className="text-2xl font-bold">QUOMA AI Assistant</CardTitle>
-                <p className="text-sm text-blue-100">Your comprehensive physics & math tutor</p>
+                <h2 className="text-xl font-bold">QUOMA AI</h2>
+                <p className="text-xs text-blue-100">Physics & Math Tutor</p>
               </div>
             </div>
             <div className="flex gap-2">
@@ -265,7 +268,7 @@ export default function EnhancedAITutor({ isOpen, onClose, currentQuestion, cont
                 }}
                 variant="ghost"
                 size="sm"
-                className="text-white hover:bg-white/20 rounded-full px-4 py-2"
+                className="text-white hover:bg-white/20 rounded-lg px-3 py-1 text-sm"
                 title="Go back one message"
                 disabled={messages.length <= 1}
               >
@@ -275,28 +278,23 @@ export default function EnhancedAITutor({ isOpen, onClose, currentQuestion, cont
                 onClick={clearChat}
                 variant="ghost"
                 size="sm"
-                className="text-white hover:bg-white/20 rounded-full px-4 py-2"
+                className="text-white hover:bg-white/20 rounded-lg px-3 py-1 text-sm"
                 title="Clear chat and restart"
               >
                 🔄 Reset
               </Button>
               <Button
-                onClick={(e) => {
-                  e.preventDefault();
-                  e.stopPropagation();
-                  onClose();
-                }}
+                onClick={onClose}
                 variant="ghost"
                 size="sm"
-                className="text-white hover:bg-white/20 rounded-full px-4 py-2 z-10 relative"
+                className="text-white hover:bg-white/20 rounded-lg px-3 py-1 text-sm font-bold"
                 title="Close chat"
-                style={{ pointerEvents: 'auto' }}
               >
                 ✕ Close
               </Button>
             </div>
           </div>
-        </CardHeader>
+        </div>
 
         <CardContent className="p-0 flex flex-col h-full">
           {/* Messages Area with Enhanced Scrolling */}
