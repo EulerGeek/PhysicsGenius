@@ -315,11 +315,11 @@ export default function CandyCrushLevelPlayer({ level, onComplete, onClose }: Ca
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="mt-4 bg-yellow-100 border-2 border-yellow-400 rounded-lg p-4"
+                    className="mt-4 bg-blue-100 border-2 border-blue-400 rounded-lg p-4"
                   >
                     <div className="flex items-start">
-                      <span className="text-yellow-500 text-xl mr-2">💡</span>
-                      <p className="text-yellow-800 font-semibold">{currentQuestion.hint}</p>
+                      <span className="text-blue-500 text-xl mr-2">💡</span>
+                      <p className="text-blue-800 font-semibold">{currentQuestion.hint}</p>
                     </div>
                   </motion.div>
                 )}

@@ -250,9 +250,9 @@ export default function FriendsModal({ isOpen, onClose, user }: FriendsModalProp
                   <div key={friend.id} className="flex items-center justify-between p-3 border border-gray-200 dark:border-gray-700 rounded-lg">
                     <div className="flex items-center space-x-3">
                       <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold ${
-                        index === 0 ? 'bg-yellow-500 text-white' : 
-                        index === 1 ? 'bg-gray-400 text-white' : 
-                        index === 2 ? 'bg-orange-500 text-white' : 
+                        index === 0 ? 'bg-emerald-500 text-white' : 
+                        index === 1 ? 'bg-blue-500 text-white' : 
+                        index === 2 ? 'bg-purple-500 text-white' : 
                         'bg-gray-200 text-gray-700'
                       }`}>
                         #{index + 1}
@@ -265,9 +265,9 @@ export default function FriendsModal({ isOpen, onClose, user }: FriendsModalProp
                     <div className="flex items-center space-x-2">
                       {index < 3 && (
                         <i className={`fas fa-trophy ${
-                          index === 0 ? 'text-yellow-500' : 
-                          index === 1 ? 'text-gray-400' : 
-                          'text-orange-500'
+                          index === 0 ? 'text-emerald-500' : 
+                          index === 1 ? 'text-blue-500' : 
+                          'text-purple-500'
                         }`}></i>
                       )}
                       <Badge variant="outline">

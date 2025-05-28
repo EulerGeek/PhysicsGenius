@@ -63,7 +63,7 @@ export default function ConceptsPage({ onStartConcept, onNavigate, progress }: C
       title: "Electromagnetic Fields",
       icon: "⚡",
       description: "Electric and magnetic phenomena",
-      color: "bg-yellow-50 border-yellow-200",
+      color: "bg-green-50 border-green-200",
       concepts: [
         {
           id: "electrostatics",
