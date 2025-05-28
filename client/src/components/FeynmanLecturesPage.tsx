@@ -4,8 +4,14 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import NavigationMenu from './NavigationMenu';
 
-export default function FeynmanLecturesPage() {
+interface FeynmanLecturesPageProps {
+  onNavigate?: (page: string) => void;
+  progress?: any;
+}
+
+export default function FeynmanLecturesPage({ onNavigate, progress }: FeynmanLecturesPageProps = {}) {
   const [selectedChapter, setSelectedChapter] = useState<string | null>(null);
   const [readingMode, setReadingMode] = useState(false);
 
@@ -957,6 +963,11 @@ Understanding momentum conservation not only helps us solve practical problemsâ€
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-purple-900">
+      {/* Navigation Menu */}
+      {onNavigate && progress && (
+        <NavigationMenu currentPage="feynman" onNavigate={onNavigate} progress={progress} />
+      )}
+      
       <div className="max-w-7xl mx-auto px-3 sm:px-6 py-4 sm:py-8">
         {/* Header */}
         <div className="text-center mb-6 sm:mb-12">

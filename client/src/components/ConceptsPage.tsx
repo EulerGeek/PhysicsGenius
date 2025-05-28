@@ -3,12 +3,15 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import NavigationMenu from './NavigationMenu';
 
 interface ConceptsPageProps {
   onStartConcept: (courseId: string, conceptId: string) => void;
+  onNavigate?: (page: string) => void;
+  progress?: any;
 }
 
-export default function ConceptsPage({ onStartConcept }: ConceptsPageProps) {
+export default function ConceptsPage({ onStartConcept, onNavigate, progress }: ConceptsPageProps) {
   const [selectedCategory, setSelectedCategory] = useState("physics");
 
   const physicsConceptCategories = [
@@ -203,6 +206,11 @@ export default function ConceptsPage({ onStartConcept }: ConceptsPageProps) {
 
   return (
     <div className="min-h-screen bg-neutral-50 dark:bg-gray-900">
+      {/* Navigation Menu */}
+      {onNavigate && progress && (
+        <NavigationMenu currentPage="concepts" onNavigate={onNavigate} progress={progress} />
+      )}
+      
       <div className="max-w-7xl mx-auto px-2 sm:px-4 py-3 sm:py-6">
         {/* Header */}
         <div className="text-center mb-4 sm:mb-8">
