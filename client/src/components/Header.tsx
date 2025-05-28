@@ -46,23 +46,18 @@ export default function Header({ progress, resetProgress, setProgress }: HeaderP
 
   return (
     <>
-      <header className="bg-gradient-to-r from-white via-blue-50 to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 shadow-lg border-b-2 border-gradient-to-r from-blue-200 to-purple-200 dark:border-gray-700 transition-all duration-500">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-18">
-            <div className="flex items-center space-x-4 group">
-              <div className="w-12 h-12 bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 rounded-xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300 float-animation">
-                <span className="text-white text-2xl">⚛️</span>
+      <header className="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700">
+        <div className="w-full px-1">
+          <div className="flex justify-between items-center h-10">
+            <div className="flex items-center space-x-1">
+              <div className="w-6 h-6 bg-blue-600 rounded flex items-center justify-center">
+                <span className="text-white text-xs">⚛️</span>
               </div>
-              <div>
-                <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">QUOMA</h1>
-                <p className="text-sm font-medium text-neutral-600 dark:text-gray-400">
-                  🚀 Your Personal Physics Geek
-                </p>
-              </div>
+              <h1 className="text-sm font-bold text-blue-600">QUOMA</h1>
             </div>
 
-            {/* Wikipedia Search Bar */}
-            <div className="flex-1 max-w-lg mx-8">
+            {/* Search - Hidden on mobile */}
+            <div className="hidden sm:flex flex-1 max-w-xs mx-2">
               <form onSubmit={handleWikipediaSearch} className="relative group">
                 <Input
                   type="text"

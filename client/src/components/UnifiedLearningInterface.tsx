@@ -123,36 +123,36 @@ export default function UnifiedLearningInterface({
   };
 
   return (
-    <div className="space-y-4 md:space-y-6 px-2 md:px-4">
-      {/* Course Header - Mobile Responsive */}
+    <div className="space-y-2 px-1">
+      {/* Course Header - Compact */}
       <div className="flex justify-center items-center">
-        <h2 className="text-xl md:text-2xl font-bold text-gray-900 dark:text-white text-center">
-          {courseId === 'classical' ? '🔬 Classical Mechanics' : 
-           courseId === 'quantum' ? '⚛️ Quantum Mechanics' : 
-           '🌌 General Relativity'}
+        <h2 className="text-sm sm:text-lg font-bold text-gray-900 dark:text-white text-center">
+          {courseId === 'classical' ? '🔬 Classical' : 
+           courseId === 'quantum' ? '⚛️ Quantum' : 
+           '🌌 Relativity'}
         </h2>
       </div>
 
-      {/* Concept Notes Modal - Mobile Responsive */}
+      {/* Concept Notes Modal - Ultra Compact */}
       {showConcepts && selectedLesson && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-2 md:p-4">
-          <Card className="w-full max-w-4xl max-h-[95vh] md:max-h-[90vh] overflow-y-auto">
-            <CardHeader className="pb-3 md:pb-6">
-              <div className="flex justify-between items-start gap-2">
-                <h3 className="text-lg md:text-xl font-bold leading-tight">
-                  📚 Concept Review: {selectedLesson.title}
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-1">
+          <Card className="w-[95vw] max-w-sm h-[80vh] overflow-y-auto">
+            <CardHeader className="pb-2 px-3 py-2">
+              <div className="flex justify-between items-center gap-1">
+                <h3 className="text-xs font-bold truncate">
+                  📚 {selectedLesson.title}
                 </h3>
                 <Button 
                   variant="ghost" 
                   size="sm"
                   onClick={() => setShowConcepts(false)}
-                  className="shrink-0"
+                  className="h-6 w-6 p-0"
                 >
                   ✕
                 </Button>
               </div>
             </CardHeader>
-            <CardContent className="space-y-4 md:space-y-6 px-3 md:px-6">
+            <CardContent className="space-y-2 px-3 pb-3">
               {/* Key Concepts */}
               <div className="grid gap-4">
                 <h4 className="text-lg font-semibold text-blue-600 dark:text-blue-400">

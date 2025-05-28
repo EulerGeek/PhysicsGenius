@@ -115,7 +115,7 @@ export default function Home() {
           <div className="min-h-screen bg-neutral-50 dark:bg-gray-900">
             <Header progress={progress} resetProgress={resetProgress} />
             
-            <main className="max-w-6xl mx-auto px-2 sm:px-4 md:px-6 lg:px-8 py-4 md:py-8">
+            <main className="max-w-6xl mx-auto px-1 sm:px-2 md:px-4 lg:px-6 py-2 sm:py-4">
               <ProgressOverview progress={progress} courses={courses} />
               
               <CourseNavigation 
