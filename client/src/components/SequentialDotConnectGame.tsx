@@ -354,10 +354,13 @@ export default function SequentialDotConnectGame({ isOpen, onClose, onComplete, 
             className="relative w-full h-full bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-800 dark:to-gray-700 rounded-2xl border-2 border-dashed border-blue-300 dark:border-blue-600"
             onMouseMove={handleMouseMove}
           >
-            {/* Instructions */}
+            {/* Instructions and Debug */}
             <div className="absolute top-4 left-1/2 transform -translate-x-1/2 bg-white dark:bg-gray-800 px-6 py-3 rounded-full shadow-lg border-2 border-blue-200 dark:border-blue-600">
               <p className="text-sm font-semibold text-gray-700 dark:text-gray-300">
                 🎯 Click dots in order: {nextExpected > currentPuzzleData.correctSequence.length ? 'Complete!' : `Next is ${nextExpected}`}
+              </p>
+              <p className="text-xs text-gray-500 mt-1">
+                Debug: {dots.length} dots loaded
               </p>
             </div>
 
@@ -400,39 +403,71 @@ export default function SequentialDotConnectGame({ isOpen, onClose, onComplete, 
               )}
             </svg>
 
-            {/* Dots */}
-            {dots && dots.length > 0 && dots.map((dot) => (
-              <div
-                key={dot.id}
-                id={`dot-${dot.id}`}
-                className={`absolute cursor-pointer transition-all duration-300 hover:scale-110 group ${
-                  dot.id === nextExpected ? 'ring-4 ring-yellow-400 ring-opacity-75 animate-pulse' : ''
-                }`}
-                style={{
-                  left: `${dot.x}px`,
-                  top: `${dot.y}px`,
-                  zIndex: 10
-                }}
-                onClick={() => handleDotClick(dot.id)}
-              >
-                <div
-                  className={`w-12 h-12 rounded-full flex items-center justify-center shadow-lg border-3 border-white font-bold text-lg group-hover:shadow-2xl transition-all duration-300 ${
-                    dot.isConnected 
-                      ? 'bg-gradient-to-r from-green-500 to-emerald-500 text-white' 
-                      : dot.id === nextExpected
-                        ? 'bg-gradient-to-r from-yellow-400 to-orange-500 text-white animate-bounce'
-                        : 'bg-gradient-to-r from-blue-500 to-purple-500 text-white'
-                  }`}
-                >
-                  {dot.label}
-                </div>
-                
-                {/* Concept tooltip */}
-                <div className="absolute top-14 left-1/2 transform -translate-x-1/2 bg-black/80 text-white px-3 py-2 rounded-lg text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-                  {dot.concept}
-                </div>
+            {/* Manual Test Dots - Let's add some fixed dots for testing */}
+            <div
+              className="absolute cursor-pointer transition-all duration-300 hover:scale-110 group ring-4 ring-yellow-400 ring-opacity-75 animate-pulse"
+              style={{ left: '100px', top: '200px', zIndex: 10 }}
+              onClick={() => console.log('Dot 1 clicked!')}
+            >
+              <div className="w-12 h-12 rounded-full flex items-center justify-center shadow-lg border-3 border-white font-bold text-lg bg-gradient-to-r from-yellow-400 to-orange-500 text-white animate-bounce">
+                1
               </div>
-            ))}
+              <div className="absolute top-14 left-1/2 transform -translate-x-1/2 bg-black/80 text-white px-3 py-2 rounded-lg text-xs whitespace-nowrap">
+                Object at Rest
+              </div>
+            </div>
+
+            <div
+              className="absolute cursor-pointer transition-all duration-300 hover:scale-110 group"
+              style={{ left: '200px', top: '150px', zIndex: 10 }}
+              onClick={() => console.log('Dot 2 clicked!')}
+            >
+              <div className="w-12 h-12 rounded-full flex items-center justify-center shadow-lg border-3 border-white font-bold text-lg bg-gradient-to-r from-blue-500 to-purple-500 text-white">
+                2
+              </div>
+              <div className="absolute top-14 left-1/2 transform -translate-x-1/2 bg-black/80 text-white px-3 py-2 rounded-lg text-xs whitespace-nowrap">
+                Force Applied
+              </div>
+            </div>
+
+            <div
+              className="absolute cursor-pointer transition-all duration-300 hover:scale-110 group"
+              style={{ left: '300px', top: '100px', zIndex: 10 }}
+              onClick={() => console.log('Dot 3 clicked!')}
+            >
+              <div className="w-12 h-12 rounded-full flex items-center justify-center shadow-lg border-3 border-white font-bold text-lg bg-gradient-to-r from-blue-500 to-purple-500 text-white">
+                3
+              </div>
+              <div className="absolute top-14 left-1/2 transform -translate-x-1/2 bg-black/80 text-white px-3 py-2 rounded-lg text-xs whitespace-nowrap">
+                Acceleration Begins
+              </div>
+            </div>
+
+            <div
+              className="absolute cursor-pointer transition-all duration-300 hover:scale-110 group"
+              style={{ left: '400px', top: '80px', zIndex: 10 }}
+              onClick={() => console.log('Dot 4 clicked!')}
+            >
+              <div className="w-12 h-12 rounded-full flex items-center justify-center shadow-lg border-3 border-white font-bold text-lg bg-gradient-to-r from-blue-500 to-purple-500 text-white">
+                4
+              </div>
+              <div className="absolute top-14 left-1/2 transform -translate-x-1/2 bg-black/80 text-white px-3 py-2 rounded-lg text-xs whitespace-nowrap">
+                Velocity Increases
+              </div>
+            </div>
+
+            <div
+              className="absolute cursor-pointer transition-all duration-300 hover:scale-110 group"
+              style={{ left: '500px', top: '120px', zIndex: 10 }}
+              onClick={() => console.log('Dot 5 clicked!')}
+            >
+              <div className="w-12 h-12 rounded-full flex items-center justify-center shadow-lg border-3 border-white font-bold text-lg bg-gradient-to-r from-blue-500 to-purple-500 text-white">
+                5
+              </div>
+              <div className="absolute top-14 left-1/2 transform -translate-x-1/2 bg-black/80 text-white px-3 py-2 rounded-lg text-xs whitespace-nowrap">
+                Constant Velocity
+              </div>
+            </div>
 
             {/* Results Section */}
             {showResults && (
