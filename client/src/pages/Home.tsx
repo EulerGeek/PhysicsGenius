@@ -16,7 +16,7 @@ import Footer from "@/components/Footer";
 import ConceptMenu from "@/components/ConceptMenu";
 import InteractiveConceptLesson from "@/components/InteractiveConceptLesson";
 import FloatingAIButton from "@/components/FloatingAIButton";
-import InteractivePhysicsElements from "@/components/InteractivePhysicsElements";
+import VoiceNavigationAssistant from "@/components/VoiceNavigationAssistant";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useProgress } from "@/hooks/useProgress";
@@ -246,8 +246,20 @@ export default function Home() {
         onClose={() => setShowQuickTest(false)}
       />
 
-      {/* Interactive Physics Elements */}
-      <InteractivePhysicsElements isVisible={true} />
+      {/* Voice Navigation Assistant */}
+      <VoiceNavigationAssistant 
+        onNavigate={(path) => {
+          if (path === '/') setCurrentPage('home');
+          else if (path.includes('classical-mechanics')) setCurrentPage('classical-mechanics');
+          else if (path.includes('quantum-mechanics')) setCurrentPage('quantum-mechanics');
+          else if (path.includes('general-relativity')) setCurrentPage('general-relativity');
+          else if (path.includes('mathematics')) setCurrentPage('mathematics');
+        }}
+        onVoiceCommand={(command, action) => {
+          console.log('Voice command:', command, action);
+        }}
+        currentPage={currentPage}
+      />
     </div>
   );
 }
