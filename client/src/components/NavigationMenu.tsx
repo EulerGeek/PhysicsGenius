@@ -33,7 +33,14 @@ export default function NavigationMenu({ currentPage, onNavigate, progress }: Na
       <div 
         className="relative group"
         onMouseEnter={() => setIsOpen(true)}
-        onMouseLeave={() => setIsOpen(false)}
+        onMouseLeave={(e) => {
+          // Add delay to prevent flickering
+          setTimeout(() => {
+            if (!e.currentTarget.matches(':hover')) {
+              setIsOpen(false);
+            }
+          }, 100);
+        }}
       >
         {/* Menu Button */}
         <Button

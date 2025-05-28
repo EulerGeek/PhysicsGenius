@@ -97,26 +97,32 @@ export default function Header({ progress, resetProgress, setProgress }: HeaderP
                 <i className={`fas ${theme === 'dark' ? 'fa-sun' : 'fa-moon'} text-sm`}></i>
               </Button>
 
-              {user && (
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => setShowFriendsModal(true)}
-                  className="text-blue-600 border-blue-600 hover:bg-blue-50 dark:text-blue-400 dark:border-blue-400"
-                  title="Friends & Leaderboard"
-                >
-                  <i className="fas fa-users text-sm"></i>
-                </Button>
-              )}
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  setShowFriendsModal(true);
+                }}
+                className="text-blue-600 border-blue-600 hover:bg-blue-50 dark:text-blue-400 dark:border-blue-400"
+                title="Friends & Leaderboard"
+              >
+                👥 Friends
+              </Button>
 
               <Button
                 variant="outline"
                 size="sm"
-                onClick={() => setShowSettingsModal(true)}
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  setShowSettingsModal(true);
+                }}
                 className="text-gray-700 dark:text-gray-300"
                 title="Settings"
               >
-                <i className="fas fa-cog text-sm"></i>
+                ⚙️ Settings
               </Button>
 
               <div className="hidden sm:flex items-center space-x-2 bg-gray-100 dark:bg-gray-700 px-3 py-1 rounded-full">

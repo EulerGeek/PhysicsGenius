@@ -230,8 +230,8 @@ export default function EnhancedAITutor({ isOpen, onClose, currentQuestion, cont
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
-      <Card className="w-full max-w-4xl h-[90vh] bg-white dark:bg-gray-900 shadow-2xl rounded-3xl overflow-hidden">
+    <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4" style={{ pointerEvents: 'auto' }}>
+      <Card className="w-full max-w-4xl h-[90vh] bg-white dark:bg-gray-900 shadow-2xl rounded-3xl overflow-hidden" style={{ pointerEvents: 'auto' }}>
         {/* Enhanced Header */}
         <CardHeader className="border-b-2 border-gray-200 dark:border-gray-700 bg-gradient-to-r from-blue-600 to-purple-600 text-white p-6">
           <div className="flex items-center justify-between">
@@ -267,11 +267,16 @@ export default function EnhancedAITutor({ isOpen, onClose, currentQuestion, cont
                 🔄 Reset
               </Button>
               <Button
-                onClick={onClose}
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  onClose();
+                }}
                 variant="ghost"
                 size="sm"
-                className="text-white hover:bg-white/20 rounded-full px-4 py-2"
+                className="text-white hover:bg-white/20 rounded-full px-4 py-2 z-10 relative"
                 title="Close chat"
+                style={{ pointerEvents: 'auto' }}
               >
                 ✕ Close
               </Button>
