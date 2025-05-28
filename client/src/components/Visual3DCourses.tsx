@@ -273,23 +273,25 @@ export default function Visual3DCourses({ isOpen, onClose, onComplete }: Visual3
     const gravity = parameters.gravity || 9.81;
     const damping = 0.995; // Realistic energy loss
     
-    // Advanced physics with damping
-    const frequency = Math.sqrt(gravity / (parameters.length * 100));
+    // Advanced physics with damping (faster speed)
+    const frequency = Math.sqrt(gravity / (parameters.length * 100)) * 2.5;
     const amplitude = parameters.angle * Math.PI / 180;
     const angle = amplitude * Math.cos(time * frequency) * Math.pow(damping, time);
     
     const bobX = centerX + length * Math.sin(angle);
     const bobY = centerY + length * Math.cos(angle);
 
-    // Draw motion trail with fade effect
-    ctx.globalAlpha = 0.2;
+    // Draw motion trail with fade effect (vibrant nature colors)
+    ctx.globalAlpha = 0.3;
     for (let i = 1; i <= 8; i++) {
       const trailTime = time - i * 0.05;
       const trailAngle = amplitude * Math.cos(trailTime * frequency) * Math.pow(damping, trailTime);
       const trailX = centerX + length * Math.sin(trailAngle);
       const trailY = centerY + length * Math.cos(trailAngle);
       
-      ctx.fillStyle = `rgba(220, 38, 38, ${0.2 - i * 0.025})`;
+      // Beautiful gradient trail from teal to purple
+      const hue = 170 + i * 15; // Teal to purple spectrum
+      ctx.fillStyle = `hsla(${hue}, 70%, 55%, ${0.3 - i * 0.035})`;
       ctx.beginPath();
       ctx.arc(trailX, trailY, 12, 0, 2 * Math.PI);
       ctx.fill();
