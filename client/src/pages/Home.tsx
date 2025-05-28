@@ -115,13 +115,14 @@ export default function Home() {
           <div className="min-h-screen bg-neutral-50 dark:bg-gray-900">
             <Header progress={progress} resetProgress={resetProgress} />
             
-            <main className="max-w-6xl mx-auto px-1 sm:px-2 md:px-4 lg:px-6 py-2 sm:py-4">
+            <main className="max-w-6xl mx-auto px-1 sm:px-3 md:px-6 lg:px-8 py-1 sm:py-3 md:py-6 lg:py-8">
               <ProgressOverview progress={progress} courses={courses} />
               
               <CourseNavigation 
                 courses={courses}
                 activeTab={activeTab}
                 onTabChange={setActiveTab}
+                progress={progress}
               />
 
               <section className="mb-8">

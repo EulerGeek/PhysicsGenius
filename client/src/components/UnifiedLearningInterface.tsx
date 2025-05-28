@@ -123,36 +123,35 @@ export default function UnifiedLearningInterface({
   };
 
   return (
-    <div className="space-y-2 px-1">
-      {/* Course Header - Compact */}
+    <div className="space-y-1 sm:space-y-2 md:space-y-4 px-1 sm:px-2 md:px-4">
+      {/* Course Header - Device Relative Scaling */}
       <div className="flex justify-center items-center">
-        <h2 className="text-sm sm:text-lg font-bold text-gray-900 dark:text-white text-center">
+        <h2 className="text-xs sm:text-sm md:text-lg lg:text-xl font-bold text-gray-900 dark:text-white text-center">
           {courseId === 'classical' ? '🔬 Classical' : 
            courseId === 'quantum' ? '⚛️ Quantum' : 
            '🌌 Relativity'}
         </h2>
       </div>
 
-      {/* Concept Notes Modal - Ultra Compact */}
+      {/* Concept Notes Modal - Device Relative Scaling */}
       {showConcepts && selectedLesson && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-1">
-          <Card className="w-[95vw] max-w-sm h-[80vh] overflow-y-auto">
-            <CardHeader className="pb-2 px-3 py-2">
-              <div className="flex justify-between items-center gap-1">
-                <h3 className="text-xs font-bold truncate">
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-1 sm:p-2 md:p-4">
+          <Card className="w-[95vw] sm:w-[85vw] md:w-[75vw] lg:w-[65vw] max-w-4xl h-[85vh] sm:h-[80vh] md:h-[75vh] overflow-y-auto">
+            <CardHeader className="pb-1 sm:pb-2 md:pb-3 px-2 sm:px-3 md:px-4 py-1 sm:py-2 md:py-3">
+              <div className="flex justify-between items-center gap-1 sm:gap-2">
+                <h3 className="text-xs sm:text-sm md:text-lg lg:text-xl font-bold truncate">
                   📚 {selectedLesson.title}
                 </h3>
                 <Button 
                   variant="ghost" 
-                  size="sm"
                   onClick={() => setShowConcepts(false)}
-                  className="h-6 w-6 p-0"
+                  className="h-5 w-5 sm:h-6 sm:w-6 md:h-8 md:w-8 p-0 text-xs sm:text-sm md:text-base"
                 >
                   ✕
                 </Button>
               </div>
             </CardHeader>
-            <CardContent className="space-y-2 px-3 pb-3">
+            <CardContent className="space-y-1 sm:space-y-2 md:space-y-3 px-2 sm:px-3 md:px-4 pb-2 sm:pb-3 md:pb-4">
               {/* Key Concepts */}
               <div className="grid gap-4">
                 <h4 className="text-lg font-semibold text-blue-600 dark:text-blue-400">
