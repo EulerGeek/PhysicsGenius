@@ -67,7 +67,7 @@ export default function ProgressOverview({ progress, courses }: ProgressOverview
                 <div className="text-sm font-medium text-neutral-900">
                   {progress.completedLessons[course.id] || 0}/{course.totalLessons}
                 </div>
-                <div className="text-xs text-neutral-500">{course.title.split(' ')[0]}</div>
+                <div className="text-xs text-[#ffffff]">{course.title.split(' ')[0]}</div>
               </div>
             ))}
           </div>

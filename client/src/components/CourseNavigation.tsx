@@ -60,10 +60,9 @@ export default function CourseNavigation({ courses, activeTab, onTabChange, prog
           })}
         </div>
       </section>
-
       {/* Mathematics Courses (Optional) */}
       <section className="mb-1 sm:mb-2">
-        <h3 className="text-[8px] sm:text-xs md:text-sm font-semibold text-center mb-1 sm:mb-2 text-green-700">
+        <h3 className="text-[8px] sm:text-xs md:text-sm font-semibold text-center mb-1 sm:mb-2 text-[#c1f0ff]">
           📐 Mathematics (Optional)
         </h3>
         <div className="flex space-x-0.5 sm:space-x-1 bg-green-50 p-0.5 rounded-lg">
