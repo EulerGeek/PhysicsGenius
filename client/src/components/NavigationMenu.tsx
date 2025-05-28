@@ -16,6 +16,7 @@ export default function NavigationMenu({ currentPage, onNavigate, progress }: Na
     { id: 'home', label: 'Home', icon: '🏠', description: 'Main dashboard' },
     { id: 'concepts', label: 'Concepts', icon: '🎯', description: 'Interactive physics concepts' },
     { id: 'courses', label: 'Courses', icon: '📚', description: 'Physics lessons' },
+    { id: 'feynman', label: 'Feynman Lectures', icon: '🎓', description: 'Classic physics lectures' },
     { id: 'progress', label: 'Progress', icon: '📊', description: 'Your achievements' },
     { id: 'test', label: 'Quick Test', icon: '🧪', description: 'Random questions' },
     { id: 'friends', label: 'Friends', icon: '👥', description: 'Study together' },

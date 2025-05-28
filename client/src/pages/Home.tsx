@@ -3,6 +3,7 @@ import Header from "@/components/Header";
 import HomeScreen from "@/components/HomeScreen";
 import AboutPage from "@/components/AboutPage";
 import ConceptsPage from "@/components/ConceptsPage";
+import FeynmanLecturesPage from "@/components/FeynmanLecturesPage";
 import NavigationMenu from "@/components/NavigationMenu";
 import ProgressOverview from "@/components/ProgressOverview";
 import CourseNavigation from "@/components/CourseNavigation";
@@ -73,6 +74,14 @@ export default function Home() {
           <Header progress={progress} resetProgress={resetProgress} />
           <ConceptsPage onStartConcept={handleStartConceptLesson} />
           <EducationalFooter />
+          <FloatingAIButton />
+        </div>
+      );
+    case 'feynman':
+      return (
+        <div className="min-h-screen bg-neutral-50 dark:bg-gray-900">
+          <Header progress={progress} resetProgress={resetProgress} />
+          <FeynmanLecturesPage />
           <FloatingAIButton />
         </div>
       );
