@@ -167,7 +167,9 @@ export default function InteractiveLesson({ lessonId, title, onComplete, onClose
                 <CardContent className="p-4">
                   <div className="flex items-start space-x-3">
                     <div className={`w-8 h-8 rounded-full flex items-center justify-center ${isCorrect ? 'bg-green-500' : 'bg-red-500'}`}>
-                      <i className={`fas ${isCorrect ? 'fa-check' : 'fa-times'} text-white text-sm`}></i>
+                      <span className="text-white text-sm">
+                        {isCorrect ? '✅' : '❌'}
+                      </span>
                     </div>
                     <div className="flex-1">
                       <h5 className={`font-semibold mb-2 ${isCorrect ? 'text-green-800 dark:text-green-200' : 'text-red-800 dark:text-red-200'}`}>
@@ -178,7 +180,7 @@ export default function InteractiveLesson({ lessonId, title, onComplete, onClose
                       </p>
                       {isCorrect && (
                         <div className="mt-2 flex items-center">
-                          <i className="fas fa-star text-amber-500 text-sm mr-1"></i>
+                          <span className="text-amber-500 text-sm mr-1">⭐</span>
                           <span className="text-sm font-medium text-amber-700 dark:text-amber-300">+20 XP</span>
                         </div>
                       )}
@@ -215,12 +217,12 @@ export default function InteractiveLesson({ lessonId, title, onComplete, onClose
                   {currentQuestion < questions.length - 1 ? (
                     <>
                       Next Question
-                      <i className="fas fa-arrow-right text-xs ml-2"></i>
+                      <span className="text-xs ml-2">➡️</span>
                     </>
                   ) : (
                     <>
                       Complete Lesson
-                      <i className="fas fa-check text-xs ml-2"></i>
+                      <span className="text-xs ml-2">✅</span>
                     </>
                   )}
                 </Button>

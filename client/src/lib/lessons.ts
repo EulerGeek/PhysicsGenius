@@ -24,7 +24,7 @@ export const getCourses = (): Course[] => [
     id: "classical",
     title: "Classical Mechanics",
     description: "Master the fundamentals of motion and forces",
-    icon: "fas fa-rocket",
+    icon: "🚀",
     color: "bg-blue-50 text-blue-600 dark:bg-blue-900 dark:text-blue-200",
     totalLessons: 15
   },
@@ -32,7 +32,7 @@ export const getCourses = (): Course[] => [
     id: "relativity",
     title: "General Relativity",
     description: "Explore spacetime and gravity",
-    icon: "fas fa-infinity",
+    icon: "🌌",
     color: "bg-purple-50 text-purple-600 dark:bg-purple-900 dark:text-purple-200",
     totalLessons: 10
   },
@@ -40,7 +40,7 @@ export const getCourses = (): Course[] => [
     id: "quantum",
     title: "Quantum Mechanics",
     description: "Discover the quantum world",
-    icon: "fas fa-wave-square",
+    icon: "⚛️",
     color: "bg-amber-50 text-amber-600 dark:bg-amber-900 dark:text-amber-200",
     totalLessons: 12
   }
