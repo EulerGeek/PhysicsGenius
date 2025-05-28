@@ -3,9 +3,11 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 export default function FeynmanLecturesPage() {
   const [selectedChapter, setSelectedChapter] = useState<string | null>(null);
+  const [readingMode, setReadingMode] = useState(false);
 
   const feynmanVolumes = [
     {
@@ -20,7 +22,58 @@ export default function FeynmanLecturesPage() {
           description: "All things are made of atoms - little particles that move around in perpetual motion, attracting each other when they are a little distance apart, but repelling upon being squeezed into one another.",
           topics: ["Atomic Theory", "States of Matter", "Molecular Motion"],
           duration: "45 min",
-          difficulty: "Beginner"
+          difficulty: "Beginner",
+          content: `
+# Chapter 1-1: Atoms in Motion
+
+*"If, in some cataclysm, all of scientific knowledge were to be destroyed, and only one sentence passed on to the next generations of creatures, what statement would contain the most information in the fewest words? I believe it is the atomic hypothesis (or the atomic fact, or whatever you wish to call it) that all things are made of atoms—little particles that move around in perpetual motion, attracting each other when they are a little distance apart, but repelling upon being squeezed into one another."*
+
+## Introduction
+
+This is our first venture into the world of physics. We begin with one of the most important concepts in all of science: the atomic theory of matter. This single idea, properly understood, contains an enormous amount of information about the world around us.
+
+## The Atomic Hypothesis
+
+Everything is made of atoms. This seems like a simple statement, but let us explore what it means. Atoms are extremely small particles, far too small to see with the naked eye or even with ordinary microscopes. Yet these tiny building blocks make up everything we see around us—the air we breathe, the water we drink, the food we eat, our own bodies.
+
+### What Are Atoms Like?
+
+Imagine atoms as tiny spheres, constantly in motion. They attract each other when they are a small distance apart, but if you try to squeeze them too close together, they repel each other strongly. This simple picture can explain an enormous number of phenomena.
+
+## States of Matter
+
+Let's consider water as an example. In ice, the water molecules (each made of two hydrogen atoms and one oxygen atom) are locked in a rigid pattern, vibrating in place but not moving around much. As we heat the ice, the molecules vibrate more and more until they break free from their rigid positions—the ice melts into liquid water.
+
+In liquid water, the molecules are still close together and attracting each other, but they can slide past one another. They are in constant motion, jiggling and tumbling about.
+
+If we heat the water further, the molecules move so fast that they overcome the attractive forces entirely and escape into the air as water vapor or steam. In this gaseous state, the molecules are flying around freely, only occasionally bumping into each other.
+
+## Brownian Motion
+
+One of the most beautiful demonstrations of atomic motion was discovered by the botanist Robert Brown in 1827. When he looked at tiny pollen grains suspended in water under a microscope, he saw them jiggling around in an irregular, never-ending dance.
+
+This motion, now called Brownian motion, is caused by the water molecules constantly bombarding the pollen grains from all sides. Since the bombardment is random, sometimes more molecules hit one side than the other, causing the grain to move. This was one of the first direct pieces of evidence for the reality of atoms and their constant motion.
+
+## Chemical Reactions
+
+The atomic theory also explains chemical reactions. When we burn wood, for example, the complex molecules that make up the wood (mostly cellulose) combine with oxygen molecules from the air. The atoms rearrange themselves into new combinations—carbon dioxide and water vapor—which escape into the air. The atoms themselves are not destroyed; they simply form new partnerships.
+
+## The Salt Crystal
+
+Consider a crystal of salt. If we could see the individual atoms, we would find them arranged in a perfectly regular pattern: sodium atoms and chlorine atoms alternating in a three-dimensional checkerboard. The forces between these atoms hold the crystal together and give it its characteristic cubic shape.
+
+When we dissolve salt in water, the water molecules surround the sodium and chlorine atoms and pull them away from the crystal structure. The atoms don't disappear—they're still there, just spread throughout the water instead of being locked in the crystal.
+
+## Conclusion
+
+The atomic hypothesis is the key that unlocks our understanding of the physical world. From this one idea—that matter is made of atoms in constant motion—we can understand phase changes, chemical reactions, the behavior of gases, and countless other phenomena.
+
+In the words of Richard Feynman: "The world is a dynamic mess of jiggling things." This jiggling, this constant atomic motion, is the hidden reality behind all the apparent stillness and solidity of the world around us.
+
+As we continue our study of physics, we will return again and again to this fundamental insight. Whether we are studying heat, pressure, chemical bonds, or the properties of materials, we will find that the behavior of atoms provides the underlying explanation.
+
+Remember: everything is made of atoms, and atoms are always moving. From this simple truth flows much of our understanding of the natural world.
+          `
         },
         {
           id: "1-2", 
@@ -294,17 +347,12 @@ export default function FeynmanLecturesPage() {
                         <Button 
                           size="sm" 
                           className="flex-1 text-xs sm:text-sm bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700"
-                          onClick={() => window.open('https://feynmanlectures.caltech.edu/', '_blank')}
+                          onClick={() => {
+                            setSelectedChapter(chapter.id);
+                            setReadingMode(true);
+                          }}
                         >
-                          📖 Find at Caltech
-                        </Button>
-                        <Button 
-                          variant="outline" 
-                          size="sm"
-                          className="text-xs sm:text-sm"
-                          onClick={() => window.open(`https://archive.org/search.php?query=feynman+lectures+${chapter.title.replace(/\s+/g, '+')}`, '_blank')}
-                        >
-                          📚 Archive.org
+                          📖 Read Chapter
                         </Button>
                         <Button 
                           variant="outline" 
@@ -316,19 +364,18 @@ export default function FeynmanLecturesPage() {
                         </Button>
                       </div>
                       
-                      {selectedChapter === chapter.id && (
+                      {selectedChapter === chapter.id && !readingMode && (
                         <div className="mt-4 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg border-l-4 border-blue-500">
                           <h5 className="font-semibold text-sm mb-2">Chapter Summary:</h5>
                           <p className="text-xs sm:text-sm text-gray-700 dark:text-gray-300 mb-3">
                             {chapter.description}
                           </p>
                           <div className="text-xs text-gray-600 dark:text-gray-400">
-                            <strong>How to Access:</strong>
+                            <strong>Key Topics Covered:</strong>
                             <ul className="mt-2 space-y-1 ml-4">
-                              <li>• Visit the official Caltech Feynman Lectures website</li>
-                              <li>• Search for "{chapter.title}" in the chapter index</li>
-                              <li>• Check Archive.org for digital copies</li>
-                              <li>• Look for Volume {volume.id.replace('volume', '').toUpperCase()}, Chapter {chapter.id.split('-')[1]}</li>
+                              {chapter.topics.map((topic, idx) => (
+                                <li key={idx}>• {topic}</li>
+                              ))}
                             </ul>
                           </div>
                         </div>
@@ -340,6 +387,61 @@ export default function FeynmanLecturesPage() {
             </TabsContent>
           ))}
         </Tabs>
+
+        {/* Reading Mode Modal */}
+        {readingMode && selectedChapter && (
+          <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+            <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden">
+              {/* Reader Header */}
+              <div className="bg-gradient-to-r from-blue-500 to-purple-600 p-4 text-white">
+                <div className="flex justify-between items-center">
+                  <div>
+                    <h2 className="text-xl font-heading font-bold">
+                      {feynmanVolumes.flatMap(v => v.chapters).find(ch => ch.id === selectedChapter)?.title}
+                    </h2>
+                    <p className="text-sm opacity-90">
+                      The Feynman Lectures on Physics
+                    </p>
+                  </div>
+                  <Button
+                    variant="secondary"
+                    size="sm"
+                    onClick={() => {
+                      setReadingMode(false);
+                      setSelectedChapter(null);
+                    }}
+                    className="bg-white/20 hover:bg-white/30 text-white border-white/30"
+                  >
+                    ✕ Close
+                  </Button>
+                </div>
+              </div>
+
+              {/* Reader Content */}
+              <ScrollArea className="h-[calc(90vh-120px)]">
+                <div className="p-6 sm:p-8">
+                  <div className="prose prose-lg dark:prose-invert max-w-none">
+                    {feynmanVolumes.flatMap(v => v.chapters).find(ch => ch.id === selectedChapter)?.content?.split('\n').map((line, idx) => {
+                      if (line.startsWith('# ')) {
+                        return <h1 key={idx} className="font-heading text-3xl font-bold text-gray-900 dark:text-white mb-6">{line.substring(2)}</h1>;
+                      } else if (line.startsWith('## ')) {
+                        return <h2 key={idx} className="font-heading text-2xl font-semibold text-gray-800 dark:text-gray-200 mt-8 mb-4">{line.substring(3)}</h2>;
+                      } else if (line.startsWith('### ')) {
+                        return <h3 key={idx} className="font-heading text-xl font-medium text-gray-700 dark:text-gray-300 mt-6 mb-3">{line.substring(4)}</h3>;
+                      } else if (line.startsWith('*') && line.endsWith('*')) {
+                        return <p key={idx} className="italic text-gray-600 dark:text-gray-400 my-4 pl-4 border-l-4 border-blue-200 dark:border-blue-800">{line.substring(1, line.length - 1)}</p>;
+                      } else if (line.trim() === '') {
+                        return <div key={idx} className="my-4"></div>;
+                      } else {
+                        return <p key={idx} className="text-gray-700 dark:text-gray-300 leading-relaxed my-3">{line}</p>;
+                      }
+                    })}
+                  </div>
+                </div>
+              </ScrollArea>
+            </div>
+          </div>
+        )}
 
         {/* Quote Section */}
         <div className="mt-8 sm:mt-16 text-center">
