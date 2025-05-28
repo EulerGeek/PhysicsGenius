@@ -479,7 +479,7 @@ export default function CustomAITutor({ isOpen, onClose, currentQuestion, contex
 
         <CardContent className="flex-1 flex flex-col p-0">
           {/* Messages Area */}
-          <ScrollArea className="flex-1 p-6">
+          <div className="flex-1 p-6 overflow-y-auto">
             <div className="space-y-4">
               {messages.map((message) => (
                 <div
@@ -532,7 +532,7 @@ export default function CustomAITutor({ isOpen, onClose, currentQuestion, contex
               )}
               <div ref={messagesEndRef} />
             </div>
-          </ScrollArea>
+          </div>
 
           {/* Quick Questions */}
           <div className="border-t border-gray-200 dark:border-gray-700 p-4">
