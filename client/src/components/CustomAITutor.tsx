@@ -455,59 +455,79 @@ export default function CustomAITutor({ isOpen, onClose, currentQuestion, contex
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/60 backdrop-blur-md z-50 flex items-center justify-center p-4">
-      <Card className="w-full max-w-4xl h-[85vh] bg-white dark:bg-gray-800 shadow-2xl rounded-2xl overflow-hidden flex flex-col">
-        <CardHeader className="bg-gradient-to-r from-purple-600 to-blue-600 text-white p-6">
+    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+      <Card className="w-full max-w-5xl h-[90vh] glass dark:glass-dark backdrop-blur-xl shadow-2xl rounded-3xl overflow-hidden flex flex-col bounce-in border-2 border-white/20">
+        <CardHeader className="bg-gradient-to-r from-purple-600 via-blue-600 to-indigo-600 text-white p-8 shadow-xl">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="text-3xl">🤖</div>
+            <div className="flex items-center gap-4">
+              <div className="text-4xl animate-bounce">🤖</div>
               <div>
-                <CardTitle className="text-2xl font-bold">Physics AI Tutor</CardTitle>
-                <p className="text-purple-100">Your personal learning companion</p>
+                <CardTitle className="text-3xl font-bold">QUOMA AI Assistant</CardTitle>
+                <p className="text-purple-100 text-lg">🚀 Your intelligent learning companion</p>
               </div>
             </div>
             <Button
               variant="ghost"
               onClick={onClose}
-              className="text-white hover:bg-white/20 rounded-xl"
+              className="text-white hover:bg-red-500/20 rounded-full p-3 transition-all duration-300 hover:scale-110 group"
             >
-              <span className="text-xl">✕</span>
+              <span className="text-2xl group-hover:wiggle">✕</span>
             </Button>
+          </div>
+          
+          {/* AI Status Indicator */}
+          <div className="mt-4 flex items-center gap-2">
+            <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
+            <span className="text-sm text-green-200">AI Assistant Online</span>
           </div>
         </CardHeader>
 
         <CardContent className="flex-1 flex flex-col p-0">
           {/* Messages Area */}
           <div className="flex-1 p-6 overflow-y-auto">
-            <div className="space-y-4">
+            <div className="space-y-6">
               {messages.map((message) => (
                 <div
                   key={message.id}
-                  className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
+                  className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'} slide-up`}
                 >
-                  <div className={`max-w-[80%] ${
+                  <div className={`max-w-[85%] transition-all duration-300 hover:scale-102 ${
                     message.sender === 'user'
-                      ? 'bg-blue-600 text-white rounded-2xl rounded-br-md'
-                      : 'bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white rounded-2xl rounded-bl-md'
-                  } p-4 shadow-md`}>
+                      ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-3xl rounded-br-lg shadow-xl'
+                      : 'bg-gradient-to-r from-gray-100 to-gray-50 dark:from-gray-700 dark:to-gray-600 text-gray-900 dark:text-white rounded-3xl rounded-bl-lg shadow-xl border border-gray-200 dark:border-gray-600'
+                  } p-6`}>
                     {message.sender === 'ai' && (
-                      <div className="flex items-center gap-2 mb-2">
-                        <span className="text-lg">🤖</span>
+                      <div className="flex items-center gap-3 mb-4">
+                        <div className="w-8 h-8 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full flex items-center justify-center">
+                          <span className="text-white text-sm">🤖</span>
+                        </div>
                         <Badge 
                           variant="secondary" 
-                          className={`text-xs ${
-                            message.type === 'encouragement' ? 'bg-green-100 text-green-700' :
-                            message.type === 'hint' ? 'bg-yellow-100 text-yellow-700' :
-                            message.type === 'question' ? 'bg-purple-100 text-purple-700' :
-                            'bg-blue-100 text-blue-700'
+                          className={`px-3 py-1 rounded-full text-sm font-semibold ${
+                            message.type === 'encouragement' ? 'bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300' :
+                            message.type === 'hint' ? 'bg-yellow-100 text-yellow-700 dark:bg-yellow-900 dark:text-yellow-300' :
+                            message.type === 'question' ? 'bg-purple-100 text-purple-700 dark:bg-purple-900 dark:text-purple-300' :
+                            'bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300'
                           }`}
                         >
                           {message.type || 'explanation'}
                         </Badge>
                       </div>
                     )}
-                    <p className="whitespace-pre-wrap leading-relaxed">{message.text}</p>
-                    <div className="text-xs opacity-70 mt-2">
+                    
+                    {message.sender === 'user' && (
+                      <div className="flex items-center gap-3 mb-3">
+                        <div className="w-6 h-6 bg-white/20 rounded-full flex items-center justify-center">
+                          <span className="text-white text-sm">👤</span>
+                        </div>
+                        <span className="text-white/80 text-sm font-medium">You</span>
+                      </div>
+                    )}
+                    
+                    <p className="whitespace-pre-wrap leading-relaxed text-lg">{message.text}</p>
+                    <div className={`text-sm mt-3 ${
+                      message.sender === 'user' ? 'text-white/60' : 'text-gray-500 dark:text-gray-400'
+                    }`}>
                       {message.timestamp.toLocaleTimeString()}
                     </div>
                   </div>
@@ -534,43 +554,57 @@ export default function CustomAITutor({ isOpen, onClose, currentQuestion, contex
           </div>
 
           {/* Quick Questions */}
-          <div className="border-t border-gray-200 dark:border-gray-700 p-4">
-            <div className="mb-3">
-              <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">Quick questions:</p>
-              <div className="flex flex-wrap gap-2">
+          <div className="border-t-2 border-gray-200 dark:border-gray-700 p-6 bg-gradient-to-r from-gray-50 to-blue-50 dark:from-gray-800 dark:to-gray-700">
+            <div className="mb-4">
+              <p className="text-lg font-semibold text-gray-700 dark:text-gray-300 mb-4 flex items-center gap-2">
+                <span>💡</span>
+                Quick Start Questions:
+              </p>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
                 {quickQuestions.map((question, index) => (
                   <Button
                     key={index}
                     variant="outline"
-                    size="sm"
                     onClick={() => setInputText(question)}
-                    className="text-xs rounded-full"
+                    className="text-left justify-start p-4 h-auto bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-600 rounded-2xl hover:border-blue-400 hover:bg-blue-50 dark:hover:bg-gray-700 transition-all duration-300 hover:scale-105"
                   >
-                    {question}
+                    <span className="text-sm leading-relaxed">{question}</span>
                   </Button>
                 ))}
               </div>
             </div>
           </div>
 
-          {/* Input Area */}
-          <div className="border-t border-gray-200 dark:border-gray-700 p-4">
-            <div className="flex gap-3">
-              <Input
-                type="text"
-                placeholder="Ask me anything about physics..."
-                value={inputText}
-                onChange={(e) => setInputText(e.target.value)}
-                onKeyPress={handleKeyPress}
-                className="flex-1 p-3 border-2 border-gray-300 dark:border-gray-600 rounded-xl focus:border-blue-500"
-              />
+          {/* Enhanced Input Area */}
+          <div className="border-t-2 border-gray-200 dark:border-gray-700 p-6 bg-gradient-to-r from-white to-purple-50 dark:from-gray-900 dark:to-gray-800">
+            <div className="flex gap-4 items-end">
+              <div className="flex-1">
+                <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                  💬 Ask your question:
+                </label>
+                <Input
+                  type="text"
+                  placeholder="Ask me anything about physics, math, or any topic you're studying..."
+                  value={inputText}
+                  onChange={(e) => setInputText(e.target.value)}
+                  onKeyPress={handleKeyPress}
+                  className="p-4 border-3 border-gray-300 dark:border-gray-600 rounded-2xl focus:border-blue-500 dark:focus:border-blue-400 text-lg bg-white dark:bg-gray-800 shadow-lg hover:shadow-xl transition-all duration-300"
+                />
+              </div>
               <Button
                 onClick={handleSendMessage}
                 disabled={!inputText.trim() || isTyping}
-                className="bg-blue-600 hover:bg-blue-700 rounded-xl px-6"
+                className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-4 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-110 text-lg font-semibold group disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                <span className="text-lg">🚀</span>
+                <span className="mr-2 group-hover:wiggle">🚀</span>
+                Send
               </Button>
+            </div>
+            
+            <div className="mt-3 text-center">
+              <p className="text-sm text-gray-500 dark:text-gray-400">
+                ✨ Powered by QUOMA's intelligent AI assistant
+              </p>
             </div>
           </div>
         </CardContent>
