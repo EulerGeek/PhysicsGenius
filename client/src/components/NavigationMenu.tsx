@@ -37,11 +37,14 @@ export default function NavigationMenu({ currentPage, onNavigate, progress }: Na
       >
         {/* Menu Button */}
         <Button
-          className={`w-12 h-12 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white shadow-lg transition-all duration-300 ${
-            isOpen ? 'scale-110' : 'scale-100'
-          }`}
+          className={`w-14 h-14 rounded-full bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 hover:from-blue-700 hover:via-indigo-700 hover:to-purple-700 text-white shadow-2xl transition-all duration-500 ${
+            isOpen ? 'scale-125 rotate-90 pulse-glow' : 'scale-100 float-animation hover-glow'
+          } relative overflow-hidden group`}
         >
-          <span className="text-xl">☰</span>
+          {/* Animated Background */}
+          <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-full"></div>
+          
+          <span className={`text-2xl relative z-10 transition-transform duration-300 ${isOpen ? 'rotate-90' : ''}`}>☰</span>
         </Button>
 
         {/* Invisible bridge to prevent menu from closing */}

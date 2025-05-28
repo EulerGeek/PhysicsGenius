@@ -244,33 +244,41 @@ export default function ConceptMenu({ isOpen, onClose, onStartConcept }: Concept
               </div>
 
               <div className="grid md:grid-cols-3 gap-8">
-                {courses.map((course) => (
+                {courses.map((course, index) => (
                   <Card 
                     key={course.id}
-                    className="cursor-pointer transform transition-all duration-300 hover:scale-105 hover:shadow-2xl border-2 border-gray-200 dark:border-gray-600 rounded-2xl overflow-hidden"
+                    className="cursor-pointer transform transition-all duration-500 hover:scale-110 hover:shadow-2xl border-2 border-gray-200 dark:border-gray-600 rounded-3xl overflow-hidden hover-lift group bounce-in"
                     onClick={() => setSelectedCourse(course.id)}
+                    style={{animationDelay: `${index * 0.2}s`}}
                   >
-                    <CardHeader className={`bg-gradient-to-r ${course.color} text-white p-6`}>
-                      <div className="text-center">
-                        <div className="text-6xl mb-4">{course.icon}</div>
-                        <CardTitle className="text-2xl font-bold">{course.title}</CardTitle>
-                        <p className="text-lg opacity-90 mt-2">{course.description}</p>
+                    <CardHeader className={`bg-gradient-to-r ${course.color} text-white p-8 relative overflow-hidden`}>
+                      {/* Animated Background Elements */}
+                      <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-16 translate-x-16 group-hover:scale-150 transition-transform duration-700"></div>
+                      <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/5 rounded-full translate-y-12 -translate-x-12 group-hover:scale-125 transition-transform duration-500"></div>
+                      
+                      <div className="text-center relative z-10">
+                        <div className="text-7xl mb-6 float-animation group-hover:wiggle">{course.icon}</div>
+                        <CardTitle className="text-3xl font-bold tracking-wide">{course.title}</CardTitle>
+                        <p className="text-lg opacity-90 mt-3 leading-relaxed">{course.description}</p>
                       </div>
                     </CardHeader>
-                    <CardContent className="p-6 bg-white dark:bg-gray-800">
-                      <div className="space-y-4">
+                    <CardContent className="p-8 bg-white dark:bg-gray-800 relative">
+                      <div className="space-y-6">
                         <div className="flex items-center justify-between">
-                          <span className="text-sm font-medium text-gray-600 dark:text-gray-400">
-                            Concepts: {course.concepts.length}
+                          <span className="text-sm font-semibold text-gray-600 dark:text-gray-400 flex items-center gap-2">
+                            <span className="text-lg">📚</span>
+                            {course.concepts.length} Interactive Concepts
                           </span>
-                          <Badge variant="outline" className="border-green-300 text-green-700 dark:border-green-600 dark:text-green-400">
-                            Free
+                          <Badge variant="outline" className="border-green-400 text-green-700 dark:border-green-500 dark:text-green-400 px-3 py-1 rounded-full font-semibold">
+                            🎉 FREE
                           </Badge>
                         </div>
-                        <Progress value={0} className="h-2" />
-                        <p className="text-sm text-gray-500 dark:text-gray-400">
-                          Start your journey with {course.concepts[0]?.title}
-                        </p>
+                        <Progress value={0} className="h-3 bg-gray-200 dark:bg-gray-700" />
+                        <div className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-gray-700 dark:to-gray-600 rounded-xl p-4">
+                          <p className="text-sm font-medium text-gray-700 dark:text-gray-300 text-center">
+                            🚀 Begin with: <span className="font-bold text-blue-600 dark:text-blue-400">{course.concepts[0]?.title}</span>
+                          </p>
+                        </div>
                       </div>
                     </CardContent>
                   </Card>
