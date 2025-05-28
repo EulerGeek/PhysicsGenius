@@ -178,7 +178,7 @@ export default function SequentialDotConnectGame({ isOpen, onClose, onComplete, 
       setShowResults(false);
       setMistakes(0);
     }
-  }, [currentPuzzle, currentPuzzleData]);
+  }, [currentPuzzle]);
 
   // Prevent body scrolling when game is open
   useEffect(() => {
