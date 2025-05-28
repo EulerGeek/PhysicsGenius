@@ -27,6 +27,7 @@ export default function Home() {
   const [examCourseId, setExamCourseId] = useState('');
   const [currentConcept, setCurrentConcept] = useState<{courseId: string, conceptId: string} | null>(null);
   const [showQuickTest, setShowQuickTest] = useState(false);
+  const [showVisual3DCourses, setShowVisual3DCourses] = useState(false);
   const { progress, updateProgress, resetProgress } = useProgress();
   
   const courses = getCourses();

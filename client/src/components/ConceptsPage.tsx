@@ -4,6 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import NavigationMenu from './NavigationMenu';
+import Visual3DCourses from './Visual3DCourses';
 
 interface ConceptsPageProps {
   onStartConcept: (courseId: string, conceptId: string) => void;
@@ -13,6 +14,7 @@ interface ConceptsPageProps {
 
 export default function ConceptsPage({ onStartConcept, onNavigate, progress }: ConceptsPageProps) {
   const [selectedCategory, setSelectedCategory] = useState("physics");
+  const [showVisual3DCourses, setShowVisual3DCourses] = useState(false);
 
   const physicsConceptCategories = [
     {
@@ -337,7 +339,56 @@ export default function ConceptsPage({ onStartConcept, onNavigate, progress }: C
             ))}
           </TabsContent>
         </Tabs>
+
+        {/* NEW: 3D Visual Courses Section */}
+        <div className="mt-8 p-6 bg-gradient-to-r from-purple-600 via-blue-600 to-indigo-600 rounded-3xl text-white shadow-2xl">
+          <div className="text-center space-y-4">
+            <div className="text-4xl animate-bounce">🎯</div>
+            <h2 className="text-2xl md:text-3xl font-bold">3D Visual Physics Courses</h2>
+            <p className="text-purple-100 max-w-2xl mx-auto">
+              Experience physics like never before with interactive 3D visualizations! Watch pendulums swing, 
+              orbits form, waves propagate, and quantum particles dance in real-time simulations.
+            </p>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
+              <div className="bg-white/10 rounded-xl p-4 backdrop-blur-sm">
+                <div className="text-2xl mb-2">⚙️</div>
+                <h3 className="font-semibold">Classical Mechanics</h3>
+                <p className="text-sm text-purple-100">Pendulums, springs, orbital motion</p>
+              </div>
+              <div className="bg-white/10 rounded-xl p-4 backdrop-blur-sm">
+                <div className="text-2xl mb-2">🌊</div>
+                <h3 className="font-semibold">Wave Physics</h3>
+                <p className="text-sm text-purple-100">Wave propagation and interference</p>
+              </div>
+              <div className="bg-white/10 rounded-xl p-4 backdrop-blur-sm">
+                <div className="text-2xl mb-2">⚡</div>
+                <h3 className="font-semibold">Electromagnetic Fields</h3>
+                <p className="text-sm text-purple-100">Electric fields and force lines</p>
+              </div>
+            </div>
+
+            <Button 
+              onClick={() => setShowVisual3DCourses(true)}
+              className="mt-6 bg-white text-purple-600 hover:bg-purple-50 px-8 py-3 text-lg font-bold shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
+            >
+              🚀 Launch 3D Physics Experience
+            </Button>
+          </div>
+        </div>
       </div>
+
+      {/* 3D Visual Courses Modal */}
+      {showVisual3DCourses && (
+        <Visual3DCourses
+          isOpen={showVisual3DCourses}
+          onClose={() => setShowVisual3DCourses(false)}
+          onComplete={(courseId: string, score: number) => {
+            console.log(`Completed 3D course ${courseId} with score ${score}`);
+            setShowVisual3DCourses(false);
+          }}
+        />
+      )}
     </div>
   );
 }
