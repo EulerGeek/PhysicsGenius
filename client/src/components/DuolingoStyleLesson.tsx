@@ -289,7 +289,7 @@ export default function DuolingoStyleLesson({ isOpen, onClose, courseId, lessonI
                 onClick={nextQuestion}
                 className={`px-8 py-3 text-lg font-bold transition-all duration-200 hover:scale-105 ${
                   isCorrect 
-                    ? "bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700" 
+                    ? "bg-gradient-to-r from-yellow-500 to-amber-600 hover:from-yellow-600 hover:to-amber-700" 
                     : "bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700"
                 }`}
               >

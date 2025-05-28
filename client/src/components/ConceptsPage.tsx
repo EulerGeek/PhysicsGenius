@@ -22,7 +22,7 @@ export default function ConceptsPage({ onStartConcept, onNavigate, progress }: C
       title: "Classical Mechanics",
       icon: "⚙️",
       description: "Motion, forces, and energy",
-      color: "bg-blue-50 border-blue-200",
+      color: "bg-yellow-50 border-yellow-200",
       concepts: [
         {
           id: "kinematics",
@@ -96,7 +96,7 @@ export default function ConceptsPage({ onStartConcept, onNavigate, progress }: C
       title: "Modern Physics",
       icon: "🔬",
       description: "Relativity and quantum mechanics",
-      color: "bg-purple-50 border-purple-200",
+      color: "bg-amber-50 border-amber-200",
       concepts: [
         {
           id: "relativity",
