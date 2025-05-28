@@ -213,6 +213,12 @@ export default function Visual3DCourses({ isOpen, onClose, onComplete }: Visual3
       case 'particle':
         drawQuantumParticle(ctx, centerX, centerY, time);
         break;
+      case 'collision':
+        drawParticleCollision(ctx, centerX, centerY, time);
+        break;
+      case 'fluid':
+        drawFluidDynamics(ctx, centerX, centerY, time);
+        break;
     }
   };
 
@@ -528,6 +534,162 @@ export default function Visual3DCourses({ isOpen, onClose, onComplete }: Visual3
     ctx.beginPath();
     ctx.arc(particleX, centerY - 100, 8, 0, 2 * Math.PI);
     ctx.fill();
+  };
+
+  const drawParticleCollision = (ctx: CanvasRenderingContext2D, centerX: number, centerY: number, time: number) => {
+    const m1 = parameters.particle1Mass || 2;
+    const m2 = parameters.particle2Mass || 1;
+    const v1_initial = parameters.velocity1 || 3;
+    const v2_initial = parameters.velocity2 || -2;
+    const restitution = parameters.restitution || 0.9;
+    
+    // Collision physics calculations
+    const collision_time = 3;
+    const collision_x = centerX;
+    
+    let x1, x2, v1, v2;
+    
+    if (time < collision_time) {
+      x1 = collision_x - 100 + v1_initial * time * 20;
+      x2 = collision_x + 100 + v2_initial * time * 20;
+      v1 = v1_initial;
+      v2 = v2_initial;
+    } else {
+      v1 = (m1 - restitution * m2) / (m1 + m2) * v1_initial + (1 + restitution) * m2 / (m1 + m2) * v2_initial;
+      v2 = (1 + restitution) * m1 / (m1 + m2) * v1_initial + (m2 - restitution * m1) / (m1 + m2) * v2_initial;
+      
+      const post_time = time - collision_time;
+      x1 = collision_x + v1 * post_time * 20;
+      x2 = collision_x + v2 * post_time * 20;
+    }
+    
+    // Draw particle trails
+    ctx.globalAlpha = 0.3;
+    for (let i = 1; i <= 8; i++) {
+      const trail_time = time - i * 0.1;
+      if (trail_time > 0) {
+        let trail_x1, trail_x2;
+        
+        if (trail_time < collision_time) {
+          trail_x1 = collision_x - 100 + v1_initial * trail_time * 20;
+          trail_x2 = collision_x + 100 + v2_initial * trail_time * 20;
+        } else {
+          const trail_post_time = trail_time - collision_time;
+          trail_x1 = collision_x + v1 * trail_post_time * 20;
+          trail_x2 = collision_x + v2 * trail_post_time * 20;
+        }
+        
+        ctx.fillStyle = `rgba(220, 38, 38, ${0.3 - i * 0.03})`;
+        ctx.beginPath();
+        ctx.arc(trail_x1, centerY, Math.sqrt(m1) * 8, 0, 2 * Math.PI);
+        ctx.fill();
+        
+        ctx.fillStyle = `rgba(37, 99, 235, ${0.3 - i * 0.03})`;
+        ctx.beginPath();
+        ctx.arc(trail_x2, centerY, Math.sqrt(m2) * 8, 0, 2 * Math.PI);
+        ctx.fill();
+      }
+    }
+    ctx.globalAlpha = 1;
+    
+    // Draw particles with 3D effect
+    const particle1Gradient = ctx.createRadialGradient(x1 - 5, centerY - 5, 0, x1, centerY, Math.sqrt(m1) * 12);
+    particle1Gradient.addColorStop(0, '#fca5a5');
+    particle1Gradient.addColorStop(0.7, '#dc2626');
+    particle1Gradient.addColorStop(1, '#991b1b');
+    ctx.fillStyle = particle1Gradient;
+    ctx.beginPath();
+    ctx.arc(x1, centerY, Math.sqrt(m1) * 12, 0, 2 * Math.PI);
+    ctx.fill();
+    
+    const particle2Gradient = ctx.createRadialGradient(x2 - 5, centerY - 5, 0, x2, centerY, Math.sqrt(m2) * 12);
+    particle2Gradient.addColorStop(0, '#93c5fd');
+    particle2Gradient.addColorStop(0.7, '#2563eb');
+    particle2Gradient.addColorStop(1, '#1d4ed8');
+    ctx.fillStyle = particle2Gradient;
+    ctx.beginPath();
+    ctx.arc(x2, centerY, Math.sqrt(m2) * 12, 0, 2 * Math.PI);
+    ctx.fill();
+    
+    // Add collision flash effect
+    if (Math.abs(time - collision_time) < 0.2) {
+      ctx.globalAlpha = 0.5 - Math.abs(time - collision_time) * 2.5;
+      const flashGradient = ctx.createRadialGradient(collision_x, centerY, 0, collision_x, centerY, 50);
+      flashGradient.addColorStop(0, '#fbbf24');
+      flashGradient.addColorStop(1, 'rgba(251, 191, 36, 0)');
+      ctx.fillStyle = flashGradient;
+      ctx.beginPath();
+      ctx.arc(collision_x, centerY, 50, 0, 2 * Math.PI);
+      ctx.fill();
+      ctx.globalAlpha = 1;
+    }
+  };
+
+  const drawFluidDynamics = (ctx: CanvasRenderingContext2D, centerX: number, centerY: number, time: number) => {
+    const viscosity = parameters.viscosity || 0.1;
+    const flow_speed = parameters.flow_speed || 2;
+    const turbulence = parameters.turbulence || 0.3;
+    
+    // Create fluid flow field
+    const gridSize = 30;
+    ctx.globalAlpha = 0.7;
+    
+    for (let x = 0; x < 600; x += gridSize) {
+      for (let y = 0; y < 400; y += gridSize) {
+        const distance_from_center = Math.sqrt((x - centerX)**2 + (y - centerY)**2);
+        const base_flow = flow_speed * (1 - Math.exp(-distance_from_center / 100));
+        
+        const vortex_x = Math.sin(time * 0.5 + x * 0.01) * turbulence;
+        const vortex_y = Math.cos(time * 0.7 + y * 0.01) * turbulence;
+        
+        const flow_x = base_flow + vortex_x;
+        const flow_y = vortex_y * 0.5;
+        
+        const magnitude = Math.sqrt(flow_x**2 + flow_y**2);
+        if (magnitude > 0.1) {
+          const scale = Math.min(gridSize * 0.8, magnitude * 10);
+          const end_x = x + (flow_x / magnitude) * scale;
+          const end_y = y + (flow_y / magnitude) * scale;
+          
+          const intensity = Math.min(1, magnitude / 3);
+          const hue = 240 - intensity * 60;
+          ctx.strokeStyle = `hsla(${hue}, 80%, 60%, ${intensity})`;
+          ctx.lineWidth = 2;
+          
+          ctx.beginPath();
+          ctx.moveTo(x, y);
+          ctx.lineTo(end_x, end_y);
+          ctx.stroke();
+          
+          const angle = Math.atan2(flow_y, flow_x);
+          ctx.fillStyle = ctx.strokeStyle;
+          ctx.beginPath();
+          ctx.moveTo(end_x, end_y);
+          ctx.lineTo(end_x - 6 * Math.cos(angle - 0.3), end_y - 6 * Math.sin(angle - 0.3));
+          ctx.lineTo(end_x - 6 * Math.cos(angle + 0.3), end_y - 6 * Math.sin(angle + 0.3));
+          ctx.fill();
+        }
+      }
+    }
+    
+    // Add flowing particles
+    ctx.globalAlpha = 0.8;
+    for (let i = 0; i < 12; i++) {
+      const particle_age = (time * flow_speed + i * 0.5) % 8;
+      const x = 50 + particle_age * 70;
+      const y = centerY + 30 * Math.sin(time * 2 + i) * turbulence;
+      
+      const particle_size = 4 + 2 * Math.sin(time * 3 + i);
+      const particleGradient = ctx.createRadialGradient(x, y, 0, x, y, particle_size);
+      particleGradient.addColorStop(0, '#60a5fa');
+      particleGradient.addColorStop(1, 'rgba(96, 165, 250, 0)');
+      
+      ctx.fillStyle = particleGradient;
+      ctx.beginPath();
+      ctx.arc(x, y, particle_size, 0, 2 * Math.PI);
+      ctx.fill();
+    }
+    ctx.globalAlpha = 1;
   };
 
   const updateParameter = (key: string, value: number) => {
