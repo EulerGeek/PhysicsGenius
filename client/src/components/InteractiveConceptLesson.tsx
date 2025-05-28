@@ -171,9 +171,9 @@ export default function InteractiveConceptLesson({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-gradient-to-br from-blue-600 via-purple-600 to-indigo-600 z-50 overflow-hidden">
+    <div className="fixed inset-0 bg-gradient-to-br from-blue-600 via-purple-600 to-indigo-600 z-50 flex flex-col overflow-hidden">
       {/* Top Bar */}
-      <div className="bg-white/98 dark:bg-gray-900/98 backdrop-blur-xl border-b-2 border-white/20 p-6 shadow-2xl">
+      <div className="bg-white/98 dark:bg-gray-900/98 backdrop-blur-xl border-b-2 border-white/20 p-6 shadow-2xl flex-shrink-0">
         <div className="max-w-4xl mx-auto flex items-center justify-between">
           <Button
             variant="ghost"
@@ -210,7 +210,7 @@ export default function InteractiveConceptLesson({
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 flex items-center justify-center p-8">
+      <div className="flex-1 overflow-y-auto flex items-center justify-center p-8">
         <Card className="w-full max-w-5xl glass dark:glass-dark backdrop-blur-xl shadow-2xl rounded-3xl overflow-hidden bounce-in border-2 border-white/20">
           <CardContent className="p-10">
             {!showExplanation ? (

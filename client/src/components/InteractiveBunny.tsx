@@ -1,32 +1,22 @@
 import { useState, useEffect, useRef } from 'react';
 
-interface Position {
-  x: number;
-  y: number;
-}
-
-interface Velocity {
-  x: number;
-  y: number;
-}
-
 interface InteractiveBunnyProps {
   isVisible?: boolean;
 }
 
 export default function InteractiveBunny({ isVisible = true }: InteractiveBunnyProps) {
-  const [position, setPosition] = useState<Position>({ x: 100, y: 100 });
-  const [velocity, setVelocity] = useState<Velocity>({ x: 0, y: 0 });
+  const [position, setPosition] = useState({ x: 100, y: 100 });
+  const [velocity, setVelocity] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
   const [isKicked, setIsKicked] = useState(false);
-  const [dragOffset, setDragOffset] = useState<Position>({ x: 0, y: 0 });
+  const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
   const animationRef = useRef<number>();
   const bunnyRef = useRef<HTMLDivElement>(null);
 
   // Physics constants
-  const gravity = 0.8;
-  const friction = 0.98;
-  const bounce = 0.7;
+  const gravity = 0.5;
+  const friction = 0.99;
+  const bounce = 0.8;
   const bunnySize = 60;
 
   useEffect(() => {
@@ -34,51 +24,43 @@ export default function InteractiveBunny({ isVisible = true }: InteractiveBunnyP
 
     const animate = () => {
       if (!isDragging) {
-        setVelocity(prevVel => {
-          let newVel = { ...prevVel };
-          
-          // Apply gravity
-          newVel.y += gravity;
-          
-          // Apply friction
-          newVel.x *= friction;
-          newVel.y *= friction;
-          
-          return newVel;
-        });
-        
-        setPosition(prevPos => {
-          let newPos = { ...prevPos };
-          
-          // Update position with current velocity
-          setVelocity(currentVel => {
-            newPos.x += currentVel.x;
-            newPos.y += currentVel.y;
+        setPosition(prev => {
+          setVelocity(vel => {
+            const newVel = { ...vel };
             
-            // Boundary collisions
-            const windowWidth = window.innerWidth - bunnySize;
-            const windowHeight = window.innerHeight - bunnySize;
-
-            // Left and right boundaries
-            if (newPos.x <= 0) {
-              newPos.x = 0;
-              setVelocity(prev => ({ ...prev, x: -prev.x * bounce }));
-            } else if (newPos.x >= windowWidth) {
-              newPos.x = windowWidth;
-              setVelocity(prev => ({ ...prev, x: -prev.x * bounce }));
-            }
-
-            // Top and bottom boundaries
-            if (newPos.y <= 0) {
-              newPos.y = 0;
-              setVelocity(prev => ({ ...prev, y: -prev.y * bounce }));
-            } else if (newPos.y >= windowHeight) {
-              newPos.y = windowHeight;
-              setVelocity(prev => ({ ...prev, y: -prev.y * bounce * 0.8, x: prev.x * 0.9 }));
-            }
+            // Apply gravity
+            newVel.y += gravity;
             
-            return currentVel;
+            // Apply friction
+            newVel.x *= friction;
+            newVel.y *= friction;
+            
+            return newVel;
           });
+          
+          const newPos = { ...prev };
+          newPos.x += velocity.x;
+          newPos.y += velocity.y;
+          
+          // Boundary collisions
+          const maxX = window.innerWidth - bunnySize;
+          const maxY = window.innerHeight - bunnySize;
+
+          if (newPos.x <= 0) {
+            newPos.x = 0;
+            setVelocity(v => ({ ...v, x: -v.x * bounce }));
+          } else if (newPos.x >= maxX) {
+            newPos.x = maxX;
+            setVelocity(v => ({ ...v, x: -v.x * bounce }));
+          }
+
+          if (newPos.y <= 0) {
+            newPos.y = 0;
+            setVelocity(v => ({ ...v, y: -v.y * bounce }));
+          } else if (newPos.y >= maxY) {
+            newPos.y = maxY;
+            setVelocity(v => ({ ...v, y: -v.y * bounce * 0.8, x: v.x * 0.9 }));
+          }
           
           return newPos;
         });
@@ -94,7 +76,7 @@ export default function InteractiveBunny({ isVisible = true }: InteractiveBunnyP
         cancelAnimationFrame(animationRef.current);
       }
     };
-  }, [isDragging, isVisible]);
+  }, [isDragging, isVisible, velocity]);
 
   const handleMouseDown = (e: React.MouseEvent) => {
     e.preventDefault();
