@@ -66,12 +66,12 @@ export const classicalMechanicsExam: ExamSession = {
     },
     {
       id: 'cm-4',
-      question: 'Energy can be created or destroyed.',
+      question: 'Acceleration can be negative.',
       type: 'true-false',
-      correctAnswer: 'false',
-      explanation: 'According to the law of conservation of energy, energy cannot be created or destroyed, only transformed from one form to another.',
+      correctAnswer: 'true',
+      explanation: 'Yes! Acceleration can be negative when an object is slowing down (deceleration) or moving in the opposite direction. For example, when you brake a car, the acceleration is negative.',
       difficulty: 'medium',
-      topic: 'Energy Conservation',
+      topic: 'Acceleration',
       points: 10
     },
     {

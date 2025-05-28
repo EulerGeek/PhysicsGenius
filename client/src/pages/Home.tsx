@@ -1,240 +1,52 @@
 import { useState } from "react";
 import Header from "@/components/Header";
-import HomeScreen from "@/components/HomeScreen";
-import AboutPage from "@/components/AboutPage";
-import NavigationMenu from "@/components/NavigationMenu";
-import ProgressOverview from "@/components/ProgressOverview";
-import CourseNavigation from "@/components/CourseNavigation";
-import LessonCard from "@/components/LessonCard";
-import LessonPreview from "@/components/LessonPreview";
-import LessonIntro from "@/components/LessonIntro";
-import InteractiveLesson from "@/components/InteractiveLesson";
-import LevelMap from "@/components/LevelMap";
+import ComprehensiveLearningSystem from "@/components/ComprehensiveLearningSystem";
 import QuickTest from "@/components/QuickTest";
-import UnifiedLearningInterface from "@/components/UnifiedLearningInterface";
-import Resources from "@/components/Resources";
-import Footer from "@/components/Footer";
-import ConceptMenu from "@/components/ConceptMenu";
-import InteractiveConceptLesson from "@/components/InteractiveConceptLesson";
 import FloatingAIButton from "@/components/FloatingAIButton";
-import VoiceNavigationAssistant from "@/components/VoiceNavigationAssistant";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import { useProgress } from "@/hooks/useProgress";
-import { getCourses, getLessonsByCourse } from "@/lib/lessons";
 
 export default function Home() {
-  const [currentPage, setCurrentPage] = useState("home");
-  const [activeTab, setActiveTab] = useState("classical");
-  const [showConceptMenu, setShowConceptMenu] = useState(false);
-  const [showConceptLesson, setShowConceptLesson] = useState(false);
-  const [currentConcept, setCurrentConcept] = useState<{courseId: string, conceptId: string} | null>(null);
-  const [selectedLesson, setSelectedLesson] = useState<any>(null);
-  const [showLessonIntro, setShowLessonIntro] = useState(false);
-  const [showInteractiveLesson, setShowInteractiveLesson] = useState(false);
   const [showQuickTest, setShowQuickTest] = useState(false);
-  const [viewMode, setViewMode] = useState<'list' | 'map'>('map');
-  const [wrongAnswers, setWrongAnswers] = useState<any[]>([]);
   const { progress, updateProgress, resetProgress } = useProgress();
-  
-  const courses = getCourses();
-  const activeCourse = courses.find(course => course.id === activeTab);
-  const lessons = getLessonsByCourse(activeTab);
 
-  const handleStartLesson = (lessonId: string) => {
-    const lesson = lessons.find(l => l.id === lessonId);
-    if (lesson) {
-      setSelectedLesson(lesson);
-      setShowLessonIntro(true);
-    }
-  };
-
-  const handleActualStartLesson = () => {
-    setShowLessonIntro(false);
-    setShowInteractiveLesson(true);
-  };
-
-  const handleLessonComplete = (score: number) => {
-    if (selectedLesson) {
-      updateProgress(selectedLesson.id, true, score);
-      setShowInteractiveLesson(false);
-      setSelectedLesson(null);
-    }
-  };
-
-  const handleCloseLessonIntro = () => {
-    setShowLessonIntro(false);
-    setSelectedLesson(null);
-  };
-
-  const handleCloseInteractiveLesson = () => {
-    setShowInteractiveLesson(false);
-    setSelectedLesson(null);
-  };
-
-  const handleNavigate = (page: string) => {
-    if (page === 'concepts') {
-      setShowConceptMenu(true);
-    } else {
-      setCurrentPage(page);
-    }
-  };
-
-  const handleStartConcept = (courseId: string, conceptId: string) => {
-    setCurrentConcept({ courseId, conceptId });
-    setShowConceptLesson(true);
-  };
-
-  const handleCompleteConceptLesson = (score: number) => {
-    console.log(`Concept lesson completed with score: ${score}`);
-    setShowConceptLesson(false);
-    setCurrentConcept(null);
-  };
-
-  const handleCompleteLesson = (lessonId: string, score: number) => {
-    updateProgress(lessonId, true, score);
-  };
-
-  const renderCurrentPage = () => {
-    switch (currentPage) {
-      case 'home':
-        return <HomeScreen progress={progress} onNavigate={setCurrentPage} onStartQuickTest={() => setShowQuickTest(true)} />;
-      case 'about':
-        return <AboutPage />;
-      case 'progress':
-        return (
-          <div className="min-h-screen bg-neutral-50 dark:bg-gray-900">
-            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-              <ProgressOverview progress={progress} courses={courses} />
-            </div>
-          </div>
-        );
-      case 'courses':
-      default:
-        return (
-          <div className="h-screen overflow-hidden bg-neutral-50 dark:bg-gray-900">
-            <Header progress={progress} resetProgress={resetProgress} />
-            
-            <main className="max-w-6xl mx-auto px-0.5 sm:px-1 md:px-3 lg:px-6 py-0.5 sm:py-1 md:py-3 lg:py-6 h-[calc(100vh-1.5rem)] sm:h-[calc(100vh-2rem)] md:h-[calc(100vh-2.5rem)] lg:h-[calc(100vh-3rem)] overflow-y-auto">
-              <ProgressOverview progress={progress} courses={courses} />
-              
-              <CourseNavigation 
-                courses={courses}
-                activeTab={activeTab}
-                onTabChange={setActiveTab}
-                progress={progress}
-              />
-
-              <section className="mb-1 sm:mb-2 md:mb-4">
-                <div className="flex items-center justify-between mb-1 sm:mb-2 md:mb-3">
-                  <div>
-                    <h3 className="text-[10px] sm:text-xs md:text-sm lg:text-lg font-bold text-neutral-900 dark:text-white">{activeCourse?.title}</h3>
-                    <p className="text-[8px] sm:text-xs md:text-sm text-neutral-600 dark:text-gray-400 hidden sm:block">{activeCourse?.description}</p>
-                  </div>
-                  <div className="flex items-center">
-                    <Button
-                      onClick={() => setShowQuickTest(true)}
-                      className="h-5 sm:h-6 md:h-8 px-1 sm:px-2 md:px-3 text-[8px] sm:text-xs md:text-sm bg-gradient-to-r from-purple-600 to-pink-600"
-                    >
-                      🧪
-                    </Button>
-                  </div>
-                </div>
-
-                <UnifiedLearningInterface
-                  courseId={activeCourse.id}
-                  lessons={activeCourse.lessons}
-                  onStartLesson={handleStartLesson}
-                  progress={progress}
-                  viewMode="map"
-                  onViewModeChange={() => {}}
-                />
-              </section>
-
-              <LessonPreview onComplete={handleCompleteLesson} />
-              <Resources />
-            </main>
-
-            <Footer />
-          </div>
-        );
-    }
+  const handleLessonComplete = (courseId: string, lessonId: string, score: number) => {
+    updateProgress(lessonId, score);
   };
 
   return (
-    <div className="relative">
-      <NavigationMenu
-        currentPage={currentPage}
-        onNavigate={handleNavigate}
-        progress={progress}
-      />
+    <div className="h-screen overflow-hidden bg-neutral-50 dark:bg-gray-900">
+      <Header progress={progress} resetProgress={resetProgress} />
       
-      {renderCurrentPage()}
+      <main className="max-w-6xl mx-auto px-0.5 sm:px-1 md:px-3 lg:px-6 py-0.5 sm:py-1 md:py-3 lg:py-6 h-[calc(100vh-1.5rem)] sm:h-[calc(100vh-2rem)] md:h-[calc(100vh-2.5rem)] lg:h-[calc(100vh-3rem)] overflow-y-auto">
+        <div className="text-center mb-2 sm:mb-4">
+          <h1 className="text-sm sm:text-lg md:text-2xl lg:text-3xl font-bold text-blue-600 mb-1 sm:mb-2">
+            🎓 QUOMA Learning Platform
+          </h1>
+          <p className="text-[8px] sm:text-xs md:text-sm text-gray-600">
+            Master mathematics and physics through interactive lessons and exams
+          </p>
+        </div>
 
-      {/* Floating AI Button */}
-      <FloatingAIButton 
-        currentContext={{
-          courseId: activeTab,
-          conceptId: currentPage,
-          title: `${activeCourse?.title || 'Physics'} Learning Assistant`,
-          description: `Get help with ${activeCourse?.title || 'physics'} concepts and problems`
-        }}
-      />
+        <ComprehensiveLearningSystem
+          progress={progress}
+          onProgressUpdate={handleLessonComplete}
+        />
+      </main>
 
-      {/* Concept Menu */}
-      <ConceptMenu
-        isOpen={showConceptMenu}
-        onClose={() => setShowConceptMenu(false)}
-        onStartConcept={handleStartConcept}
-      />
-
-      {/* Interactive Concept Lesson */}
-      {showConceptLesson && currentConcept && (
-        <InteractiveConceptLesson
-          isOpen={showConceptLesson}
-          onClose={() => setShowConceptLesson(false)}
-          courseId={currentConcept.courseId}
-          conceptId={currentConcept.conceptId}
-          onComplete={handleCompleteConceptLesson}
+      {/* Quick Test Modal */}
+      {showQuickTest && (
+        <QuickTest
+          isOpen={showQuickTest}
+          onClose={() => setShowQuickTest(false)}
+          onComplete={(score) => {
+            console.log('Quick test completed with score:', score);
+            setShowQuickTest(false);
+          }}
         />
       )}
 
-      {showLessonIntro && selectedLesson && (
-        <LessonIntro
-          lesson={selectedLesson}
-          onStartLesson={handleActualStartLesson}
-          onClose={handleCloseLessonIntro}
-        />
-      )}
-
-      {showInteractiveLesson && selectedLesson && (
-        <InteractiveLesson
-          lessonId={selectedLesson.id}
-          title={selectedLesson.title}
-          onComplete={handleLessonComplete}
-          onClose={handleCloseInteractiveLesson}
-        />
-      )}
-
-      <QuickTest
-        isOpen={showQuickTest}
-        onClose={() => setShowQuickTest(false)}
-      />
-
-      {/* Voice Navigation Assistant */}
-      <VoiceNavigationAssistant 
-        onNavigate={(path) => {
-          if (path === '/') setCurrentPage('home');
-          else if (path.includes('classical-mechanics')) setCurrentPage('classical-mechanics');
-          else if (path.includes('quantum-mechanics')) setCurrentPage('quantum-mechanics');
-          else if (path.includes('general-relativity')) setCurrentPage('general-relativity');
-          else if (path.includes('mathematics')) setCurrentPage('mathematics');
-        }}
-        onVoiceCommand={(command, action) => {
-          console.log('Voice command:', command, action);
-        }}
-        currentPage={currentPage}
-      />
+      {/* Floating AI Assistant */}
+      <FloatingAIButton />
     </div>
   );
 }
