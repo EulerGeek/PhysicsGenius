@@ -30,7 +30,7 @@ export default function NavigationMenu({ currentPage, onNavigate, progress }: Na
   return (
     <div className="fixed top-4 left-4 z-50">
       <div 
-        className="relative"
+        className="relative group"
         onMouseEnter={() => setIsOpen(true)}
         onMouseLeave={() => setIsOpen(false)}
       >
@@ -43,10 +43,17 @@ export default function NavigationMenu({ currentPage, onNavigate, progress }: Na
           <span className="text-xl">☰</span>
         </Button>
 
-        {/* Hover Menu */}
-        <div className={`absolute top-16 left-0 transition-all duration-300 ${
-          isOpen ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 -translate-y-4 pointer-events-none'
-        }`}>
+        {/* Invisible bridge to prevent menu from closing */}
+        <div className="absolute top-12 left-0 w-12 h-6 bg-transparent" />
+        
+        {/* Hover Menu - Extended hover area */}
+        <div 
+          className={`absolute top-14 left-0 transition-all duration-300 ${
+            isOpen ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 -translate-y-4 pointer-events-none'
+          }`}
+          onMouseEnter={() => setIsOpen(true)}
+          onMouseLeave={() => setIsOpen(false)}
+        >
           <Card className="bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm shadow-xl border-0 min-w-[240px]">
             <CardContent className="p-2">
               <div className="space-y-1">
