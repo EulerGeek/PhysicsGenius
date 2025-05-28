@@ -114,7 +114,7 @@ export default function QuomaCharacter({ isActive, isListening, onClose }: Quoma
         </div>
       </div>
 
-      <style jsx>{`
+      <style>{`
         .character-container {
           transition: all 0.5s ease-in-out;
         }

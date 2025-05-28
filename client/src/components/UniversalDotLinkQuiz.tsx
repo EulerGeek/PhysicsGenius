@@ -352,8 +352,8 @@ export default function UniversalDotLinkQuiz({ isOpen, onClose, onComplete, subj
         const newConnection: Connection = {
           from: draggedDot,
           to: targetDotId,
-          isCorrect: currentQ.correctConnections[draggedDot] === targetDotId ||
-                    currentQ.correctConnections[targetDotId] === draggedDot
+          isCorrect: (currentQ.correctConnections as any)[draggedDot] === targetDotId ||
+                    (currentQ.correctConnections as any)[targetDotId] === draggedDot
         };
 
         setConnections(prev => [...prev, newConnection]);
