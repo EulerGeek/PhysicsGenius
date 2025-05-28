@@ -72,7 +72,7 @@ export default function CandyCrushLevelMap({ onLevelSelect, progress }: CandyCru
                     <div className="text-sm text-white font-bold mb-1">Progress</div>
                     <div className="w-full bg-white/30 rounded-full h-3">
                       <div 
-                        className="bg-emerald-400 h-3 rounded-full transition-all duration-500"
+                        className="bg-yellow-400 h-3 rounded-full transition-all duration-500"
                         style={{ width: `${lesson.overallProgress}%` }}
                       />
                     </div>
@@ -212,7 +212,7 @@ export default function CandyCrushLevelMap({ onLevelSelect, progress }: CandyCru
                     {/* Stars */}
                     {level.isCompleted && (
                       <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2">
-                        <div className="bg-emerald-500 rounded-full px-2 py-1 text-xs font-bold text-white">
+                        <div className="bg-yellow-400 rounded-full px-2 py-1 text-xs font-bold text-black">
                           {getStarDisplay(level.stars)}
                         </div>
                       </div>
