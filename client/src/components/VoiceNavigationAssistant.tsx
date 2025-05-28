@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import QuomaCharacter from "./QuomaCharacter";
 
 interface VoiceNavigationAssistantProps {
   onNavigate: (command: string) => void;
@@ -20,7 +21,10 @@ export default function VoiceNavigationAssistant({
   const [lastCommand, setLastCommand] = useState('');
   const [confidence, setConfidence] = useState(0);
   const [showFeedback, setShowFeedback] = useState(false);
-  const recognitionRef = useRef<SpeechRecognition | null>(null);
+  const [isWakeWordListening, setIsWakeWordListening] = useState(true);
+  const [showCharacter, setShowCharacter] = useState(false);
+  const recognitionRef = useRef<any>(null);
+  const wakeWordRef = useRef<any>(null);
 
   // Voice commands mapping
   const voiceCommands = {
@@ -66,12 +70,66 @@ export default function VoiceNavigationAssistant({
     }
   };
 
+  // Wake word detection function
+  const startWakeWordListening = () => {
+    if (!isSupported || wakeWordRef.current) return;
+
+    const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+    const wakeWordRecognition = new SpeechRecognition();
+    
+    wakeWordRecognition.continuous = true;
+    wakeWordRecognition.interimResults = true;
+    wakeWordRecognition.lang = 'en-US';
+
+    wakeWordRecognition.onresult = (event: any) => {
+      for (let i = event.resultIndex; i < event.results.length; i++) {
+        const transcript = event.results[i][0].transcript.toLowerCase();
+        
+        if (transcript.includes('hey quoma') || transcript.includes('quoma')) {
+          // Wake word detected! Show Quoma character and start voice recognition
+          setIsWakeWordListening(false);
+          setShowCharacter(true);
+          speak('Hi! I\'m Quoma, your physics learning assistant! How can I help you today?');
+          startListening();
+          
+          // Auto-hide character and restart wake word listening after 10 seconds
+          setTimeout(() => {
+            if (!isListening) {
+              setShowCharacter(false);
+              setIsWakeWordListening(true);
+            }
+          }, 10000);
+          break;
+        }
+      }
+    };
+
+    wakeWordRecognition.onerror = () => {
+      // Silently restart wake word listening
+      setTimeout(startWakeWordListening, 1000);
+    };
+
+    wakeWordRecognition.onend = () => {
+      // Automatically restart wake word listening
+      if (isWakeWordListening) {
+        setTimeout(startWakeWordListening, 500);
+      }
+    };
+
+    try {
+      wakeWordRecognition.start();
+      wakeWordRef.current = wakeWordRecognition;
+    } catch (error) {
+      console.log('Wake word recognition not available');
+    }
+  };
+
   useEffect(() => {
     // Check if speech recognition is supported
     if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
       setIsSupported(true);
       
-      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
       const recognition = new SpeechRecognition();
       
       recognition.continuous = false;
@@ -124,11 +182,17 @@ export default function VoiceNavigationAssistant({
       };
 
       recognitionRef.current = recognition;
+      
+      // Start wake word listening automatically
+      startWakeWordListening();
     }
 
     return () => {
       if (recognitionRef.current) {
         recognitionRef.current.abort();
+      }
+      if (wakeWordRef.current) {
+        wakeWordRef.current.abort();
       }
     };
   }, []);
@@ -330,6 +394,16 @@ export default function VoiceNavigationAssistant({
           </div>
         </CardContent>
       </Card>
+
+      {/* Quoma Character - appears when "Hey Quoma" is said */}
+      <QuomaCharacter 
+        isActive={showCharacter}
+        isListening={isListening}
+        onClose={() => {
+          setShowCharacter(false);
+          setIsWakeWordListening(true);
+        }}
+      />
     </div>
   );
 }
